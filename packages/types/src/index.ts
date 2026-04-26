@@ -1,3 +1,3 @@
-export * from "./product.js";
-export * from "./goldPrice.js";
-export * from "./api.js";
+export * from "./product";
+export * from "./goldPrice";
+export * from "./api";

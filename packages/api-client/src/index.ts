@@ -1,3 +1,3 @@
-export * from "./goldPrice.js";
-export * from "./products.js";
-export { apiFetch } from "./client.js";
+export * from "./goldPrice";
+export * from "./products";
+export { apiFetch } from "./client";

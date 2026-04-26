@@ -4,7 +4,7 @@ import type {
   CreateProductInput,
   UpdateProductInput,
 } from "@jwell/types";
-import { apiFetch } from "./client.js";
+import { apiFetch } from "./client";
 
 export async function getProducts(baseUrl: string): Promise<ProductWithPrice[]> {
   return apiFetch<ProductWithPrice[]>(`${baseUrl}/products`);
