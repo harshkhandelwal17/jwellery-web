@@ -1,0 +1,37 @@
+import { z } from "zod";
+
+export const ProductCategorySchema = z.enum([
+  "rings",
+  "necklaces",
+  "earrings",
+  "bracelets",
+]);
+
+export const CreateProductSchema = z.object({
+  name: z.string().min(1, "Name is required").max(100),
+  weight: z.number().positive("Weight must be greater than 0"),
+  makingCharges: z.number().min(0, "Making charges cannot be negative"),
+  image: z.string().url("Image must be a valid URL"),
+  category: ProductCategorySchema,
+  description: z.string().max(1000).default(""),
+  modelPath: z.string().nullable().optional(),
+});
+
+export const UpdateProductSchema = CreateProductSchema.partial();
+
+export const UpdateGoldPriceSchema = z.object({
+  pricePerGram: z.number().positive("Gold price must be greater than 0"),
+});
+
+export const ContactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  phone: z
+    .string()
+    .regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
+  message: z.string().min(10, "Message must be at least 10 characters").max(500),
+});
+
+export type CreateProductInput = z.infer<typeof CreateProductSchema>;
+export type UpdateProductInput = z.infer<typeof UpdateProductSchema>;
+export type UpdateGoldPriceInput = z.infer<typeof UpdateGoldPriceSchema>;
+export type ContactFormInput = z.infer<typeof ContactFormSchema>;

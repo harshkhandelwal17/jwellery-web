@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWELL — Design 4: Heritage / Vintage / Royal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f8f1e4;
+      --bg-deep:  #ede0c8;
+      --burgundy: #4a0e1a;
+      --burg2:    #6b1020;
+      --gold:     #c8901a;
+      --gold2:    #d4a017;
+      --gold-lt:  #f0c860;
+      --text:     #2a1810;
+      --text-mid: #6a4a38;
+      --text-lt:  #9a7860;
+      --border:   #c8a880;
+      --border-lt:#e0c898;
+    }
+
+    body {
+      font-family: 'Crimson Text', Georgia, serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ornamental border utility */
+    .orn-border {
+      border: 1px solid var(--border);
+      box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--border-lt);
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      background: var(--burgundy);
+      color: var(--gold-lt);
+      padding: 0 4rem;
+    }
+    .nav-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 0; border-bottom: 1px solid rgba(200,144,26,0.2);
+      font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(240,200,96,0.6);
+    }
+    .nav-main {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 0;
+    }
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem; font-weight: 600; letter-spacing: 0.2em;
+      color: var(--gold-lt); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold2); }
+    .nav-ornament { color: rgba(200,144,26,0.4); letter-spacing: 0.3em; font-size: 0.8rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+    .nav-links a {
+      font-family: 'Cinzel', serif; font-size: 0.72rem;
+      letter-spacing: 0.15em; color: rgba(240,200,96,0.75);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-lt); }
+    .nav-divider { color: rgba(200,144,26,0.3); }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      position: relative; min-height: 90vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 5rem 4rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('https://picsum.photos/seed/hero4ryl/1600/900') center/cover no-repeat;
+      filter: brightness(0.2) sepia(0.5);
+    }
+    .hero-vignette {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 30%, rgba(26,4,8,0.8) 100%);
+    }
+    .hero-content { position: relative; max-width: 860px; }
+    .hero-crown {
+      font-size: 2rem; color: var(--gold2); margin-bottom: 1.5rem;
+      letter-spacing: 0.5em;
+    }
+    .hero-crest {
+      width: 80px; height: 2px;
+      background: linear-gradient(to right, transparent, var(--gold2), transparent);
+      margin: 0 auto 1.5rem;
+    }
+    .hero-subtitle {
+      font-family: 'Cinzel', serif; font-size: 0.7rem;
+      letter-spacing: 0.4em; color: var(--gold2);
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 700; line-height: 1.1;
+      color: var(--gold-lt);
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 20px rgba(200,144,26,0.3);
+    }
+    .hero-divider {
+      display: flex; align-items: center; gap: 1rem;
+      justify-content: center; margin: 2rem 0;
+      color: var(--gold2); font-size: 0.9rem; letter-spacing: 0.3em;
+    }
+    .hero-divider::before, .hero-divider::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold2));
+    }
+    .hero-divider::after { background: linear-gradient(to left, transparent, var(--gold2)); }
+    .hero-desc {
+      font-family: 'Crimson Text', serif;
+      font-style: italic; font-size: 1.2rem;
+      color: rgba(240,200,96,0.7); max-width: 560px; margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 1.5rem; justify-content: center; }
+    .btn-royal {
+      background: var(--gold2); color: var(--burgundy);
+      padding: 0.875rem 2.5rem; font-family: 'Cinzel', serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-decoration: none;
+      font-weight: 600; transition: all 0.2s;
+      border: 1px solid var(--gold2);
+    }
+    .btn-royal:hover { background: var(--gold-lt); }
+    .btn-royal-out {
+      border: 1px solid var(--gold2); color: var(--gold-lt);
+      padding: 0.875rem 2.5rem; font-family: 'Cinzel', serif;
+      font-size: 0.7rem; letter-spacing: 0.2em; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-royal-out:hover { background: rgba(212,160,23,0.1); }
+
+    /* ── SECTION COMMON ─────────────────────── */
+    .orn-title-wrap { text-align: center; margin-bottom: 3.5rem; }
+    .orn-pre {
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 0.4em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .orn-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 600; color: var(--burgundy); letter-spacing: 0.05em;
+    }
+    .orn-rule {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; margin-top: 1rem; color: var(--gold);
+      font-size: 0.8rem;
+    }
+    .orn-rule::before, .orn-rule::after {
+      content: ''; display: block; width: 4rem; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .orn-rule::after { background: linear-gradient(to left, transparent, var(--gold)); }
+
+    /* ── CATEGORIES ─────────────────────────── */
+    .categories { padding: 5rem 4rem; background: var(--bg-deep); }
+    .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .cat-card {
+      background: var(--bg); text-decoration: none; color: var(--text);
+      border: 1px solid var(--border-lt); transition: all 0.3s; display: block;
+      position: relative; overflow: hidden;
+    }
+    .cat-card::before, .cat-card::after {
+      content: ''; position: absolute;
+      width: 20px; height: 20px;
+      border-color: var(--gold); border-style: solid;
+      transition: all 0.3s; opacity: 0;
+    }
+    .cat-card::before { top: 6px; left: 6px; border-width: 1px 0 0 1px; }
+    .cat-card::after { bottom: 6px; right: 6px; border-width: 0 1px 1px 0; }
+    .cat-card:hover::before, .cat-card:hover::after { opacity: 1; }
+    .cat-card:hover { box-shadow: 0 8px 32px rgba(74,14,26,0.12); }
+    .cat-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+    .cat-body { padding: 1.25rem; text-align: center; border-top: 1px solid var(--border-lt); }
+    .cat-ribbon {
+      display: inline-block;
+      background: var(--burgundy); color: var(--gold-lt);
+      font-family: 'Cinzel', serif; font-size: 0.6rem;
+      letter-spacing: 0.2em; padding: 0.25rem 0.75rem;
+      text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .cat-name { font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600; color: var(--burgundy); }
+    .cat-count { font-style: italic; color: var(--text-lt); font-size: 0.85rem; margin-top: 0.25rem; }
+
+    /* ── PRODUCTS ───────────────────────────── */
+    .products { padding: 5rem 4rem; }
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .product-card {
+      background: var(--bg); text-decoration: none; color: var(--text);
+      border: 1px solid var(--border-lt); transition: all 0.3s; display: block;
+    }
+    .product-card:hover { box-shadow: 0 12px 40px rgba(74,14,26,0.15); transform: translateY(-4px); }
+    .product-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+    .product-body { padding: 1.25rem; }
+    .product-ribbon {
+      display: inline-block;
+      background: var(--gold2); color: var(--burgundy);
+      font-family: 'Cinzel', serif; font-size: 0.58rem;
+      letter-spacing: 0.15em; padding: 0.2rem 0.65rem;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .product-name { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: var(--burgundy); line-height: 1.3; }
+    .product-meta { font-style: italic; color: var(--text-lt); font-size: 0.85rem; margin-top: 0.25rem; }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--border-lt);
+    }
+    .product-price { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--burgundy); font-weight: 600; }
+    .product-btn {
+      background: var(--burgundy); color: var(--gold-lt);
+      padding: 0.4rem 0.875rem; font-family: 'Cinzel', serif;
+      font-size: 0.6rem; letter-spacing: 0.1em; border: none; cursor: pointer;
+      transition: background 0.2s; text-decoration: none; display: inline-block;
+    }
+    .product-btn:hover { background: var(--burg2); }
+
+    /* ── ABOUT ──────────────────────────────── */
+    .about { padding: 5rem 4rem; background: var(--bg-deep); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img-frame {
+      position: relative; padding: 1rem;
+      border: 1px solid var(--border);
+    }
+    .about-img-frame::before {
+      content: ''; position: absolute; inset: 4px;
+      border: 1px solid var(--border-lt); pointer-events: none;
+    }
+    .about-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+    .about-text { }
+    .about-title {
+      font-family: 'Cinzel', serif; font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 600; color: var(--burgundy); line-height: 1.3;
+    }
+    .about-ornament { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.3em; margin: 1.25rem 0; }
+    .about-body { font-size: 1.05rem; line-height: 1.9; color: var(--text-mid); }
+    .about-body + .about-body { margin-top: 1rem; }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 2.5rem;
+    }
+    .stat {
+      padding: 1rem; border: 1px solid var(--border-lt); text-align: center;
+      background: var(--bg);
+    }
+    .stat-num { font-family: 'Cinzel', serif; font-size: 1.8rem; color: var(--burgundy); font-weight: 600; }
+    .stat-label { font-style: italic; color: var(--text-lt); font-size: 0.85rem; margin-top: 0.25rem; }
+
+    /* ── WHY ────────────────────────────────── */
+    .why { padding: 5rem 4rem; }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .why-card {
+      text-align: center; padding: 2.5rem 1.5rem;
+      border: 1px solid var(--border-lt); background: var(--bg);
+      transition: all 0.3s;
+    }
+    .why-card:hover { border-color: var(--gold); box-shadow: 0 8px 24px rgba(74,14,26,0.1); }
+    .why-ornament { font-size: 1.5rem; color: var(--gold); margin-bottom: 1rem; letter-spacing: 0.3em; }
+    .why-title { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 600; color: var(--burgundy); margin-bottom: 0.75rem; }
+    .why-desc { font-size: 0.95rem; color: var(--text-mid); line-height: 1.8; font-style: italic; }
+
+    /* ── CTA ────────────────────────────────── */
+    .cta {
+      background: var(--burgundy); color: var(--gold-lt);
+      padding: 6rem 4rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: '✦ ✦ ✦';
+      position: absolute; left: 0; right: 0; top: 1.5rem;
+      text-align: center; color: rgba(200,144,26,0.2);
+      font-size: 1.5rem; letter-spacing: 2rem;
+    }
+    .cta::after {
+      content: '✦ ✦ ✦';
+      position: absolute; left: 0; right: 0; bottom: 1.5rem;
+      text-align: center; color: rgba(200,144,26,0.2);
+      font-size: 1.5rem; letter-spacing: 2rem;
+    }
+    .cta-content { position: relative; max-width: 700px; margin: 0 auto; }
+    .cta-pre { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.4em; color: var(--gold2); text-transform: uppercase; margin-bottom: 1.5rem; }
+    .cta-title { font-family: 'Cinzel', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 600; line-height: 1.2; }
+    .cta-orn { color: var(--gold2); font-size: 1rem; letter-spacing: 0.5em; margin: 1.5rem 0; }
+    .cta-body { font-style: italic; font-size: 1.1rem; color: rgba(240,200,96,0.65); margin-bottom: 2.5rem; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer { background: var(--burgundy); border-top: 2px solid var(--gold2); }
+    .footer-inner { padding: 4rem; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 3rem; }
+    .footer-logo {
+      font-family: 'Cinzel', serif; font-size: 1.75rem; font-weight: 600;
+      color: var(--gold-lt); text-decoration: none; letter-spacing: 0.15em;
+      display: block; margin-bottom: 1rem;
+    }
+    .footer-about { font-style: italic; font-size: 0.92rem; color: rgba(240,200,96,0.55); line-height: 1.9; }
+    .footer-col h4 { font-family: 'Cinzel', serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold2); margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.65rem; }
+    .footer-col a { font-style: italic; font-size: 0.9rem; color: rgba(240,200,96,0.5); text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--gold-lt); }
+    .footer-bottom {
+      padding-top: 2rem; border-top: 1px solid rgba(200,144,26,0.2);
+      display: flex; justify-content: space-between;
+      font-family: 'Cinzel', serif; font-size: 0.65rem;
+      letter-spacing: 0.1em; color: rgba(240,200,96,0.35);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-top">
+      <span>✦ Established 1992 ✦</span>
+      <span>Jaipur, Rajasthan — India</span>
+      <span>BIS Hallmarked 22KT Gold ✦</span>
+    </div>
+    <div class="nav-main">
+      <a href="#" class="nav-logo">J<span>WELL</span></a>
+      <div class="nav-ornament">❖ ❖ ❖</div>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li class="nav-divider">|</li>
+        <li><a href="#">Collections</a></li>
+        <li class="nav-divider">|</li>
+        <li><a href="#">Our Heritage</a></li>
+        <li class="nav-divider">|</li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-content">
+      <div class="hero-crown">♛ ♛ ♛</div>
+      <div class="hero-crest"></div>
+      <p class="hero-subtitle">Royal Jewellers of Jaipur</p>
+      <h1 class="hero-title">
+        The Art of<br />Pure Gold
+      </h1>
+      <div class="hero-divider">✦</div>
+      <p class="hero-desc">
+        "Each piece is a testament to three decades of artisan mastery,
+        crafted for those who honour heritage and treasure purity."
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-royal">Explore Collection</a>
+        <a href="#" class="btn-royal-out">Our Heritage</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="orn-title-wrap">
+      <p class="orn-pre">Browse Our Collections</p>
+      <h2 class="orn-title">The Royal Treasury</h2>
+      <div class="orn-rule">✦</div>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-card">
+        <img src="https://picsum.photos/seed/c1r/400/400" alt="Rings" class="cat-img" />
+        <div class="cat-body">
+          <div class="cat-ribbon">I — Rings</div>
+          <h3 class="cat-name">Rings</h3>
+          <p class="cat-count">24 masterpieces</p>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <img src="https://picsum.photos/seed/c2r/400/400" alt="Necklaces" class="cat-img" />
+        <div class="cat-body">
+          <div class="cat-ribbon">II — Necklaces</div>
+          <h3 class="cat-name">Necklaces</h3>
+          <p class="cat-count">18 masterpieces</p>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <img src="https://picsum.photos/seed/c3r/400/400" alt="Earrings" class="cat-img" />
+        <div class="cat-body">
+          <div class="cat-ribbon">III — Earrings</div>
+          <h3 class="cat-name">Earrings</h3>
+          <p class="cat-count">32 masterpieces</p>
+        </div>
+      </a>
+      <a href="#" class="cat-card">
+        <img src="https://picsum.photos/seed/c4r/400/400" alt="Bracelets" class="cat-img" />
+        <div class="cat-body">
+          <div class="cat-ribbon">IV — Bracelets</div>
+          <h3 class="cat-name">Bracelets</h3>
+          <p class="cat-count">15 masterpieces</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="orn-title-wrap">
+      <p class="orn-pre">Featured Selection</p>
+      <h2 class="orn-title">Prized Pieces</h2>
+      <div class="orn-rule">❖</div>
+    </div>
+    <div class="products-grid">
+      <a href="#" class="product-card">
+        <img src="https://picsum.photos/seed/p1r/400/533" alt="Ring" class="product-img" />
+        <div class="product-body">
+          <div class="product-ribbon">Rings</div>
+          <h3 class="product-name">Eternal Solitaire Ring</h3>
+          <p class="product-meta">22KT Gold · 4.2 grams</p>
+          <div class="product-footer">
+            <span class="product-price">₹58,400</span>
+            <a href="#" class="product-btn">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <img src="https://picsum.photos/seed/p2r/400/533" alt="Necklace" class="product-img" />
+        <div class="product-body">
+          <div class="product-ribbon">Necklaces</div>
+          <h3 class="product-name">Celestial Layered Chain</h3>
+          <p class="product-meta">22KT Gold · 8.5 grams</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,18,000</span>
+            <a href="#" class="product-btn">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <img src="https://picsum.photos/seed/p3r/400/533" alt="Earrings" class="product-img" />
+        <div class="product-body">
+          <div class="product-ribbon">Earrings</div>
+          <h3 class="product-name">Cascade Drop Earrings</h3>
+          <p class="product-meta">22KT Gold · 5.8 grams</p>
+          <div class="product-footer">
+            <span class="product-price">₹80,600</span>
+            <a href="#" class="product-btn">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <img src="https://picsum.photos/seed/p4r/400/533" alt="Bracelet" class="product-img" />
+        <div class="product-body">
+          <div class="product-ribbon">Bracelets</div>
+          <h3 class="product-name">Heritage Kangan Bangle</h3>
+          <p class="product-meta">22KT Gold · 12.0 grams</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,66,800</span>
+            <a href="#" class="product-btn">Enquire</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-img-frame">
+        <img src="https://picsum.photos/seed/ab4r/600/750" alt="Artisan" class="about-img" />
+      </div>
+      <div class="about-text">
+        <p class="orn-pre" style="text-align:left">Our Heritage</p>
+        <h2 class="about-title">Three Decades of<br />Royal Artisanship</h2>
+        <div class="about-ornament">✦ ✦ ✦</div>
+        <p class="about-body">Since 1992, our karigars have carried forward the jewellery traditions of Mughal-era Jaipur. Every chisel mark, every filigree twist bears the memory of masters who came before.</p>
+        <p class="about-body">We honour this legacy by pricing fairly — your gold is weighed, the market rate is applied, and transparent making charges are added. Honesty, as timeless as the craft.</p>
+        <div class="about-stats">
+          <div class="stat"><div class="stat-num">1992</div><div class="stat-label">Year Established</div></div>
+          <div class="stat"><div class="stat-num">4,000+</div><div class="stat-label">Pieces Created</div></div>
+          <div class="stat"><div class="stat-num">22KT</div><div class="stat-label">Hallmarked Purity</div></div>
+          <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Handcrafted</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="orn-title-wrap">
+      <p class="orn-pre">Why Choose JWELL</p>
+      <h2 class="orn-title">Our Royal Promise</h2>
+      <div class="orn-rule">✦</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-ornament">✦</div>
+        <h3 class="why-title">Live Gold Pricing</h3>
+        <p class="why-desc">Prices reflect today's market rate. You pay for gold weight — never a hidden margin.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ornament">♦</div>
+        <h3 class="why-title">BIS Hallmarked</h3>
+        <p class="why-desc">Every piece bears the Bureau of Indian Standards 22KT hallmark. Purity certified.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ornament">❖</div>
+        <h3 class="why-title">Master Karigars</h3>
+        <p class="why-desc">Artisans trained in the Jaipur tradition, each with over 15 years of gold-working mastery.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-ornament">♛</div>
+        <h3 class="why-title">Lifetime Care</h3>
+        <p class="why-desc">A JWELL piece is forever. Complimentary care, polishing, and repairs for life.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-content">
+      <p class="cta-pre">Begin Your Journey</p>
+      <h2 class="cta-title">Every Piece Tells<br />Your Story</h2>
+      <div class="cta-orn">❖ ❖ ❖</div>
+      <p class="cta-body">Visit our royal atelier in Jaipur or write to us. We craft for milestones, for love, for legacy.</p>
+      <a href="#" class="btn-royal">Book a Royal Consultation</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="footer-logo">JWELL</a>
+          <p class="footer-about">Royal jewellers of Jaipur since 1992. Crafting pieces that carry your stories forward.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Collections</h4>
+          <ul>
+            <li><a href="#">Rings</a></li>
+            <li><a href="#">Necklaces</a></li>
+            <li><a href="#">Earrings</a></li>
+            <li><a href="#">Bracelets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Heritage</h4>
+          <ul>
+            <li><a href="#">Our Story</a></li>
+            <li><a href="#">The Craft</a></li>
+            <li><a href="#">Our Karigars</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Atelier</h4>
+          <ul>
+            <li><a href="#">M.I. Road, Jaipur</a></li>
+            <li><a href="#">+91 98765 43210</a></li>
+            <li><a href="#">durbar@jwell.in</a></li>
+            <li><a href="#">Mon–Sat 10am–7pm</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 JWELL. All Rights Reserved.</span>
+        <span>DESIGN 4 — HERITAGE / VINTAGE / ROYAL</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

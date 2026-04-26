@@ -1,0 +1,18 @@
+import type { GoldPrice, UpdateGoldPriceInput } from "@jwell/types";
+import { apiFetch } from "./client.js";
+
+export async function getGoldPrice(baseUrl: string): Promise<GoldPrice> {
+  return apiFetch<GoldPrice>(`${baseUrl}/gold-price`);
+}
+
+export async function updateGoldPrice(
+  baseUrl: string,
+  data: UpdateGoldPriceInput,
+  adminKey: string
+): Promise<GoldPrice> {
+  return apiFetch<GoldPrice>(`${baseUrl}/gold-price`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+    headers: { "x-admin-key": adminKey },
+  });
+}

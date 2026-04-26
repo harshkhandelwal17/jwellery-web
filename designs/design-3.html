@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWELL — Design 3: Minimalist / Swiss / Clean</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:    #ffffff;
+      --navy:  #1a2744;
+      --navy2: #0e1828;
+      --text:  #111111;
+      --muted: #888888;
+      --light: #f5f5f5;
+      --border:#e5e5e5;
+      --gold:  #c4953a;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ─────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 4rem;
+    }
+    .nav-left { display: flex; align-items: center; gap: 3rem; }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 600; letter-spacing: 0.1em;
+      color: var(--navy); text-decoration: none; text-transform: uppercase;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem; color: var(--muted); text-decoration: none;
+      transition: color 0.15s; font-weight: 400;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-rate {
+      background: var(--light); padding: 0.4rem 1rem;
+      font-size: 0.72rem; color: var(--muted);
+    }
+    .nav-rate strong { color: var(--gold); font-weight: 500; }
+    .nav-cta {
+      background: var(--navy); color: white;
+      padding: 0.5rem 1.25rem; font-size: 0.78rem;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--navy2); }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 57px);
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 4rem; border-right: 1px solid var(--border);
+    }
+    .hero-no {
+      font-size: 0.68rem; letter-spacing: 0.3em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .hero-no::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--border); }
+    .hero-title {
+      font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.03em; color: var(--text);
+    }
+    .hero-title strong { font-weight: 600; color: var(--navy); }
+    .hero-body {
+      margin-top: 2.5rem; font-size: 0.9rem; color: var(--muted);
+      line-height: 1.8; max-width: 400px; font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 1rem; margin-top: 3rem; }
+    .btn-navy {
+      background: var(--navy); color: white;
+      padding: 0.875rem 2rem; font-size: 0.8rem;
+      text-decoration: none; font-weight: 500; transition: background 0.2s;
+    }
+    .btn-navy:hover { background: var(--navy2); }
+    .btn-ghost {
+      border: 1px solid var(--border); color: var(--text);
+      padding: 0.875rem 2rem; font-size: 0.8rem;
+      text-decoration: none; transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--navy); }
+    .hero-meta {
+      display: flex; gap: 2rem; margin-top: 4rem;
+      padding-top: 2rem; border-top: 1px solid var(--border);
+    }
+    .hero-meta-item { }
+    .hero-meta-num { font-size: 1.5rem; font-weight: 600; color: var(--navy); }
+    .hero-meta-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.15rem; }
+    .hero-right { position: relative; overflow: hidden; }
+    .hero-img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-tag {
+      position: absolute; bottom: 3rem; left: 3rem;
+      background: white; padding: 1.25rem 1.75rem;
+      border-left: 3px solid var(--navy);
+    }
+    .hero-tag-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .hero-tag-val { font-size: 1.25rem; font-weight: 600; color: var(--navy); margin-top: 0.25rem; }
+
+    /* ── CATEGORIES ─────────────────────────── */
+    .categories { padding: 5rem 4rem; border-bottom: 1px solid var(--border); }
+    .section-head {
+      display: grid; grid-template-columns: 1fr 3fr;
+      gap: 4rem; align-items: start; margin-bottom: 3rem;
+    }
+    .section-num { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase; }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2.5rem); font-weight: 300; letter-spacing: -0.02em; }
+    .section-title strong { font-weight: 600; }
+    .cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+    .cat-item {
+      background: white; padding: 0; overflow: hidden;
+      text-decoration: none; color: var(--text);
+      transition: background 0.2s; display: block;
+    }
+    .cat-item:hover { background: var(--light); }
+    .cat-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; }
+    .cat-body { padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); }
+    .cat-num-label { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.25rem; }
+    .cat-name { font-size: 1rem; font-weight: 500; }
+    .cat-count { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+
+    /* ── PRODUCTS ───────────────────────────── */
+    .products { padding: 5rem 4rem; }
+    .products-head {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 3rem;
+    }
+    .view-all { font-size: 0.78rem; color: var(--navy); text-decoration: none; font-weight: 500; }
+    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); }
+    .product-card {
+      background: white; text-decoration: none; color: var(--text);
+      transition: background 0.2s; display: block;
+    }
+    .product-card:hover { background: var(--light); }
+    .product-img-wrap { position: relative; overflow: hidden; }
+    .product-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; display: block; }
+    .product-num {
+      position: absolute; top: 1rem; left: 1rem;
+      font-size: 0.6rem; color: white; letter-spacing: 0.2em;
+      background: rgba(0,0,0,0.4); padding: 0.25rem 0.5rem;
+    }
+    .product-body { padding: 1.25rem 1.5rem; }
+    .product-meta-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .product-cat { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.15em; }
+    .product-weight { font-size: 0.62rem; color: var(--muted); }
+    .product-name { font-size: 0.92rem; font-weight: 500; line-height: 1.3; }
+    .product-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
+    }
+    .product-price { font-size: 1rem; font-weight: 600; color: var(--navy); }
+    .product-enquire {
+      font-size: 0.7rem; color: var(--navy); text-decoration: none;
+      border-bottom: 1px solid var(--navy); padding-bottom: 1px; font-weight: 500;
+    }
+
+    /* ── ABOUT ──────────────────────────────── */
+    .about { display: grid; grid-template-columns: 1fr 1fr; }
+    .about-img { width: 100%; height: 100%; min-height: 500px; object-fit: cover; display: block; }
+    .about-content {
+      padding: 5rem 4rem; background: var(--navy); color: white;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-num { font-size: 0.65rem; color: rgba(255,255,255,0.4); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .about-title { font-size: clamp(1.8rem, 3vw, 3rem); font-weight: 300; line-height: 1.2; letter-spacing: -0.02em; }
+    .about-title strong { font-weight: 600; }
+    .about-divider { width: 3rem; height: 2px; background: var(--gold); margin: 2rem 0; }
+    .about-text { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.9; }
+    .about-text + .about-text { margin-top: 1rem; }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    .stat-block { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; }
+    .stat-num { font-size: 2rem; font-weight: 600; color: white; }
+    .stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.25rem; }
+
+    /* ── WHY ────────────────────────────────── */
+    .why { padding: 5rem 4rem; background: var(--light); border-top: 1px solid var(--border); }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); margin-top: 3rem; }
+    .why-item { background: white; padding: 2.5rem 2rem; }
+    .why-index { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .why-icon { font-size: 1.5rem; margin-bottom: 1rem; color: var(--navy); }
+    .why-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .why-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.8; }
+
+    /* ── CTA ────────────────────────────────── */
+    .cta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--border);
+    }
+    .cta-img { object-fit: cover; width: 100%; height: 100%; min-height: 400px; display: block; }
+    .cta-content {
+      padding: 5rem 4rem; display: flex;
+      flex-direction: column; justify-content: center; background: var(--navy2);
+      color: white;
+    }
+    .cta-label { font-size: 0.65rem; color: var(--gold); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .cta-title { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1.2; }
+    .cta-title strong { font-weight: 600; }
+    .cta-body { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.8; margin-top: 1.5rem; }
+    .cta-btn {
+      display: inline-block; margin-top: 2.5rem;
+      background: var(--gold); color: white;
+      padding: 0.875rem 2rem; font-size: 0.82rem; font-weight: 500;
+      text-decoration: none; transition: opacity 0.2s; align-self: flex-start;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      border-top: 3px solid var(--navy);
+      padding: 3.5rem 4rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem;
+    }
+    .footer-logo { font-size: 1rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; display: block; margin-bottom: 1rem; }
+    .footer-about { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+    .footer-col h4 { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); font-weight: 600; margin-bottom: 1.25rem; }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.6rem; }
+    .footer-col a { font-size: 0.8rem; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .footer-col a:hover { color: var(--navy); }
+    .footer-bottom-bar {
+      grid-column: 1 / -1; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-left">
+      <a href="#" class="nav-logo">JWELL</a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="nav-right">
+      <div class="nav-rate">Gold Rate <strong>₹7,200/g</strong></div>
+      <a href="#" class="nav-cta">Enquire Now</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-no">2025 Collection</p>
+      <h1 class="hero-title">
+        Pure Gold.<br /><strong>Honest Price.</strong><br />Timeless Craft.
+      </h1>
+      <p class="hero-body">
+        Handcrafted jewellery priced transparently — you pay for gold weight plus artisan skill. Nothing hidden. Nothing inflated.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-navy">View Collection</a>
+        <a href="#" class="btn-ghost">Our Story</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">89</div>
+          <div class="hero-meta-label">Pieces Available</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">22KT</div>
+          <div class="hero-meta-label">Certified Purity</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-num">30yr</div>
+          <div class="hero-meta-label">Craft Heritage</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img src="https://picsum.photos/seed/hero3sw/800/900" alt="Jewellery" class="hero-img" />
+      <div class="hero-tag">
+        <div class="hero-tag-label">Today's Gold Rate</div>
+        <div class="hero-tag-val">₹7,200 /g</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div class="section-head">
+      <div class="section-num">01 / Categories</div>
+      <h2 class="section-title">Browse by<br /><strong>Collection</strong></h2>
+    </div>
+    <div class="cat-grid">
+      <a href="#" class="cat-item">
+        <img src="https://picsum.photos/seed/c1sw/400/400" alt="Rings" class="cat-img" />
+        <div class="cat-body">
+          <p class="cat-num-label">01</p>
+          <h3 class="cat-name">Rings</h3>
+          <p class="cat-count">24 items</p>
+        </div>
+      </a>
+      <a href="#" class="cat-item">
+        <img src="https://picsum.photos/seed/c2sw/400/400" alt="Necklaces" class="cat-img" />
+        <div class="cat-body">
+          <p class="cat-num-label">02</p>
+          <h3 class="cat-name">Necklaces</h3>
+          <p class="cat-count">18 items</p>
+        </div>
+      </a>
+      <a href="#" class="cat-item">
+        <img src="https://picsum.photos/seed/c3sw/400/400" alt="Earrings" class="cat-img" />
+        <div class="cat-body">
+          <p class="cat-num-label">03</p>
+          <h3 class="cat-name">Earrings</h3>
+          <p class="cat-count">32 items</p>
+        </div>
+      </a>
+      <a href="#" class="cat-item">
+        <img src="https://picsum.photos/seed/c4sw/400/400" alt="Bracelets" class="cat-img" />
+        <div class="cat-body">
+          <p class="cat-num-label">04</p>
+          <h3 class="cat-name">Bracelets</h3>
+          <p class="cat-count">15 items</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="products-head">
+      <div>
+        <p style="font-size:0.62rem;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;margin-bottom:0.25rem">02 / Featured</p>
+        <h2 class="section-title">Selected <strong>Pieces</strong></h2>
+      </div>
+      <a href="#" class="view-all">View all 89 pieces →</a>
+    </div>
+    <div class="products-grid">
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://picsum.photos/seed/pr1sw/400/533" alt="Ring" class="product-img" />
+          <span class="product-num">01</span>
+        </div>
+        <div class="product-body">
+          <div class="product-meta-top">
+            <span class="product-cat">Rings</span>
+            <span class="product-weight">4.2g</span>
+          </div>
+          <h3 class="product-name">Eternal Solitaire Ring</h3>
+          <div class="product-footer">
+            <span class="product-price">₹58,400</span>
+            <a href="#" class="product-enquire">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://picsum.photos/seed/pr2sw/400/533" alt="Necklace" class="product-img" />
+          <span class="product-num">02</span>
+        </div>
+        <div class="product-body">
+          <div class="product-meta-top">
+            <span class="product-cat">Necklaces</span>
+            <span class="product-weight">8.5g</span>
+          </div>
+          <h3 class="product-name">Celestial Layered Chain</h3>
+          <div class="product-footer">
+            <span class="product-price">₹1,18,000</span>
+            <a href="#" class="product-enquire">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://picsum.photos/seed/pr3sw/400/533" alt="Earrings" class="product-img" />
+          <span class="product-num">03</span>
+        </div>
+        <div class="product-body">
+          <div class="product-meta-top">
+            <span class="product-cat">Earrings</span>
+            <span class="product-weight">5.8g</span>
+          </div>
+          <h3 class="product-name">Cascade Drop Earrings</h3>
+          <div class="product-footer">
+            <span class="product-price">₹80,600</span>
+            <a href="#" class="product-enquire">Enquire</a>
+          </div>
+        </div>
+      </a>
+      <a href="#" class="product-card">
+        <div class="product-img-wrap">
+          <img src="https://picsum.photos/seed/pr4sw/400/533" alt="Bracelet" class="product-img" />
+          <span class="product-num">04</span>
+        </div>
+        <div class="product-body">
+          <div class="product-meta-top">
+            <span class="product-cat">Bracelets</span>
+            <span class="product-weight">12g</span>
+          </div>
+          <h3 class="product-name">Heritage Kangan Bangle</h3>
+          <div class="product-footer">
+            <span class="product-price">₹1,66,800</span>
+            <a href="#" class="product-enquire">Enquire</a>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="about">
+    <img src="https://picsum.photos/seed/ab3sw/700/600" alt="Artisan" class="about-img" />
+    <div class="about-content">
+      <p class="about-num">03 / About</p>
+      <h2 class="about-title">Craft Heritage<br /><strong>Since 1992</strong></h2>
+      <div class="about-divider"></div>
+      <p class="about-text">Our Jaipur workshop has produced over 4,000 pieces in three decades. Master karigars shape every ring and necklace by hand — a tradition that cannot be automated.</p>
+      <p class="about-text">Our pricing model is simple: you pay market gold rate × weight, plus transparent making charges. No hidden margins. No opaque pricing. Just honest gold.</p>
+      <div class="about-stats">
+        <div class="stat-block"><div class="stat-num">30+</div><div class="stat-label">Years in craft</div></div>
+        <div class="stat-block"><div class="stat-num">4,000+</div><div class="stat-label">Pieces made</div></div>
+        <div class="stat-block"><div class="stat-num">22KT</div><div class="stat-label">BIS Hallmarked</div></div>
+        <div class="stat-block"><div class="stat-num">100%</div><div class="stat-label">Handcrafted</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="section-head">
+      <div class="section-num">04 / Why Us</div>
+      <h2 class="section-title">The JWELL<br /><strong>Difference</strong></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <p class="why-index">01 — Pricing</p>
+        <div class="why-icon">◈</div>
+        <h3 class="why-title">Live Gold Rate</h3>
+        <p class="why-desc">Prices update daily. You see exactly what the market charges — nothing padded on top.</p>
+      </div>
+      <div class="why-item">
+        <p class="why-index">02 — Quality</p>
+        <div class="why-icon">◇</div>
+        <h3 class="why-title">BIS Certified</h3>
+        <p class="why-desc">Every piece hallmarked at 22KT. Authenticity verified before it reaches your hands.</p>
+      </div>
+      <div class="why-item">
+        <p class="why-index">03 — Craft</p>
+        <div class="why-icon">◉</div>
+        <h3 class="why-title">Handmade Only</h3>
+        <p class="why-desc">No machines, no shortcuts. Our karigars spend hours shaping a single bangle.</p>
+      </div>
+      <div class="why-item">
+        <p class="why-index">04 — Service</p>
+        <div class="why-icon">◆</div>
+        <h3 class="why-title">Lifetime Care</h3>
+        <p class="why-desc">Free cleaning and polishing for the lifetime of your JWELL piece.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <img src="https://picsum.photos/seed/cta3sw/700/400" alt="Store" class="cta-img" />
+    <div class="cta-content">
+      <p class="cta-label">05 / Contact</p>
+      <h2 class="cta-title">Visit Our<br /><strong>Jaipur Atelier</strong></h2>
+      <p class="cta-body">M.I. Road, Jaipur. Open Monday to Saturday, 10am to 7pm. Book a personal consultation or simply walk in.</p>
+      <a href="#" class="cta-btn">Book a Visit</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <a href="#" class="footer-logo">JWELL</a>
+      <p class="footer-about">Handcrafted gold jewellery with transparent pricing. Jaipur, India — since 1992.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Collections</h4>
+      <ul>
+        <li><a href="#">Rings</a></li>
+        <li><a href="#">Necklaces</a></li>
+        <li><a href="#">Earrings</a></li>
+        <li><a href="#">Bracelets</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Craft</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="#">+91 98765 43210</a></li>
+        <li><a href="#">hello@jwell.in</a></li>
+        <li><a href="#">M.I. Road, Jaipur</a></li>
+        <li><a href="#">Mon–Sat 10am–7pm</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom-bar">
+      <span>© 2025 JWELL. All rights reserved.</span>
+      <span>DESIGN 3 — MINIMALIST / SWISS / CLEAN</span>
+    </div>
+  </footer>
+
+</body>
+</html>
