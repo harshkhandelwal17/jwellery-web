@@ -53,9 +53,14 @@ export default async function ProductsPage({ searchParams }: Props) {
           </h1>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        <style>{`
+          @media (max-width: 768px) {
+            .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+          }
+        `}</style>
+        <div className="max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-12">
           {/* Category filter */}
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
             {CATEGORIES.map((cat) => {
               const isActive =
                 (!active && cat.slug === "all") || active === cat.slug;
@@ -97,7 +102,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               No products found in this category.
             </div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 220px))", gap: "1rem" }}>
+            <div className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 220px))", gap: "1rem" }}>
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

@@ -2,18 +2,23 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer style={{ padding: "5rem 5rem 3rem", background: "#1e1610", color: "#7a6a62" }}>
+    <footer className="footer-root" style={{ background: "#1e1610", color: "#7a6a62" }}>
       <style>{`
+        .footer-root { padding: 5rem 5rem 3rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3.5rem; border-bottom: 1px solid #2e2218; }
+        .footer-bottom { padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: #3a2e28; }
+        @media (max-width: 768px) {
+          .footer-root { padding: 3rem 1.5rem 2rem; }
+          .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+          .footer-brand { grid-column: 1 / -1; }
+          .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
+        }
         .footer-link:hover { color: var(--color-blush-mid) !important; }
       `}</style>
 
-      <div style={{
-        display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr",
-        gap: "4rem", paddingBottom: "3.5rem",
-        borderBottom: "1px solid #2e2218",
-      }}>
+      <div className="footer-grid">
         {/* Brand */}
-        <div>
+        <div className="footer-brand">
           <Link href="/" style={{ fontFamily: "'Corinthia', cursive", fontSize: "2.2rem", color: "#f0e8e0", textDecoration: "none", display: "block", marginBottom: "1rem" }}>
             Jwell
           </Link>
@@ -44,7 +49,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div style={{ paddingTop: "2rem", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "0.72rem", color: "#3a2e28" }}>
+      <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Jwell. All rights reserved.</span>
         <Link href="/" className="footer-link" style={{ color: "#3a2e28", textDecoration: "none" }}>Privacy Policy</Link>
       </div>

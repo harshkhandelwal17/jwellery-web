@@ -16,20 +16,39 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
       <style>{`
         .hero-btn-primary:hover { background: var(--color-blush) !important; }
         .hero-btn-link:hover { color: var(--color-blush) !important; }
+        .hero-section {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          min-height: calc(100vh - 96px);
+          background: var(--color-bg);
+        }
+        .hero-text {
+          padding: 5rem 4rem 5rem 5rem;
+          display: flex; flex-direction: column;
+          justify-content: center; align-items: flex-start;
+        }
+        .hero-image-col {
+          height: calc(100vh - 96px);
+          position: relative;
+          background: #f0efed;
+          display: flex; align-items: center; justify-content: center;
+          overflow: hidden;
+        }
+        @media (max-width: 768px) {
+          .hero-section { grid-template-columns: 1fr; min-height: auto; }
+          .hero-text { padding: 3rem 1.5rem 2rem; align-items: center; text-align: center; }
+          .hero-text h1 { font-size: clamp(4rem, 14vw, 6rem) !important; }
+          .hero-text-rule { justify-content: center; }
+          .hero-cta { justify-content: center; }
+          .hero-image-col { height: 60vw; min-height: 260px; max-height: 420px; }
+          .hero-image-col img { padding: 1.5rem !important; }
+          .hero-gold-tag { bottom: 1rem !important; left: 1rem !important; }
+        }
       `}</style>
 
-      <section style={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        minHeight: "calc(100vh - 96px)",
-        background: "var(--color-bg)",
-      }}>
+      <section className="hero-section">
         {/* Text side */}
-        <div style={{
-          padding: "5rem 4rem 5rem 5rem",
-          display: "flex", flexDirection: "column",
-          justifyContent: "center", alignItems: "flex-start",
-        }}>
+        <div className="hero-text">
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
             Forever Luxury
           </p>
@@ -43,7 +62,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             Moments To<br />Mementos
           </h1>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
+          <div className="hero-text-rule" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
             <span style={{ display: "block", width: "2.5rem", height: "1px", background: "var(--color-blush-mid)" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--color-blush)", textTransform: "uppercase" }}>
               Handcrafted since 1992
@@ -55,7 +74,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             a mark of love. Crafted with care. Delivered with heart.
           </p>
 
-          <div style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
+          <div className="hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
             <Link href="/products" className="hero-btn-primary" style={{
               background: "var(--color-text)", color: "var(--color-bg-card)",
               padding: "0.8rem 2.25rem",
@@ -74,16 +93,8 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
           </div>
         </div>
 
-        {/* Hero image — full height, soft grey bg so ring sits naturally */}
-        <div style={{
-          height: "calc(100vh - 96px)",
-          position: "relative",
-          background: "#f0efed",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          overflow: "hidden",
-        }}>
+        {/* Hero image */}
+        <div className="hero-image-col">
           <Image
             src="/heroImage.webp"
             alt="Handcrafted gold diamond ring"
@@ -91,12 +102,11 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             className="object-contain"
             priority
             quality={95}
-            sizes="50vw"
+            sizes="(max-width: 768px) 100vw, 50vw"
             style={{ padding: "3rem" }}
           />
 
-          {/* Gold rate tag */}
-          <div style={{
+          <div className="hero-gold-tag" style={{
             position: "absolute", bottom: "2.5rem", left: "2rem",
             background: "rgba(250,247,242,0.92)",
             backdropFilter: "blur(8px)",

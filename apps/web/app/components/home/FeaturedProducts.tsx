@@ -8,8 +8,18 @@ interface Props {
 
 export default function FeaturedProducts({ products }: Props) {
   return (
-    <section style={{ padding: "6rem 5rem", background: "var(--color-bg-warm)" }}>
-      <div style={{
+    <section className="featured-section" style={{ padding: "6rem 5rem", background: "var(--color-bg-warm)" }}>
+      <style>{`
+        .featured-section { padding: 6rem 5rem; }
+        .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 960px; margin: 0 auto; }
+        @media (max-width: 768px) {
+          .featured-section { padding: 3rem 1.25rem !important; }
+          .featured-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+          .featured-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+        }
+      `}</style>
+
+      <div className="featured-header" style={{
         display: "flex", alignItems: "flex-end",
         justifyContent: "space-between", marginBottom: "3rem",
       }}>
@@ -26,12 +36,13 @@ export default function FeaturedProducts({ products }: Props) {
           textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem",
           borderBottom: "1px solid var(--color-border)", paddingBottom: "2px",
           transition: "color 0.2s, border-color 0.2s",
+          whiteSpace: "nowrap",
         }}>
           See all pieces →
         </Link>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", maxWidth: "960px", margin: "0 auto" }}>
+      <div className="featured-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

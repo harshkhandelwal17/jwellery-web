@@ -2,11 +2,20 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section style={{
-      padding: "8rem 5rem", textAlign: "center",
+    <section className="cta-section" style={{
+      textAlign: "center",
       background: "var(--color-text)",
       color: "white", position: "relative", overflow: "hidden",
     }}>
+      <style>{`
+        .cta-section { padding: 8rem 5rem; }
+        @media (max-width: 768px) { .cta-section { padding: 4rem 1.5rem; } }
+        .cta-btn:hover {
+          background: var(--color-blush) !important;
+          border-color: var(--color-blush) !important;
+        }
+      `}</style>
+
       {/* Watermark */}
       <div style={{
         position: "absolute", left: "50%", top: "50%",
@@ -43,13 +52,6 @@ export default function CTASection() {
           Get in Touch
         </Link>
       </div>
-
-      <style>{`
-        .cta-btn:hover {
-          background: var(--color-blush) !important;
-          border-color: var(--color-blush) !important;
-        }
-      `}</style>
     </section>
   );
 }

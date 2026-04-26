@@ -10,14 +10,18 @@ const FALLBACK_ACCENT = "https://picsum.photos/seed/abjw2/400/400";
 
 export default function AboutSection({ mainImage, accentImage }: Props) {
   return (
-    <section style={{
-      padding: "7rem 5rem",
-      display: "grid", gridTemplateColumns: "1fr 1fr",
-      gap: "6rem", alignItems: "center",
-      background: "var(--color-bg)",
-    }}>
+    <section className="about-section" style={{ background: "var(--color-bg)" }}>
+      <style>{`
+        .about-section { padding: 7rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .about-image-wrap { position: relative; height: 520px; }
+        @media (max-width: 768px) {
+          .about-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.25rem; }
+          .about-image-wrap { height: 300px; }
+        }
+      `}</style>
+
       {/* Overlapping images */}
-      <div style={{ position: "relative", height: "520px" }}>
+      <div className="about-image-wrap">
         <div style={{
           position: "absolute", top: 0, left: 0, width: "72%", height: "88%",
           borderRadius: "1.5rem", overflow: "hidden",
@@ -30,7 +34,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
             fill
             quality={90}
             style={{ objectFit: "contain", padding: "1.5rem" }}
-            sizes="35vw"
+            sizes="(max-width: 768px) 70vw, 35vw"
           />
         </div>
         <div style={{
@@ -46,7 +50,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
             fill
             quality={88}
             style={{ objectFit: "contain", padding: "1rem" }}
-            sizes="25vw"
+            sizes="(max-width: 768px) 50vw, 25vw"
           />
         </div>
       </div>
@@ -75,10 +79,10 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           Transparent, honest, and always fair.
         </p>
 
-        {/* Stats */}
         <div style={{
           display: "flex", gap: "2.5rem", marginTop: "2.5rem",
           paddingTop: "2rem", borderTop: "1px solid var(--color-border)",
+          flexWrap: "wrap",
         }}>
           {[
             { num: "30+", label: "Years of Craft" },

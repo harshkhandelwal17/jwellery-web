@@ -9,8 +9,18 @@ export default function Header() {
 
   return (
     <>
-      {/* Announcement bar — dark background like design-2 */}
-      <div style={{
+      <style>{`
+        .header-desktop-nav { display: flex; }
+        .header-burger { display: none; }
+        @media (max-width: 768px) {
+          .header-desktop-nav { display: none; }
+          .header-burger { display: block; }
+          .header-root { padding: 0 1.25rem !important; }
+          .header-announce { font-size: 0.6rem !important; padding: 0.45rem 0.75rem !important; }
+        }
+      `}</style>
+
+      <div className="header-announce" style={{
         background: "var(--color-text)",
         color: "rgba(250,240,235,0.75)",
         textAlign: "center",
@@ -24,8 +34,7 @@ export default function Header() {
         &nbsp;·&nbsp; BIS Hallmarked 22KT Gold
       </div>
 
-      {/* Nav — backdrop blur, 3-col grid */}
-      <header style={{
+      <header className="header-root" style={{
         position: "sticky", top: 0, zIndex: 100,
         background: "rgba(250,247,242,0.95)",
         backdropFilter: "blur(12px)",
@@ -37,8 +46,8 @@ export default function Header() {
         padding: "0 3rem",
         height: "70px",
       }}>
-        {/* Left links */}
-        <nav style={{ display: "flex", gap: "2rem", listStyle: "none", alignItems: "center" }}>
+        {/* Left links — hidden on mobile */}
+        <nav className="header-desktop-nav" style={{ gap: "2rem", listStyle: "none", alignItems: "center" }}>
           {[
             { href: "/", label: "Home" },
             { href: "/products", label: "Products" },
@@ -55,6 +64,18 @@ export default function Header() {
           ))}
         </nav>
 
+        {/* Mobile burger — left side on mobile */}
+        <button
+          className="header-burger"
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open menu"
+          style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", justifySelf: "start" }}
+        >
+          <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)", marginBottom: "5px" }} />
+          <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)", marginBottom: "5px" }} />
+          <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)" }} />
+        </button>
+
         {/* Logo — centred */}
         <Link href="/" style={{
           fontFamily: "'Corinthia', cursive",
@@ -66,21 +87,17 @@ export default function Header() {
           Jwell
         </Link>
 
-        {/* Right links */}
-        <nav style={{ display: "flex", gap: "1.5rem", alignItems: "center", justifyContent: "flex-end" }}>
-          {[
-            { href: "/contact", label: "Contact" },
-          ].map((l) => (
-            <Link key={l.href} href={l.href} style={{
-              fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
-              textDecoration: "none", transition: "color 0.2s",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-text)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-muted)")}
-            >
-              {l.label}
-            </Link>
-          ))}
+        {/* Right links — hidden on mobile */}
+        <nav className="header-desktop-nav" style={{ gap: "1.5rem", alignItems: "center", justifyContent: "flex-end" }}>
+          <Link href="/contact" style={{
+            fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
+            textDecoration: "none", transition: "color 0.2s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.color = "var(--color-text)")}
+          onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-muted)")}
+          >
+            Contact
+          </Link>
           <Link href="/contact" style={{
             fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase",
             color: "var(--color-text)", border: "1px solid var(--color-text)",
@@ -97,19 +114,10 @@ export default function Header() {
           >
             Book Appointment
           </Link>
-
-          {/* Mobile burger */}
-          <button
-            className="block md:hidden"
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
-            style={{ background: "none", border: "none", cursor: "pointer", padding: "4px" }}
-          >
-            <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)", marginBottom: "5px" }} />
-            <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)", marginBottom: "5px" }} />
-            <span style={{ display: "block", width: "20px", height: "1px", background: "var(--color-text)" }} />
-          </button>
         </nav>
+
+        {/* Mobile right placeholder to keep logo centred */}
+        <div className="header-burger" style={{ justifySelf: "end", width: "28px" }} />
       </header>
 
       <MobileNav open={mobileOpen} onClose={() => setMobileOpen(false)} />

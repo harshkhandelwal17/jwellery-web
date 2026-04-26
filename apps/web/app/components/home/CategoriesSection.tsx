@@ -14,7 +14,16 @@ interface Props {
 
 export default function CategoriesSection({ categoryImages = {} }: Props) {
   return (
-    <section style={{ padding: "5rem 5rem", background: "var(--color-bg)" }}>
+    <section className="categories-section" style={{ padding: "5rem 5rem", background: "var(--color-bg)" }}>
+      <style>{`
+        .categories-section { padding: 5rem 5rem; }
+        .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; }
+        @media (max-width: 768px) {
+          .categories-section { padding: 3rem 1.25rem !important; }
+          .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+        }
+      `}</style>
+
       <div style={{ textAlign: "center", marginBottom: "3rem" }}>
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Browse Categories
@@ -27,7 +36,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
         </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", maxWidth: "900px", margin: "0 auto" }}>
+      <div className="categories-grid">
         {CATEGORIES.map((cat) => (
           <Link key={cat.slug} href={`/products?category=${cat.slug}`}
             className="cat-card-link"
@@ -45,7 +54,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
                 alt={cat.name}
                 fill
                 className="object-cover"
-                sizes="(max-width: 900px) 25vw, 225px"
+                sizes="(max-width: 768px) 45vw, 225px"
                 quality={85}
               />
             </div>

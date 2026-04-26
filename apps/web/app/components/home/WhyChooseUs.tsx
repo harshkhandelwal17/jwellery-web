@@ -7,7 +7,21 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section style={{ padding: "6rem 5rem", background: "var(--color-blush-light)" }}>
+    <section className="why-section" style={{ background: "var(--color-blush-light)" }}>
+      <style>{`
+        .why-section { padding: 6rem 5rem; }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        @media (max-width: 768px) {
+          .why-section { padding: 3rem 1.25rem; }
+          .why-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+        }
+        .why-card:hover {
+          border-color: var(--color-blush-mid) !important;
+          box-shadow: 0 12px 36px rgba(201,128,106,0.12);
+          transform: translateY(-4px);
+        }
+      `}</style>
+
       <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Why Choose Us
@@ -17,7 +31,7 @@ export default function WhyChooseUs() {
         </h2>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem" }}>
+      <div className="why-grid">
         {reasons.map((r) => (
           <div key={r.title} className="why-card" style={{
             background: "white", borderRadius: "1.25rem", padding: "2rem 1.75rem",
@@ -41,14 +55,6 @@ export default function WhyChooseUs() {
           </div>
         ))}
       </div>
-
-      <style>{`
-        .why-card:hover {
-          border-color: var(--color-blush-mid) !important;
-          box-shadow: 0 12px 36px rgba(201,128,106,0.12);
-          transform: translateY(-4px);
-        }
-      `}</style>
     </section>
   );
 }
