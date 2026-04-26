@@ -8,5 +8,4 @@ dist
 *.tsbuildinfo
 coverage
 .DS_Store
-Jewellery_Data/
 Screenshot*
