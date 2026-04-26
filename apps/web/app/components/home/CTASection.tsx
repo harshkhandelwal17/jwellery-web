@@ -2,75 +2,54 @@ import Link from "next/link";
 
 export default function CTASection() {
   return (
-    <section
-      className="relative py-24 overflow-hidden"
-      style={{ backgroundColor: "var(--color-dark-800)" }}
-    >
-      {/* Watermark text */}
-      <div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden"
-        aria-hidden
-      >
-        <span
-          className="font-display leading-none opacity-5 whitespace-nowrap"
-          style={{
-            fontSize: "clamp(8rem, 20vw, 18rem)",
-            color: "var(--color-ivory-50)",
-          }}
-        >
-          Jwell
-        </span>
+    <section style={{
+      padding: "8rem 5rem", textAlign: "center",
+      background: "var(--color-text)",
+      color: "white", position: "relative", overflow: "hidden",
+    }}>
+      {/* Watermark */}
+      <div style={{
+        position: "absolute", left: "50%", top: "50%",
+        transform: "translate(-50%, -50%)",
+        fontFamily: "var(--font-display)",
+        fontSize: "22rem", lineHeight: 1,
+        color: "rgba(255,255,255,0.03)",
+        pointerEvents: "none", whiteSpace: "nowrap",
+      }}>
+        Jwell
       </div>
 
-      <div className="relative max-w-2xl mx-auto px-6 text-center">
-        <p
-          className="text-xs tracking-widest uppercase mb-6"
-          style={{ color: "var(--color-blush-300)" }}
-        >
-          Begin Your Journey
+      <div style={{ position: "relative", zIndex: 1 }}>
+        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush-mid)", marginBottom: "1rem" }}>
+          Ready to begin?
         </p>
-
-        <h2
-          className="font-display leading-none mb-8"
-          style={{
-            fontSize: "clamp(3.5rem, 7vw, 6rem)",
-            color: "var(--color-ivory-50)",
-          }}
-        >
-          Find Your Forever Piece
+        <h2 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(3.5rem, 6vw, 6rem)",
+          fontWeight: 400, lineHeight: 1.1, marginBottom: "1.25rem",
+        }}>
+          Find the Piece That<br />Speaks to You
         </h2>
-
-        <p
-          className="text-base leading-relaxed mb-10"
-          style={{ color: "var(--color-text-300)" }}
-        >
-          Whether it&apos;s a gift for someone special or a treat for yourself,
-          our jewellery experts are here to help you find the perfect piece.
+        <p style={{ opacity: 0.6, fontSize: "0.92rem", fontWeight: 300, marginBottom: "3rem", maxWidth: "460px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
+          Visit us in Jaipur or enquire online — we would love to help you find something truly special.
         </p>
-
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/products"
-            className="inline-block text-xs tracking-widest uppercase px-8 py-4 transition-all hover:opacity-90"
-            style={{
-              backgroundColor: "var(--color-blush-400)",
-              color: "#fff",
-            }}
-          >
-            Shop Collections
-          </Link>
-          <Link
-            href="/contact"
-            className="inline-block text-xs tracking-widest uppercase px-8 py-4 border transition-all hover:opacity-80"
-            style={{
-              borderColor: "var(--color-ivory-200)",
-              color: "var(--color-ivory-50)",
-            }}
-          >
-            Book Appointment
-          </Link>
-        </div>
+        <Link href="/contact" className="cta-btn" style={{
+          display: "inline-block",
+          border: "1px solid rgba(255,255,255,0.35)", color: "white",
+          padding: "0.875rem 2.75rem",
+          fontSize: "0.7rem", letterSpacing: "0.2em", textTransform: "uppercase",
+          textDecoration: "none", fontWeight: 500, transition: "all 0.25s",
+        }}>
+          Get in Touch
+        </Link>
       </div>
+
+      <style>{`
+        .cta-btn:hover {
+          background: var(--color-blush) !important;
+          border-color: var(--color-blush) !important;
+        }
+      `}</style>
     </section>
   );
 }

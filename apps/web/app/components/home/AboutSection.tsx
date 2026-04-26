@@ -1,104 +1,83 @@
 import Image from "next/image";
 
-const stats = [
-  { value: "20+", label: "Years of Craft" },
-  { value: "5,000+", label: "Happy Families" },
-  { value: "500+", label: "Unique Designs" },
-  { value: "100%", label: "BIS Hallmarked" },
-];
-
 export default function AboutSection() {
   return (
-    <section className="py-20" style={{ backgroundColor: "var(--color-ivory-50)" }}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* Images — overlapping layout */}
-          <div className="relative h-[480px] md:h-[560px]">
-            {/* Back image */}
-            <div
-              className="absolute top-0 right-0 w-3/4 h-4/5 overflow-hidden"
-              style={{ boxShadow: "var(--shadow-card)" }}
-            >
-              <Image
-                src="https://picsum.photos/seed/about1/600/700"
-                alt="Our craftsmanship"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 75vw, 37vw"
-              />
-            </div>
-            {/* Front image */}
-            <div
-              className="absolute bottom-0 left-0 w-3/5 h-3/5 overflow-hidden border-4"
-              style={{
-                borderColor: "var(--color-ivory-50)",
-                boxShadow: "var(--shadow-card-hover)",
-              }}
-            >
-              <Image
-                src="https://picsum.photos/seed/about2/400/450"
-                alt="Artisan at work"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 60vw, 30vw"
-              />
-            </div>
-          </div>
+    <section style={{
+      padding: "7rem 5rem",
+      display: "grid", gridTemplateColumns: "1fr 1fr",
+      gap: "6rem", alignItems: "center",
+      background: "var(--color-bg)",
+    }}>
+      {/* Overlapping images */}
+      <div style={{ position: "relative", height: "520px" }}>
+        <Image
+          src="https://picsum.photos/seed/abjw1/500/625"
+          alt="Artisan at work"
+          width={500}
+          height={460}
+          style={{
+            position: "absolute", top: 0, left: 0, width: "72%",
+            borderRadius: "1.5rem", height: "88%", objectFit: "cover",
+            boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
+          }}
+        />
+        <Image
+          src="https://picsum.photos/seed/abjw2/400/400"
+          alt="Gold craft detail"
+          width={400}
+          height={400}
+          style={{
+            position: "absolute", bottom: 0, right: 0, width: "52%",
+            borderRadius: "1.25rem", aspectRatio: "1/1", objectFit: "cover",
+            border: "4px solid var(--color-bg)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+          }}
+        />
+      </div>
 
-          {/* Text */}
-          <div>
-            <p
-              className="text-xs tracking-widest uppercase mb-4"
-              style={{ color: "var(--color-blush-400)" }}
-            >
-              Our Story
-            </p>
-            <h2
-              className="font-display leading-none mb-8"
-              style={{
-                fontSize: "clamp(3rem, 5vw, 4.5rem)",
-                color: "var(--color-text-900)",
-              }}
-            >
-              Two Decades of Timeless Craft
-            </h2>
-            <p
-              className="text-base leading-relaxed mb-6"
-              style={{ color: "var(--color-text-500)" }}
-            >
-              Founded in 2003, JWELL was born from a passion for creating
-              jewellery that transcends trends. Every piece we craft carries
-              the weight of tradition and the lightness of modern artistry.
-            </p>
-            <p
-              className="text-base leading-relaxed mb-10"
-              style={{ color: "var(--color-text-500)" }}
-            >
-              Our master craftsmen use time-honoured techniques passed down
-              through generations, combined with ethically sourced gold and
-              precious stones, to create pieces that become family heirlooms.
-            </p>
+      {/* Text */}
+      <div>
+        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+          Our Story
+        </p>
+        <h2 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(2.8rem, 4vw, 4.2rem)",
+          fontWeight: 400, lineHeight: 1.15, marginBottom: "1.5rem",
+          color: "var(--color-text)",
+        }}>
+          Jewellery Crafted<br />
+          with <em style={{ fontStyle: "italic", color: "var(--color-blush)" }}>Heart &amp; Heritage</em>
+        </h2>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <div
-                    className="font-display text-4xl leading-none mb-1"
-                    style={{ color: "var(--color-text-900)" }}
-                  >
-                    {s.value}
-                  </div>
-                  <div
-                    className="text-xs tracking-widest uppercase"
-                    style={{ color: "var(--color-text-500)" }}
-                  >
-                    {s.label}
-                  </div>
-                </div>
-              ))}
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
+          Since 1992, our artisans in Jaipur have poured love into every ring, necklace, and bangle.
+          We believe jewellery is more than gold — it carries your moments, your milestones, your memory.
+        </p>
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
+          Our dynamic gold pricing means you pay exactly what the market says — nothing more.
+          Transparent, honest, and always fair.
+        </p>
+
+        {/* Stats */}
+        <div style={{
+          display: "flex", gap: "2.5rem", marginTop: "2.5rem",
+          paddingTop: "2rem", borderTop: "1px solid var(--color-border)",
+        }}>
+          {[
+            { num: "30+", label: "Years of Craft" },
+            { num: "4K+", label: "Happy Customers" },
+            { num: "22KT", label: "Pure Gold" },
+          ].map((s) => (
+            <div key={s.label}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: "2.8rem", color: "var(--color-blush)", lineHeight: 1 }}>
+                {s.num}
+              </div>
+              <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: "0.2rem", fontWeight: 400 }}>
+                {s.label}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

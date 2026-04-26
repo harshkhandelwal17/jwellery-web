@@ -1,88 +1,51 @@
 const reasons = [
-  {
-    icon: "✦",
-    title: "BIS Hallmarked Gold",
-    body: "Every piece carries the Bureau of Indian Standards hallmark, guaranteeing purity and authenticity.",
-  },
-  {
-    icon: "◎",
-    title: "Lifetime Warranty",
-    body: "We stand behind every piece with a lifetime warranty on craftsmanship and a free polishing service.",
-  },
-  {
-    icon: "⬡",
-    title: "Custom Creations",
-    body: "Bring your vision to life. Our designers work with you to create a one-of-a-kind piece just for you.",
-  },
-  {
-    icon: "◈",
-    title: "Transparent Pricing",
-    body: "Our prices are calculated live — gold rate × weight + making charges. No hidden costs, ever.",
-  },
+  { icon: "◈", title: "Live Gold Pricing", body: "Prices reflect the daily market rate. You always know you're getting honest value for every gram of gold." },
+  { icon: "✦", title: "BIS Hallmarked", body: "Every piece carries the BIS hallmark certifying 22KT purity. Authenticity you can see and trust." },
+  { icon: "◉", title: "Handcrafted Always", body: "No mass production, ever. Each piece is shaped by skilled karigars with 15+ years of expertise." },
+  { icon: "◇", title: "Lifetime Servicing", body: "Bring your Jwell piece in anytime for complimentary cleaning, polishing, and minor repairs." },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section
-      className="py-20"
-      style={{ backgroundColor: "var(--color-ivory-100)" }}
-    >
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <div className="text-center mb-14">
-          <p
-            className="text-xs tracking-widest uppercase mb-3"
-            style={{ color: "var(--color-blush-400)" }}
-          >
-            The JWELL Promise
-          </p>
-          <h2
-            className="font-display leading-none"
-            style={{
-              fontSize: "clamp(3rem, 6vw, 5rem)",
-              color: "var(--color-text-900)",
-            }}
-          >
-            Why Choose Us
-          </h2>
-        </div>
+    <section style={{ padding: "6rem 5rem", background: "var(--color-blush-light)" }}>
+      <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+          Why Choose Us
+        </p>
+        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
+          The Jwell Promise
+        </h2>
+      </div>
 
-        {/* Cards — hover handled via CSS class */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {reasons.map((r) => (
-            <div key={r.title} className="why-card p-8">
-              <div
-                className="text-2xl mb-5"
-                style={{ color: "var(--color-blush-400)" }}
-              >
-                {r.icon}
-              </div>
-              <h3
-                className="text-sm tracking-wide font-medium mb-3"
-                style={{ color: "var(--color-text-900)" }}
-              >
-                {r.title}
-              </h3>
-              <p
-                className="text-sm leading-relaxed"
-                style={{ color: "var(--color-text-500)" }}
-              >
-                {r.body}
-              </p>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.5rem" }}>
+        {reasons.map((r) => (
+          <div key={r.title} className="why-card" style={{
+            background: "white", borderRadius: "1.25rem", padding: "2rem 1.75rem",
+            border: "1px solid transparent", transition: "all 0.3s",
+          }}>
+            <div style={{
+              width: "2.75rem", height: "2.75rem",
+              background: "var(--color-blush-light)", borderRadius: "0.75rem",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontSize: "1.1rem", marginBottom: "1.25rem",
+              color: "var(--color-blush)",
+            }}>
+              {r.icon}
             </div>
-          ))}
-        </div>
+            <h3 style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--color-text)" }}>
+              {r.title}
+            </h3>
+            <p style={{ fontSize: "0.82rem", color: "var(--color-text-muted)", lineHeight: 1.85, fontWeight: 300 }}>
+              {r.body}
+            </p>
+          </div>
+        ))}
       </div>
 
       <style>{`
-        .why-card {
-          background-color: var(--color-ivory-50);
-          border-top: 2px solid var(--color-ivory-200);
-          box-shadow: var(--shadow-card);
-          transition: border-color 0.2s, transform 0.2s;
-        }
         .why-card:hover {
-          border-top-color: var(--color-blush-400);
+          border-color: var(--color-blush-mid) !important;
+          box-shadow: 0 12px 36px rgba(201,128,106,0.12);
           transform: translateY(-4px);
         }
       `}</style>

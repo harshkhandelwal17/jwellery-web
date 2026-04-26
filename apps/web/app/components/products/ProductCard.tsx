@@ -9,52 +9,72 @@ interface Props {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <Link href={`/products/${product.id}`} className="group block">
+    <Link href={`/products/${product.id}`}
+      className="product-card-link"
+      style={{
+        background: "var(--color-bg-card)",
+        borderRadius: "1.25rem", overflow: "hidden",
+        border: "1px solid var(--color-border)",
+        textDecoration: "none", color: "var(--color-text)",
+        transition: "all 0.3s", display: "block",
+      }}
+    >
       {/* Image */}
-      <div
-        className="relative overflow-hidden mb-4"
-        style={{ aspectRatio: "3/4" }}
-      >
+      <div className="product-img-wrap" style={{ position: "relative" }}>
         <Image
           src={product.image}
           alt={product.name}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-106"
+          width={400}
+          height={533}
+          style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", display: "block" }}
           sizes="(max-width: 768px) 50vw, 25vw"
         />
-        {/* Category badge */}
-        <div
-          className="absolute top-3 left-3 text-xs tracking-widest uppercase px-2 py-1"
-          style={{
-            backgroundColor: "var(--color-ivory-50)",
-            color: "var(--color-text-700)",
-          }}
-        >
+      </div>
+
+      {/* Body */}
+      <div style={{ padding: "1.1rem 1.25rem 1.25rem" }}>
+        {/* Badge — pill */}
+        <span style={{
+          display: "inline-block",
+          background: "var(--color-blush-light)", color: "var(--color-blush)",
+          padding: "0.18rem 0.7rem", borderRadius: "100px",
+          fontSize: "0.62rem", letterSpacing: "0.08em", fontWeight: 500,
+          marginBottom: "0.6rem", textTransform: "capitalize",
+        }}>
           {product.category}
+        </span>
+
+        <div style={{ fontSize: "0.92rem", fontWeight: 500, lineHeight: 1.35 }}>{product.name}</div>
+        <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: "0.2rem" }}>
+          22KT · {product.weight}g
+        </div>
+
+        {/* Price row */}
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          marginTop: "0.875rem", paddingTop: "0.875rem",
+          borderTop: "1px solid var(--color-border)",
+        }}>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "var(--color-gold)", lineHeight: 1 }}>
+            {formatCurrency(product.calculatedPrice)}
+          </span>
+          <span style={{
+            width: "1.875rem", height: "1.875rem", borderRadius: "50%",
+            background: "var(--color-blush)", color: "white",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "0.75rem", flexShrink: 0,
+          }}>
+            →
+          </span>
         </div>
       </div>
 
-      {/* Details */}
-      <div>
-        <h3
-          className="text-sm tracking-wide mb-1 group-hover:opacity-70 transition-opacity"
-          style={{ color: "var(--color-text-900)" }}
-        >
-          {product.name}
-        </h3>
-        <p
-          className="text-xs mb-2"
-          style={{ color: "var(--color-text-500)" }}
-        >
-          {product.weight}g · Making ₹{product.makingCharges.toLocaleString("en-IN")}
-        </p>
-        <div
-          className="font-display text-2xl leading-none"
-          style={{ color: "var(--color-gold-500)" }}
-        >
-          {formatCurrency(product.calculatedPrice)}
-        </div>
-      </div>
+      <style>{`
+        .product-card-link:hover {
+          transform: translateY(-6px);
+          box-shadow: 0 16px 40px rgba(201,128,106,0.14);
+        }
+      `}</style>
     </Link>
   );
 }

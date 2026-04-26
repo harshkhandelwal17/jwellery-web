@@ -1,161 +1,126 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const TICKER_ITEMS = [
+  "BIS Hallmarked 22KT Gold",
+  "Handcrafted in Jaipur",
+  "Live Market Pricing",
+  "Lifetime Servicing",
+  "Free Home Delivery",
+  "30+ Years of Craft",
+];
+
 export default function HeroSection() {
   return (
-    <section
-      className="relative overflow-hidden"
-      style={{ backgroundColor: "var(--color-ivory-50)" }}
-    >
-      <div className="max-w-7xl mx-auto px-6 py-16 md:py-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-0 items-center">
-          {/* Text side */}
-          <div className="md:py-24 order-2 md:order-1">
-            <p
-              className="text-xs tracking-widest uppercase mb-6"
-              style={{ color: "var(--color-blush-400)" }}
-            >
-              Forever Luxury
-            </p>
+    <>
+      <style>{`
+        .hero-btn-primary:hover { background: var(--color-blush) !important; }
+        .hero-btn-link:hover { color: var(--color-blush) !important; }
+      `}</style>
 
-            <h1
-              className="font-display leading-none mb-8"
-              style={{
-                fontSize: "clamp(5rem, 10vw, 8.5rem)",
-                color: "var(--color-text-900)",
-              }}
-            >
-              Moments
-              <br />
-              To
-              <br />
-              Mementos
-            </h1>
+      {/* Hero — 2-col, full viewport height */}
+      <section style={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        minHeight: "calc(100vh - 96px)",
+        background: "var(--color-bg)",
+      }}>
+        {/* Text side */}
+        <div style={{
+          padding: "5rem 4rem 5rem 5rem",
+          display: "flex", flexDirection: "column",
+          justifyContent: "center", alignItems: "flex-start",
+        }}>
+          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+            Forever Luxury
+          </p>
 
-            <p
-              className="text-base md:text-lg leading-relaxed mb-10 max-w-sm"
-              style={{ color: "var(--color-text-500)" }}
-            >
-              Handcrafted luxury jewellery that captures life&apos;s most
-              precious moments. Each piece is a testament to timeless
-              elegance.
-            </p>
+          <h1 style={{
+            fontFamily: "var(--font-display)",
+            fontSize: "clamp(5rem, 9vw, 8.5rem)",
+            fontWeight: 400, lineHeight: 1.0,
+            color: "var(--color-text)",
+          }}>
+            Moments To<br />Mementos
+          </h1>
 
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/products"
-                className="inline-block text-xs tracking-widest uppercase px-8 py-4 transition-all hover:opacity-90"
-                style={{
-                  backgroundColor: "var(--color-text-900)",
-                  color: "var(--color-ivory-50)",
-                }}
-              >
-                Explore Collections
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-block text-xs tracking-widest uppercase px-8 py-4 border transition-all hover:opacity-80"
-                style={{
-                  borderColor: "var(--color-text-900)",
-                  color: "var(--color-text-900)",
-                }}
-              >
-                Book Appointment
-              </Link>
-            </div>
+          {/* Decorative rule */}
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
+            <span style={{ display: "block", width: "2.5rem", height: "1px", background: "var(--color-blush-mid)" }} />
+            <span style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--color-blush)", textTransform: "uppercase" }}>
+              Handcrafted since 1992
+            </span>
           </div>
 
-          {/* Image side */}
-          <div className="order-1 md:order-2 relative">
-            <div
-              className="relative mx-auto md:mx-0 overflow-hidden"
-              style={{
-                aspectRatio: "4/5",
-                maxWidth: "520px",
-                marginLeft: "auto",
-              }}
-            >
-              <Image
-                src="https://picsum.photos/seed/jwellhero/800/1000"
-                alt="Luxury jewellery collection"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+          <p style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
+            It&apos;s more than an adornment. It&apos;s a feeling, a memory,
+            a mark of love. Crafted with care. Delivered with heart.
+          </p>
 
-              {/* Gold rate badge */}
-              <div
-                className="absolute bottom-6 left-6 px-4 py-3 text-xs"
-                style={{
-                  backgroundColor: "var(--color-ivory-50)",
-                  color: "var(--color-text-900)",
-                  boxShadow: "var(--shadow-card)",
-                }}
-              >
-                <div
-                  className="text-xs tracking-widest uppercase mb-0.5"
-                  style={{ color: "var(--color-text-500)" }}
-                >
-                  Today&apos;s Gold Rate
-                </div>
-                <div
-                  className="font-display text-2xl leading-none"
-                  style={{ color: "var(--color-gold-500)" }}
-                >
-                  ₹9,450/g
-                </div>
-              </div>
-            </div>
-
-            {/* Decorative background blob */}
-            <div
-              className="absolute -top-10 -right-10 w-80 h-80 rounded-full -z-10 opacity-40"
-              style={{ backgroundColor: "var(--color-blush-100)" }}
-            />
+          <div style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
+            <Link href="/products" className="hero-btn-primary" style={{
+              background: "var(--color-text)", color: "var(--color-bg-card)",
+              padding: "0.8rem 2.25rem",
+              fontSize: "0.7rem", letterSpacing: "0.18em", textTransform: "uppercase",
+              textDecoration: "none", fontWeight: 500, transition: "all 0.25s",
+            }}>
+              Shop Our Pieces
+            </Link>
+            <Link href="/products" className="hero-btn-link" style={{
+              color: "var(--color-text-mid)", fontSize: "0.82rem",
+              textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem",
+              transition: "color 0.2s", fontWeight: 400,
+            }}>
+              Explore collection →
+            </Link>
           </div>
         </div>
-      </div>
 
-      {/* Scrolling ticker */}
-      <div
-        className="mt-16 py-4 overflow-hidden border-t border-b"
-        style={{
-          borderColor: "var(--color-ivory-200)",
-          backgroundColor: "var(--color-ivory-100)",
-        }}
-      >
-        <div className="ticker-track">
-          {Array.from({ length: 2 }).map((_, i) => (
-            <span key={i} className="flex items-center">
-              {[
-                "Handcrafted Gold Jewellery",
-                "BIS Hallmarked",
-                "Lifetime Warranty",
-                "Free Shipping Above ₹25,000",
-                "Custom Orders Welcome",
-                "100+ Designs",
-                "Trusted Since 2003",
-                "Expert Craftsmen",
-              ].map((text) => (
-                <span
-                  key={text}
-                  className="mx-8 text-xs tracking-widest uppercase"
-                  style={{ color: "var(--color-text-500)" }}
-                >
-                  {text}
-                  <span
-                    className="mx-8"
-                    style={{ color: "var(--color-blush-300)" }}
-                  >
-                    ✦
-                  </span>
-                </span>
-              ))}
+        {/* Image side — full height */}
+        <div style={{ height: "calc(100vh - 96px)", overflow: "hidden", position: "relative" }}>
+          <Image
+            src="https://picsum.photos/seed/herojwf/900/1000"
+            alt="Model wearing gold jewellery"
+            fill
+            className="object-cover object-top"
+            priority
+            sizes="50vw"
+          />
+          {/* Gold rate tag */}
+          <div style={{
+            position: "absolute", bottom: "2.5rem", left: "2rem",
+            background: "rgba(250,247,242,0.92)",
+            backdropFilter: "blur(8px)",
+            border: "1px solid var(--color-border)",
+            padding: "0.875rem 1.25rem",
+          }}>
+            <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>Live Gold Rate</div>
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem", color: "var(--color-gold)", marginTop: "0.1rem" }}>₹9,450 /g</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ticker — blush-light background */}
+      <div style={{
+        background: "var(--color-blush-light)",
+        borderTop: "1px solid var(--color-border)",
+        borderBottom: "1px solid var(--color-border)",
+        padding: "0.875rem 0",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+      }}>
+        <div className="ticker-inner">
+          {[...TICKER_ITEMS, ...TICKER_ITEMS].map((text, i) => (
+            <span key={i} style={{
+              fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase",
+              color: "var(--color-text-mid)", display: "inline-flex", alignItems: "center", gap: "0.75rem",
+            }}>
+              <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--color-blush)", display: "inline-block", flexShrink: 0 }} />
+              {text}
             </span>
           ))}
         </div>
       </div>
-    </section>
+    </>
   );
 }
