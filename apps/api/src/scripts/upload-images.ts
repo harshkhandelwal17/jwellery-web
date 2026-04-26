@@ -18,7 +18,7 @@ import { cloudinary } from "../upload/cloudinary.js";
 import { ProductModel } from "../models/Product.model.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, "../../../../../");
+const REPO_ROOT = path.resolve(__dirname, "../../../../");
 const DATA_ROOT =
   process.env.JEWELLERY_DATA_PATH ?? path.join(REPO_ROOT, "Jewellery_Data");
 
