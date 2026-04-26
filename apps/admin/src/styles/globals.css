@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@import "@jwell/ui/theme.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+  background: #f8f7f5;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: "Corinthia", cursive;
+}
