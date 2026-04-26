@@ -19,7 +19,8 @@ import { ProductModel } from "../models/Product.model.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../../../../");
-const DATA_ROOT = process.env.JEWELLERY_DATA_PATH ?? path.join(REPO_ROOT, "Jewellery_Data");
+const DATA_ROOT =
+  process.env.JEWELLERY_DATA_PATH ?? path.join(REPO_ROOT, "Jewellery_Data");
 
 // How many images to upload per category (change as needed)
 const MAX_PER_CATEGORY = Number(process.env.MAX_PER_CATEGORY ?? "20");
@@ -28,23 +29,49 @@ const CONCURRENCY = 3; // parallel uploads
 // ─── Product name generators ───────────────────────────────────────────────
 
 const RING_NAMES = [
-  "Floral Diamond Ring", "Solitaire Elegance Ring", "Twisted Band Ring",
-  "Eternity Band Ring", "Vintage Cluster Ring", "Princess Cut Ring",
-  "Pavé Diamond Ring", "Infinity Love Ring", "Royal Crown Ring",
-  "Chevron Stackable Ring", "Rose Gold Halo Ring", "Art Deco Ring",
-  "Bezel Set Ring", "Cathedral Setting Ring", "Micropavé Band Ring",
-  "Split Shank Ring", "Bypass Swirl Ring", "East-West Oval Ring",
-  "Hidden Halo Ring", "Three-Stone Ring",
+  "Floral Diamond Ring",
+  "Solitaire Elegance Ring",
+  "Twisted Band Ring",
+  "Eternity Band Ring",
+  "Vintage Cluster Ring",
+  "Princess Cut Ring",
+  "Pavé Diamond Ring",
+  "Infinity Love Ring",
+  "Royal Crown Ring",
+  "Chevron Stackable Ring",
+  "Rose Gold Halo Ring",
+  "Art Deco Ring",
+  "Bezel Set Ring",
+  "Cathedral Setting Ring",
+  "Micropavé Band Ring",
+  "Split Shank Ring",
+  "Bypass Swirl Ring",
+  "East-West Oval Ring",
+  "Hidden Halo Ring",
+  "Three-Stone Ring",
 ];
 
 const NECKLACE_NAMES = [
-  "Layered Chain Necklace", "Temple Choker Necklace", "Diamond Pendant Necklace",
-  "Pearl Drop Necklace", "Heritage Mangalsutra", "Delicate Bar Necklace",
-  "Floral Motif Necklace", "Kundan Statement Necklace", "Filigree Locket Necklace",
-  "Celestial Star Necklace", "Vintage Cameo Necklace", "Polki Haar Necklace",
-  "Chain Link Necklace", "South Sea Pearl Necklace", "Emerald Pendant Necklace",
-  "Antique Coin Necklace", "Minimalist Charm Necklace", "Royal Rani Haar",
-  "Floral Jadau Necklace", "Solitaire Diamond Necklace",
+  "Layered Chain Necklace",
+  "Temple Choker Necklace",
+  "Diamond Pendant Necklace",
+  "Pearl Drop Necklace",
+  "Heritage Mangalsutra",
+  "Delicate Bar Necklace",
+  "Floral Motif Necklace",
+  "Kundan Statement Necklace",
+  "Filigree Locket Necklace",
+  "Celestial Star Necklace",
+  "Vintage Cameo Necklace",
+  "Polki Haar Necklace",
+  "Chain Link Necklace",
+  "South Sea Pearl Necklace",
+  "Emerald Pendant Necklace",
+  "Antique Coin Necklace",
+  "Minimalist Charm Necklace",
+  "Royal Rani Haar",
+  "Floral Jadau Necklace",
+  "Solitaire Diamond Necklace",
 ];
 
 const RING_DESCRIPTIONS = [
@@ -81,7 +108,9 @@ function ringParams(index: number) {
 }
 function necklaceParams(index: number) {
   const weights = [14.5, 18.2, 22.0, 16.8, 20.5, 12.3, 25.0, 17.6, 19.1, 23.4];
-  const charges = [6500, 8000, 9500, 7200, 10000, 5500, 12000, 7800, 8800, 9200];
+  const charges = [
+    6500, 8000, 9500, 7200, 10000, 5500, 12000, 7800, 8800, 9200,
+  ];
   return {
     weight: weights[index % weights.length]!,
     makingCharges: charges[index % charges.length]!,
@@ -90,7 +119,10 @@ function necklaceParams(index: number) {
 
 // ─── Cloudinary upload (idempotent) ──────────────────────────────────────────
 
-async function uploadToCloudinary(filePath: string, publicId: string): Promise<string> {
+async function uploadToCloudinary(
+  filePath: string,
+  publicId: string,
+): Promise<string> {
   try {
     // Check if already uploaded
     const existing = await cloudinary.api.resource(publicId);
@@ -117,7 +149,7 @@ async function processCategory(
   dirName: "ring" | "necklace",
   names: string[],
   descriptions: string[],
-  paramsFn: (i: number) => { weight: number; makingCharges: number }
+  paramsFn: (i: number) => { weight: number; makingCharges: number },
 ) {
   const dirPath = path.join(DATA_ROOT, dirName);
   if (!fs.existsSync(dirPath)) {
@@ -163,11 +195,16 @@ async function processCategory(
             description: pickDescription(descriptions, globalIdx),
             modelPath: null,
           });
-          console.log(`  ✓  Saved: ${pickName(names, globalIdx)} (${imageUrl.slice(-30)})`);
+          console.log(
+            `  ✓  Saved: ${pickName(names, globalIdx)} (${imageUrl.slice(-30)})`,
+          );
         } catch (err) {
-          console.error(`  ✗  Failed: ${file}`, err instanceof Error ? err.message : err);
+          console.error(
+            `  ✗  Failed: ${file}`,
+            err instanceof Error ? err.message : err,
+          );
         }
-      })
+      }),
     );
   }
 }
@@ -177,15 +214,28 @@ async function processCategory(
 async function main() {
   const uri = process.env.MONGODB_URI;
   if (!uri) throw new Error("MONGODB_URI is not set in .env");
-  if (!process.env.CLOUDINARY_CLOUD_NAME) throw new Error("CLOUDINARY_CLOUD_NAME is not set");
+  if (!process.env.CLOUDINARY_CLOUD_NAME)
+    throw new Error("CLOUDINARY_CLOUD_NAME is not set");
 
   await mongoose.connect(uri);
   console.log("✅ Connected to MongoDB");
   console.log(`📁 Reading images from: ${DATA_ROOT}`);
   console.log(`🔢 Max per category: ${MAX_PER_CATEGORY}`);
 
-  await processCategory("rings", "ring", RING_NAMES, RING_DESCRIPTIONS, ringParams);
-  await processCategory("necklaces", "necklace", NECKLACE_NAMES, NECKLACE_DESCRIPTIONS, necklaceParams);
+  await processCategory(
+    "rings",
+    "ring",
+    RING_NAMES,
+    RING_DESCRIPTIONS,
+    ringParams,
+  );
+  await processCategory(
+    "necklaces",
+    "necklace",
+    NECKLACE_NAMES,
+    NECKLACE_DESCRIPTIONS,
+    necklaceParams,
+  );
 
   const total = await ProductModel.countDocuments();
   console.log(`\n🎉 Done! Total products in DB: ${total}`);
