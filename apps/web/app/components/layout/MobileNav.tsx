@@ -21,59 +21,96 @@ export default function MobileNav({ open, onClose }: Props) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex">
+    <div style={{
+      position: "fixed", inset: 0, zIndex: 200,
+      display: "flex",
+    }}>
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/40"
         onClick={onClose}
+        style={{
+          position: "absolute", inset: 0,
+          background: "rgba(0,0,0,0.5)",
+        }}
       />
 
-      {/* Drawer */}
-      <nav
-        className="relative ml-auto w-72 h-full flex flex-col py-8 px-8"
-        style={{ backgroundColor: "var(--color-ivory-50)" }}
-      >
+      {/* Drawer — slides in from left */}
+      <nav style={{
+        position: "relative",
+        marginLeft: "auto",
+        width: "280px",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        padding: "2rem",
+        background: "#fdfcf8",
+        overflowY: "auto",
+        zIndex: 10,
+      }}>
+        {/* Close button */}
         <button
-          className="self-end mb-8 text-xl"
           onClick={onClose}
           aria-label="Close menu"
-          style={{ color: "var(--color-text-700)" }}
+          style={{
+            alignSelf: "flex-end",
+            background: "none", border: "none",
+            cursor: "pointer", color: "#1a1a1a",
+            marginBottom: "2rem", padding: "4px",
+          }}
         >
-          ✕
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+            <line x1="4" y1="4" x2="20" y2="20" />
+            <line x1="20" y1="4" x2="4" y2="20" />
+          </svg>
         </button>
 
+        {/* Logo */}
         <Link
           href="/"
-          className="font-display text-4xl mb-8 leading-none"
-          style={{ color: "var(--color-text-900)" }}
           onClick={onClose}
+          style={{
+            fontFamily: "'Corinthia', cursive",
+            fontSize: "2.2rem", fontWeight: 400,
+            color: "#1a1a1a", textDecoration: "none",
+            marginBottom: "2rem", display: "block",
+          }}
         >
           Jwell
         </Link>
 
+        {/* Links */}
         {links.map((l) => (
           <Link
-            key={l.href}
+            key={l.href + l.label}
             href={l.href}
-            className="py-3 text-xs tracking-widest uppercase border-b transition-colors hover:opacity-60"
-            style={{
-              color: "var(--color-text-700)",
-              borderColor: "var(--color-ivory-200)",
-            }}
             onClick={onClose}
+            style={{
+              padding: "0.875rem 0",
+              fontSize: "0.72rem", letterSpacing: "0.2em",
+              textTransform: "uppercase",
+              color: "#3a3a3a", textDecoration: "none",
+              borderBottom: "1px solid #ede9e1",
+              transition: "color 0.2s",
+              display: "block",
+            }}
           >
             {l.label}
           </Link>
         ))}
 
+        {/* CTA */}
         <Link
           href="/contact"
-          className="mt-8 text-center text-xs tracking-widest uppercase px-4 py-3 border"
-          style={{
-            borderColor: "var(--color-text-900)",
-            color: "var(--color-text-900)",
-          }}
           onClick={onClose}
+          style={{
+            marginTop: "2rem",
+            textAlign: "center",
+            fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase",
+            padding: "0.875rem 1rem",
+            border: "1px solid #1a1a1a",
+            color: "#1a1a1a", textDecoration: "none",
+            display: "block",
+          }}
         >
           Book Appointment
         </Link>
