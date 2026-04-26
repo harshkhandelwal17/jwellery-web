@@ -4,7 +4,10 @@ import Link from "next/link";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import PriceDisplay from "../../components/products/PriceDisplay";
-import { MOCK_PRODUCTS } from "../../lib/mock-data";
+import { fetchProduct, fetchProducts } from "../../lib/api";
+import { cloudinaryUrl } from "../../lib/cloudinary";
+
+export const revalidate = 300;
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -12,13 +15,18 @@ interface Props {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
-  const product = MOCK_PRODUCTS.find((p) => p.id === id);
 
-  if (!product) notFound();
+  let product;
+  try {
+    product = await fetchProduct(id);
+  } catch {
+    notFound();
+  }
 
-  const related = MOCK_PRODUCTS.filter(
-    (p) => p.category === product.category && p.id !== product.id
-  ).slice(0, 4);
+  const allProducts = await fetchProducts();
+  const related = allProducts
+    .filter((p) => p.category === product!.category && p.id !== product!.id)
+    .slice(0, 4);
 
   return (
     <>
@@ -47,11 +55,12 @@ export default async function ProductDetailPage({ params }: Props) {
               style={{ aspectRatio: "3/4" }}
             >
               <Image
-                src={product.image}
+                src={cloudinaryUrl(product.image, { width: 1200, quality: 90 })}
                 alt={product.name}
                 fill
                 className="object-cover"
                 priority
+                quality={90}
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
@@ -157,20 +166,21 @@ export default async function ProductDetailPage({ params }: Props) {
               >
                 You May Also Like
               </h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 200px))", gap: "1rem" }}>
                 {related.map((p) => (
                   <Link key={p.id} href={`/products/${p.id}`} className="group block">
-                    <div className="relative overflow-hidden mb-3" style={{ aspectRatio: "3/4" }}>
+                    <div className="relative overflow-hidden mb-2" style={{ aspectRatio: "3/4" }}>
                       <Image
-                        src={p.image}
+                        src={cloudinaryUrl(p.image, { width: 600, quality: 85 })}
                         alt={p.name}
                         fill
+                        quality={85}
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     </div>
-                    <p className="text-sm mb-1" style={{ color: "var(--color-text-900)" }}>{p.name}</p>
-                    <p className="font-display text-xl" style={{ color: "var(--color-gold-500)" }}>
+                    <p style={{ fontSize: "0.8rem", marginBottom: "0.15rem", color: "var(--color-text-900)" }}>{p.name}</p>
+                    <p style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.2rem", color: "var(--color-gold)" }}>
                       ₹{p.calculatedPrice.toLocaleString("en-IN")}
                     </p>
                   </Link>

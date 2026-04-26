@@ -1,8 +1,10 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ProductCard from "../components/products/ProductCard";
-import { MOCK_PRODUCTS } from "../lib/mock-data";
+import { fetchProducts } from "../lib/api";
 import type { ProductCategory } from "@jwell/types";
+
+export const revalidate = 300;
 
 const CATEGORIES: { slug: ProductCategory | "all"; label: string }[] = [
   { slug: "all", label: "All" },
@@ -20,9 +22,10 @@ export default async function ProductsPage({ searchParams }: Props) {
   const { category } = await searchParams;
   const active = category as ProductCategory | undefined;
 
+  const allProducts = await fetchProducts();
   const products = active
-    ? MOCK_PRODUCTS.filter((p) => p.category === active)
-    : MOCK_PRODUCTS;
+    ? allProducts.filter((p) => p.category === active)
+    : allProducts;
 
   return (
     <>
@@ -94,7 +97,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               No products found in this category.
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 220px))", gap: "1rem" }}>
               {products.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}

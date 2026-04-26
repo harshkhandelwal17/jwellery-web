@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ProductWithPrice } from "@jwell/types";
 import { formatCurrency } from "@jwell/utils";
+import { cloudinaryUrl } from "../../lib/cloudinary";
 
 interface Props {
   product: ProductWithPrice;
@@ -22,47 +23,46 @@ export default function ProductCard({ product }: Props) {
       {/* Image */}
       <div className="product-img-wrap" style={{ position: "relative" }}>
         <Image
-          src={product.image}
+          src={cloudinaryUrl(product.image, { width: 800, quality: 90 })}
           alt={product.name}
           width={400}
           height={533}
+          quality={90}
           style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", display: "block" }}
           sizes="(max-width: 768px) 50vw, 25vw"
         />
       </div>
 
       {/* Body */}
-      <div style={{ padding: "1.1rem 1.25rem 1.25rem" }}>
-        {/* Badge — pill */}
+      <div style={{ padding: "0.75rem 0.875rem 0.875rem" }}>
         <span style={{
           display: "inline-block",
           background: "var(--color-blush-light)", color: "var(--color-blush)",
-          padding: "0.18rem 0.7rem", borderRadius: "100px",
-          fontSize: "0.62rem", letterSpacing: "0.08em", fontWeight: 500,
-          marginBottom: "0.6rem", textTransform: "capitalize",
+          padding: "0.12rem 0.55rem", borderRadius: "100px",
+          fontSize: "0.58rem", letterSpacing: "0.08em", fontWeight: 500,
+          marginBottom: "0.4rem", textTransform: "capitalize",
         }}>
           {product.category}
         </span>
 
-        <div style={{ fontSize: "0.92rem", fontWeight: 500, lineHeight: 1.35 }}>{product.name}</div>
-        <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: "0.2rem" }}>
+        <div style={{ fontSize: "0.82rem", fontWeight: 500, lineHeight: 1.3 }}>{product.name}</div>
+        <div style={{ fontSize: "0.67rem", color: "var(--color-text-muted)", marginTop: "0.15rem" }}>
           22KT · {product.weight}g
         </div>
 
-        {/* Price row */}
         <div style={{
           display: "flex", alignItems: "center", justifyContent: "space-between",
-          marginTop: "0.875rem", paddingTop: "0.875rem",
+          marginTop: "0.625rem", paddingTop: "0.625rem",
           borderTop: "1px solid var(--color-border)",
         }}>
-          <span style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.5rem", color: "var(--color-gold)", lineHeight: 1 }}>
+          <span style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.25rem", color: "var(--color-gold)", lineHeight: 1 }}>
             {formatCurrency(product.calculatedPrice)}
           </span>
           <span style={{
-            width: "1.875rem", height: "1.875rem", borderRadius: "50%",
+            width: "1.6rem", height: "1.6rem", borderRadius: "50%",
             background: "var(--color-blush)", color: "white",
             display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: "0.75rem", flexShrink: 0,
+            fontSize: "0.7rem", flexShrink: 0,
           }}>
             →
           </span>

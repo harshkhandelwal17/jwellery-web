@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-export default function AboutSection() {
+interface Props {
+  mainImage?: string;
+  accentImage?: string;
+}
+
+const FALLBACK_MAIN = "https://picsum.photos/seed/abjw1/500/625";
+const FALLBACK_ACCENT = "https://picsum.photos/seed/abjw2/400/400";
+
+export default function AboutSection({ mainImage, accentImage }: Props) {
   return (
     <section style={{
       padding: "7rem 5rem",
@@ -10,29 +18,37 @@ export default function AboutSection() {
     }}>
       {/* Overlapping images */}
       <div style={{ position: "relative", height: "520px" }}>
-        <Image
-          src="https://picsum.photos/seed/abjw1/500/625"
-          alt="Artisan at work"
-          width={500}
-          height={460}
-          style={{
-            position: "absolute", top: 0, left: 0, width: "72%",
-            borderRadius: "1.5rem", height: "88%", objectFit: "cover",
-            boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
-          }}
-        />
-        <Image
-          src="https://picsum.photos/seed/abjw2/400/400"
-          alt="Gold craft detail"
-          width={400}
-          height={400}
-          style={{
-            position: "absolute", bottom: 0, right: 0, width: "52%",
-            borderRadius: "1.25rem", aspectRatio: "1/1", objectFit: "cover",
-            border: "4px solid var(--color-bg)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-          }}
-        />
+        <div style={{
+          position: "absolute", top: 0, left: 0, width: "72%", height: "88%",
+          borderRadius: "1.5rem", overflow: "hidden",
+          boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
+          background: "#f0efed",
+        }}>
+          <Image
+            src={mainImage ?? FALLBACK_MAIN}
+            alt="Gold jewellery piece"
+            fill
+            quality={90}
+            style={{ objectFit: "contain", padding: "1.5rem" }}
+            sizes="35vw"
+          />
+        </div>
+        <div style={{
+          position: "absolute", bottom: 0, right: 0, width: "52%",
+          borderRadius: "1.25rem", aspectRatio: "1/1", overflow: "hidden",
+          border: "4px solid var(--color-bg)",
+          boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+          background: "#f0efed",
+        }}>
+          <Image
+            src={accentImage ?? FALLBACK_ACCENT}
+            alt="Gold jewellery detail"
+            fill
+            quality={88}
+            style={{ objectFit: "contain", padding: "1rem" }}
+            sizes="25vw"
+          />
+        </div>
       </div>
 
       {/* Text */}

@@ -10,7 +10,7 @@ const TICKER_ITEMS = [
   "30+ Years of Craft",
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ heroImages: _ }: { heroImages?: string[] } = {}) {
   return (
     <>
       <style>{`
@@ -18,7 +18,6 @@ export default function HeroSection() {
         .hero-btn-link:hover { color: var(--color-blush) !important; }
       `}</style>
 
-      {/* Hero — 2-col, full viewport height */}
       <section style={{
         display: "grid",
         gridTemplateColumns: "1fr 1fr",
@@ -44,7 +43,6 @@ export default function HeroSection() {
             Moments To<br />Mementos
           </h1>
 
-          {/* Decorative rule */}
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
             <span style={{ display: "block", width: "2.5rem", height: "1px", background: "var(--color-blush-mid)" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--color-blush)", textTransform: "uppercase" }}>
@@ -76,16 +74,27 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Image side — full height */}
-        <div style={{ height: "calc(100vh - 96px)", overflow: "hidden", position: "relative" }}>
+        {/* Hero image — full height, soft grey bg so ring sits naturally */}
+        <div style={{
+          height: "calc(100vh - 96px)",
+          position: "relative",
+          background: "#f0efed",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          overflow: "hidden",
+        }}>
           <Image
-            src="https://picsum.photos/seed/herojwf/900/1000"
-            alt="Model wearing gold jewellery"
+            src="/heroImage.webp"
+            alt="Handcrafted gold diamond ring"
             fill
-            className="object-cover object-top"
+            className="object-contain"
             priority
+            quality={95}
             sizes="50vw"
+            style={{ padding: "3rem" }}
           />
+
           {/* Gold rate tag */}
           <div style={{
             position: "absolute", bottom: "2.5rem", left: "2rem",
@@ -93,6 +102,7 @@ export default function HeroSection() {
             backdropFilter: "blur(8px)",
             border: "1px solid var(--color-border)",
             padding: "0.875rem 1.25rem",
+            zIndex: 10,
           }}>
             <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>Live Gold Rate</div>
             <div style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.6rem", color: "var(--color-gold)", marginTop: "0.1rem" }}>₹9,450 /g</div>
@@ -100,7 +110,7 @@ export default function HeroSection() {
         </div>
       </section>
 
-      {/* Ticker — blush-light background */}
+      {/* Ticker */}
       <div style={{
         background: "var(--color-blush-light)",
         borderTop: "1px solid var(--color-border)",

@@ -31,7 +31,7 @@ export default function FeaturedProducts({ products }: Props) {
         </Link>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1.25rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "1rem", maxWidth: "960px", margin: "0 auto" }}>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
