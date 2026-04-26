@@ -1,3 +1,3 @@
-export * from "./pricing";
-export * from "./formatting";
-export * from "./validation";
+export * from "./pricing.js";
+export * from "./formatting.js";
+export * from "./validation.js";
