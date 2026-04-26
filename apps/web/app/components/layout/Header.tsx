@@ -57,7 +57,7 @@ export default function Header() {
 
         {/* Logo — centred */}
         <Link href="/" style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "'Corinthia', cursive",
           fontSize: "2.4rem", fontWeight: 400,
           color: "var(--color-text)", textDecoration: "none",
           letterSpacing: "0.03em", textAlign: "center",

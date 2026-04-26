@@ -15,7 +15,7 @@ export default function CategoriesSection() {
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Browse Categories
         </p>
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
+        <h2 style={{ fontFamily: "'Corinthia', cursive", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
           Find Your Perfect Piece
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--color-text-muted)", marginTop: "0.5rem", fontWeight: 300 }}>

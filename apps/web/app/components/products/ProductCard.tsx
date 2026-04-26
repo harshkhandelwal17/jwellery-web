@@ -55,7 +55,7 @@ export default function ProductCard({ product }: Props) {
           marginTop: "0.875rem", paddingTop: "0.875rem",
           borderTop: "1px solid var(--color-border)",
         }}>
-          <span style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", color: "var(--color-gold)", lineHeight: 1 }}>
+          <span style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.5rem", color: "var(--color-gold)", lineHeight: 1 }}>
             {formatCurrency(product.calculatedPrice)}
           </span>
           <span style={{

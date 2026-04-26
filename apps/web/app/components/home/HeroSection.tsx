@@ -36,7 +36,7 @@ export default function HeroSection() {
           </p>
 
           <h1 style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "'Corinthia', cursive",
             fontSize: "clamp(5rem, 9vw, 8.5rem)",
             fontWeight: 400, lineHeight: 1.0,
             color: "var(--color-text)",
@@ -95,7 +95,7 @@ export default function HeroSection() {
             padding: "0.875rem 1.25rem",
           }}>
             <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>Live Gold Rate</div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem", color: "var(--color-gold)", marginTop: "0.1rem" }}>₹9,450 /g</div>
+            <div style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.6rem", color: "var(--color-gold)", marginTop: "0.1rem" }}>₹9,450 /g</div>
           </div>
         </div>
       </section>

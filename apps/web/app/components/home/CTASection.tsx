@@ -11,7 +11,7 @@ export default function CTASection() {
       <div style={{
         position: "absolute", left: "50%", top: "50%",
         transform: "translate(-50%, -50%)",
-        fontFamily: "var(--font-display)",
+        fontFamily: "'Corinthia', cursive",
         fontSize: "22rem", lineHeight: 1,
         color: "rgba(255,255,255,0.03)",
         pointerEvents: "none", whiteSpace: "nowrap",
@@ -24,7 +24,7 @@ export default function CTASection() {
           Ready to begin?
         </p>
         <h2 style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "'Corinthia', cursive",
           fontSize: "clamp(3.5rem, 6vw, 6rem)",
           fontWeight: 400, lineHeight: 1.1, marginBottom: "1.25rem",
         }}>

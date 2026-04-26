@@ -41,7 +41,7 @@ export default function AboutSection() {
           Our Story
         </p>
         <h2 style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "'Corinthia', cursive",
           fontSize: "clamp(2.8rem, 4vw, 4.2rem)",
           fontWeight: 400, lineHeight: 1.15, marginBottom: "1.5rem",
           color: "var(--color-text)",
@@ -70,7 +70,7 @@ export default function AboutSection() {
             { num: "22KT", label: "Pure Gold" },
           ].map((s) => (
             <div key={s.label}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "2.8rem", color: "var(--color-blush)", lineHeight: 1 }}>
+              <div style={{ fontFamily: "'Corinthia', cursive", fontSize: "2.8rem", color: "var(--color-blush)", lineHeight: 1 }}>
                 {s.num}
               </div>
               <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: "0.2rem", fontWeight: 400 }}>

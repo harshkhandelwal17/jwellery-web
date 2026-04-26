@@ -14,7 +14,7 @@ export default function Footer() {
       }}>
         {/* Brand */}
         <div>
-          <Link href="/" style={{ fontFamily: "var(--font-display)", fontSize: "2.2rem", color: "#f0e8e0", textDecoration: "none", display: "block", marginBottom: "1rem" }}>
+          <Link href="/" style={{ fontFamily: "'Corinthia', cursive", fontSize: "2.2rem", color: "#f0e8e0", textDecoration: "none", display: "block", marginBottom: "1rem" }}>
             Jwell
           </Link>
           <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300 }}>
