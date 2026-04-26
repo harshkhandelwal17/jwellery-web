@@ -19,8 +19,10 @@ export default async function HomePage() {
   const necklaces = products.filter((p) => p.category === "necklaces");
 
   const categoryImages: Record<string, string | undefined> = {
-    rings: rings[0] ? cloudinaryUrl(rings[0].image, { width: 600, quality: 85 }) : undefined,
+    rings:     rings[0]     ? cloudinaryUrl(rings[0].image,     { width: 600, quality: 85 }) : undefined,
     necklaces: necklaces[0] ? cloudinaryUrl(necklaces[0].image, { width: 600, quality: 85 }) : undefined,
+    earrings:  rings[4]     ? cloudinaryUrl(rings[4].image,     { width: 600, quality: 85 }) : undefined,
+    bracelets: necklaces[4] ? cloudinaryUrl(necklaces[4].image, { width: 600, quality: 85 }) : undefined,
   };
 
   const aboutMainImage = rings[3]
