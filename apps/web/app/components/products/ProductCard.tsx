@@ -55,7 +55,7 @@ export default function ProductCard({ product }: Props) {
           marginTop: "0.625rem", paddingTop: "0.625rem",
           borderTop: "1px solid var(--color-border)",
         }}>
-          <span style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.25rem", color: "var(--color-gold)", lineHeight: 1 }}>
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", fontWeight: 600, color: "var(--color-gold)", lineHeight: 1, letterSpacing: "0.02em" }}>
             {formatCurrency(product.calculatedPrice)}
           </span>
           <span className="arrow-btn" style={{

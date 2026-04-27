@@ -6,12 +6,25 @@ import type { ProductCategory } from "@jwell/types";
 
 export const revalidate = 300;
 
-const CATEGORIES: { slug: ProductCategory | "all"; label: string }[] = [
-  { slug: "all", label: "All" },
+const CATEGORIES: { slug: string; label: string }[] = [
+  { slug: "all", label: "All Jewellery" },
   { slug: "rings", label: "Rings" },
   { slug: "necklaces", label: "Necklaces" },
   { slug: "earrings", label: "Earrings" },
   { slug: "bracelets", label: "Bracelets" },
+  { slug: "watches", label: "Watches" },
+  { slug: "bridal", label: "Bridal" },
+  { slug: "lab-grown-diamond", label: "Lab Grown Diamond" },
+  { slug: "silver-gold", label: "Silver & Gold" },
+  { slug: "flick", label: "Flick Jewellery" },
+  { slug: "silver-collection", label: "Silver Collection" },
+];
+
+const CRAFT_EDIT = [
+  { slug: "lab-grown-diamond", title: "Lab Grown Diamond", desc: "Brilliant, ethical, and exquisite", bg: "#f0eaff" },
+  { slug: "silver-gold", title: "Silver & Gold", desc: "The timeless duo, reimagined", bg: "#fff8e8" },
+  { slug: "flick", title: "Flick Jewellery", desc: "Bold statements, light wear", bg: "#eafff4" },
+  { slug: "silver-collection", title: "Silver Collection", desc: "Pure elegance in sterling silver", bg: "#eaf0ff" },
 ];
 
 interface Props {
@@ -21,6 +34,7 @@ interface Props {
 export default async function ProductsPage({ searchParams }: Props) {
   const { category } = await searchParams;
   const active = category as ProductCategory | undefined;
+  const activeSlug = category ?? "all";
 
   const allProducts = await fetchProducts();
   const products = active
@@ -62,27 +76,22 @@ export default async function ProductsPage({ searchParams }: Props) {
           {/* Category filter */}
           <div className="hero-enter hero-enter-3 flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
             {CATEGORIES.map((cat) => {
-              const isActive =
-                (!active && cat.slug === "all") || active === cat.slug;
+              const isActive = activeSlug === cat.slug;
               return (
                 <a
                   key={cat.slug}
-                  href={
-                    cat.slug === "all"
-                      ? "/products"
-                      : `/products?category=${cat.slug}`
-                  }
+                  href={cat.slug === "all" ? "/products" : `/products?category=${cat.slug}`}
                   className="text-xs tracking-widest uppercase px-5 py-2.5 border transition-all"
                   style={
                     isActive
                       ? {
-                          backgroundColor: "var(--color-text-900)",
-                          borderColor: "var(--color-text-900)",
-                          color: "var(--color-ivory-50)",
+                          backgroundColor: "var(--color-text)",
+                          borderColor: "var(--color-text)",
+                          color: "white",
                         }
                       : {
-                          borderColor: "var(--color-ivory-200)",
-                          color: "var(--color-text-700)",
+                          borderColor: "var(--color-border)",
+                          color: "var(--color-text-muted)",
                           backgroundColor: "transparent",
                         }
                   }
@@ -108,6 +117,63 @@ export default async function ProductsPage({ searchParams }: Props) {
               ))}
             </div>
           )}
+        </div>
+
+        {/* The Craft Edit */}
+        <div style={{ background: "var(--color-blush-light)", padding: "5rem 0" }}>
+          <div className="max-w-7xl mx-auto px-4 md:px-6">
+            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+              <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+                Curated For You
+              </p>
+              <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 600, letterSpacing: "0.08em", color: "var(--color-text)" }}>
+                The Craft Edit
+              </h2>
+            </div>
+            <style>{`
+              .craft-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+              @media (max-width: 768px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
+              .craft-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,150,42,0.16) !important; }
+              .craft-card { transition: all 0.3s; }
+            `}</style>
+            <div className="craft-grid">
+              {CRAFT_EDIT.map((item) => (
+                <a
+                  key={item.slug}
+                  href={`/products?category=${item.slug}`}
+                  className="craft-card"
+                  style={{
+                    textDecoration: "none",
+                    background: item.bg,
+                    borderRadius: "1.25rem",
+                    padding: "2.5rem 1.75rem",
+                    border: "1px solid var(--color-border)",
+                    display: "block",
+                  }}
+                >
+                  <div style={{
+                    width: "2.5rem", height: "2.5rem",
+                    background: "white", borderRadius: "0.5rem",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: "1.1rem", marginBottom: "1.25rem",
+                    color: "var(--color-gold)",
+                    border: "1px solid var(--color-border)",
+                  }}>
+                    ◈
+                  </div>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--color-text)", marginBottom: "0.4rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
+                    {item.title}
+                  </h3>
+                  <p style={{ fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 300, lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                    {item.desc}
+                  </p>
+                  <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-blush)", fontWeight: 500 }}>
+                    Explore →
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
       </main>
       <Footer />

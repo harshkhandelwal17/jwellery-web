@@ -16,7 +16,7 @@ export interface ProductWithPrice extends Product {
   goldPriceUsed: number;
 }
 
-export type ProductCategory = "rings" | "necklaces" | "earrings" | "bracelets";
+export type ProductCategory = "rings" | "necklaces" | "earrings" | "bracelets" | "watches";
 
 export interface CreateProductInput {
   name: string;

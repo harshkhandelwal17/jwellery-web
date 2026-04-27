@@ -3,11 +3,11 @@ import Image from "next/image";
 
 const TICKER_ITEMS = [
   "BIS Hallmarked 22KT Gold",
-  "Handcrafted in Jaipur",
+  "Handcrafted with Love",
   "Live Market Pricing",
   "Lifetime Servicing",
   "Free Home Delivery",
-  "30+ Years of Craft",
+  "Lab Grown Diamonds Available",
 ];
 
 export default function HeroSection({ heroImages: _ }: { heroImages?: string[] } = {}) {
@@ -30,7 +30,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         .hero-image-col {
           height: calc(100vh - 96px);
           position: relative;
-          background: #edf1fc;
+          background: var(--color-bg-warm);
           display: flex; align-items: center; justify-content: center;
           overflow: hidden;
         }
@@ -50,31 +50,24 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         {/* Text side */}
         <div className="hero-text">
           <p className="hero-enter hero-enter-1" style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
-            Feel the Luxury
+            Feel with Luxury
           </p>
 
           <h1 className="hero-enter hero-enter-2" style={{
-            fontFamily: "'Corinthia', cursive",
-            fontSize: "clamp(5rem, 9vw, 8.5rem)",
-            fontWeight: 400, lineHeight: 1.0,
+            fontFamily: "'Cinzel', serif",
+            fontSize: "clamp(2.2rem, 5vw, 4.5rem)",
+            fontWeight: 550, lineHeight: 1.15, letterSpacing: "0.06em",
             color: "var(--color-text)",
           }}>
             Moments To<br />Mementos
           </h1>
 
-          <div className="hero-enter hero-enter-3 hero-text-rule" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
-            <span style={{ display: "block", width: "2.5rem", height: "1px", background: "var(--color-blush-mid)" }} />
-            <span style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--color-blush)", textTransform: "uppercase" }}>
-              Handcrafted since 1992
-            </span>
-          </div>
-
-          <p className="hero-enter hero-enter-4" style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
+          <p className="hero-enter hero-enter-3" style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
             It&apos;s more than an adornment. It&apos;s a feeling, a memory,
             a mark of love. Crafted with care. Delivered with heart.
           </p>
 
-          <div className="hero-enter hero-enter-5 hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
+          <div className="hero-enter hero-enter-4 hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
             <Link href="/products" className="hero-btn-primary" style={{
               background: "var(--color-text)", color: "var(--color-bg-card)",
               padding: "0.8rem 2.25rem",
@@ -110,14 +103,14 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
 
           <div className="hero-gold-tag gold-badge-pulse" style={{
             position: "absolute", bottom: "2.5rem", left: "2rem",
-            background: "rgba(255,255,255,0.92)",
+            background: "var(--color-bg-overlay)",
             backdropFilter: "blur(8px)",
             border: "1px solid var(--color-border)",
             padding: "0.875rem 1.25rem",
             zIndex: 10,
           }}>
             <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>Live Gold Rate</div>
-            <div style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.6rem", color: "var(--color-gold)", marginTop: "0.1rem" }}>₹9,450 /g</div>
+            <div style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", fontWeight: 700, color: "var(--color-gold)", marginTop: "0.25rem", letterSpacing: "0.04em" }}>₹9,450 /g</div>
           </div>
         </div>
       </section>

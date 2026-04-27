@@ -2,10 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 const CATEGORIES = [
-  { name: "Rings", slug: "rings", fallback: "https://picsum.photos/seed/rings88/400/400" },
-  { name: "Necklaces", slug: "necklaces", fallback: "https://picsum.photos/seed/neck88/400/400" },
-  { name: "Earrings", slug: "earrings", fallback: "https://picsum.photos/seed/ear88/400/400" },
-  { name: "Bracelets", slug: "bracelets", fallback: "https://picsum.photos/seed/brac88/400/400" },
+  { name: "Rings", slug: "rings", fallback: "/shreeva/ring_green_stone_flower_008.jpeg" },
+  { name: "Necklaces", slug: "necklaces", fallback: "/shreeva/necklace_gold_wavy_mesh_009.jpeg" },
+  { name: "Earrings", slug: "earrings", fallback: "/shreeva/earring_bali_oval_hoop_gold_018.jpeg" },
+  { name: "Bracelets", slug: "bracelets", fallback: "/shreeva/kada_gold_chain_weave_013.jpeg" },
+  { name: "Bridal", slug: "bridal", fallback: "/shreeva/necklace_set_rose_gold_flower_021.jpeg" },
+  { name: "Watches", slug: "watches", fallback: "/shreeva/watch_ladies_GW875_titan_gold_019.jpeg" },
 ];
 
 interface Props {
@@ -17,7 +19,10 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
     <section className="categories-section" style={{ padding: "5rem 5rem", background: "var(--color-bg)" }}>
       <style>{`
         .categories-section { padding: 5rem 5rem; }
-        .categories-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 900px; margin: 0 auto; }
+        .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+        @media (max-width: 900px) {
+          .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+        }
         @media (max-width: 768px) {
           .categories-section { padding: 3rem 1.25rem !important; }
           .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
@@ -28,11 +33,11 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Browse Categories
         </p>
-        <h2 style={{ fontFamily: "'Corinthia', cursive", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
+        <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 600, letterSpacing: "0.06em", color: "var(--color-text)" }}>
           Find Your Perfect Piece
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--color-text-muted)", marginTop: "0.5rem", fontWeight: 300 }}>
-          From bridal sets to everyday elegance
+          From lightweight bridal to everyday elegance
         </p>
       </div>
 

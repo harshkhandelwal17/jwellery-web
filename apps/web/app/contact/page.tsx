@@ -66,8 +66,7 @@ export default async function ContactPage({ searchParams }: Props) {
                     Address
                   </p>
                   <p className="text-base" style={{ color: "var(--color-text-700)" }}>
-                    12, Jewellers Street, Zaveri Bazaar<br />
-                    Mumbai, Maharashtra 400002
+                    Address to be updated
                   </p>
                 </div>
 

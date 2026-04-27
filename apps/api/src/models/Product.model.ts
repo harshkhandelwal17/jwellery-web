@@ -7,7 +7,7 @@ interface IProduct {
   weight: number;
   makingCharges: number;
   image: string;
-  category: "rings" | "necklaces" | "earrings" | "bracelets";
+  category: "rings" | "necklaces" | "earrings" | "bracelets" | "watches";
   description: string;
   modelPath: string | null;
   createdAt: Date;
@@ -20,7 +20,7 @@ const ProductSchema = new Schema<IProduct>(
     weight:        { type: Number, required: true, min: 0 },
     makingCharges: { type: Number, required: true, min: 0 },
     image:         { type: String, required: true },
-    category:      { type: String, required: true, enum: ["rings", "necklaces", "earrings", "bracelets"] },
+    category:      { type: String, required: true, enum: ["rings", "necklaces", "earrings", "bracelets", "watches"] },
     description:   { type: String, default: "" },
     modelPath:     { type: String, default: null },
   },
