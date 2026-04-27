@@ -21,7 +21,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
       `}</style>
 
       {/* Overlapping images */}
-      <div className="about-image-wrap">
+      <div className="about-image-wrap scroll-reveal">
         <div style={{
           position: "absolute", top: 0, left: 0, width: "72%", height: "88%",
           borderRadius: "1.5rem", overflow: "hidden",
@@ -56,7 +56,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
       </div>
 
       {/* Text */}
-      <div>
+      <div className="scroll-reveal">
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Our Story
         </p>

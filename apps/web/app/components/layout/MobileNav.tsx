@@ -27,6 +27,7 @@ export default function MobileNav({ open, onClose }: Props) {
     }}>
       {/* Backdrop */}
       <div
+        className="mobile-nav-backdrop"
         onClick={onClose}
         style={{
           position: "absolute", inset: 0,
@@ -34,8 +35,8 @@ export default function MobileNav({ open, onClose }: Props) {
         }}
       />
 
-      {/* Drawer — slides in from left */}
-      <nav style={{
+      {/* Drawer — slides in from right */}
+      <nav className="mobile-nav-drawer" style={{
         position: "relative",
         marginLeft: "auto",
         width: "280px",

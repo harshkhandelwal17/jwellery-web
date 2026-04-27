@@ -58,11 +58,12 @@ export default function ProductCard({ product }: Props) {
           <span style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.25rem", color: "var(--color-gold)", lineHeight: 1 }}>
             {formatCurrency(product.calculatedPrice)}
           </span>
-          <span style={{
+          <span className="arrow-btn" style={{
             width: "1.6rem", height: "1.6rem", borderRadius: "50%",
             background: "var(--color-blush)", color: "white",
             display: "flex", alignItems: "center", justifyContent: "center",
             fontSize: "0.7rem", flexShrink: 0,
+            transition: "transform 0.2s ease",
           }}>
             →
           </span>
@@ -73,6 +74,9 @@ export default function ProductCard({ product }: Props) {
         .product-card-link:hover {
           transform: translateY(-6px);
           box-shadow: 0 16px 40px rgba(201,128,106,0.14);
+        }
+        .product-card-link:hover .arrow-btn {
+          transform: scale(1.15) translateX(2px);
         }
       `}</style>
     </Link>

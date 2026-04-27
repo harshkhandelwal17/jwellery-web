@@ -64,12 +64,13 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
               display: "flex", alignItems: "center", justifyContent: "space-between",
             }}>
               <div style={{ fontSize: "0.85rem", fontWeight: 500 }}>{cat.name}</div>
-              <div className="cat-arrow" style={{
+              <div className="cat-arrow cat-arrow-icon" style={{
                 width: "1.6rem", height: "1.6rem", borderRadius: "50%",
                 border: "1px solid var(--color-border)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 fontSize: "0.7rem", color: "var(--color-text-muted)",
-                transition: "all 0.2s", flexShrink: 0,
+                transition: "transform 0.2s ease, background 0.2s, color 0.2s, border-color 0.2s",
+                flexShrink: 0,
               }}>
                 →
               </div>
@@ -88,6 +89,9 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
           background: var(--color-blush) !important;
           color: white !important;
           border-color: var(--color-blush) !important;
+        }
+        .cat-card-link:hover .cat-arrow-icon {
+          transform: rotate(45deg) scale(1.05);
         }
       `}</style>
     </section>

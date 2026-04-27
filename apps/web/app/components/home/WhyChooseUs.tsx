@@ -20,6 +20,7 @@ export default function WhyChooseUs() {
           box-shadow: 0 12px 36px rgba(201,128,106,0.12);
           transform: translateY(-4px);
         }
+        .why-card:hover .why-icon { transform: scale(1.12); }
       `}</style>
 
       <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
@@ -33,16 +34,17 @@ export default function WhyChooseUs() {
 
       <div className="why-grid">
         {reasons.map((r) => (
-          <div key={r.title} className="why-card" style={{
+          <div key={r.title} className="why-card scroll-reveal" style={{
             background: "white", borderRadius: "1.25rem", padding: "2rem 1.75rem",
             border: "1px solid transparent", transition: "all 0.3s",
           }}>
-            <div style={{
+            <div className="why-icon" style={{
               width: "2.75rem", height: "2.75rem",
               background: "var(--color-blush-light)", borderRadius: "0.75rem",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: "1.1rem", marginBottom: "1.25rem",
               color: "var(--color-blush)",
+              transition: "transform 0.2s ease",
             }}>
               {r.icon}
             </div>

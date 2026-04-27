@@ -49,11 +49,11 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
       <section className="hero-section">
         {/* Text side */}
         <div className="hero-text">
-          <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+          <p className="hero-enter hero-enter-1" style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
             Feel the Luxury
           </p>
 
-          <h1 style={{
+          <h1 className="hero-enter hero-enter-2" style={{
             fontFamily: "'Corinthia', cursive",
             fontSize: "clamp(5rem, 9vw, 8.5rem)",
             fontWeight: 400, lineHeight: 1.0,
@@ -62,19 +62,19 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             Moments To<br />Mementos
           </h1>
 
-          <div className="hero-text-rule" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
+          <div className="hero-enter hero-enter-3 hero-text-rule" style={{ display: "flex", alignItems: "center", gap: "1rem", margin: "1.75rem 0" }}>
             <span style={{ display: "block", width: "2.5rem", height: "1px", background: "var(--color-blush-mid)" }} />
             <span style={{ fontSize: "0.65rem", letterSpacing: "0.15em", color: "var(--color-blush)", textTransform: "uppercase" }}>
               Handcrafted since 1992
             </span>
           </div>
 
-          <p style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
+          <p className="hero-enter hero-enter-4" style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
             It&apos;s more than an adornment. It&apos;s a feeling, a memory,
             a mark of love. Crafted with care. Delivered with heart.
           </p>
 
-          <div className="hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
+          <div className="hero-enter hero-enter-5 hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
             <Link href="/products" className="hero-btn-primary" style={{
               background: "var(--color-text)", color: "var(--color-bg-card)",
               padding: "0.8rem 2.25rem",
@@ -95,18 +95,20 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
 
         {/* Hero image */}
         <div className="hero-image-col">
-          <Image
-            src="/heroImage.webp"
-            alt="Handcrafted gold diamond ring"
-            fill
-            className="object-contain"
-            priority
-            quality={95}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            style={{ padding: "3rem" }}
-          />
+          <div className="hero-float" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Image
+              src="/heroImage.webp"
+              alt="Handcrafted gold diamond ring"
+              fill
+              className="object-contain"
+              priority
+              quality={95}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              style={{ padding: "3rem" }}
+            />
+          </div>
 
-          <div className="hero-gold-tag" style={{
+          <div className="hero-gold-tag gold-badge-pulse" style={{
             position: "absolute", bottom: "2.5rem", left: "2rem",
             background: "rgba(255,255,255,0.92)",
             backdropFilter: "blur(8px)",

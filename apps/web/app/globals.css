@@ -29,5 +29,80 @@ body {
 
 /* Product image zoom */
 .product-img-wrap { position: relative; overflow: hidden; }
-.product-img-wrap img { transition: transform 0.5s ease; }
+.product-img-wrap img { transition: transform 0.5s ease; will-change: transform; }
 .product-img-wrap:hover img { transform: scale(1.04); }
+
+/* ── Animation Keyframes ─────────────────────────────────────── */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes shimmer-gold {
+  0%   { box-shadow: 0 0 0 0 rgba(184,122,0,0.22); }
+  70%  { box-shadow: 0 0 0 9px rgba(184,122,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(184,122,0,0); }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Hero entrance (load-time, staggered) ────────────────────── */
+
+.hero-enter {
+  animation: fade-up 0.65s ease both;
+}
+.hero-enter-1 { animation-delay: 0s; }
+.hero-enter-2 { animation-delay: 0.15s; }
+.hero-enter-3 { animation-delay: 0.3s; }
+.hero-enter-4 { animation-delay: 0.45s; }
+.hero-enter-5 { animation-delay: 0.6s; }
+
+/* ── Hero image float ────────────────────────────────────────── */
+
+.hero-float { animation: float 5s ease-in-out infinite; }
+
+/* ── Gold badge pulse ────────────────────────────────────────── */
+
+.gold-badge-pulse { animation: shimmer-gold 3s ease-in-out infinite 1.2s; }
+
+/* ── Mobile nav ──────────────────────────────────────────────── */
+
+.mobile-nav-backdrop { animation: backdrop-in 0.2s ease both; }
+.mobile-nav-drawer   { animation: slide-in-right 0.28s ease both; }
+
+/* ── Nav link underline slide ────────────────────────────────── */
+
+.nav-link-underline { position: relative; }
+.nav-link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-text);
+  transition: width 0.25s ease;
+}
+.nav-link-underline:hover::after { width: 100%; }
+
+/* ── CSS scroll-driven reveals ───────────────────────────────── */
+
+@supports (animation-timeline: scroll()) {
+  .scroll-reveal {
+    animation: fade-up 0.7s ease both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 28%;
+  }
+}

@@ -58,7 +58,7 @@ export default function Header() {
               { href: "/", label: "Home" },
               { href: "/products", label: "Products" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} style={{
+              <Link key={l.href} href={l.href} className="nav-link-underline" style={{
                 fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
                 textDecoration: "none", letterSpacing: "0.02em", transition: "color 0.2s",
               }}
@@ -85,7 +85,7 @@ export default function Header() {
         {/* Right — hidden on mobile, nav + CTA on desktop */}
         <div className="flex items-center justify-end gap-6">
           <nav className="hidden md:flex items-center gap-6">
-            <Link href="/contact" style={{
+            <Link href="/contact" className="nav-link-underline" style={{
               fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
               textDecoration: "none", transition: "color 0.2s",
             }}
