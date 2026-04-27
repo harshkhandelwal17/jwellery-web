@@ -36,10 +36,11 @@ export default function CuratedSection() {
         }
         .curated-label-box {
           position: relative; z-index: 1;
-          background: rgba(15,11,45,0.78);
-          padding: 0.6rem 1rem;
+          background: var(--color-dark-footer);
+          padding: 0.75rem 1rem;
           border-radius: 0.5rem;
           text-align: center; width: 100%;
+          border: 1px solid rgba(201,150,42,0.3);
         }
         @media (max-width: 768px) {
           .curated-section { padding: 3.5rem 1.25rem; }
@@ -71,10 +72,10 @@ export default function CuratedSection() {
               <span className="curated-icon">✦</span>
             </div>
             <div className="curated-label-box">
-              <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.04em", fontFamily: "'Cinzel', serif" }}>
+              <div style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--color-gold)", letterSpacing: "0.05em", fontFamily: "'Cinzel', serif" }}>
                 {b.label}
               </div>
-              <div style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.6)", marginTop: "0.2rem", fontWeight: 300 }}>
+              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.75)", marginTop: "0.25rem", fontWeight: 300 }}>
                 {b.note}
               </div>
             </div>
