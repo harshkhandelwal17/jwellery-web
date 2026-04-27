@@ -16,12 +16,8 @@ interface Props {
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
 
-  let product;
-  try {
-    product = await fetchProduct(id);
-  } catch {
-    notFound();
-  }
+  const product = await fetchProduct(id);
+  if (!product) notFound();
 
   const allProducts = await fetchProducts();
   const related = allProducts
@@ -180,7 +176,7 @@ export default async function ProductDetailPage({ params }: Props) {
                       />
                     </div>
                     <p style={{ fontSize: "0.8rem", marginBottom: "0.15rem", color: "var(--color-text-900)" }}>{p.name}</p>
-                    <p style={{ fontFamily: "'Corinthia', cursive", fontSize: "1.2rem", color: "var(--color-gold)" }}>
+                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.03em", color: "var(--color-gold)" }}>
                       ₹{p.calculatedPrice.toLocaleString("en-IN")}
                     </p>
                   </Link>

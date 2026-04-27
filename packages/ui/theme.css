@@ -1,5 +1,5 @@
 /*
- * Shreeva Jewellers — Deep Navy & Gold Theme
+ * Shreeva Jewellers — Royal Purple & Gold Theme (logo-matched)
  * Tailwind v4 CSS-first theme — imported by all apps via @import "@jwell/ui/theme.css"
  */
 
@@ -7,24 +7,29 @@
   /* ── Brand Palette ───────────────── */
 
   --color-bg:          #ffffff;
-  --color-bg-warm:     #edf1fc;
-  --color-bg-card:     #f4f7fe;
-  --color-blush:       #9a6e00;
-  --color-blush-light: #dde5f8;
-  --color-blush-mid:   #7088c0;
-  --color-text:        #0d0a22;
-  --color-text-mid:    #343060;
-  --color-text-muted:  #565a80;
-  --color-border:      #c0caea;
-  --color-gold:        #b87a00;
+  --color-bg-warm:     #f5f0ff;
+  --color-bg-card:     #f9f7fe;
+  --color-blush:       #a07820;
+  --color-blush-light: #ede8ff;
+  --color-blush-mid:   #7c6dbf;
+  --color-text:        #0f0b2d;
+  --color-text-mid:    #3d2e8c;
+  --color-text-muted:  #6b5ea8;
+  --color-border:      #d0c8f0;
+  --color-gold:        #c9962a;
+
+  /* Surface & overlay */
+  --color-surface:     #ffffff;
+  --color-bg-overlay:  rgba(255, 255, 255, 0.96);
 
   /* Dark backgrounds */
-  --color-dark-footer: #0a0820;
+  --color-dark-footer: #0f0b2d;
 
   /* ── Typography ──────────────────────────────────────── */
 
-  --font-display: "Corinthia", cursive;
-  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-display:  "Corinthia", cursive;
+  --font-display2: "Cinzel", serif;
+  --font-body:     "DM Sans", system-ui, sans-serif;
 
   /* ── Letter Spacing ──────────────────────────────────── */
 

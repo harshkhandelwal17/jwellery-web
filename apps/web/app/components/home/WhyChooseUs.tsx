@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Why Choose Us
         </p>
-        <h2 style={{ fontFamily: "'Corinthia', cursive", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
+        <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 600, letterSpacing: "0.06em", color: "var(--color-text)" }}>
           The Shreeva Jewellers Promise
         </h2>
       </div>
@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
       <div className="why-grid">
         {reasons.map((r) => (
           <div key={r.title} className="why-card scroll-reveal" style={{
-            background: "white", borderRadius: "1.25rem", padding: "2rem 1.75rem",
+            background: "var(--color-surface)", borderRadius: "1.25rem", padding: "2rem 1.75rem",
             border: "1px solid transparent", transition: "all 0.3s",
           }}>
             <div className="why-icon" style={{

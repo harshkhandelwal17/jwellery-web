@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -19,18 +20,27 @@ export default function Footer() {
       <div className="footer-grid">
         {/* Brand */}
         <div className="footer-brand">
-          <Link href="/" style={{ fontFamily: "'Corinthia', cursive", fontSize: "2.2rem", color: "var(--color-gold)", textDecoration: "none", display: "block", marginBottom: "1rem" }}>
-            Shreeva Jewellers
+          <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
+            <Image
+              src="/logo.jpeg"
+              alt="Shreeva Jewellers"
+              width={64}
+              height={64}
+              style={{ borderRadius: "0.5rem", objectFit: "cover" }}
+            />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.3 }}>
+              Shreeva<br />Jewellers
+            </span>
           </Link>
           <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300 }}>
-            Feel the Luxury — Handcrafted gold jewellery from the heart of Jaipur. Bringing tradition and transparency together since 1992.
+            Feel with Luxury — Handcrafted gold jewellery crafted with passion and presented with pride.
           </p>
         </div>
 
         {[
           { heading: "Collections", links: [{ label: "Rings", href: "/products?category=rings" }, { label: "Necklaces", href: "/products?category=necklaces" }, { label: "Earrings", href: "/products?category=earrings" }, { label: "Bracelets", href: "/products?category=bracelets" }] },
           { heading: "Company", links: [{ label: "About Us", href: "/" }, { label: "Our Artisans", href: "/" }, { label: "Blog", href: "/" }, { label: "Careers", href: "/" }] },
-          { heading: "Visit Us", links: [{ label: "M.I. Road, Jaipur", href: "/" }, { label: "+91 98765 43210", href: "tel:+919876543210" }, { label: "hello@shreevajewellers.in", href: "mailto:hello@shreevajewellers.in" }, { label: "Mon–Sat, 10am–7pm", href: "/" }] },
+          { heading: "Visit Us", links: [{ label: "Address Coming Soon", href: "/" }, { label: "+91 98765 43210", href: "tel:+919876543210" }, { label: "hello@shreevajewellers.in", href: "mailto:hello@shreevajewellers.in" }, { label: "WhatsApp Us", href: "https://wa.me/919876543210" }, { label: "Mon–Sat, 10am–7pm", href: "/" }] },
         ].map((col) => (
           <div key={col.heading}>
             <h4 style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-mid)", fontWeight: 600, marginBottom: "1.5rem" }}>

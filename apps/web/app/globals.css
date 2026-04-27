@@ -4,6 +4,21 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
+/* ── Dark theme overrides ────────────────────────────────────── */
+[data-theme="dark"] {
+  --color-bg:          #0f0b2d;
+  --color-bg-warm:     #14103a;
+  --color-bg-card:     #1a1645;
+  --color-surface:     #1a1645;
+  --color-bg-overlay:  rgba(15, 11, 45, 0.96);
+  --color-text:        #ede9ff;
+  --color-text-mid:    #c4b4f8;
+  --color-text-muted:  #9888cc;
+  --color-border:      #2e2860;
+  --color-blush-light: #1e1a50;
+  --color-dark-footer: #07051a;
+}
+
 body {
   font-family: 'DM Sans', system-ui, sans-serif;
   background: var(--color-bg);
@@ -13,7 +28,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-.font-display { font-family: 'Corinthia', cursive; }
+.font-display { font-family: 'Cinzel', serif; letter-spacing: 0.04em; }
+.font-script  { font-family: 'Corinthia', cursive; }
 
 /* Ticker */
 .ticker-inner {

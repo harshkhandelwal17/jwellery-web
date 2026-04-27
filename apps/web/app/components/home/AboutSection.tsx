@@ -26,7 +26,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           position: "absolute", top: 0, left: 0, width: "72%", height: "88%",
           borderRadius: "1.5rem", overflow: "hidden",
           boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
-          background: "#f0efed",
+          background: "var(--color-bg-card)",
         }}>
           <Image
             src={mainImage ?? FALLBACK_MAIN}
@@ -42,7 +42,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           borderRadius: "1.25rem", aspectRatio: "1/1", overflow: "hidden",
           border: "4px solid var(--color-bg)",
           boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
-          background: "#f0efed",
+          background: "var(--color-bg-card)",
         }}>
           <Image
             src={accentImage ?? FALLBACK_ACCENT}
@@ -58,25 +58,21 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
       {/* Text */}
       <div className="scroll-reveal">
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
-          Our Story
+          Our Journey
         </p>
         <h2 style={{
-          fontFamily: "'Corinthia', cursive",
-          fontSize: "clamp(2.8rem, 4vw, 4.2rem)",
-          fontWeight: 400, lineHeight: 1.15, marginBottom: "1.5rem",
+          fontFamily: "'Cinzel', serif",
+          fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)",
+          fontWeight: 600, letterSpacing: "0.06em", lineHeight: 1.3, marginBottom: "1.5rem",
           color: "var(--color-text)",
         }}>
-          Jewellery Crafted<br />
-          with <em style={{ fontStyle: "italic", color: "var(--color-blush)" }}>Heart &amp; Heritage</em>
+          Jewellery Crafted with<br />
+          <span style={{ color: "var(--color-blush)" }}>Heart &amp; Heritage</span>
         </h2>
 
         <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          Since 1992, our artisans in Jaipur have poured love into every ring, necklace, and bangle.
-          We believe jewellery is more than gold — it carries your moments, your milestones, your memory.
-        </p>
-        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          Our dynamic gold pricing means you pay exactly what the market says — nothing more.
-          Transparent, honest, and always fair.
+          Shreeva Jewellers — handcrafted with passion and presented with pride.
+          Our story is being written for you. Stay tuned.
         </p>
 
         <div style={{
@@ -85,12 +81,12 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           flexWrap: "wrap",
         }}>
           {[
-            { num: "30+", label: "Years of Craft" },
             { num: "4K+", label: "Happy Customers" },
             { num: "22KT", label: "Pure Gold" },
+            { num: "BIS", label: "Hallmarked" },
           ].map((s) => (
             <div key={s.label}>
-              <div style={{ fontFamily: "'Corinthia', cursive", fontSize: "2.8rem", color: "var(--color-blush)", lineHeight: 1 }}>
+              <div style={{ fontFamily: "'Cinzel', serif", fontSize: "1.8rem", fontWeight: 700, color: "var(--color-blush)", lineHeight: 1, letterSpacing: "0.04em" }}>
                 {s.num}
               </div>
               <div style={{ fontSize: "0.72rem", color: "var(--color-text-muted)", marginTop: "0.2rem", fontWeight: 400 }}>

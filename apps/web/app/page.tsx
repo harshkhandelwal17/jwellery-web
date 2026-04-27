@@ -3,7 +3,9 @@ import Footer from "./components/layout/Footer";
 import HeroSection from "./components/home/HeroSection";
 import CategoriesSection from "./components/home/CategoriesSection";
 import FeaturedProducts from "./components/home/FeaturedProducts";
+import BridalSection from "./components/home/BridalSection";
 import AboutSection from "./components/home/AboutSection";
+import CuratedSection from "./components/home/CuratedSection";
 import WhyChooseUs from "./components/home/WhyChooseUs";
 import CTASection from "./components/home/CTASection";
 import { fetchProducts } from "./lib/api";
@@ -39,7 +41,9 @@ export default async function HomePage() {
         <HeroSection />
         <CategoriesSection categoryImages={categoryImages} />
         <FeaturedProducts products={featured} />
+        <BridalSection />
         <AboutSection mainImage={aboutMainImage} accentImage={aboutAccentImage} />
+        <CuratedSection />
         <WhyChooseUs />
         <CTASection />
       </main>

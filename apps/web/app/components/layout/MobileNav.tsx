@@ -1,14 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const links = [
   { href: "/", label: "Home" },
-  { href: "/products", label: "Collections" },
+  { href: "/products", label: "All Collections" },
+  { href: "/products?category=bridal", label: "Bridal" },
   { href: "/products?category=rings", label: "Rings" },
   { href: "/products?category=necklaces", label: "Necklaces" },
   { href: "/products?category=earrings", label: "Earrings" },
   { href: "/products?category=bracelets", label: "Bracelets" },
+  { href: "/products?category=lab-grown-diamond", label: "Lab Grown Diamond" },
+  { href: "/products?category=silver-gold", label: "Silver & Gold" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -44,7 +49,7 @@ export default function MobileNav({ open, onClose }: Props) {
         display: "flex",
         flexDirection: "column",
         padding: "2rem",
-        background: "#ffffff",
+        background: "var(--color-bg)",
         overflowY: "auto",
         zIndex: 10,
       }}>
@@ -70,13 +75,16 @@ export default function MobileNav({ open, onClose }: Props) {
           href="/"
           onClick={onClose}
           style={{
-            fontFamily: "'Corinthia', cursive",
-            fontSize: "2.2rem", fontWeight: 400,
-            color: "var(--color-gold)", textDecoration: "none",
-            marginBottom: "2rem", display: "block",
+            textDecoration: "none", marginBottom: "2rem",
+            display: "flex", alignItems: "center", gap: "0.6rem",
           }}
         >
-          Shreeva Jewellers
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <Image src="/logo.jpeg" alt="Shreeva Jewellers" width={40} height={40} style={{ borderRadius: "0.35rem", objectFit: "cover" }} />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.8rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              Shreeva Jewellers
+            </span>
+          </div>
         </Link>
 
         {/* Links */}
@@ -89,8 +97,8 @@ export default function MobileNav({ open, onClose }: Props) {
               padding: "0.875rem 0",
               fontSize: "0.72rem", letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#343060", textDecoration: "none",
-              borderBottom: "1px solid #c0caea",
+              color: "var(--color-text-mid)", textDecoration: "none",
+              borderBottom: "1px solid var(--color-border)",
               transition: "color 0.2s",
               display: "block",
             }}
@@ -98,6 +106,14 @@ export default function MobileNav({ open, onClose }: Props) {
             {l.label}
           </Link>
         ))}
+
+        {/* Theme toggle */}
+        <div style={{ marginTop: "1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+          <span style={{ fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>
+            Theme
+          </span>
+          <ThemeToggle />
+        </div>
 
         {/* CTA */}
         <Link

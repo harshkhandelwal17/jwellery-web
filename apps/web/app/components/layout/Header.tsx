@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import MobileNav from "./MobileNav";
+import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -11,7 +13,7 @@ export default function Header() {
     <>
       {/* Announcement bar */}
       <div style={{
-        background: "var(--color-text)",
+        background: "var(--color-dark-footer)",
         color: "rgba(240,244,251,0.75)",
         textAlign: "center",
         padding: "0.55rem 1rem",
@@ -26,7 +28,7 @@ export default function Header() {
 
       <header style={{
         position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(255,255,255,0.96)",
+        background: "var(--color-bg-overlay)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderBottom: "1px solid var(--color-border)",
@@ -73,18 +75,34 @@ export default function Header() {
 
         {/* Logo — always centred */}
         <Link href="/" style={{
-          fontFamily: "'Corinthia', cursive",
-          fontSize: "2.4rem", fontWeight: 400,
-          color: "var(--color-gold)", textDecoration: "none",
-          letterSpacing: "0.03em", textAlign: "center",
+          textDecoration: "none",
+          display: "flex", alignItems: "center", justifyContent: "center",
           justifySelf: "center",
         }}>
-          Shreeva Jewellers
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <Image
+              src="/logo.jpeg"
+              alt="Shreeva Jewellers"
+              width={44}
+              height={44}
+              style={{ borderRadius: "0.4rem", objectFit: "cover" }}
+              priority
+            />
+            <span style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.85rem", fontWeight: 600,
+              color: "var(--color-gold)", letterSpacing: "0.1em",
+              textTransform: "uppercase", whiteSpace: "nowrap",
+            }}>
+              Shreeva Jewellers
+            </span>
+          </div>
         </Link>
 
         {/* Right — hidden on mobile, nav + CTA on desktop */}
         <div className="flex items-center justify-end gap-6">
           <nav className="hidden md:flex items-center gap-6">
+            <ThemeToggle />
             <Link href="/contact" className="nav-link-underline" style={{
               fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
               textDecoration: "none", transition: "color 0.2s",
