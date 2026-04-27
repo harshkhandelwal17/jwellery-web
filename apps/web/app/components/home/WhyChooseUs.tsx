@@ -2,7 +2,7 @@ const reasons = [
   { icon: "◈", title: "Live Gold Pricing", body: "Prices reflect the daily market rate. You always know you're getting honest value for every gram of gold." },
   { icon: "✦", title: "BIS Hallmarked", body: "Every piece carries the BIS hallmark certifying 22KT purity. Authenticity you can see and trust." },
   { icon: "◉", title: "Handcrafted Always", body: "No mass production, ever. Each piece is shaped by skilled karigars with 15+ years of expertise." },
-  { icon: "◇", title: "Lifetime Servicing", body: "Bring your Jwell piece in anytime for complimentary cleaning, polishing, and minor repairs." },
+  { icon: "◇", title: "Lifetime Servicing", body: "Bring your Shreeva Jewellers piece in anytime for complimentary cleaning, polishing, and minor repairs." },
 ];
 
 export default function WhyChooseUs() {
@@ -27,7 +27,7 @@ export default function WhyChooseUs() {
           Why Choose Us
         </p>
         <h2 style={{ fontFamily: "'Corinthia', cursive", fontSize: "clamp(2.8rem, 4.5vw, 4.5rem)", fontWeight: 400, color: "var(--color-text)" }}>
-          The Jwell Promise
+          The Shreeva Jewellers Promise
         </h2>
       </div>
 

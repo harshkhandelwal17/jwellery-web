@@ -12,7 +12,7 @@ export default function Header() {
       {/* Announcement bar */}
       <div style={{
         background: "var(--color-text)",
-        color: "rgba(250,240,235,0.75)",
+        color: "rgba(240,244,251,0.75)",
         textAlign: "center",
         padding: "0.55rem 1rem",
         fontSize: "0.7rem",
@@ -20,13 +20,13 @@ export default function Header() {
       }}>
         Free consultation &amp; home delivery available &nbsp;·&nbsp;
         Today&apos;s Gold Rate:{" "}
-        <span style={{ color: "var(--color-blush-mid)" }}>₹9,450 / gram</span>
+        <span style={{ color: "var(--color-gold)" }}>₹9,450 / gram</span>
         &nbsp;·&nbsp; BIS Hallmarked 22KT Gold
       </div>
 
       <header style={{
         position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(250,247,242,0.95)",
+        background: "rgba(255,255,255,0.96)",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderBottom: "1px solid var(--color-border)",
@@ -75,11 +75,11 @@ export default function Header() {
         <Link href="/" style={{
           fontFamily: "'Corinthia', cursive",
           fontSize: "2.4rem", fontWeight: 400,
-          color: "var(--color-text)", textDecoration: "none",
+          color: "var(--color-gold)", textDecoration: "none",
           letterSpacing: "0.03em", textAlign: "center",
           justifySelf: "center",
         }}>
-          Jwell
+          Shreeva Jewellers
         </Link>
 
         {/* Right — hidden on mobile, nav + CTA on desktop */}

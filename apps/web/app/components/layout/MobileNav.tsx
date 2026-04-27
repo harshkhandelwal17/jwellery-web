@@ -43,7 +43,7 @@ export default function MobileNav({ open, onClose }: Props) {
         display: "flex",
         flexDirection: "column",
         padding: "2rem",
-        background: "#fdfcf8",
+        background: "#ffffff",
         overflowY: "auto",
         zIndex: 10,
       }}>
@@ -54,7 +54,7 @@ export default function MobileNav({ open, onClose }: Props) {
           style={{
             alignSelf: "flex-end",
             background: "none", border: "none",
-            cursor: "pointer", color: "#1a1a1a",
+            cursor: "pointer", color: "#1e1a3a",
             marginBottom: "2rem", padding: "4px",
           }}
         >
@@ -71,11 +71,11 @@ export default function MobileNav({ open, onClose }: Props) {
           style={{
             fontFamily: "'Corinthia', cursive",
             fontSize: "2.2rem", fontWeight: 400,
-            color: "#1a1a1a", textDecoration: "none",
+            color: "var(--color-gold)", textDecoration: "none",
             marginBottom: "2rem", display: "block",
           }}
         >
-          Jwell
+          Shreeva Jewellers
         </Link>
 
         {/* Links */}
@@ -88,8 +88,8 @@ export default function MobileNav({ open, onClose }: Props) {
               padding: "0.875rem 0",
               fontSize: "0.72rem", letterSpacing: "0.2em",
               textTransform: "uppercase",
-              color: "#3a3a3a", textDecoration: "none",
-              borderBottom: "1px solid #ede9e1",
+              color: "#343060", textDecoration: "none",
+              borderBottom: "1px solid #c0caea",
               transition: "color 0.2s",
               display: "block",
             }}
@@ -107,8 +107,8 @@ export default function MobileNav({ open, onClose }: Props) {
             textAlign: "center",
             fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase",
             padding: "0.875rem 1rem",
-            border: "1px solid #1a1a1a",
-            color: "#1a1a1a", textDecoration: "none",
+            border: "1px solid var(--color-gold)",
+            color: "var(--color-gold)", textDecoration: "none",
             display: "block",
           }}
         >

@@ -1,25 +1,25 @@
 /*
- * JWELL Luxury Design Tokens — Design 2: Soft Feminine / Blush & Ivory
+ * Shreeva Jewellers — Deep Navy & Gold Theme
  * Tailwind v4 CSS-first theme — imported by all apps via @import "@jwell/ui/theme.css"
  */
 
 @theme {
-  /* ── Brand Palette (matches design-2) ───────────────── */
+  /* ── Brand Palette ───────────────── */
 
-  --color-bg:          #faf7f2;
-  --color-bg-warm:     #f4ece0;
-  --color-bg-card:     #fffdf9;
-  --color-blush:       #c9806a;
-  --color-blush-light: #f5e6e0;
-  --color-blush-mid:   #e8b4a0;
-  --color-text:        #2e2420;
-  --color-text-mid:    #6b5750;
-  --color-text-muted:  #9a8880;
-  --color-border:      #e8ddd4;
-  --color-gold:        #b8821a;
+  --color-bg:          #ffffff;
+  --color-bg-warm:     #edf1fc;
+  --color-bg-card:     #f4f7fe;
+  --color-blush:       #9a6e00;
+  --color-blush-light: #dde5f8;
+  --color-blush-mid:   #7088c0;
+  --color-text:        #0d0a22;
+  --color-text-mid:    #343060;
+  --color-text-muted:  #565a80;
+  --color-border:      #c0caea;
+  --color-gold:        #b87a00;
 
   /* Dark backgrounds */
-  --color-dark-footer: #1e1610;
+  --color-dark-footer: #0a0820;
 
   /* ── Typography ──────────────────────────────────────── */
 
@@ -33,8 +33,8 @@
 
   /* ── Box Shadows ─────────────────────────────────────── */
 
-  --shadow-card:       0 4px 16px rgba(46,36,32,0.06);
-  --shadow-card-hover: 0 16px 40px rgba(201,128,106,0.14);
+  --shadow-card:       0 4px 16px rgba(13,10,34,0.07);
+  --shadow-card-hover: 0 16px 40px rgba(184,122,0,0.16);
 
   /* ── Animations ──────────────────────────────────────── */
 

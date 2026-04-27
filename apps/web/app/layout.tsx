@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "JWELL — Luxury Jewellery",
-  description: "Handcrafted luxury jewellery. Rings, necklaces, earrings and bracelets made with the finest gold.",
+  title: "Shreeva Jewellers — Feel the Luxury",
+  description: "Handcrafted gold jewellery from the heart of Jaipur. Shreeva Jewellers — where tradition meets luxury.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -4,7 +4,7 @@ export default function CTASection() {
   return (
     <section className="cta-section" style={{
       textAlign: "center",
-      background: "var(--color-text)",
+      background: "var(--color-dark-footer)",
       color: "white", position: "relative", overflow: "hidden",
     }}>
       <style>{`
@@ -25,7 +25,7 @@ export default function CTASection() {
         color: "rgba(255,255,255,0.03)",
         pointerEvents: "none", whiteSpace: "nowrap",
       }}>
-        Jwell
+        Shreeva
       </div>
 
       <div style={{ position: "relative", zIndex: 1 }}>

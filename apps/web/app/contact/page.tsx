@@ -95,11 +95,11 @@ export default async function ContactPage({ searchParams }: Props) {
                     Email
                   </p>
                   <a
-                    href="mailto:hello@jwell.in"
+                    href="mailto:hello@shreevajewellers.in"
                     className="text-base transition-opacity hover:opacity-70"
                     style={{ color: "var(--color-text-700)" }}
                   >
-                    hello@jwell.in
+                    hello@shreevajewellers.in
                   </a>
                 </div>
 

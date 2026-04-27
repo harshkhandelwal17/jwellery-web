@@ -30,7 +30,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         .hero-image-col {
           height: calc(100vh - 96px);
           position: relative;
-          background: #f0efed;
+          background: #edf1fc;
           display: flex; align-items: center; justify-content: center;
           overflow: hidden;
         }
@@ -50,7 +50,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         {/* Text side */}
         <div className="hero-text">
           <p style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
-            Forever Luxury
+            Feel the Luxury
           </p>
 
           <h1 style={{
@@ -108,7 +108,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
 
           <div className="hero-gold-tag" style={{
             position: "absolute", bottom: "2.5rem", left: "2rem",
-            background: "rgba(250,247,242,0.92)",
+            background: "rgba(255,255,255,0.92)",
             backdropFilter: "blur(8px)",
             border: "1px solid var(--color-border)",
             padding: "0.875rem 1.25rem",
