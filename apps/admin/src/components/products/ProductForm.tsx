@@ -26,7 +26,7 @@ interface Props {
   product?: ProductWithPrice;
 }
 
-const CATEGORIES = ["rings", "necklaces", "earrings", "bracelets"] as const;
+const CATEGORIES = ["rings", "necklaces", "earrings", "bracelets", "watches"] as const;
 
 export default function ProductForm({ product }: Props) {
   const navigate = useNavigate();

@@ -19,12 +19,17 @@ export default async function HomePage() {
 
   const rings = products.filter((p) => p.category === "rings");
   const necklaces = products.filter((p) => p.category === "necklaces");
+  const earrings = products.filter((p) => p.category === "earrings");
+  const bracelets = products.filter((p) => p.category === "bracelets");
+  const watches = products.filter((p) => p.category === "watches");
 
   const categoryImages: Record<string, string | undefined> = {
     rings:     rings[0]     ? cloudinaryUrl(rings[0].image,     { width: 600, quality: 85 }) : undefined,
     necklaces: necklaces[0] ? cloudinaryUrl(necklaces[0].image, { width: 600, quality: 85 }) : undefined,
-    earrings:  rings[4]     ? cloudinaryUrl(rings[4].image,     { width: 600, quality: 85 }) : undefined,
-    bracelets: necklaces[4] ? cloudinaryUrl(necklaces[4].image, { width: 600, quality: 85 }) : undefined,
+    earrings:  earrings[0]  ? cloudinaryUrl(earrings[0].image,  { width: 600, quality: 85 }) : undefined,
+    bracelets: bracelets[0] ? cloudinaryUrl(bracelets[0].image, { width: 600, quality: 85 }) : undefined,
+    bridal:    necklaces[1] ? cloudinaryUrl(necklaces[1].image, { width: 600, quality: 85 }) : undefined,
+    watches:   watches[0]   ? cloudinaryUrl(watches[0].image,   { width: 600, quality: 85 }) : undefined,
   };
 
   const aboutMainImage = rings[3]

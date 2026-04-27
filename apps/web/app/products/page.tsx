@@ -12,6 +12,7 @@ const CATEGORIES: { slug: string; label: string }[] = [
   { slug: "necklaces", label: "Necklaces" },
   { slug: "earrings", label: "Earrings" },
   { slug: "bracelets", label: "Bracelets" },
+  { slug: "watches", label: "Watches" },
   { slug: "bridal", label: "Bridal" },
   { slug: "lab-grown-diamond", label: "Lab Grown Diamond" },
   { slug: "silver-gold", label: "Silver & Gold" },

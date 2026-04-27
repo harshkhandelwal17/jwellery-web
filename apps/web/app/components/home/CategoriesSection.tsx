@@ -2,11 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 
 const CATEGORIES = [
-  { name: "Rings", slug: "rings", fallback: "https://picsum.photos/seed/rings88/400/400" },
-  { name: "Necklaces", slug: "necklaces", fallback: "https://picsum.photos/seed/neck88/400/400" },
-  { name: "Earrings", slug: "earrings", fallback: "https://picsum.photos/seed/ear88/400/400" },
-  { name: "Bracelets", slug: "bracelets", fallback: "https://picsum.photos/seed/brac88/400/400" },
-  { name: "Bridal", slug: "bridal", fallback: "https://picsum.photos/seed/bridal88/400/400" },
+  { name: "Rings", slug: "rings", fallback: "/shreeva/ring_green_stone_flower_008.jpeg" },
+  { name: "Necklaces", slug: "necklaces", fallback: "/shreeva/necklace_gold_wavy_mesh_009.jpeg" },
+  { name: "Earrings", slug: "earrings", fallback: "/shreeva/earring_bali_oval_hoop_gold_018.jpeg" },
+  { name: "Bracelets", slug: "bracelets", fallback: "/shreeva/kada_gold_chain_weave_013.jpeg" },
+  { name: "Bridal", slug: "bridal", fallback: "/shreeva/necklace_set_rose_gold_flower_021.jpeg" },
+  { name: "Watches", slug: "watches", fallback: "/shreeva/watch_ladies_GW875_titan_gold_019.jpeg" },
 ];
 
 interface Props {
@@ -18,7 +19,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
     <section className="categories-section" style={{ padding: "5rem 5rem", background: "var(--color-bg)" }}>
       <style>{`
         .categories-section { padding: 5rem 5rem; }
-        .categories-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; max-width: 1100px; margin: 0 auto; }
+        .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; max-width: 1200px; margin: 0 auto; }
         @media (max-width: 900px) {
           .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
         }

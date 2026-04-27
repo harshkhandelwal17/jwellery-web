@@ -5,6 +5,7 @@ export const ProductCategorySchema = z.enum([
   "necklaces",
   "earrings",
   "bracelets",
+  "watches",
 ]);
 
 export const CreateProductSchema = z.object({
