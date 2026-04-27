@@ -19,13 +19,13 @@ export default async function ContactPage({ searchParams }: Props) {
           style={{ borderColor: "var(--color-ivory-200)" }}
         >
           <p
-            className="text-xs tracking-widest uppercase mb-3"
+            className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
             style={{ color: "var(--color-blush-400)" }}
           >
             We&apos;d Love to Hear From You
           </p>
           <h1
-            className="font-display leading-none"
+            className="hero-enter hero-enter-2 font-display leading-none"
             style={{
               fontSize: "clamp(3.5rem, 7vw, 6rem)",
               color: "var(--color-text-900)",
@@ -38,7 +38,7 @@ export default async function ContactPage({ searchParams }: Props) {
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Contact form */}
-            <div>
+            <div className="scroll-reveal">
               <h2
                 className="font-display text-4xl leading-none mb-8"
                 style={{ color: "var(--color-text-900)" }}
@@ -49,7 +49,7 @@ export default async function ContactPage({ searchParams }: Props) {
             </div>
 
             {/* Business details */}
-            <div>
+            <div className="scroll-reveal">
               <h2
                 className="font-display text-4xl leading-none mb-8"
                 style={{ color: "var(--color-text-900)" }}

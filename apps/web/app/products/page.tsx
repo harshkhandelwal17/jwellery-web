@@ -37,13 +37,13 @@ export default async function ProductsPage({ searchParams }: Props) {
           style={{ borderColor: "var(--color-ivory-200)" }}
         >
           <p
-            className="text-xs tracking-widest uppercase mb-3"
+            className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
             style={{ color: "var(--color-blush-400)" }}
           >
             Handcrafted Luxury
           </p>
           <h1
-            className="font-display leading-none"
+            className="hero-enter hero-enter-2 font-display leading-none"
             style={{
               fontSize: "clamp(3.5rem, 7vw, 6rem)",
               color: "var(--color-text-900)",
@@ -60,7 +60,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         `}</style>
         <div className="max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-12">
           {/* Category filter */}
-          <div className="flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
+          <div className="hero-enter hero-enter-3 flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
             {CATEGORIES.map((cat) => {
               const isActive =
                 (!active && cat.slug === "all") || active === cat.slug;

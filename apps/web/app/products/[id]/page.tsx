@@ -69,7 +69,7 @@ export default async function ProductDetailPage({ params }: Props) {
             <div className="flex flex-col">
               {/* Category */}
               <p
-                className="text-xs tracking-widest uppercase mb-3"
+                className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
                 style={{ color: "var(--color-blush-400)" }}
               >
                 {product.category}
@@ -77,7 +77,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
               {/* Name */}
               <h1
-                className="font-display leading-none mb-6"
+                className="hero-enter hero-enter-2 font-display leading-none mb-6"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw, 4rem)",
                   color: "var(--color-text-900)",
@@ -88,7 +88,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
               {/* Description */}
               <p
-                className="text-base leading-relaxed mb-8"
+                className="hero-enter hero-enter-3 text-base leading-relaxed mb-8"
                 style={{ color: "var(--color-text-500)" }}
               >
                 {product.description}
@@ -96,7 +96,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
               {/* Specs */}
               <div
-                className="grid grid-cols-2 gap-4 mb-8 p-5 border"
+                className="hero-enter hero-enter-4 grid grid-cols-2 gap-4 mb-8 p-5 border"
                 style={{
                   borderColor: "var(--color-ivory-200)",
                   backgroundColor: "var(--color-ivory-100)",
@@ -124,7 +124,7 @@ export default async function ProductDetailPage({ params }: Props) {
               <PriceDisplay product={product} />
 
               {/* Actions */}
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <div className="hero-enter hero-enter-5 flex flex-col sm:flex-row gap-4 mt-8">
                 <Link
                   href={`/contact?product=${encodeURIComponent(product.name)}`}
                   className="flex-1 text-center text-xs tracking-widest uppercase px-6 py-4 transition-all hover:opacity-90"
@@ -153,7 +153,7 @@ export default async function ProductDetailPage({ params }: Props) {
         {/* Related products */}
         {related.length > 0 && (
           <div
-            className="py-16 border-t"
+            className="scroll-reveal py-16 border-t"
             style={{ borderColor: "var(--color-ivory-200)" }}
           >
             <div className="max-w-7xl mx-auto px-6">
