@@ -18,9 +18,11 @@ export default function GoldPricePage() {
   const displayPrice = optimisticPrice ?? goldPrice?.pricePerGram ?? 0;
 
   return (
-    <div className="p-8 max-w-2xl">
+    <div className="p-6 lg:p-8 max-w-2xl">
+      {/* Page header */}
       <div className="mb-8">
-        <h1 className="text-2xl font-semibold" style={{ color: "var(--color-text)" }}>
+        <p className="admin-section-label mb-2">Pricing</p>
+        <h1 className="admin-page-title">
           Gold Price
         </h1>
         <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
@@ -29,14 +31,18 @@ export default function GoldPricePage() {
       </div>
 
       <div className="flex flex-col gap-6">
+        {/* Current rate card */}
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "#fef9ee" }}>
-                <Coins size={20} style={{ color: "var(--color-gold)" }} />
+              <div
+                className="h-10 w-10 rounded-xl flex items-center justify-center border border-[var(--color-border)]"
+                style={{ background: "#fef9ee" }}
+              >
+                <Coins size={20} style={{ color: "var(--color-gold)" }} strokeWidth={1.8} />
               </div>
               <div>
-                <CardTitle>Current Rate</CardTitle>
+                <CardTitle className="font-display2 text-base">Current Rate</CardTitle>
                 <CardDescription>Live gold price used for all calculations</CardDescription>
               </div>
             </div>
@@ -45,13 +51,16 @@ export default function GoldPricePage() {
             {isLoading ? (
               <div className="h-8 w-32 rounded animate-pulse" style={{ background: "var(--color-blush-light)" }} />
             ) : (
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-semibold" style={{ color: "var(--color-gold)" }}>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-3xl font-semibold font-display2" style={{ color: "var(--color-gold)" }}>
                   {formatCurrency(displayPrice)}
                 </span>
                 <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>per gram</span>
                 {optimisticPrice && (
-                  <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "var(--color-blush-light)", color: "var(--color-blush)" }}>
+                  <span
+                    className="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                    style={{ background: "var(--color-blush-light)", color: "var(--color-blush)" }}
+                  >
                     saving…
                   </span>
                 )}
@@ -65,14 +74,18 @@ export default function GoldPricePage() {
           </CardContent>
         </Card>
 
+        {/* Update rate card */}
         <Card>
           <CardHeader>
             <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: "var(--color-blush-light)" }}>
-                <TrendingUp size={20} style={{ color: "var(--color-blush)" }} />
+              <div
+                className="h-10 w-10 rounded-xl flex items-center justify-center border border-[var(--color-border)]"
+                style={{ background: "var(--color-blush-light)" }}
+              >
+                <TrendingUp size={20} style={{ color: "var(--color-blush)" }} strokeWidth={1.8} />
               </div>
               <div>
-                <CardTitle>Update Rate</CardTitle>
+                <CardTitle className="font-display2 text-base">Update Rate</CardTitle>
                 <CardDescription>Enter the new gold rate in ₹ per gram</CardDescription>
               </div>
             </div>

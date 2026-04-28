@@ -57,7 +57,7 @@ export default function GoldPriceForm({ currentPrice }: Props) {
   });
 
   return (
-    <form onSubmit={handleSubmit((d) => mutation.mutate(d))} className="flex flex-col gap-4 max-w-sm">
+    <form onSubmit={handleSubmit((d) => mutation.mutate(d))} className="flex flex-col gap-5 max-w-sm">
       <div className="flex flex-col gap-1.5">
         <Label htmlFor="pricePerGram">Gold Rate (₹ per gram)</Label>
         <Input
@@ -68,7 +68,7 @@ export default function GoldPriceForm({ currentPrice }: Props) {
           {...register("pricePerGram")}
         />
         {errors.pricePerGram && (
-          <p className="text-xs text-red-500">{errors.pricePerGram.message}</p>
+          <p className="text-xs text-red-500 mt-1">{errors.pricePerGram.message}</p>
         )}
       </div>
       <Button type="submit" disabled={mutation.isPending} className="self-start">

@@ -15,18 +15,20 @@ export default function ProductsPage() {
   });
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-6 lg:p-8">
+      {/* Page header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-semibold" style={{ color: "var(--color-text)" }}>
+          <p className="admin-section-label mb-2">Catalogue</p>
+          <h1 className="admin-page-title">
             Products
           </h1>
           <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
             {products ? `${products.length} products` : "Loading…"}
           </p>
         </div>
-        <Button onClick={() => navigate("/products/new")}>
-          <PlusCircle size={16} />
+        <Button onClick={() => navigate("/products/new")} className="self-start sm:self-auto">
+          <PlusCircle size={16} strokeWidth={1.8} />
           Add Product
         </Button>
       </div>
@@ -34,20 +36,25 @@ export default function ProductsPage() {
       {isLoading ? (
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-14 rounded-xl animate-pulse" style={{ background: "var(--color-blush-light)" }} />
+            <div key={i} className="h-16 rounded-xl animate-pulse" style={{ background: "var(--color-blush-light)" }} />
           ))}
         </div>
       ) : !products || products.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <div className="h-16 w-16 rounded-2xl flex items-center justify-center" style={{ background: "var(--color-blush-light)" }}>
-            <Package size={28} style={{ color: "var(--color-blush)" }} />
+        <div className="flex flex-col items-center justify-center py-24 gap-5">
+          <div
+            className="h-20 w-20 rounded-2xl flex items-center justify-center border border-[var(--color-border)]"
+            style={{ background: "var(--color-bg-card)" }}
+          >
+            <Package size={32} style={{ color: "var(--color-blush)" }} strokeWidth={1.5} />
           </div>
           <div className="text-center">
-            <p className="font-medium" style={{ color: "var(--color-text)" }}>No products yet</p>
-            <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>Add your first product to get started</p>
+            <p className="font-medium font-display2" style={{ color: "var(--color-text)" }}>No products yet</p>
+            <p className="text-sm mt-1 max-w-xs mx-auto" style={{ color: "var(--color-text-muted)" }}>
+              Add your first product to build your jewellery catalogue
+            </p>
           </div>
           <Button onClick={() => navigate("/products/new")}>
-            <PlusCircle size={16} />
+            <PlusCircle size={16} strokeWidth={1.8} />
             Add Product
           </Button>
         </div>

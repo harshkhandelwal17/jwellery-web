@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient, useQuery } from "@tanstack/react-query";
-import { Loader2, Upload, X } from "lucide-react";
+import { Loader2, Upload, X, Coins } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button.js";
 import { Input } from "@/components/ui/input.js";
@@ -114,25 +114,25 @@ export default function ProductForm({ product }: Props) {
         <div className="lg:col-span-2 flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Product Details</CardTitle>
+              <CardTitle className="font-display2 text-base">Product Details</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col gap-4">
+            <CardContent className="flex flex-col gap-5">
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="name">Name</Label>
                 <Input id="name" placeholder="e.g. Radiant Solitaire Ring" {...register("name")} />
-                {errors.name && <p className="text-xs text-red-500">{errors.name.message}</p>}
+                {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="weight">Weight (grams)</Label>
                   <Input id="weight" type="number" step="0.1" placeholder="e.g. 4.2" {...register("weight", { valueAsNumber: true })} />
-                  {errors.weight && <p className="text-xs text-red-500">{errors.weight.message}</p>}
+                  {errors.weight && <p className="text-xs text-red-500 mt-1">{errors.weight.message}</p>}
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <Label htmlFor="makingCharges">Making Charges (₹)</Label>
                   <Input id="makingCharges" type="number" step="1" placeholder="e.g. 3500" {...register("makingCharges", { valueAsNumber: true })} />
-                  {errors.makingCharges && <p className="text-xs text-red-500">{errors.makingCharges.message}</p>}
+                  {errors.makingCharges && <p className="text-xs text-red-500 mt-1">{errors.makingCharges.message}</p>}
                 </div>
               </div>
 
@@ -153,7 +153,7 @@ export default function ProductForm({ product }: Props) {
                     ))}
                   </SelectContent>
                 </Select>
-                {errors.category && <p className="text-xs text-red-500">{errors.category.message}</p>}
+                {errors.category && <p className="text-xs text-red-500 mt-1">{errors.category.message}</p>}
               </div>
 
               <div className="flex flex-col gap-1.5">
@@ -162,7 +162,7 @@ export default function ProductForm({ product }: Props) {
                   id="description"
                   rows={3}
                   placeholder="Describe the product…"
-                  className="flex w-full rounded-lg border px-3 py-2 text-sm resize-none focus-visible:outline-none focus-visible:ring-2 transition-colors"
+                  className="flex w-full rounded-xl border bg-[var(--color-bg)] px-3 py-2.5 text-sm resize-none focus-visible:outline-none focus-visible:ring-2 transition-colors"
                   style={{
                     borderColor: "var(--color-border)",
                     color: "var(--color-text)",
@@ -176,29 +176,33 @@ export default function ProductForm({ product }: Props) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Product Image</CardTitle>
+              <CardTitle className="font-display2 text-base">Product Image</CardTitle>
             </CardHeader>
             <CardContent>
               <input type="hidden" {...register("image")} />
               {imagePreview ? (
-                <div className="relative inline-block">
-                  <img src={imagePreview} alt="Preview" className="h-40 w-40 rounded-xl object-cover" />
+                <div className="relative inline-block group">
+                  <img
+                    src={imagePreview}
+                    alt="Preview"
+                    className="h-44 w-44 rounded-xl object-cover border border-[var(--color-border)]"
+                  />
                   <button
                     type="button"
                     onClick={() => { setImagePreview(""); setValue("image", ""); }}
-                    className="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600"
+                    className="absolute -top-2 -right-2 h-7 w-7 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 shadow-md transition-transform hover:scale-110"
                   >
-                    <X size={12} />
+                    <X size={14} />
                   </button>
                 </div>
               ) : (
-                <label className="flex flex-col items-center justify-center h-40 w-40 rounded-xl border-2 border-dashed cursor-pointer transition-colors hover:bg-[var(--color-blush-light)]" style={{ borderColor: "var(--color-border)" }}>
+                <label className="flex flex-col items-center justify-center h-44 w-44 rounded-xl border-2 border-dashed cursor-pointer transition-all duration-200 hover:bg-[var(--color-blush-light)] hover:border-[var(--color-blush)]" style={{ borderColor: "var(--color-border)" }}>
                   {uploadingImage ? (
-                    <Loader2 size={20} className="animate-spin" style={{ color: "var(--color-blush)" }} />
+                    <Loader2 size={24} className="animate-spin" style={{ color: "var(--color-blush)" }} />
                   ) : (
                     <>
-                      <Upload size={20} style={{ color: "var(--color-text-muted)" }} />
-                      <span className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>Upload image</span>
+                      <Upload size={24} style={{ color: "var(--color-text-muted)" }} />
+                      <span className="text-xs mt-2 font-medium" style={{ color: "var(--color-text-muted)" }}>Upload image</span>
                     </>
                   )}
                   <input
@@ -220,7 +224,12 @@ export default function ProductForm({ product }: Props) {
         <div className="flex flex-col gap-6">
           <Card>
             <CardHeader>
-              <CardTitle>Live Price Preview</CardTitle>
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl flex items-center justify-center border border-[var(--color-border)]" style={{ background: "#fef9ee" }}>
+                  <Coins size={18} style={{ color: "var(--color-gold)" }} strokeWidth={1.8} />
+                </div>
+                <CardTitle className="font-display2 text-base">Live Price Preview</CardTitle>
+              </div>
             </CardHeader>
             <CardContent className="flex flex-col gap-3">
               <div className="flex justify-between text-sm">
@@ -235,9 +244,9 @@ export default function ProductForm({ product }: Props) {
                 <span style={{ color: "var(--color-text-muted)" }}>Making charges</span>
                 <span style={{ color: "var(--color-text-mid)" }}>{formatCurrency(Number(makingCharges))}</span>
               </div>
-              <div className="border-t pt-3 flex justify-between" style={{ borderColor: "var(--color-border)" }}>
+              <div className="border-t pt-3 flex justify-between items-center" style={{ borderColor: "var(--color-border)" }}>
                 <span className="font-medium text-sm" style={{ color: "var(--color-text)" }}>Final Price</span>
-                <span className="text-xl font-semibold" style={{ color: "var(--color-gold)" }}>
+                <span className="text-xl font-semibold font-display2" style={{ color: "var(--color-gold)" }}>
                   {formatCurrency(livePrice)}
                 </span>
               </div>
@@ -245,11 +254,11 @@ export default function ProductForm({ product }: Props) {
           </Card>
 
           <div className="flex flex-col gap-2">
-            <Button type="submit" disabled={mutation.isPending}>
-              {mutation.isPending && <Loader2 size={14} className="animate-spin" />}
+            <Button type="submit" disabled={mutation.isPending} className="h-11">
+              {mutation.isPending && <Loader2 size={16} className="animate-spin" />}
               {isEdit ? "Save Changes" : "Create Product"}
             </Button>
-            <Button type="button" variant="outline" onClick={() => navigate("/products")}>
+            <Button type="button" variant="outline" onClick={() => navigate("/products")} className="h-11">
               Cancel
             </Button>
           </div>
