@@ -225,6 +225,9 @@ importers:
         specifier: workspace:*
         version: link:../types
     devDependencies:
+      '@types/node':
+        specifier: ^22.10.7
+        version: 22.19.17
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
