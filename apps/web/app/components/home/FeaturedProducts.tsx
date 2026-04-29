@@ -13,15 +13,17 @@ export default function FeaturedProducts({ products }: Props) {
         .featured-section { padding: 6rem 5rem; }
         .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 960px; margin: 0 auto; }
         @media (max-width: 768px) {
-          .featured-section { padding: 3rem 1.25rem !important; }
-          .featured-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-          .featured-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+          .featured-section { padding: 2.5rem 1rem !important; }
+          .featured-header { flex-direction: row; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+          .featured-header h2 { font-size: 1.1rem !important; }
+          .featured-header a { font-size: 0.7rem !important; }
+          .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; max-width: 100%; }
         }
       `}</style>
 
-      <div className="featured-header" style={{
+      <div className="featured-header mb-6 md:mb-12" style={{
         display: "flex", alignItems: "flex-end",
-        justifyContent: "space-between", marginBottom: "3rem",
+        justifyContent: "space-between",
       }}>
         <div>
           <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>

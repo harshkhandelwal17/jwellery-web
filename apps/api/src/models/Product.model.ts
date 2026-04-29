@@ -12,7 +12,22 @@ interface IProduct {
   modelPath: string | null;
   createdAt: Date;
   updatedAt: Date;
+  // New hierarchical category fields
+  mainCategory?: string;
+  subCategory?: string;
+  occasion?: string;
 }
+
+const MAIN_CATEGORIES = [
+  "Diamond Jewellery",
+  "Silver Jewellery",
+  "Chic Everyday Jewellery",
+  "Gold Jewellery",
+  "Bridal Collection",
+  "Unique Categories",
+] as const;
+
+const OCCASIONS = ["Everyday", "Festive", "Minimal", "Statement"] as const;
 
 const ProductSchema = new Schema<IProduct>(
   {
@@ -23,6 +38,9 @@ const ProductSchema = new Schema<IProduct>(
     category:      { type: String, required: true, enum: ["rings", "necklaces", "earrings", "bracelets", "watches"] },
     description:   { type: String, default: "" },
     modelPath:     { type: String, default: null },
+    mainCategory:  { type: String, enum: MAIN_CATEGORIES, default: null },
+    subCategory:   { type: String, default: null },
+    occasion:      { type: String, enum: OCCASIONS, default: null },
   },
   { timestamps: true }
 );

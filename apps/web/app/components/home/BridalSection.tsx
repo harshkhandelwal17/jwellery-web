@@ -25,8 +25,14 @@ export default function BridalSection() {
         .bridal-section { padding: 6rem 5rem; }
         .bridal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
         @media (max-width: 768px) {
-          .bridal-section { padding: 3.5rem 1.25rem; }
-          .bridal-grid { grid-template-columns: 1fr; gap: 1rem; }
+          .bridal-section { padding: 2.5rem 1rem !important; }
+          .bridal-section h2 { font-size: 1.1rem !important; }
+          .bridal-section .section-subtitle { font-size: 0.6rem !important; }
+          .bridal-section .section-desc { font-size: 0.8rem !important; }
+          .bridal-grid { grid-template-columns: 1fr; gap: 0.75rem; margin-top: 1.5rem !important; }
+          .bridal-card { padding: 1.25rem !important; }
+          .bridal-card .card-title { font-size: 0.9rem !important; }
+          .bridal-card .card-body { font-size: 0.8rem !important; }
         }
         .bridal-card:hover {
           border-color: var(--color-blush-mid) !important;
@@ -37,7 +43,7 @@ export default function BridalSection() {
       `}</style>
 
       <div style={{ textAlign: "center" }}>
-        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+        <p className="section-subtitle" style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Bridal Collection
         </p>
         <h2 style={{
@@ -50,7 +56,7 @@ export default function BridalSection() {
           Light as a Blessing,<br />
           <span style={{ color: "var(--color-blush)" }}>Radiant as a Bride</span>
         </h2>
-        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
+        <p className="section-desc" style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
           We specialise in lightweight bridal jewellery — designed to adorn without burden.
           Perfect for the modern bride who values elegance and comfort in equal measure.
         </p>
@@ -74,10 +80,10 @@ export default function BridalSection() {
             }}>
               {f.icon}
             </div>
-            <h3 style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--color-text)" }}>
+            <h3 className="card-title" style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--color-text)" }}>
               {f.title}
             </h3>
-            <p style={{ fontSize: "0.82rem", color: "var(--color-text-muted)", lineHeight: 1.85, fontWeight: 300 }}>
+            <p className="card-body" style={{ fontSize: "0.82rem", color: "var(--color-text-muted)", lineHeight: 1.85, fontWeight: 300 }}>
               {f.body}
             </p>
           </div>

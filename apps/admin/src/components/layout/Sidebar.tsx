@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Coins, Package, PlusCircle } from "lucide-react";
+import { LayoutDashboard, Coins, Package, PlusCircle, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils.js";
 
 const links = [
@@ -7,6 +7,7 @@ const links = [
   { to: "/gold-price", icon: Coins, label: "Gold Price" },
   { to: "/products", icon: Package, label: "Products" },
   { to: "/products/new", icon: PlusCircle, label: "Add Product" },
+  { to: "/enquiries", icon: MessageSquare, label: "Enquiries" },
 ];
 
 export interface SidebarProps {

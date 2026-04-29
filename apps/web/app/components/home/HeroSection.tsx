@@ -36,13 +36,16 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         }
         @media (max-width: 768px) {
           .hero-section { grid-template-columns: 1fr; min-height: auto; }
-          .hero-text { padding: 3rem 1.5rem 2rem; align-items: center; text-align: center; }
-          .hero-text h1 { font-size: clamp(4rem, 14vw, 6rem) !important; }
+          .hero-text { padding: 2rem 1.25rem 1.5rem; align-items: center; text-align: center; }
+          .hero-text h1 { font-size: clamp(2rem, 8vw, 3rem) !important; line-height: 1.2 !important; }
+          .hero-text p { font-size: 0.85rem !important; max-width: 280px !important; }
           .hero-text-rule { justify-content: center; }
-          .hero-cta { justify-content: center; }
-          .hero-image-col { height: 60vw; min-height: 260px; max-height: 420px; }
-          .hero-image-col img { padding: 1.5rem !important; }
-          .hero-gold-tag { bottom: 1rem !important; left: 1rem !important; }
+          .hero-cta { justify-content: center; margin-top: 1.5rem !important; }
+          .hero-image-col { height: 50vw; min-height: 220px; max-height: 350px; }
+          .hero-image-col img { padding: 1rem !important; }
+          .hero-gold-tag { bottom: 0.75rem !important; left: 0.75rem !important; padding: 0.5rem 0.75rem !important; }
+          .hero-gold-tag div:first-child { font-size: 0.5rem !important; }
+          .hero-gold-tag div:last-child { font-size: 0.8rem !important; }
         }
       `}</style>
 

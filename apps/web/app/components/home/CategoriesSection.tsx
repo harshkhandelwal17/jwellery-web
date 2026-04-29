@@ -24,19 +24,24 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
           .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
         }
         @media (max-width: 768px) {
-          .categories-section { padding: 3rem 1.25rem !important; }
-          .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; }
+          .categories-section { padding: 2.5rem 1rem !important; }
+          .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; gap: 0.75rem; }
+          .categories-section h2 { font-size: 1.25rem !important; }
+          .categories-section .section-subtitle { font-size: 0.6rem !important; }
+          .categories-section .section-desc { font-size: 0.8rem !important; }
+          .cat-card-link .cat-name { font-size: 0.75rem !important; }
+          .cat-arrow { width: 1.4rem !important; height: 1.4rem !important; font-size: 0.6rem !important; }
         }
       `}</style>
 
       <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+        <p className="section-subtitle" style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
           Browse Categories
         </p>
         <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 600, letterSpacing: "0.06em", color: "var(--color-text)" }}>
           Find Your Perfect Piece
         </h2>
-        <p style={{ fontSize: "0.88rem", color: "var(--color-text-muted)", marginTop: "0.5rem", fontWeight: 300 }}>
+        <p className="section-desc" style={{ fontSize: "0.88rem", color: "var(--color-text-muted)", marginTop: "0.5rem", fontWeight: 300 }}>
           From lightweight bridal to everyday elegance
         </p>
       </div>
@@ -68,7 +73,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
               borderTop: "1px solid var(--color-border)",
               display: "flex", alignItems: "center", justifyContent: "space-between",
             }}>
-              <div style={{ fontSize: "0.85rem", fontWeight: 500 }}>{cat.name}</div>
+              <div className="cat-name" style={{ fontSize: "0.85rem", fontWeight: 500 }}>{cat.name}</div>
               <div className="cat-arrow cat-arrow-icon" style={{
                 width: "1.6rem", height: "1.6rem", borderRadius: "50%",
                 border: "1px solid var(--color-border)",

@@ -47,19 +47,18 @@ export default async function ProductsPage({ searchParams }: Props) {
       <main className="min-h-screen" style={{ backgroundColor: "var(--color-ivory-50)" }}>
         {/* Page header */}
         <div
-          className="py-16 text-center border-b"
+          className="py-10 md:py-16 text-center border-b"
           style={{ borderColor: "var(--color-ivory-200)" }}
         >
           <p
-            className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
+            className="hero-enter hero-enter-1 text-[0.65rem] md:text-xs tracking-widest uppercase mb-2 md:mb-3"
             style={{ color: "var(--color-blush-400)" }}
           >
             Handcrafted Luxury
           </p>
           <h1
-            className="hero-enter hero-enter-2 font-display leading-none"
+            className="hero-enter hero-enter-2 font-display leading-none text-3xl md:text-6xl"
             style={{
-              fontSize: "clamp(3.5rem, 7vw, 6rem)",
               color: "var(--color-text-900)",
             }}
           >
@@ -69,12 +68,15 @@ export default async function ProductsPage({ searchParams }: Props) {
 
         <style>{`
           @media (max-width: 768px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+            .category-filter { flex-wrap: nowrap !important; overflow-x: auto !important; padding-bottom: 0.75rem !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; }
+            .category-filter::-webkit-scrollbar { display: none; }
+            .category-filter a { white-space: nowrap !important; font-size: 0.6rem !important; padding: 0.5rem 0.9rem !important; flex-shrink: 0; }
           }
         `}</style>
         <div className="max-w-7xl mx-auto px-4 py-8 md:px-6 md:py-12">
           {/* Category filter */}
-          <div className="hero-enter hero-enter-3 flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
+          <div className="hero-enter hero-enter-3 category-filter flex flex-wrap gap-2 mb-8 md:gap-3 md:mb-12">
             {CATEGORIES.map((cat) => {
               const isActive = activeSlug === cat.slug;
               return (
@@ -91,7 +93,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                         }
                       : {
                           borderColor: "var(--color-border)",
-                          color: "var(--color-text-muted)",
+                          color: "var(--color-text)",
                           backgroundColor: "transparent",
                         }
                   }
@@ -120,19 +122,25 @@ export default async function ProductsPage({ searchParams }: Props) {
         </div>
 
         {/* The Craft Edit */}
-        <div style={{ background: "var(--color-blush-light)", padding: "5rem 0" }}>
+        <div style={{ background: "var(--color-blush-light)", padding: "3rem 0 2.5rem" }} className="md:py-20">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
-            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "2rem" }} className="md:mb-12">
               <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
                 Curated For You
               </p>
-              <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3vw, 2.4rem)", fontWeight: 600, letterSpacing: "0.08em", color: "var(--color-text)" }}>
+              <h2 className="text-xl md:text-4xl" style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, letterSpacing: "0.08em", color: "var(--color-text)" }}>
                 The Craft Edit
               </h2>
             </div>
             <style>{`
               .craft-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-              @media (max-width: 768px) { .craft-grid { grid-template-columns: repeat(2, 1fr); } }
+              @media (max-width: 768px) {
+                .craft-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+                .craft-card { padding: 1.25rem !important; }
+                .craft-card h3 { font-size: 0.8rem !important; }
+                .craft-card p { font-size: 0.7rem !important; margin-bottom: 0.75rem !important; }
+                .craft-card .craft-icon { width: 2rem !important; height: 2rem !important; font-size: 0.9rem !important; margin-bottom: 0.75rem !important; }
+              }
               .craft-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,150,42,0.16) !important; }
               .craft-card { transition: all 0.3s; }
             `}</style>
@@ -151,7 +159,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                     display: "block",
                   }}
                 >
-                  <div style={{
+                  <div className="craft-icon" style={{
                     width: "2.5rem", height: "2.5rem",
                     background: "white", borderRadius: "0.5rem",
                     display: "flex", alignItems: "center", justifyContent: "center",

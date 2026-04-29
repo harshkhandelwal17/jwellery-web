@@ -3,6 +3,27 @@ import { ProductModel } from "../models/Product.model.js";
 import { GoldPriceModel } from "../models/GoldPrice.model.js";
 import type { ProductWithPrice } from "@jwell/types";
 
+export interface GetProductsOptions {
+  sort?: "price_desc" | "price_asc" | "weight_desc" | "weight_asc";
+  occasion?: string;
+  mainCategory?: string;
+  subCategory?: string;
+}
+
+// Map old category to new mainCategory for backward compatibility
+export function mapOldCategoryToMainCategory(
+  oldCategory: string
+): string | undefined {
+  const mapping: Record<string, string> = {
+    rings: "Gold Jewellery",
+    necklaces: "Gold Jewellery",
+    earrings: "Gold Jewellery",
+    bracelets: "Gold Jewellery",
+    watches: "Unique Categories",
+  };
+  return mapping[oldCategory];
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function toProductWithPrice(p: any, goldRate: number): ProductWithPrice {
   return {
@@ -18,16 +39,53 @@ function toProductWithPrice(p: any, goldRate: number): ProductWithPrice {
     updatedAt:       p.updatedAt instanceof Date ? p.updatedAt.toISOString() : String(p.updatedAt),
     calculatedPrice: calculatePrice(goldRate, p.weight as number, p.makingCharges as number),
     goldPriceUsed:   goldRate,
+    mainCategory:    p.mainCategory ?? mapOldCategoryToMainCategory(p.category as string),
+    subCategory:     p.subCategory ?? undefined,
+    occasion:        p.occasion ?? undefined,
   };
 }
 
-export async function getProducts(): Promise<ProductWithPrice[]> {
+export async function getProducts(options?: GetProductsOptions): Promise<ProductWithPrice[]> {
+  const query: Record<string, unknown> = {};
+
+  // Apply filters
+  if (options?.occasion) {
+    query.occasion = options.occasion;
+  }
+  if (options?.mainCategory) {
+    query.mainCategory = options.mainCategory;
+  }
+  if (options?.subCategory) {
+    query.subCategory = options.subCategory;
+  }
+
   const [products, goldDoc] = await Promise.all([
-    ProductModel.find().lean(),
+    ProductModel.find(query).lean(),
     GoldPriceModel.findOne().lean(),
   ]);
   const goldRate = goldDoc?.pricePerGram ?? 0;
-  return products.map((p) => toProductWithPrice(p, goldRate));
+
+  let result = products.map((p) => toProductWithPrice(p, goldRate));
+
+  // Apply sorting
+  if (options?.sort) {
+    result = result.sort((a, b) => {
+      switch (options.sort) {
+        case "price_desc":
+          return b.calculatedPrice - a.calculatedPrice;
+        case "price_asc":
+          return a.calculatedPrice - b.calculatedPrice;
+        case "weight_desc":
+          return b.weight - a.weight;
+        case "weight_asc":
+          return a.weight - b.weight;
+        default:
+          return 0;
+      }
+    });
+  }
+
+  return result;
 }
 
 export async function getProduct(id: string): Promise<ProductWithPrice | null> {

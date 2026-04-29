@@ -15,19 +15,18 @@ export default async function ContactPage({ searchParams }: Props) {
       <main style={{ backgroundColor: "var(--color-ivory-50)" }}>
         {/* Page header */}
         <div
-          className="py-16 text-center border-b"
+          className="py-10 md:py-16 text-center border-b"
           style={{ borderColor: "var(--color-ivory-200)" }}
         >
           <p
-            className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
+            className="hero-enter hero-enter-1 text-[0.65rem] md:text-xs tracking-widest uppercase mb-2 md:mb-3"
             style={{ color: "var(--color-blush-400)" }}
           >
             We&apos;d Love to Hear From You
           </p>
           <h1
-            className="hero-enter hero-enter-2 font-display leading-none"
+            className="hero-enter hero-enter-2 font-display leading-none text-3xl md:text-6xl"
             style={{
-              fontSize: "clamp(3.5rem, 7vw, 6rem)",
               color: "var(--color-text-900)",
             }}
           >
@@ -35,12 +34,12 @@ export default async function ContactPage({ searchParams }: Props) {
           </h1>
         </div>
 
-        <div className="max-w-6xl mx-auto px-6 py-16">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             {/* Contact form */}
             <div className="scroll-reveal">
               <h2
-                className="font-display text-4xl leading-none mb-8"
+                className="font-display text-2xl md:text-4xl leading-none mb-6 md:mb-8"
                 style={{ color: "var(--color-text-900)" }}
               >
                 Send Us a Message
@@ -51,7 +50,7 @@ export default async function ContactPage({ searchParams }: Props) {
             {/* Business details */}
             <div className="scroll-reveal">
               <h2
-                className="font-display text-4xl leading-none mb-8"
+                className="font-display text-2xl md:text-4xl leading-none mb-6 md:mb-8"
                 style={{ color: "var(--color-text-900)" }}
               >
                 Visit Our Store
@@ -78,11 +77,11 @@ export default async function ContactPage({ searchParams }: Props) {
                     Phone
                   </p>
                   <a
-                    href="tel:+912222001234"
+                    href="tel:+919111452626"
                     className="text-base transition-opacity hover:opacity-70"
                     style={{ color: "var(--color-text-700)" }}
                   >
-                    +91 22 2200 1234
+                    +91 91114 52626
                   </a>
                 </div>
 
@@ -94,11 +93,11 @@ export default async function ContactPage({ searchParams }: Props) {
                     Email
                   </p>
                   <a
-                    href="mailto:hello@shreevajewellers.in"
+                    href="mailto:support@shreevajewellers.com"
                     className="text-base transition-opacity hover:opacity-70"
                     style={{ color: "var(--color-text-700)" }}
                   >
-                    hello@shreevajewellers.in
+                    support@shreevajewellers.com
                   </a>
                 </div>
 

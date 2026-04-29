@@ -3,8 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
+import ProductCard from "../../components/products/ProductCard";
+import EnquireButton from "../../components/products/EnquireButton";
 import PriceDisplay from "../../components/products/PriceDisplay";
 import { fetchProduct, fetchProducts } from "../../lib/api";
+import type { ProductCategory } from "@jwell/types";
 import { cloudinaryUrl } from "../../lib/cloudinary";
 
 export const revalidate = 300;
@@ -121,16 +124,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
               {/* Actions */}
               <div className="hero-enter hero-enter-5 flex flex-col sm:flex-row gap-4 mt-8">
-                <Link
-                  href={`/contact?product=${encodeURIComponent(product.name)}`}
-                  className="flex-1 text-center text-xs tracking-widest uppercase px-6 py-4 transition-all hover:opacity-90"
-                  style={{
-                    backgroundColor: "var(--color-text-900)",
-                    color: "var(--color-ivory-50)",
-                  }}
-                >
-                  Enquire Now
-                </Link>
+                <EnquireButton productId={product.id} productName={product.name} />
                 <Link
                   href="/contact"
                   className="flex-1 text-center text-xs tracking-widest uppercase px-6 py-4 border transition-all hover:opacity-80"
@@ -154,18 +148,17 @@ export default async function ProductDetailPage({ params }: Props) {
           >
             <div className="max-w-7xl mx-auto px-6">
               <h2
-                className="font-display leading-none mb-10"
+                className="font-display leading-none mb-6 md:mb-10 text-2xl md:text-4xl"
                 style={{
-                  fontSize: "clamp(2.5rem, 5vw, 4rem)",
                   color: "var(--color-text-900)",
                 }}
               >
                 You May Also Like
               </h2>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 200px))", gap: "1rem" }}>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 {related.map((p) => (
                   <Link key={p.id} href={`/products/${p.id}`} className="group block">
-                    <div className="relative overflow-hidden mb-2" style={{ aspectRatio: "3/4" }}>
+                    <div className="relative overflow-hidden mb-2 rounded-lg" style={{ aspectRatio: "3/4" }}>
                       <Image
                         src={cloudinaryUrl(p.image, { width: 600, quality: 85 })}
                         alt={p.name}
@@ -175,8 +168,8 @@ export default async function ProductDetailPage({ params }: Props) {
                         sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     </div>
-                    <p style={{ fontSize: "0.8rem", marginBottom: "0.15rem", color: "var(--color-text-900)" }}>{p.name}</p>
-                    <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.85rem", fontWeight: 600, letterSpacing: "0.03em", color: "var(--color-gold)" }}>
+                    <p className="text-xs md:text-sm mb-0.5 truncate" style={{ color: "var(--color-text-900)" }}>{p.name}</p>
+                    <p className="text-xs md:text-sm font-semibold" style={{ fontFamily: "'Cinzel', serif", color: "var(--color-gold)" }}>
                       ₹{p.calculatedPrice.toLocaleString("en-IN")}
                     </p>
                   </Link>

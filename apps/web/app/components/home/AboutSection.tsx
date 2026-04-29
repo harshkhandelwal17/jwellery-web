@@ -71,8 +71,13 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
         </h2>
 
         <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          Shreeva Jewellers — handcrafted with passion and presented with pride.
-          Our story is being written for you. Stay tuned.
+          Since 1987, GP Jewellers has been a trusted name in the bustling gold markets of Sarafa, Indore, built through years of dedication and strong customer relationships. Our roots, however, go even deeper—grounded in a rich ancestral legacy of craftsmanship and expertise in jewellery.
+        </p>
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
+          For decades, we have proudly served customers across Madhya Pradesh, earning their trust with every piece we create. Today, we take a new step forward—expanding our presence across India.
+        </p>
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
+          Same trust. Same relationships. Just a new platform. With this vision, we introduce Shreeva Jewellers—a brand that goes beyond jewellery. We aim to become a part of your stories, your milestones, and the celebrations that define who you are. We stand with you—not just in your special moments, but in your journey of self-expression.
         </p>
 
         <div style={{

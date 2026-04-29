@@ -18,7 +18,7 @@ export default function WhatsAppButton() {
         .wa-btn:hover .wa-tooltip { opacity: 1; }
       `}</style>
       <a
-        href="https://wa.me/919876543210"
+        href="https://wa.me/919111452626"
         target="_blank"
         rel="noopener noreferrer"
         className="wa-btn"

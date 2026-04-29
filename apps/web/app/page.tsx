@@ -8,6 +8,7 @@ import AboutSection from "./components/home/AboutSection";
 import CuratedSection from "./components/home/CuratedSection";
 import WhyChooseUs from "./components/home/WhyChooseUs";
 import CTASection from "./components/home/CTASection";
+import BlessingsSection from "./components/home/BlessingsSection";
 import { fetchProducts } from "./lib/api";
 import { cloudinaryUrl } from "./lib/cloudinary";
 
@@ -48,6 +49,7 @@ export default async function HomePage() {
         <FeaturedProducts products={featured} />
         <BridalSection />
         <AboutSection mainImage={aboutMainImage} accentImage={aboutAccentImage} />
+        <BlessingsSection />
         <CuratedSection />
         <WhyChooseUs />
         <CTASection />

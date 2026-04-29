@@ -18,8 +18,8 @@ import type { z } from "zod";
 const API_URL = import.meta.env.VITE_API_URL as string;
 const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
 
-// z.input gives us the pre-transform type (description?: string | undefined) which
-// matches what zodResolver produces from the form fields.
+// FormData type derived from Zod schema
+// Using z.input to get the pre-transform shape (description is optional)
 type FormData = z.input<typeof CreateProductSchema>;
 
 interface Props {
@@ -27,6 +27,54 @@ interface Props {
 }
 
 const CATEGORIES = ["rings", "necklaces", "earrings", "bracelets", "watches"] as const;
+
+const MAIN_CATEGORIES = [
+  "Diamond Jewellery",
+  "Silver Jewellery",
+  "Chic Everyday Jewellery",
+  "Gold Jewellery",
+  "Bridal Collection",
+  "Unique Categories",
+] as const;
+
+const SUBCATEGORIES: Record<string, string[]> = {
+  "Diamond Jewellery": [
+    "Necklaces and Chains",
+    "Earrings",
+    "Bracelets",
+    "Rings",
+    "Pendants",
+  ],
+  "Silver Jewellery": [
+    "Necklaces and Chains",
+    "Bracelets",
+    "Earrings",
+    "Anklets",
+    "Chains",
+    "Toe Rings",
+    "Rings",
+    "Pendants",
+  ],
+  "Chic Everyday Jewellery": [
+    "Chains",
+    "Pendants",
+    "Minimal Earrings",
+    "Bracelets",
+    "Others",
+  ],
+  "Gold Jewellery": [
+    "Necklaces and Chains",
+    "Bracelets",
+    "Earrings",
+    "Chains",
+    "Rings",
+    "Pendants",
+  ],
+  "Bridal Collection": [],
+  "Unique Categories": [],
+};
+
+const OCCASIONS = ["Everyday", "Festive", "Minimal", "Statement"] as const;
 
 export default function ProductForm({ product }: Props) {
   const navigate = useNavigate();
@@ -57,6 +105,9 @@ export default function ProductForm({ product }: Props) {
           category: product.category,
           description: product.description,
           modelPath: product.modelPath ?? undefined,
+          mainCategory: product.mainCategory,
+          subCategory: product.subCategory,
+          occasion: product.occasion,
         }
       : undefined,
   });
@@ -65,6 +116,8 @@ export default function ProductForm({ product }: Props) {
   const makingCharges = watch("makingCharges") ?? 0;
   const goldRate = goldPrice?.pricePerGram ?? 0;
   const livePrice = calculatePrice(goldRate, Number(weight), Number(makingCharges));
+  const mainCategoryValue = watch("mainCategory");
+  const availableSubCategories: string[] = mainCategoryValue ? SUBCATEGORIES[mainCategoryValue] ?? [] : [];
 
   async function handleImageUpload(file: File) {
     setUploadingImage(true);
@@ -89,7 +142,7 @@ export default function ProductForm({ product }: Props) {
 
   const mutation = useMutation({
     mutationFn: (data: FormData) => {
-      const payload = { description: "", ...data };
+      const payload: any = { description: "", ...data };
       return isEdit
         ? updateProduct(API_URL, product!.id, payload, ADMIN_KEY)
         : createProduct(API_URL, payload, ADMIN_KEY);
@@ -154,6 +207,71 @@ export default function ProductForm({ product }: Props) {
                   </SelectContent>
                 </Select>
                 {errors.category && <p className="text-xs text-red-500 mt-1">{errors.category.message}</p>}
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label>Main Category (Optional)</Label>
+                <Select
+                  value={mainCategoryValue ?? "__none__"}
+                  onValueChange={(v) => {
+                    setValue("mainCategory", v === "__none__" ? undefined : v as FormData["mainCategory"]);
+                    setValue("subCategory", undefined);
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a main category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="__none__">None</SelectItem>
+                    {MAIN_CATEGORIES.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {mainCategoryValue && availableSubCategories.length > 0 && (
+                <div className="flex flex-col gap-1.5">
+                  <Label>Sub Category (Optional)</Label>
+                  <Select
+                    value={watch("subCategory") ?? "__none__"}
+                    onValueChange={(v) => setValue("subCategory", v === "__none__" ? undefined : v)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select a sub category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="__none__">None</SelectItem>
+                      {availableSubCategories.map((c) => (
+                        <SelectItem key={c} value={c}>
+                          {c}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              <div className="flex flex-col gap-1.5">
+                <Label>Occasion (Optional)</Label>
+                <Select
+                  value={watch("occasion") ?? "__none__"}
+                  onValueChange={(v) => setValue("occasion", v === "__none__" ? undefined : v as FormData["occasion"])}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select an occasion" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="__none__">None</SelectItem>
+                    {OCCASIONS.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="flex flex-col gap-1.5">

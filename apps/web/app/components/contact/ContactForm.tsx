@@ -1,6 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { createEnquiry } from "@jwell/api-client";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 interface FormState {
   name: string;
@@ -22,24 +25,38 @@ export default function ContactForm({ defaultProduct }: Props) {
   });
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   function validate(): boolean {
     const e: Partial<FormState> = {};
     if (!form.name.trim() || form.name.trim().length < 2)
       e.name = "Name must be at least 2 characters";
-    if (!/^\+?[\d\s-]{10,}$/.test(form.phone))
-      e.phone = "Please enter a valid phone number";
+    if (!/^[6-9]\d{9}$/.test(form.phone.replace(/\s/g, "")))
+      e.phone = "Please enter a valid 10-digit phone number";
     if (form.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       e.email = "Please enter a valid email";
-    if (!form.message.trim() || form.message.trim().length < 10)
-      e.message = "Message must be at least 10 characters";
     setErrors(e);
     return Object.keys(e).length === 0;
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (validate()) setSubmitted(true);
+    if (!validate()) return;
+
+    setSubmitting(true);
+    try {
+      await createEnquiry(API_URL, {
+        name: form.name,
+        phone: form.phone,
+        email: form.email || undefined,
+        message: form.message || undefined,
+      });
+      setSubmitted(true);
+    } catch {
+      setErrors({ phone: "Failed to submit. Please try again." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   if (submitted) {
@@ -173,13 +190,14 @@ export default function ContactForm({ defaultProduct }: Props) {
 
       <button
         type="submit"
-        className="w-full text-xs tracking-widest uppercase py-4 transition-all hover:opacity-90"
+        disabled={submitting}
+        className="w-full text-xs tracking-widest uppercase py-4 transition-all hover:opacity-90 disabled:opacity-50"
         style={{
           backgroundColor: "var(--color-text-900)",
           color: "var(--color-ivory-50)",
         }}
       >
-        Send Message
+        {submitting ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

@@ -4,6 +4,7 @@ import DashboardPage from "./routes/DashboardPage.js";
 import GoldPricePage from "./routes/GoldPricePage.js";
 import ProductsPage from "./routes/ProductsPage.js";
 import ProductFormPage from "./routes/ProductFormPage.js";
+import EnquiriesPage from "./routes/EnquiriesPage.js";
 import { Toaster } from "./components/ui/toaster.js";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/new" element={<ProductFormPage />} />
           <Route path="products/:id/edit" element={<ProductFormPage />} />
+          <Route path="enquiries" element={<EnquiriesPage />} />
         </Route>
       </Routes>
       <Toaster />

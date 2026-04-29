@@ -20,10 +20,12 @@ export default function Header() {
         fontSize: "0.7rem",
         letterSpacing: "0.12em",
       }}>
-        Free consultation &amp; home delivery available &nbsp;·&nbsp;
+        <span className="hidden sm:inline">
+          Free consultation &amp; home delivery available &nbsp;·&nbsp;
+        </span>
         Today&apos;s Gold Rate:{" "}
         <span style={{ color: "var(--color-gold)" }}>₹9,450 / gram</span>
-        &nbsp;·&nbsp; BIS Hallmarked 22KT Gold
+        <span className="hidden sm:inline">&nbsp;·&nbsp; BIS Hallmarked 22KT Gold</span>
       </div>
 
       <header style={{
@@ -88,9 +90,9 @@ export default function Header() {
               style={{ borderRadius: "0.4rem", objectFit: "cover" }}
               priority
             />
-            <span style={{
+            <span className="text-[0.7rem] sm:text-[0.85rem]" style={{
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.85rem", fontWeight: 600,
+              fontWeight: 600,
               color: "var(--color-gold)", letterSpacing: "0.1em",
               textTransform: "uppercase", whiteSpace: "nowrap",
             }}>

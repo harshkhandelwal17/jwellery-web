@@ -35,12 +35,15 @@ export default function Footer() {
           <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300 }}>
             Feel with Luxury — Handcrafted gold jewellery crafted with passion and presented with pride.
           </p>
+          <p style={{ fontSize: "0.75rem", lineHeight: 1.8, fontWeight: 300, marginTop: "1rem", color: "var(--color-text-muted)", fontStyle: "italic" }}>
+            Rooted in tradition, crafted with integrity, trusted by generations, made for you.
+          </p>
         </div>
 
         {[
           { heading: "Collections", links: [{ label: "Rings", href: "/products?category=rings" }, { label: "Necklaces", href: "/products?category=necklaces" }, { label: "Earrings", href: "/products?category=earrings" }, { label: "Bracelets", href: "/products?category=bracelets" }] },
           { heading: "Company", links: [{ label: "About Us", href: "/" }, { label: "Our Artisans", href: "/" }, { label: "Blog", href: "/" }, { label: "Careers", href: "/" }] },
-          { heading: "Visit Us", links: [{ label: "Address Coming Soon", href: "/" }, { label: "+91 98765 43210", href: "tel:+919876543210" }, { label: "hello@shreevajewellers.in", href: "mailto:hello@shreevajewellers.in" }, { label: "WhatsApp Us", href: "https://wa.me/919876543210" }, { label: "Mon–Sat, 10am–7pm", href: "/" }] },
+          { heading: "Visit Us", links: [{ label: "Address Coming Soon", href: "/" }, { label: "+91 91114 52626", href: "tel:+919111452626" }, { label: "support@shreevajewellers.com", href: "mailto:support@shreevajewellers.com" }, { label: "WhatsApp Us", href: "https://wa.me/919111452626" }, { label: "Mon–Sat, 10am–7pm", href: "/" }] },
         ].map((col) => (
           <div key={col.heading}>
             <h4 style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-mid)", fontWeight: 600, marginBottom: "1.5rem" }}>

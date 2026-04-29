@@ -9,7 +9,15 @@ export default function CTASection() {
     }}>
       <style>{`
         .cta-section { padding: 8rem 5rem; }
-        @media (max-width: 768px) { .cta-section { padding: 4rem 1.5rem; } }
+        @media (max-width: 768px) {
+          .cta-section { padding: 3rem 1rem !important; }
+          .cta-section h2 { font-size: 1.25rem !important; }
+          .cta-section .cta-subtitle { font-size: 0.6rem !important; }
+          .cta-section .cta-desc { font-size: 0.8rem !important; margin-bottom: 1.5rem !important; }
+          .cta-btns { flex-direction: column !important; gap: 0.75rem !important; }
+          .cta-btns a { padding: 0.7rem 1.5rem !important; font-size: 0.7rem !important; }
+          .cta-watermark { font-size: 10rem !important; }
+        }
         .cta-btn:hover {
           background: var(--color-blush) !important;
           border-color: var(--color-blush) !important;
@@ -19,7 +27,7 @@ export default function CTASection() {
       `}</style>
 
       {/* Watermark */}
-      <div style={{
+      <div className="cta-watermark" style={{
         position: "absolute", left: "50%", top: "50%",
         transform: "translate(-50%, -50%)",
         fontFamily: "'Corinthia', cursive",
@@ -31,7 +39,7 @@ export default function CTASection() {
       </div>
 
       <div style={{ position: "relative", zIndex: 1 }}>
-        <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush-mid)", marginBottom: "1rem" }}>
+        <p className="cta-subtitle" style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush-mid)", marginBottom: "1rem" }}>
           Ready to begin?
         </p>
         <h2 style={{
@@ -41,7 +49,7 @@ export default function CTASection() {
         }}>
           Find the Piece That<br />Speaks to You
         </h2>
-        <p style={{ opacity: 0.6, fontSize: "0.92rem", fontWeight: 300, marginBottom: "3rem", maxWidth: "460px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
+        <p className="cta-desc" style={{ opacity: 0.6, fontSize: "0.92rem", fontWeight: 300, marginBottom: "3rem", maxWidth: "460px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
           Visit us in Jaipur or enquire online — we would love to help you find something truly special.
         </p>
         <div className="cta-btns">
@@ -54,7 +62,7 @@ export default function CTASection() {
           }}>
             Get in Touch
           </Link>
-          <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="cta-wa-btn" style={{
+          <a href="https://wa.me/919111452626" target="_blank" rel="noopener noreferrer" className="cta-wa-btn" style={{
             display: "inline-flex", alignItems: "center", gap: "0.5rem",
             background: "#25D366", color: "white",
             padding: "0.875rem 2.25rem",
