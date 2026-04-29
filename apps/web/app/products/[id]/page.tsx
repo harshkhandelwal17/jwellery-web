@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import ProductCard from "../../components/products/ProductCard";
 import EnquireButton from "../../components/products/EnquireButton";
 import PriceDisplay from "../../components/products/PriceDisplay";
+import SafeImage from "../../components/products/SafeImage";
 import { fetchProduct, fetchProducts } from "../../lib/api";
 import type { ProductCategory } from "@jwell/types";
-import { cloudinaryUrl } from "../../lib/cloudinary";
+import { cloudinaryUrl, normalizeImageUrl } from "../../lib/cloudinary";
 
 export const revalidate = 300;
 
@@ -53,8 +53,8 @@ export default async function ProductDetailPage({ params }: Props) {
               className="relative overflow-hidden"
               style={{ aspectRatio: "3/4" }}
             >
-              <Image
-                src={cloudinaryUrl(product.image, { width: 1200, quality: 90 })}
+              <SafeImage
+                src={cloudinaryUrl(normalizeImageUrl(product.image), { width: 1200, quality: 90 })}
                 alt={product.name}
                 fill
                 className="object-cover"
@@ -159,8 +159,8 @@ export default async function ProductDetailPage({ params }: Props) {
                 {related.map((p) => (
                   <Link key={p.id} href={`/products/${p.id}`} className="group block">
                     <div className="relative overflow-hidden mb-2 rounded-lg" style={{ aspectRatio: "3/4" }}>
-                      <Image
-                        src={cloudinaryUrl(p.image, { width: 600, quality: 85 })}
+                      <SafeImage
+                        src={cloudinaryUrl(normalizeImageUrl(p.image), { width: 600, quality: 85 })}
                         alt={p.name}
                         fill
                         quality={85}

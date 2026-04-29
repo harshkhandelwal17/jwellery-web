@@ -91,6 +91,12 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
 
         {/* Hero image */}
         <div className="hero-image-col">
+          {/* DEBUG: Cloudinary test image — verify rendering */}
+          <img
+            src="https://res.cloudinary.com/dejrcjvga/image/upload/v1777232967/jwell/products/jwell/products/ring/ring_002.jpg"
+            alt="Cloudinary test"
+            style={{ position: "absolute", top: 8, right: 8, width: 80, height: 80, objectFit: "cover", borderRadius: 8, zIndex: 20, border: "2px solid red" }}
+          />
           <div className="hero-float" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Image
               src="/heroImage.webp"

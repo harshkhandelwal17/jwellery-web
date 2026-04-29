@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { ProductWithPrice } from "@jwell/types";
 import { formatCurrency } from "@jwell/utils";
-import { cloudinaryUrl } from "../../lib/cloudinary";
+import { cloudinaryUrl, normalizeImageUrl } from "../../lib/cloudinary";
+import SafeImage from "./SafeImage";
 
 interface Props {
   product: ProductWithPrice;
@@ -21,14 +21,13 @@ export default function ProductCard({ product }: Props) {
       }}
     >
       {/* Image */}
-      <div className="product-img-wrap" style={{ position: "relative" }}>
-        <Image
-          src={cloudinaryUrl(product.image, { width: 800, quality: 90 })}
+      <div className="product-img-wrap" style={{ position: "relative", aspectRatio: "3/4" }}>
+        <SafeImage
+          src={cloudinaryUrl(normalizeImageUrl(product.image), { width: 800, quality: 90 })}
           alt={product.name}
-          width={400}
-          height={533}
+          fill
           quality={90}
-          style={{ width: "100%", aspectRatio: "3/4", objectFit: "cover", display: "block" }}
+          className="object-cover"
           sizes="(max-width: 768px) 50vw, 25vw"
         />
       </div>

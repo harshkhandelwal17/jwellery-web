@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.js";
 import { toast } from "@/hooks/use-toast.js";
 import { createProduct, updateProduct, getGoldPrice } from "@jwell/api-client";
-import { CreateProductSchema, formatCurrency, calculatePrice } from "@jwell/utils";
+import { CreateProductSchema, formatCurrency, calculatePrice, normalizeImageUrl } from "@jwell/utils";
 import type { ProductWithPrice } from "@jwell/types";
 import type { z } from "zod";
 
@@ -80,7 +80,7 @@ export default function ProductForm({ product }: Props) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isEdit = !!product;
-  const [imagePreview, setImagePreview] = useState<string>(product?.image ?? "");
+  const [imagePreview, setImagePreview] = useState<string>(product?.image ? normalizeImageUrl(product.image) : "");
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const { data: goldPrice } = useQuery({
@@ -131,8 +131,9 @@ export default function ProductForm({ product }: Props) {
       });
       const json = (await res.json()) as { success: boolean; url: string };
       if (!json.success) throw new Error("Upload failed");
-      setValue("image", json.url);
-      setImagePreview(json.url);
+      const normalizedUrl = normalizeImageUrl(json.url);
+      setValue("image", normalizedUrl);
+      setImagePreview(normalizedUrl);
     } catch {
       toast({ variant: "destructive", title: "Image upload failed" });
     } finally {
@@ -301,9 +302,12 @@ export default function ProductForm({ product }: Props) {
               {imagePreview ? (
                 <div className="relative inline-block group">
                   <img
-                    src={imagePreview}
+                    src={normalizeImageUrl(imagePreview)}
                     alt="Preview"
                     className="h-44 w-44 rounded-xl object-cover border border-[var(--color-border)]"
+                    onError={(e) => {
+                      e.currentTarget.src = "/fallback.jpg";
+                    }}
                   />
                   <button
                     type="button"

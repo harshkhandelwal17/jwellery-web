@@ -3,7 +3,7 @@ import { Package, Coins, Gem, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.js";
 import { getProducts } from "@jwell/api-client";
 import { getGoldPrice } from "@jwell/api-client";
-import { formatCurrency } from "@jwell/utils";
+import { formatCurrency, normalizeImageUrl } from "@jwell/utils";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
@@ -117,7 +117,12 @@ export default function DashboardPage() {
             <div className="divide-y" style={{ borderColor: "var(--color-border)" }}>
               {products.slice(0, 5).map((p) => (
                 <div key={p.id} className="flex items-center gap-4 py-3 transition-colors hover:bg-[var(--color-bg-warm)] rounded-lg px-2 -mx-2">
-                  <img src={p.image} alt={p.name} className="h-11 w-11 rounded-xl object-cover shrink-0 border border-[var(--color-border)]" />
+                  <img
+                    src={normalizeImageUrl(p.image)}
+                    alt={p.name}
+                    className="h-11 w-11 rounded-xl object-cover shrink-0 border border-[var(--color-border)]"
+                    onError={(e) => { e.currentTarget.src = "/fallback.jpg"; }}
+                  />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate" style={{ color: "var(--color-text)" }}>
                       {p.name}
