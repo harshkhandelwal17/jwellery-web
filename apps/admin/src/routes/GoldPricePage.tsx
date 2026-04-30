@@ -6,7 +6,7 @@ import { useGoldPriceStore } from "@/store/goldPriceStore.js";
 import { getGoldPrice } from "@jwell/api-client";
 import { formatCurrency } from "@jwell/utils";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 
 export default function GoldPricePage() {
   const { data: goldPrice, isLoading } = useQuery({

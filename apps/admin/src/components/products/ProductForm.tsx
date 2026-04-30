@@ -15,7 +15,7 @@ import { CreateProductSchema, formatCurrency, calculatePrice, normalizeImageUrl 
 import type { ProductWithPrice } from "@jwell/types";
 import type { z } from "zod";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
 
 // FormData type derived from Zod schema

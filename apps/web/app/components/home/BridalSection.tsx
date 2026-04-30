@@ -20,12 +20,12 @@ const BRIDAL_FEATURES = [
 
 export default function BridalSection() {
   return (
-    <section className="bridal-section" style={{ background: "var(--color-blush-light)" }}>
+    <section className="bridal-section" style={{ background: "var(--color-bg-warm)" }}>
       <style>{`
         .bridal-section { padding: 6rem 5rem; }
         .bridal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
         @media (max-width: 768px) {
-          .bridal-section { padding: 2.5rem 1rem !important; }
+          .bridal-section { padding: 3rem 1rem !important; }
           .bridal-section h2 { font-size: 1.1rem !important; }
           .bridal-section .section-subtitle { font-size: 0.6rem !important; }
           .bridal-section .section-desc { font-size: 0.8rem !important; }
@@ -35,15 +35,15 @@ export default function BridalSection() {
           .bridal-card .card-body { font-size: 0.8rem !important; }
         }
         .bridal-card:hover {
-          border-color: var(--color-blush-mid) !important;
-          box-shadow: 0 12px 36px rgba(192,150,42,0.14);
+          border-color: var(--color-gold) !important;
+          box-shadow: 0 12px 36px rgba(212,175,55,0.12);
           transform: translateY(-4px);
         }
-        .bridal-card { transition: all 0.3s; }
+        .bridal-card { transition: all 0.3s ease-in-out; }
       `}</style>
 
       <div style={{ textAlign: "center" }}>
-        <p className="section-subtitle" style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+        <p className="section-subtitle" style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
           Bridal Collection
         </p>
         <h2 style={{
@@ -54,9 +54,9 @@ export default function BridalSection() {
           marginBottom: "1.25rem",
         }}>
           Light as a Blessing,<br />
-          <span style={{ color: "var(--color-blush)" }}>Radiant as a Bride</span>
+          <span style={{ color: "var(--color-gold)" }}>Radiant as a Bride</span>
         </h2>
-        <p className="section-desc" style={{ fontSize: "0.9rem", color: "var(--color-text-muted)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
+        <p className="section-desc" style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
           We specialise in lightweight bridal jewellery — designed to adorn without burden.
           Perfect for the modern bride who values elegance and comfort in equal measure.
         </p>
@@ -72,18 +72,19 @@ export default function BridalSection() {
           }}>
             <div style={{
               width: "2.75rem", height: "2.75rem",
-              background: "var(--color-blush-light)",
+              background: "rgba(212, 175, 55, 0.1)",
+              border: "1px solid rgba(212, 175, 55, 0.2)",
               borderRadius: "0.75rem",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: "1.1rem", marginBottom: "1.25rem",
-              color: "var(--color-blush)",
+              color: "var(--color-gold)",
             }}>
               {f.icon}
             </div>
             <h3 className="card-title" style={{ fontSize: "0.95rem", fontWeight: 600, marginBottom: "0.5rem", color: "var(--color-text)" }}>
               {f.title}
             </h3>
-            <p className="card-body" style={{ fontSize: "0.82rem", color: "var(--color-text-muted)", lineHeight: 1.85, fontWeight: 300 }}>
+            <p className="card-body" style={{ fontSize: "0.82rem", color: "var(--color-text-mid)", lineHeight: 1.85, fontWeight: 300 }}>
               {f.body}
             </p>
           </div>
@@ -94,9 +95,9 @@ export default function BridalSection() {
         <Link href="/products?category=bridal" style={{
           display: "inline-flex", alignItems: "center", gap: "0.5rem",
           fontSize: "0.78rem", letterSpacing: "0.12em", textTransform: "uppercase",
-          color: "var(--color-text)", borderBottom: "1px solid var(--color-blush)",
+          color: "var(--color-text)", borderBottom: "1px solid var(--color-gold)",
           paddingBottom: "0.15rem", textDecoration: "none",
-          fontWeight: 500, transition: "color 0.2s",
+          fontWeight: 500, transition: "all 0.3s ease-in-out",
         }}>
           Explore Bridal Collection →
         </Link>

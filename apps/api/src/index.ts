@@ -10,8 +10,16 @@ import { errorHandler } from "./middleware/errorHandler.js";
 const app = express();
 const PORT = Number(process.env.PORT ?? 4000);
 
+const corsOrigins = process.env.CORS_ORIGINS?.split(",") ?? [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://shreeva-one.vercel.app",
+];
+
 app.use(cors({
-  origin: process.env.CORS_ORIGINS?.split(",") ?? ["http://localhost:3000", "http://localhost:5173"],
+  origin: corsOrigins,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+  credentials: true,
 }));
 app.use(express.json());
 

@@ -44,23 +44,21 @@ export default async function ProductsPage({ searchParams }: Props) {
   return (
     <>
       <Header />
-      <main className="min-h-screen" style={{ backgroundColor: "var(--color-ivory-50)" }}>
+      <main className="min-h-screen" style={{ backgroundColor: "var(--color-bg)" }}>
         {/* Page header */}
         <div
           className="py-10 md:py-16 text-center border-b"
-          style={{ borderColor: "var(--color-ivory-200)" }}
+          style={{ borderColor: "var(--color-border)" }}
         >
           <p
             className="hero-enter hero-enter-1 text-[0.65rem] md:text-xs tracking-widest uppercase mb-2 md:mb-3"
-            style={{ color: "var(--color-blush-400)" }}
+            style={{ color: "var(--color-gold)" }}
           >
             Handcrafted Luxury
           </p>
           <h1
             className="hero-enter hero-enter-2 font-display leading-none text-3xl md:text-6xl"
-            style={{
-              color: "var(--color-text-900)",
-            }}
+            style={{ color: "var(--color-text)" }}
           >
             Our Collections
           </h1>
@@ -87,13 +85,14 @@ export default async function ProductsPage({ searchParams }: Props) {
                   style={
                     isActive
                       ? {
-                          backgroundColor: "var(--color-text)",
-                          borderColor: "var(--color-text)",
-                          color: "white",
+                          backgroundColor: "var(--color-gold)",
+                          borderColor: "var(--color-gold)",
+                          color: "#000000",
+                          fontWeight: 600,
                         }
                       : {
-                          borderColor: "var(--color-border)",
-                          color: "var(--color-text)",
+                          borderColor: "var(--color-gold)",
+                          color: "var(--color-gold)",
                           backgroundColor: "transparent",
                         }
                   }
@@ -108,7 +107,7 @@ export default async function ProductsPage({ searchParams }: Props) {
           {products.length === 0 ? (
             <div
               className="text-center py-24"
-              style={{ color: "var(--color-text-500)" }}
+              style={{ color: "var(--color-text-muted)" }}
             >
               No products found in this category.
             </div>
@@ -122,10 +121,10 @@ export default async function ProductsPage({ searchParams }: Props) {
         </div>
 
         {/* The Craft Edit */}
-        <div style={{ background: "var(--color-blush-light)", padding: "3rem 0 2.5rem" }} className="md:py-20">
+        <div style={{ background: "var(--color-bg-warm)", padding: "3rem 0 2.5rem" }} className="md:py-20">
           <div className="max-w-7xl mx-auto px-4 md:px-6">
             <div style={{ textAlign: "center", marginBottom: "2rem" }} className="md:mb-12">
-              <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-blush)", marginBottom: "0.5rem" }}>
+              <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
                 Curated For You
               </p>
               <h2 className="text-xl md:text-4xl" style={{ fontFamily: "'Cinzel', serif", fontWeight: 600, letterSpacing: "0.08em", color: "var(--color-text)" }}>
@@ -141,7 +140,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                 .craft-card p { font-size: 0.7rem !important; margin-bottom: 0.75rem !important; }
                 .craft-card .craft-icon { width: 2rem !important; height: 2rem !important; font-size: 0.9rem !important; margin-bottom: 0.75rem !important; }
               }
-              .craft-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(201,150,42,0.16) !important; }
+              .craft-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(212,175,55,0.16) !important; border-color: var(--color-gold) !important; }
               .craft-card { transition: all 0.3s; }
             `}</style>
             <div className="craft-grid">
@@ -161,21 +160,21 @@ export default async function ProductsPage({ searchParams }: Props) {
                 >
                   <div className="craft-icon" style={{
                     width: "2.5rem", height: "2.5rem",
-                    background: "white", borderRadius: "0.5rem",
+                    background: "rgba(212, 175, 55, 0.1)", borderRadius: "0.5rem",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     fontSize: "1.1rem", marginBottom: "1.25rem",
                     color: "var(--color-gold)",
-                    border: "1px solid var(--color-border)",
+                    border: "1px solid rgba(212, 175, 55, 0.2)",
                   }}>
                     ◈
                   </div>
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--color-text)", marginBottom: "0.4rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, color: "#1a1a1a", marginBottom: "0.4rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 300, lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                  <p style={{ fontSize: "0.78rem", color: "#333333", fontWeight: 300, lineHeight: 1.6, marginBottom: "1.5rem" }}>
                     {item.desc}
                   </p>
-                  <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-blush)", fontWeight: 500 }}>
+                  <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#1E3A8A", fontWeight: 500 }}>
                     Explore →
                   </span>
                 </a>

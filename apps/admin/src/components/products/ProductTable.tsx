@@ -13,7 +13,7 @@ import { deleteProduct } from "@jwell/api-client";
 import { formatCurrency, normalizeImageUrl } from "@jwell/utils";
 import type { ProductWithPrice } from "@jwell/types";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
 
 interface Props {

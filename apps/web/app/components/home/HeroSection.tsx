@@ -14,8 +14,10 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
   return (
     <>
       <style>{`
-        .hero-btn-primary:hover { background: var(--color-blush) !important; }
-        .hero-btn-link:hover { color: var(--color-blush) !important; }
+        .hero-btn-primary { background: var(--color-gold) !important; color: #000000 !important; border: 1px solid var(--color-gold); transition: all 0.3s ease-in-out; }
+        .hero-btn-primary:hover { background: var(--color-gold-light) !important; border-color: var(--color-gold-light); box-shadow: 0 4px 20px rgba(212,175,55,0.3); }
+        .hero-btn-link { color: var(--color-text-mid); transition: all 0.3s ease-in-out; }
+        .hero-btn-link:hover { color: var(--color-gold) !important; }
         .hero-section {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -52,7 +54,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
       <section className="hero-section">
         {/* Text side */}
         <div className="hero-text">
-          <p className="hero-enter hero-enter-1" style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-text-muted)", marginBottom: "1.5rem" }}>
+          <p className="hero-enter hero-enter-1" style={{ fontSize: "0.62rem", letterSpacing: "0.4em", textTransform: "uppercase", color: "var(--color-gold)", marginBottom: "1.5rem" }}>
             Feel with Luxury
           </p>
 
@@ -65,24 +67,23 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             Moments To<br />Mementos
           </h1>
 
-          <p className="hero-enter hero-enter-3" style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-muted)", lineHeight: 1.9, maxWidth: "360px" }}>
+          <p className="hero-enter hero-enter-3" style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--color-text-mid)", lineHeight: 1.9, maxWidth: "360px" }}>
             It&apos;s more than an adornment. It&apos;s a feeling, a memory,
             a mark of love. Crafted with care. Delivered with heart.
           </p>
 
           <div className="hero-enter hero-enter-4 hero-cta" style={{ display: "flex", gap: "1.25rem", marginTop: "2.75rem", flexWrap: "wrap", alignItems: "center" }}>
             <Link href="/products" className="hero-btn-primary" style={{
-              background: "var(--color-text)", color: "var(--color-bg-card)",
-              padding: "0.8rem 2.25rem",
+              padding: "0.9rem 2.5rem",
               fontSize: "0.7rem", letterSpacing: "0.18em", textTransform: "uppercase",
-              textDecoration: "none", fontWeight: 500, transition: "all 0.25s",
+              textDecoration: "none", fontWeight: 600,
             }}>
               Shop Our Pieces
             </Link>
             <Link href="/products" className="hero-btn-link" style={{
-              color: "var(--color-text-mid)", fontSize: "0.82rem",
+              fontSize: "0.82rem",
               textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem",
-              transition: "color 0.2s", fontWeight: 400,
+              fontWeight: 400,
             }}>
               Explore collection →
             </Link>
@@ -90,13 +91,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
         </div>
 
         {/* Hero image */}
-        <div className="hero-image-col">
-          {/* DEBUG: Cloudinary test image — verify rendering */}
-          <img
-            src="https://res.cloudinary.com/dejrcjvga/image/upload/v1777232967/jwell/products/jwell/products/ring/ring_002.jpg"
-            alt="Cloudinary test"
-            style={{ position: "absolute", top: 8, right: 8, width: 80, height: 80, objectFit: "cover", borderRadius: 8, zIndex: 20, border: "2px solid red" }}
-          />
+        <div className="hero-image-col" style={{ backgroundColor: "var(--color-bg-warm)" }}>
           <div className="hero-float" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
             <Image
               src="/heroImage.webp"
@@ -114,11 +109,11 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
             position: "absolute", bottom: "2.5rem", left: "2rem",
             background: "var(--color-bg-overlay)",
             backdropFilter: "blur(8px)",
-            border: "1px solid var(--color-border)",
+            border: "1px solid var(--color-gold)",
             padding: "0.875rem 1.25rem",
             zIndex: 10,
           }}>
-            <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>Live Gold Rate</div>
+            <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-mid)" }}>Live Gold Rate</div>
             <div style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", fontWeight: 700, color: "var(--color-gold)", marginTop: "0.25rem", letterSpacing: "0.04em" }}>₹9,450 /g</div>
           </div>
         </div>
@@ -126,7 +121,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
 
       {/* Ticker */}
       <div style={{
-        background: "var(--color-blush-light)",
+        background: "var(--color-bg-card)",
         borderTop: "1px solid var(--color-border)",
         borderBottom: "1px solid var(--color-border)",
         padding: "0.875rem 0",
@@ -139,7 +134,7 @@ export default function HeroSection({ heroImages: _ }: { heroImages?: string[] }
               fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase",
               color: "var(--color-text-mid)", display: "inline-flex", alignItems: "center", gap: "0.75rem",
             }}>
-              <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--color-blush)", display: "inline-block", flexShrink: 0 }} />
+              <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--color-gold)", display: "inline-block", flexShrink: 0 }} />
               {text}
             </span>
           ))}

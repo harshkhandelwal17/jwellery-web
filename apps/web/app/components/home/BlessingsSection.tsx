@@ -33,13 +33,13 @@ export default function BlessingsSection() {
           </p>
           <h2
             className="font-display text-2xl md:text-4xl lg:text-5xl leading-tight mb-4 md:mb-6"
-            style={{ color: "var(--color-text-900)" }}
+            style={{ color: "var(--color-text)" }}
           >
             Blessings & Heritage
           </h2>
           <p
             className="text-sm md:text-base max-w-xl mx-auto italic px-4"
-            style={{ color: "var(--color-text-500)" }}
+            style={{ color: "var(--color-text-muted)" }}
           >
             We are new in this — but grounded by the blessings of those who came
             before us.
@@ -53,8 +53,8 @@ export default function BlessingsSection() {
               key={index}
               className="relative rounded-2xl overflow-hidden border transition-transform duration-300 hover:-translate-y-1"
               style={{
-                backgroundColor: "#f0eaff",
-                borderColor: "var(--color-gold)",
+                backgroundColor: "var(--color-bg-card)",
+                borderColor: "var(--color-border)",
                 aspectRatio: "3/4",
               }}
             >
@@ -90,7 +90,7 @@ export default function BlessingsSection() {
               {/* Bottom content */}
               <div
                 className="absolute bottom-0 left-0 right-0 p-2 md:p-4 mx-2 md:mx-3 mb-2 md:mb-3 rounded-lg"
-                style={{ backgroundColor: "var(--color-text-900)" }}
+                style={{ backgroundColor: "rgba(11, 11, 11, 0.9)", border: "1px solid var(--color-gold)" }}
               >
                 <p
                   className="text-[0.65rem] md:text-sm font-medium text-center tracking-wider uppercase mb-0.5 md:mb-1"
@@ -100,7 +100,7 @@ export default function BlessingsSection() {
                 </p>
                 <p
                   className="text-[0.6rem] md:text-xs text-center"
-                  style={{ color: "var(--color-ivory-100)" }}
+                  style={{ color: "var(--color-text-muted)" }}
                 >
                   {blessing.title}
                 </p>

@@ -5,7 +5,7 @@ import { getProducts } from "@jwell/api-client";
 import { getGoldPrice } from "@jwell/api-client";
 import { formatCurrency, normalizeImageUrl } from "@jwell/utils";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 
 export default function DashboardPage() {
   const { data: products } = useQuery({

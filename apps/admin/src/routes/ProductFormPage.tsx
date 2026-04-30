@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import ProductForm from "@/components/products/ProductForm.js";
 import { getProduct } from "@jwell/api-client";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 
 export default function ProductFormPage() {
   const { id } = useParams<{ id?: string }>();

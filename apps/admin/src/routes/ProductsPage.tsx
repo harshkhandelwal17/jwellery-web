@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button.js";
 import ProductTable from "@/components/products/ProductTable.js";
 import { getProducts } from "@jwell/api-client";
 
-const API_URL = import.meta.env.VITE_API_URL as string;
+const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 
 export default function ProductsPage() {
   const navigate = useNavigate();

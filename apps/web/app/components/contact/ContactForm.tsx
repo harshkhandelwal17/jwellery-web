@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { createEnquiry } from "@jwell/api-client";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
 interface FormState {
   name: string;
@@ -63,15 +63,15 @@ export default function ContactForm({ defaultProduct }: Props) {
     return (
       <div
         className="p-10 text-center border"
-        style={{ borderColor: "var(--color-ivory-200)" }}
+        style={{ borderColor: "var(--color-border)" }}
       >
         <div
           className="font-display text-5xl mb-4"
-          style={{ color: "var(--color-blush-400)" }}
+          style={{ color: "var(--color-gold)" }}
         >
           Thank You
         </div>
-        <p className="text-base" style={{ color: "var(--color-text-500)" }}>
+        <p className="text-base" style={{ color: "var(--color-text-muted)" }}>
           We&apos;ve received your message and will be in touch within 24 hours.
         </p>
       </div>
@@ -84,7 +84,7 @@ export default function ContactForm({ defaultProduct }: Props) {
       <div>
         <label
           className="block text-xs tracking-widest uppercase mb-2"
-          style={{ color: "var(--color-text-700)" }}
+          style={{ color: "var(--color-text-mid)" }}
         >
           Full Name *
         </label>
@@ -94,9 +94,9 @@ export default function ContactForm({ defaultProduct }: Props) {
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           className="w-full px-4 py-3 text-sm outline-none border transition-colors focus:border-current"
           style={{
-            borderColor: errors.name ? "#e05252" : "var(--color-ivory-200)",
-            backgroundColor: "var(--color-ivory-50)",
-            color: "var(--color-text-900)",
+            borderColor: errors.name ? "#e05252" : "var(--color-border)",
+            backgroundColor: "var(--color-bg-card)",
+            color: "var(--color-text)",
           }}
           placeholder="Your full name"
         />
@@ -111,7 +111,7 @@ export default function ContactForm({ defaultProduct }: Props) {
       <div>
         <label
           className="block text-xs tracking-widest uppercase mb-2"
-          style={{ color: "var(--color-text-700)" }}
+          style={{ color: "var(--color-text-mid)" }}
         >
           Phone Number *
         </label>
@@ -121,9 +121,9 @@ export default function ContactForm({ defaultProduct }: Props) {
           onChange={(e) => setForm({ ...form, phone: e.target.value })}
           className="w-full px-4 py-3 text-sm outline-none border transition-colors"
           style={{
-            borderColor: errors.phone ? "#e05252" : "var(--color-ivory-200)",
-            backgroundColor: "var(--color-ivory-50)",
-            color: "var(--color-text-900)",
+            borderColor: errors.phone ? "#e05252" : "var(--color-border)",
+            backgroundColor: "var(--color-bg-card)",
+            color: "var(--color-text)",
           }}
           placeholder="+91 98765 43210"
         />
@@ -138,7 +138,7 @@ export default function ContactForm({ defaultProduct }: Props) {
       <div>
         <label
           className="block text-xs tracking-widest uppercase mb-2"
-          style={{ color: "var(--color-text-700)" }}
+          style={{ color: "var(--color-text-mid)" }}
         >
           Email Address
         </label>
@@ -148,9 +148,9 @@ export default function ContactForm({ defaultProduct }: Props) {
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           className="w-full px-4 py-3 text-sm outline-none border transition-colors"
           style={{
-            borderColor: errors.email ? "#e05252" : "var(--color-ivory-200)",
-            backgroundColor: "var(--color-ivory-50)",
-            color: "var(--color-text-900)",
+            borderColor: errors.email ? "#e05252" : "var(--color-border)",
+            backgroundColor: "var(--color-bg-card)",
+            color: "var(--color-text)",
           }}
           placeholder="your@email.com (optional)"
         />
@@ -165,7 +165,7 @@ export default function ContactForm({ defaultProduct }: Props) {
       <div>
         <label
           className="block text-xs tracking-widest uppercase mb-2"
-          style={{ color: "var(--color-text-700)" }}
+          style={{ color: "var(--color-text-mid)" }}
         >
           Message *
         </label>
@@ -175,9 +175,9 @@ export default function ContactForm({ defaultProduct }: Props) {
           rows={5}
           className="w-full px-4 py-3 text-sm outline-none border transition-colors resize-none"
           style={{
-            borderColor: errors.message ? "#e05252" : "var(--color-ivory-200)",
-            backgroundColor: "var(--color-ivory-50)",
-            color: "var(--color-text-900)",
+            borderColor: errors.message ? "#e05252" : "var(--color-border)",
+            backgroundColor: "var(--color-bg-card)",
+            color: "var(--color-text)",
           }}
           placeholder="Tell us what you're looking for…"
         />
@@ -193,8 +193,9 @@ export default function ContactForm({ defaultProduct }: Props) {
         disabled={submitting}
         className="w-full text-xs tracking-widest uppercase py-4 transition-all hover:opacity-90 disabled:opacity-50"
         style={{
-          backgroundColor: "var(--color-text-900)",
-          color: "var(--color-ivory-50)",
+          backgroundColor: "var(--color-gold)",
+          color: "#000000",
+          border: "1px solid var(--color-gold)",
         }}
       >
         {submitting ? "Sending..." : "Send Message"}

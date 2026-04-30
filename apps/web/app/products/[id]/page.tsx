@@ -30,18 +30,18 @@ export default async function ProductDetailPage({ params }: Props) {
   return (
     <>
       <Header />
-      <main style={{ backgroundColor: "var(--color-ivory-50)" }}>
+      <main style={{ backgroundColor: "var(--color-bg)" }}>
         {/* Breadcrumb */}
         <div
           className="border-b"
-          style={{ borderColor: "var(--color-ivory-200)" }}
+          style={{ borderColor: "var(--color-border)" }}
         >
-          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-2 text-xs tracking-widest uppercase" style={{ color: "var(--color-text-500)" }}>
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center gap-2 text-xs tracking-widest uppercase" style={{ color: "var(--color-text-muted)" }}>
             <Link href="/" className="hover:opacity-60 transition-opacity">Home</Link>
             <span>/</span>
             <Link href="/products" className="hover:opacity-60 transition-opacity">Collections</Link>
             <span>/</span>
-            <span style={{ color: "var(--color-text-900)" }}>{product.name}</span>
+            <span style={{ color: "var(--color-text)" }}>{product.name}</span>
           </div>
         </div>
 
@@ -69,7 +69,7 @@ export default async function ProductDetailPage({ params }: Props) {
               {/* Category */}
               <p
                 className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
-                style={{ color: "var(--color-blush-400)" }}
+                style={{ color: "var(--color-gold)" }}
               >
                 {product.category}
               </p>
@@ -79,7 +79,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 className="hero-enter hero-enter-2 font-display leading-none mb-6"
                 style={{
                   fontSize: "clamp(2.5rem, 5vw, 4rem)",
-                  color: "var(--color-text-900)",
+                  color: "var(--color-text)",
                 }}
               >
                 {product.name}
@@ -88,7 +88,7 @@ export default async function ProductDetailPage({ params }: Props) {
               {/* Description */}
               <p
                 className="hero-enter hero-enter-3 text-base leading-relaxed mb-8"
-                style={{ color: "var(--color-text-500)" }}
+                style={{ color: "var(--color-text-muted)" }}
               >
                 {product.description}
               </p>
@@ -97,25 +97,25 @@ export default async function ProductDetailPage({ params }: Props) {
               <div
                 className="hero-enter hero-enter-4 grid grid-cols-2 gap-4 mb-8 p-5 border"
                 style={{
-                  borderColor: "var(--color-ivory-200)",
-                  backgroundColor: "var(--color-ivory-100)",
+                  borderColor: "var(--color-border)",
+                  backgroundColor: "var(--color-bg-card)",
                 }}
               >
                 <div>
-                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-500)" }}>Metal</p>
-                  <p className="text-sm font-medium" style={{ color: "var(--color-text-900)" }}>22kt Gold</p>
+                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>Metal</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-text)" }}>22kt Gold</p>
                 </div>
                 <div>
-                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-500)" }}>Weight</p>
-                  <p className="text-sm font-medium" style={{ color: "var(--color-text-900)" }}>{product.weight}g</p>
+                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>Weight</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-text)" }}>{product.weight}g</p>
                 </div>
                 <div>
-                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-500)" }}>Category</p>
-                  <p className="text-sm font-medium capitalize" style={{ color: "var(--color-text-900)" }}>{product.category}</p>
+                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>Category</p>
+                  <p className="text-sm font-medium capitalize" style={{ color: "var(--color-text)" }}>{product.category}</p>
                 </div>
                 <div>
-                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-500)" }}>Hallmark</p>
-                  <p className="text-sm font-medium" style={{ color: "var(--color-text-900)" }}>BIS 916</p>
+                  <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>Hallmark</p>
+                  <p className="text-sm font-medium" style={{ color: "var(--color-text)" }}>BIS 916</p>
                 </div>
               </div>
 
@@ -129,8 +129,8 @@ export default async function ProductDetailPage({ params }: Props) {
                   href="/contact"
                   className="flex-1 text-center text-xs tracking-widest uppercase px-6 py-4 border transition-all hover:opacity-80"
                   style={{
-                    borderColor: "var(--color-text-900)",
-                    color: "var(--color-text-900)",
+                    borderColor: "var(--color-gold)",
+                    color: "var(--color-gold)",
                   }}
                 >
                   Book Appointment
@@ -144,14 +144,12 @@ export default async function ProductDetailPage({ params }: Props) {
         {related.length > 0 && (
           <div
             className="scroll-reveal py-16 border-t"
-            style={{ borderColor: "var(--color-ivory-200)" }}
+            style={{ borderColor: "var(--color-border)" }}
           >
             <div className="max-w-7xl mx-auto px-6">
               <h2
                 className="font-display leading-none mb-6 md:mb-10 text-2xl md:text-4xl"
-                style={{
-                  color: "var(--color-text-900)",
-                }}
+                style={{ color: "var(--color-text)" }}
               >
                 You May Also Like
               </h2>
@@ -168,7 +166,7 @@ export default async function ProductDetailPage({ params }: Props) {
                         sizes="(max-width: 768px) 50vw, 25vw"
                       />
                     </div>
-                    <p className="text-xs md:text-sm mb-0.5 truncate" style={{ color: "var(--color-text-900)" }}>{p.name}</p>
+                    <p className="text-xs md:text-sm mb-0.5 truncate" style={{ color: "var(--color-text)" }}>{p.name}</p>
                     <p className="text-xs md:text-sm font-semibold" style={{ fontFamily: "'Cinzel', serif", color: "var(--color-gold)" }}>
                       ₹{p.calculatedPrice.toLocaleString("en-IN")}
                     </p>

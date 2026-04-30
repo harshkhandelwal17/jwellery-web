@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { createEnquiry } from "@jwell/api-client";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
 interface FormState {
   name: string;
@@ -109,7 +109,7 @@ export default function EnquiryModal({
             <div className="text-center py-8">
               <div
                 className="font-display text-4xl mb-4"
-                style={{ color: "var(--color-blush)" }}
+                style={{ color: "var(--color-gold)" }}
               >
                 Thank You
               </div>
@@ -121,8 +121,9 @@ export default function EnquiryModal({
                 onClick={onClose}
                 className="mt-6 px-6 py-3 text-xs tracking-widest uppercase transition-all hover:opacity-90"
                 style={{
-                  backgroundColor: "var(--color-text)",
-                  color: "var(--color-bg)",
+                  backgroundColor: "var(--color-gold)",
+                  color: "#000000",
+                  border: "1px solid var(--color-gold)",
                 }}
               >
                 Close
@@ -134,11 +135,12 @@ export default function EnquiryModal({
               <div
                 className="p-3 text-sm"
                 style={{
-                  backgroundColor: "var(--color-blush-light)",
+                  backgroundColor: "rgba(212, 175, 55, 0.1)",
                   color: "var(--color-text)",
+                  border: "1px solid rgba(212, 175, 55, 0.2)",
                 }}
               >
-                <span style={{ color: "var(--color-blush)" }}>Product:</span>{" "}
+                <span style={{ color: "var(--color-gold)" }}>Product:</span>{" "}
                 {productName}
               </div>
 
@@ -146,7 +148,7 @@ export default function EnquiryModal({
               <div>
                 <label
                   className="block text-xs tracking-widest uppercase mb-2"
-                  style={{ color: "var(--color-text-700)" }}
+                  style={{ color: "var(--color-text-mid)" }}
                 >
                   Full Name *
                 </label>
@@ -175,7 +177,7 @@ export default function EnquiryModal({
               <div>
                 <label
                   className="block text-xs tracking-widest uppercase mb-2"
-                  style={{ color: "var(--color-text-700)" }}
+                  style={{ color: "var(--color-text-mid)" }}
                 >
                   Phone Number *
                 </label>
@@ -204,7 +206,7 @@ export default function EnquiryModal({
               <div>
                 <label
                   className="block text-xs tracking-widest uppercase mb-2"
-                  style={{ color: "var(--color-text-700)" }}
+                  style={{ color: "var(--color-text-mid)" }}
                 >
                   Email Address
                 </label>
@@ -233,7 +235,7 @@ export default function EnquiryModal({
               <div>
                 <label
                   className="block text-xs tracking-widest uppercase mb-2"
-                  style={{ color: "var(--color-text-700)" }}
+                  style={{ color: "var(--color-text-mid)" }}
                 >
                   Message
                 </label>
@@ -258,8 +260,9 @@ export default function EnquiryModal({
                 disabled={submitting}
                 className="w-full text-xs tracking-widest uppercase py-4 transition-all hover:opacity-90 disabled:opacity-50"
                 style={{
-                  backgroundColor: "var(--color-text)",
-                  color: "var(--color-bg)",
+                  backgroundColor: "var(--color-gold)",
+                  color: "#000000",
+                  border: "1px solid var(--color-gold)",
                 }}
               >
                 {submitting ? "Submitting..." : "Submit Enquiry"}

@@ -13,18 +13,19 @@ export default function Header() {
     <>
       {/* Announcement bar */}
       <div style={{
-        background: "var(--color-dark-footer)",
-        color: "rgba(240,244,251,0.75)",
+        background: "var(--color-bg-card)",
+        color: "var(--color-text-mid)",
         textAlign: "center",
         padding: "0.55rem 1rem",
         fontSize: "0.7rem",
         letterSpacing: "0.12em",
+        borderBottom: "1px solid var(--color-border)"
       }}>
         <span className="hidden sm:inline">
           Free consultation &amp; home delivery available &nbsp;·&nbsp;
         </span>
         Today&apos;s Gold Rate:{" "}
-        <span style={{ color: "var(--color-gold)" }}>₹9,450 / gram</span>
+        <span style={{ color: "var(--color-gold)", fontWeight: 600 }}>₹9,450 / gram</span>
         <span className="hidden sm:inline">&nbsp;·&nbsp; BIS Hallmarked 22KT Gold</span>
       </div>
 
@@ -62,12 +63,12 @@ export default function Header() {
               { href: "/", label: "Home" },
               { href: "/products", label: "Products" },
             ].map((l) => (
-              <Link key={l.href} href={l.href} className="nav-link-underline" style={{
-                fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
-                textDecoration: "none", letterSpacing: "0.02em", transition: "color 0.2s",
+              <Link key={l.href} href={l.href} className="gold-underline" style={{
+                fontSize: "0.78rem", color: "var(--color-text-mid)", fontWeight: 400,
+                textDecoration: "none", letterSpacing: "0.02em", transition: "color 0.3s ease-in-out",
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = "var(--color-text)")}
-              onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-muted)")}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--color-gold)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-mid)")}
               >
                 {l.label}
               </Link>
@@ -105,24 +106,24 @@ export default function Header() {
         <div className="flex items-center justify-end gap-6">
           <nav className="hidden md:flex items-center gap-6">
             <ThemeToggle />
-            <Link href="/contact" className="nav-link-underline" style={{
-              fontSize: "0.78rem", color: "var(--color-text-muted)", fontWeight: 400,
-              textDecoration: "none", transition: "color 0.2s",
+            <Link href="/contact" className="gold-underline" style={{
+              fontSize: "0.78rem", color: "var(--color-text-mid)", fontWeight: 400,
+              textDecoration: "none", transition: "color 0.3s ease-in-out",
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-text)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-muted)")}
+            onMouseEnter={e => (e.currentTarget.style.color = "var(--color-gold)")}
+            onMouseLeave={e => (e.currentTarget.style.color = "var(--color-text-mid)")}
             >
               Contact
             </Link>
             <Link href="/contact" style={{
               fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase",
-              color: "var(--color-text)", border: "1px solid var(--color-text)",
-              padding: "0.4rem 1.1rem", textDecoration: "none", transition: "all 0.2s",
+              color: "var(--color-text)", border: "1px solid var(--color-gold)",
+              padding: "0.5rem 1.25rem", textDecoration: "none", transition: "all 0.3s ease-in-out",
               whiteSpace: "nowrap",
             }}
             onMouseEnter={e => {
-              (e.currentTarget as HTMLAnchorElement).style.background = "var(--color-text)";
-              (e.currentTarget as HTMLAnchorElement).style.color = "var(--color-bg)";
+              (e.currentTarget as HTMLAnchorElement).style.background = "var(--color-gold)";
+              (e.currentTarget as HTMLAnchorElement).style.color = "#000000";
             }}
             onMouseLeave={e => {
               (e.currentTarget as HTMLAnchorElement).style.background = "transparent";

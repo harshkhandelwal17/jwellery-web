@@ -14,7 +14,7 @@ export default function Footer() {
           .footer-brand { grid-column: 1 / -1; }
           .footer-bottom { flex-direction: column; gap: 0.75rem; text-align: center; }
         }
-        .footer-link:hover { color: var(--color-gold) !important; }
+        .footer-link:hover { color: var(--color-gold) !important; transition: color 0.3s ease-in-out; }
       `}</style>
 
       <div className="footer-grid">
@@ -32,7 +32,7 @@ export default function Footer() {
               Shreeva<br />Jewellers
             </span>
           </Link>
-          <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300 }}>
+          <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300, color: "var(--color-text-mid)" }}>
             Feel with Luxury — Handcrafted gold jewellery crafted with passion and presented with pride.
           </p>
           <p style={{ fontSize: "0.75rem", lineHeight: 1.8, fontWeight: 300, marginTop: "1rem", color: "var(--color-text-muted)", fontStyle: "italic" }}>
@@ -46,13 +46,13 @@ export default function Footer() {
           { heading: "Visit Us", links: [{ label: "Address Coming Soon", href: "/" }, { label: "+91 91114 52626", href: "tel:+919111452626" }, { label: "support@shreevajewellers.com", href: "mailto:support@shreevajewellers.com" }, { label: "WhatsApp Us", href: "https://wa.me/919111452626" }, { label: "Mon–Sat, 10am–7pm", href: "/" }] },
         ].map((col) => (
           <div key={col.heading}>
-            <h4 style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-text-mid)", fontWeight: 600, marginBottom: "1.5rem" }}>
+            <h4 style={{ fontSize: "0.62rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--color-gold)", fontWeight: 600, marginBottom: "1.5rem" }}>
               {col.heading}
             </h4>
             <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
               {col.links.map((l) => (
                 <li key={l.label} style={{ marginBottom: "0.7rem" }}>
-                  <Link href={l.href} className="footer-link" style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.45)", textDecoration: "none", fontWeight: 300, transition: "color 0.2s" }}>
+                  <Link href={l.href} className="footer-link" style={{ fontSize: "0.82rem", color: "var(--color-text-mid)", textDecoration: "none", fontWeight: 300 }}>
                     {l.label}
                   </Link>
                 </li>
