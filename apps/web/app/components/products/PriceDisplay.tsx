@@ -10,25 +10,25 @@ export default function PriceDisplay({ product }: Props) {
     <div
       className="p-6 border"
       style={{
-        borderColor: "var(--color-border)",
-        backgroundColor: "var(--color-bg-card)",
+        borderColor: "var(--color-ivory-200)",
+        backgroundColor: "var(--color-ivory-100)",
       }}
     >
       <p
         className="text-xs tracking-widest uppercase mb-2"
-        style={{ color: "var(--color-text-muted)" }}
+        style={{ color: "var(--color-text-500)" }}
       >
         Live Price
       </p>
 
       <div
         className="font-display leading-none mb-4"
-        style={{ fontSize: "3rem", color: "var(--color-gold)" }}
+        style={{ fontSize: "3rem", color: "var(--color-gold-500)" }}
       >
         {formatCurrency(product.calculatedPrice)}
       </div>
 
-      <div className="space-y-2 text-xs" style={{ color: "var(--color-text-muted)" }}>
+      <div className="space-y-2 text-xs" style={{ color: "var(--color-text-500)" }}>
         <div className="flex justify-between">
           <span>Gold ({product.weight}g × ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g)</span>
           <span>{formatCurrency(product.goldPriceUsed * product.weight)}</span>
@@ -39,7 +39,7 @@ export default function PriceDisplay({ product }: Props) {
         </div>
         <div
           className="flex justify-between pt-2 border-t font-medium"
-          style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}
+          style={{ borderColor: "var(--color-ivory-200)", color: "var(--color-text-700)" }}
         >
           <span>Total</span>
           <span>{formatCurrency(product.calculatedPrice)}</span>
@@ -48,7 +48,7 @@ export default function PriceDisplay({ product }: Props) {
 
       <p
         className="mt-3 text-xs"
-        style={{ color: "var(--color-text-muted)" }}
+        style={{ color: "var(--color-text-300)" }}
       >
         Price calculated at ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g gold rate
       </p>

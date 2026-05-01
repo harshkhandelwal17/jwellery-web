@@ -14,7 +14,7 @@ export default function CraftsmanshipSection() {
           </p>
           <h2
             className="font-display text-3xl md:text-4xl lg:text-5xl leading-tight mb-6"
-            style={{ color: "var(--color-gold)" }}
+            style={{ color: "var(--color-text)" }}
           >
             Timeless Craftsmanship
           </h2>
@@ -40,7 +40,7 @@ export default function CraftsmanshipSection() {
             >
               <span className="text-2xl" style={{ color: "var(--color-gold)" }}>◈</span>
             </div>
-            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-gold)" }}>
+            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-text)" }}>
               BIS Hallmarked
             </h3>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
@@ -56,7 +56,7 @@ export default function CraftsmanshipSection() {
             >
               <span className="text-2xl" style={{ color: "var(--color-gold)" }}>✦</span>
             </div>
-            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-gold)" }}>
+            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-text)" }}>
               22KT Gold
             </h3>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
@@ -72,7 +72,7 @@ export default function CraftsmanshipSection() {
             >
               <span className="text-2xl" style={{ color: "var(--color-gold)" }}>◇</span>
             </div>
-            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-gold)" }}>
+            <h3 className="font-display text-lg md:text-xl mb-3" style={{ color: "var(--color-text)" }}>
               Handcrafted
             </h3>
             <p className="text-sm leading-relaxed" style={{ color: "var(--color-text-muted)" }}>
@@ -83,7 +83,7 @@ export default function CraftsmanshipSection() {
 
         {/* Bottom Quote */}
         <div className="mt-16 md:mt-20 text-center">
-          <blockquote className="font-display text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-4xl mx-auto" style={{ color: "var(--color-gold)" }}>
+          <blockquote className="font-display text-xl md:text-2xl lg:text-3xl leading-relaxed max-w-4xl mx-auto" style={{ color: "var(--color-text)" }}>
             "Crafted with precision, designed for timeless beauty."
           </blockquote>
           <p className="mt-6 text-sm md:text-base" style={{ color: "var(--color-text-muted)" }}>

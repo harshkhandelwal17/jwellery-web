@@ -1,6 +1,27 @@
-# Jwell — Jewellery E-Commerce Platform
+# Shreeva Jewellers — Luxury Jewellery E-Commerce Platform
 
-A full-stack jewellery e-commerce monorepo. The defining feature is **dynamic pricing** — `Final Price = (Gold Rate × Weight) + Making Charges`. The price is never stored in the database; it recalculates site-wide the moment the gold rate changes in the admin panel.
+A full-stack luxury jewellery e-commerce monorepo with integrated admin panel. Features dynamic pricing (`Final Price = (Gold Rate × Weight) + Making Charges`), dual theme support (light/dark), and premium luxury design.
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# 1. Install dependencies
+pnpm install
+
+# 2. Copy environment file
+cp .env.example .env
+# Edit .env with your actual values (MongoDB, Cloudinary, API keys)
+
+# 3. Start all services
+pnpm dev
+```
+
+Access:
+- Customer site: http://localhost:3000
+- Admin panel: http://localhost:5173
+- API: http://localhost:4000
 
 ---
 
@@ -29,16 +50,16 @@ jwell/
 
 ## Prerequisites
 
-- Node.js ≥ 20
-- pnpm ≥ 10 — `npm install -g pnpm`
-- MongoDB Atlas account
-- Cloudinary account
+- **Node.js** ≥ 20
+- **pnpm** ≥ 10 — Install with: `npm install -g pnpm`
+- **MongoDB** — Local instance or MongoDB Atlas account
+- **Cloudinary** account (for image hosting)
 
 ---
 
-## Setup
+## 📋 Detailed Setup
 
-### 1. Clone & install
+### 1. Clone & Install
 
 ```bash
 git clone <repo-url> jwell
@@ -46,167 +67,216 @@ cd jwell
 pnpm install
 ```
 
-### 2. Configure the API
+### 2. Environment Configuration
 
-Create `apps/api/.env`:
+Copy the example environment file:
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your actual values:
 
 ```env
-MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/jwell
-ADMIN_API_KEY=<generate: openssl rand -hex 32>
-CLOUDINARY_CLOUD_NAME=<your cloud name>
-CLOUDINARY_API_KEY=<your api key>
-CLOUDINARY_API_SECRET=<your api secret>
-WEB_URL=http://localhost:3000
-REVALIDATE_SECRET=<generate: openssl rand -hex 32>
-CORS_ORIGINS=http://localhost:3000,http://localhost:5173
+# API (Backend)
 PORT=4000
-```
+NODE_ENV=development
+MONGODB_URI=mongodb://localhost:27017/shreeva
+# Or for MongoDB Atlas:
+# MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/shreeva
 
-> Get Cloudinary credentials from [cloudinary.com/console](https://cloudinary.com/console) — all three values are on the dashboard home screen.
+ADMIN_API_KEY=your-admin-secret-key-here
+CORS_ORIGINS=http://localhost:3000,http://localhost:5173
 
-### 3. Configure the admin panel
+# Cloudinary (get from cloudinary.com/console)
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
 
-Create `apps/admin/.env`:
+# Webhook/Revalidation
+WEB_URL=http://localhost:3000
+REVALIDATE_SECRET=your-revalidation-secret-key
 
-```env
+# Frontend
+NEXT_PUBLIC_API_URL=http://localhost:4000/api
+
+# Admin Panel
 VITE_API_URL=http://localhost:4000/api
-VITE_ADMIN_API_KEY=<same value as ADMIN_API_KEY above>
 ```
 
-### 4. Configure the customer site
-
-Create `apps/web/.env.local`:
-
-```env
-API_URL=http://localhost:4000/api
-REVALIDATE_SECRET=<same value as REVALIDATE_SECRET above>
-```
-
-### 5. Start dev servers
+### 3. Start Services
 
 ```bash
-# All three apps in parallel
+# Start all apps simultaneously
 pnpm dev
 
-# Or individually
-pnpm dev:api
-pnpm dev:web
-pnpm dev:admin
+# Or start individually:
+pnpm dev:api      # Backend API at http://localhost:4000
+pnpm dev:web      # Frontend at http://localhost:3000
+pnpm dev:admin    # Admin panel at http://localhost:5173
 ```
 
-### 6. Seed an initial gold rate
+### 4. Seed Initial Data
 
-The API starts with no gold rate — run this once after the API is up:
+Once the API is running, seed the gold rate:
 
 ```bash
 curl -X PUT http://localhost:4000/api/gold-price \
   -H "Content-Type: application/json" \
-  -H "x-admin-key: <your ADMIN_API_KEY>" \
+  -H "x-admin-key: your-admin-secret-key-here" \
   -d '{"pricePerGram": 9450}'
 ```
 
-### 7. Upload product images (optional)
-
-If you have jewellery images in a local folder:
-
+Optional: Upload product images from local folder:
 ```bash
-# Default: uploads 20 images per category from <repo-root>/Jewellery_Data
-cd apps/api && pnpm upload-images
-
-# Custom path and limit
-JEWELLERY_DATA_PATH=/path/to/images MAX_PER_CATEGORY=30 pnpm upload-images
-```
-
-Expected folder structure:
-
-```
-Jewellery_Data/
-├── ring/
-│   ├── ring_001.jpg
-│   └── ...
-└── necklace/
-    ├── necklace_1.jpg
-    └── ...
+cd apps/api
+pnpm upload-images
 ```
 
 ---
 
-## Environment Variables Reference
+## 🏗️ Build for Production
 
-### `apps/api`
+```bash
+# Build all apps
+pnpm build
+
+# Build individually
+cd apps/web && npm run build
+cd apps/api && npm run build
+cd apps/admin && npm run build
+```
+
+---
+
+## 🚀 Deployment
+
+### Frontend (Vercel)
+1. Connect GitHub repo to Vercel
+2. Set root directory to `apps/web`
+3. Add environment variables:
+   - `NEXT_PUBLIC_API_URL=https://your-api.onrender.com/api`
+   - `REVALIDATE_SECRET=your-secret`
+4. Deploy
+
+### Backend (Render/Railway)
+1. Connect GitHub repo to Render
+2. Set root directory to `apps/api`
+3. Add environment variables (all from .env)
+4. Set start command: `npm run build && npm start`
+5. Deploy
+
+### Admin Panel (Vercel/Netlify)
+1. Connect GitHub repo to Vercel
+2. Set root directory to `apps/admin`
+3. Add environment variable: `VITE_API_URL=https://your-api.onrender.com/api`
+4. Deploy
+
+---
+
+## 📁 Project Structure
+
+```
+jwell/
+├── apps/
+│   ├── web/              # Next.js 16 — Customer storefront
+│   ├── admin/            # Vite + React — Admin panel
+│   └── api/              # Express.js — REST API
+├── packages/
+│   ├── types/            # Shared TypeScript interfaces
+│   ├── utils/            # Shared utilities (pricing, validation)
+│   ├── api-client/       # Typed API client
+│   └── ui/               # Shared UI components
+├── .env.example          # Environment variables template
+├── pnpm-workspace.yaml   # Workspace configuration
+├── turbo.json            # Turborepo configuration
+└── README.md
+```
+
+---
+
+## ⚙️ Environment Variables
+
+All environment variables should be set in the root `.env` file:
 
 | Variable | Required | Description |
 |---|---|---|
-| `MONGODB_URI` | Yes | MongoDB Atlas connection string |
-| `ADMIN_API_KEY` | Yes | Secret key for admin API routes |
+| `PORT` | No | API port (default: 4000) |
+| `NODE_ENV` | No | Environment (development/production) |
+| `MONGODB_URI` | Yes | MongoDB connection string |
+| `ADMIN_API_KEY` | Yes | Secret key for admin routes |
 | `CLOUDINARY_CLOUD_NAME` | Yes | Cloudinary cloud name |
 | `CLOUDINARY_API_KEY` | Yes | Cloudinary API key |
 | `CLOUDINARY_API_SECRET` | Yes | Cloudinary API secret |
-| `REVALIDATE_SECRET` | Yes | Shared secret for ISR revalidation webhook |
-| `WEB_URL` | Yes | URL of the Next.js app (for ISR webhook calls) |
-| `CORS_ORIGINS` | Yes | Comma-separated allowed CORS origins |
-| `PORT` | No | API port (default: 4000) |
-| `JEWELLERY_DATA_PATH` | No | Path for upload-images script (default: `<repo-root>/Jewellery_Data`) |
-| `MAX_PER_CATEGORY` | No | Max images per category for upload-images script (default: 20) |
-
-### `apps/admin`
-
-| Variable | Required | Description |
-|---|---|---|
-| `VITE_API_URL` | Yes | API base URL |
-| `VITE_ADMIN_API_KEY` | Yes | Must match `ADMIN_API_KEY` in the API |
-
-### `apps/web`
-
-| Variable | Required | Description |
-|---|---|---|
-| `API_URL` | Yes | API base URL (server-side only) |
-| `REVALIDATE_SECRET` | Yes | Must match `REVALIDATE_SECRET` in the API |
+| `REVALIDATE_SECRET` | Yes | Secret for ISR webhook |
+| `WEB_URL` | Yes | Frontend URL for webhook calls |
+| `CORS_ORIGINS` | Yes | Comma-separated allowed origins |
+| `NEXT_PUBLIC_API_URL` | Yes | API URL for frontend |
+| `VITE_API_URL` | Yes | API URL for admin panel |
 
 ---
 
-## API Endpoints
+## 🔌 API Endpoints
 
-All routes are prefixed `/api`.
+All routes are prefixed with `/api`.
 
 | Method | Route | Auth | Description |
 |---|---|---|---|
 | GET | `/gold-price` | Public | Current gold rate |
-| PUT | `/gold-price` | Admin | Update gold rate + triggers ISR revalidation |
-| GET | `/products` | Public | All products with calculated prices |
-| GET | `/products/:id` | Public | Single product with calculated price |
+| PUT | `/gold-price` | Admin | Update gold rate |
+| GET | `/products` | Public | All products |
+| GET | `/products/:id` | Public | Single product |
 | POST | `/products` | Admin | Create product |
 | PUT | `/products/:id` | Admin | Update product |
 | DELETE | `/products/:id` | Admin | Delete product |
-| POST | `/upload` | Admin | Upload image to Cloudinary |
+| POST | `/enquiries` | Public | Submit enquiry |
+| GET | `/enquiries` | Admin | Get all enquiries |
 
-Admin routes require `x-admin-key: <ADMIN_API_KEY>` header.
-
----
-
-## Dynamic Pricing
-
-The pricing formula lives in exactly one place:
-
-```
-packages/utils/src/pricing.ts → calculatePrice(goldRate, weight, makingCharges)
-```
-
-- The API calls it on every `/products` response — prices are never stored in MongoDB
-- When the admin updates the gold rate, the API immediately calls the Next.js ISR revalidation webhook, purging the page cache so the new price appears on the storefront within seconds
+**Admin routes** require `x-admin-key` header with your `ADMIN_API_KEY`.
 
 ---
 
-## Tech Stack
+## 💎 Features
 
-| Concern | Choice |
+- **Dynamic Pricing**: Prices auto-calculate based on gold rate × weight + making charges
+- **Dual Theme**: Light and dark mode with luxury gold accent
+- **ISR Revalidation**: Gold rate updates trigger cache invalidation
+- **Admin Panel**: Manage products, enquiries, and gold rates
+- **Cloudinary Integration**: Optimized image hosting
+- **Responsive Design**: Mobile-first, works on all devices
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
 |---|---|
 | Monorepo | pnpm workspaces + Turborepo |
-| Customer frontend | Next.js 15 App Router (SSR/ISR) |
-| Admin frontend | Vite + React SPA |
-| Styling | Tailwind CSS |
-| Backend | Node.js + Express + TypeScript |
+| Frontend | Next.js 16, React 19, TypeScript |
+| Admin Panel | Vite, React, TypeScript |
+| Styling | Tailwind CSS v4 |
+| Backend | Express.js, TypeScript |
 | Database | MongoDB + Mongoose |
-| Image hosting | Cloudinary |
+| Images | Cloudinary |
 | Forms | React Hook Form + Zod |
-| Admin UI | Shadcn/ui |
+
+---
+
+## 📝 Common Issues
+
+**Build fails with peer dependency warnings:**
+```bash
+pnpm install --force
+```
+
+**MongoDB connection refused:**
+- Ensure MongoDB is running locally
+- Or use MongoDB Atlas connection string in .env
+
+**Images not loading:**
+- Verify Cloudinary credentials in .env
+- Check CLOUDINARY_CLOUD_NAME is correct
+
+**Admin panel can't connect to API:**
+- Ensure API is running on port 4000
+- Check VITE_API_URL matches API URL
+- Verify CORS_ORIGINS includes admin panel URL

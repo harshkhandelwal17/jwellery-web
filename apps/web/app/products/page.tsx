@@ -48,7 +48,7 @@ export default async function ProductsPage({ searchParams }: Props) {
         {/* Page header */}
         <div
           className="py-10 md:py-16 text-center border-b"
-          style={{ borderColor: "var(--color-border)" }}
+          style={{ borderColor: "var(--color-ivory-200)" }}
         >
           <p
             className="hero-enter hero-enter-1 text-[0.65rem] md:text-xs tracking-widest uppercase mb-2 md:mb-3"
@@ -168,13 +168,13 @@ export default async function ProductsPage({ searchParams }: Props) {
                   }}>
                     ◈
                   </div>
-                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, color: "#1a1a1a", marginBottom: "0.4rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
+                  <h3 style={{ fontSize: "0.95rem", fontWeight: 600, color: "var(--color-text)", marginBottom: "0.4rem", fontFamily: "'Cinzel', serif", letterSpacing: "0.04em" }}>
                     {item.title}
                   </h3>
-                  <p style={{ fontSize: "0.78rem", color: "#333333", fontWeight: 300, lineHeight: 1.6, marginBottom: "1.5rem" }}>
+                  <p style={{ fontSize: "0.78rem", color: "var(--color-text-mid)", fontWeight: 300, lineHeight: 1.6, marginBottom: "1.5rem" }}>
                     {item.desc}
                   </p>
-                  <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "#1E3A8A", fontWeight: 500 }}>
+                  <span style={{ fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-gold)", fontWeight: 500 }}>
                     Explore →
                   </span>
                 </a>

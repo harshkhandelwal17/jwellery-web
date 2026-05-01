@@ -17,9 +17,8 @@ export default function EnquireButton({ productId, productName }: Props) {
         onClick={() => setIsModalOpen(true)}
         className="flex-1 text-center text-xs tracking-widest uppercase px-6 py-4 transition-all hover:opacity-90"
         style={{
-          backgroundColor: "var(--color-gold)",
-          color: "#000000",
-          border: "1px solid var(--color-gold)",
+          backgroundColor: "var(--color-text-900)",
+          color: "var(--color-ivory-50)",
         }}
       >
         Enquire Now

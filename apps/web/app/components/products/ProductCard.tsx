@@ -21,7 +21,7 @@ export default function ProductCard({ product }: Props) {
       }}
     >
       {/* Image */}
-      <div className="product-img-wrap" style={{ position: "relative", aspectRatio: "3/4", background: "#E8E4F0" }}>
+      <div className="product-img-wrap" style={{ position: "relative", aspectRatio: "3/4" }}>
         <SafeImage
           src={cloudinaryUrl(normalizeImageUrl(product.image), { width: 800, quality: 90 })}
           alt={product.name}
@@ -29,7 +29,6 @@ export default function ProductCard({ product }: Props) {
           quality={90}
           className="object-cover"
           sizes="(max-width: 768px) 50vw, 25vw"
-          style={{ opacity: 0.95 }}
         />
       </div>
 
