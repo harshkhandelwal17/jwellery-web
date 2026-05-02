@@ -24,6 +24,13 @@ export const OccasionSchema = z.enum([
   "Statement",
 ]).optional();
 
+export const ProductPromoBadgeSchema = z.enum([
+  "bestseller",
+  "top_rated",
+  "staff_pick",
+  "new_arrival",
+]);
+
 export const CreateProductSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   weight: z.coerce
@@ -42,9 +49,36 @@ export const CreateProductSchema = z.object({
   mainCategory: MainCategorySchema,
   subCategory: z.string().max(100).optional(),
   occasion: OccasionSchema,
+  featuredOnHome: z.boolean().optional().default(false),
+  homeSpotlightOrder: z.preprocess(
+    (v) => {
+      if (v === "" || v === null || v === undefined) return 999;
+      const n = typeof v === "number" ? v : Number(v);
+      if (!Number.isFinite(n)) return 999;
+      const i = Math.floor(n);
+      if (i < 1) return 999;
+      return Math.min(i, 999);
+    },
+    z.number().int()
+  ),
+  promoBadge: z.preprocess(
+    (v) => (v === "" || v === null || v === undefined ? undefined : v),
+    ProductPromoBadgeSchema.optional()
+  ),
+  sku: z.preprocess(
+    (v) => {
+      if (v === undefined || v === null || v === "") return undefined;
+      const t = String(v).trim();
+      return t.length ? t : undefined;
+    },
+    z.string().max(64).optional()
+  ),
 });
 
-export const UpdateProductSchema = CreateProductSchema.partial();
+export const UpdateProductSchema = CreateProductSchema.partial().extend({
+  /** Send `null` from admin to clear the badge. */
+  promoBadge: z.union([ProductPromoBadgeSchema, z.null()]).optional(),
+});
 
 export const UpdateGoldPriceSchema = z.object({
   pricePerGram: z.preprocess(

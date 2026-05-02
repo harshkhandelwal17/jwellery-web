@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Pencil, Trash2, Loader2 } from "lucide-react";
+import { Pencil, Trash2, Loader2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button.js";
 import { Badge } from "@/components/ui/badge.js";
 import {
@@ -12,6 +12,7 @@ import { toast } from "@/hooks/use-toast.js";
 import { deleteProduct } from "@jwell/api-client";
 import { formatCurrency, normalizeImageUrl } from "@jwell/utils";
 import type { ProductWithPrice } from "@jwell/types";
+import { PRODUCT_PROMO_BADGE_LABELS } from "@jwell/types";
 import { ADMIN_API_URL, ADMIN_API_KEY, ADMIN_IMAGE_PLACEHOLDER } from "@/lib/api-config.js";
 
 const API_URL = ADMIN_API_URL;
@@ -69,11 +70,22 @@ export default function ProductTable({ products }: Props) {
                   e.currentTarget.src = "/fallback.jpg";
                 }}
               />
-              {/* Category badge — top-left */}
-              <div className="absolute top-3 left-3">
+              {/* Category + homepage star — top-left */}
+              <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 max-w-[85%]">
                 <Badge variant={categoryColors[p.category] ?? "outline"}>
                   {p.category}
                 </Badge>
+                {p.featuredOnHome ? (
+                  <Badge variant="gold" className="gap-1 pl-1.5">
+                    <Star size={10} className="fill-current" />
+                    Home
+                  </Badge>
+                ) : null}
+                {p.promoBadge ? (
+                  <Badge variant="outline" className="border-[var(--color-gold)] text-[var(--color-gold)]">
+                    {PRODUCT_PROMO_BADGE_LABELS[p.promoBadge]}
+                  </Badge>
+                ) : null}
               </div>
               {/* Actions — top-right, visible on hover */}
               <div className="absolute top-3 right-3 flex gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">

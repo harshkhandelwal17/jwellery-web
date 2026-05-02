@@ -16,6 +16,10 @@ interface IProduct {
   mainCategory?: string;
   subCategory?: string;
   occasion?: string;
+  featuredOnHome?: boolean;
+  homeSpotlightOrder?: number;
+  promoBadge?: "bestseller" | "top_rated" | "staff_pick" | "new_arrival";
+  sku?: string;
 }
 
 const MAIN_CATEGORIES = [
@@ -29,6 +33,8 @@ const MAIN_CATEGORIES = [
 
 const OCCASIONS = ["Everyday", "Festive", "Minimal", "Statement"] as const;
 
+const PROMO_BADGES = ["bestseller", "top_rated", "staff_pick", "new_arrival"] as const;
+
 const ProductSchema = new Schema<IProduct>(
   {
     name:          { type: String, required: true, trim: true },
@@ -41,6 +47,10 @@ const ProductSchema = new Schema<IProduct>(
     mainCategory:  { type: String, enum: MAIN_CATEGORIES, default: null },
     subCategory:   { type: String, default: null },
     occasion:      { type: String, enum: OCCASIONS, default: null },
+    featuredOnHome:   { type: Boolean, default: false },
+    homeSpotlightOrder: { type: Number, default: 999 },
+    promoBadge:    { type: String, enum: PROMO_BADGES, default: null },
+    sku:           { type: String, default: "", trim: true, maxlength: 64 },
   },
   { timestamps: true }
 );

@@ -1,10 +1,37 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ProductCard from "../components/products/ProductCard";
-import { fetchProducts } from "../lib/api";
+import { fetchProducts, type GetProductsParams } from "../lib/api";
 import Link from "next/link";
 
 export const revalidate = 300;
+
+const SORT_OPTIONS = [
+  { value: "newest", label: "Newest first" },
+  { value: "oldest", label: "Oldest first" },
+  { value: "price_asc", label: "Price · Low to high" },
+  { value: "price_desc", label: "Price · High to low" },
+  { value: "name_asc", label: "Name A–Z" },
+  { value: "name_desc", label: "Name Z–A" },
+  { value: "weight_asc", label: "Weight · Light first" },
+  { value: "weight_desc", label: "Weight · Heavy first" },
+] as const;
+
+type SortValue = (typeof SORT_OPTIONS)[number]["value"];
+
+function parseSort(raw: string | undefined): SortValue {
+  const v = raw as SortValue;
+  return SORT_OPTIONS.some((o) => o.value === v) ? v : "newest";
+}
+
+function categoryHref(slug: string, q: string | undefined, sort: SortValue): string {
+  const p = new URLSearchParams();
+  if (slug !== "all") p.set("category", slug);
+  if (q?.trim()) p.set("q", q.trim());
+  if (sort && sort !== "newest") p.set("sort", sort);
+  const qs = p.toString();
+  return qs ? `/products?${qs}` : "/products";
+}
 
 const CATEGORIES: { slug: string; label: string }[] = [
   { slug: "all", label: "All Jewellery" },
@@ -40,28 +67,45 @@ const MAIN_CATEGORY_MAP: Record<string, string | string[]> = {
 const OLD_CATEGORY_SLUGS = ["rings", "necklaces", "earrings", "bracelets", "watches"];
 
 interface Props {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: Promise<{ category?: string; q?: string; sort?: string }>;
 }
 
 export default async function ProductsPage({ searchParams }: Props) {
-  const { category } = await searchParams;
-  const activeSlug = category ?? "all";
+  const sp = await searchParams;
+  const activeSlug = sp.category ?? "all";
+  const q = sp.q?.trim() ?? "";
+  const sort = parseSort(sp.sort);
 
-  const allProducts = await fetchProducts();
+  const needsClientMainFilter =
+    activeSlug !== "all" &&
+    Boolean(MAIN_CATEGORY_MAP[activeSlug]) &&
+    Array.isArray(MAIN_CATEGORY_MAP[activeSlug]);
 
-  let products = allProducts;
-  if (activeSlug !== "all" && activeSlug) {
-    if (OLD_CATEGORY_SLUGS.includes(activeSlug)) {
-      products = allProducts.filter((p) => p.category === activeSlug);
-    } else if (MAIN_CATEGORY_MAP[activeSlug]) {
-      const mc = MAIN_CATEGORY_MAP[activeSlug];
-      products = allProducts.filter((p) =>
-        Array.isArray(mc)
-          ? mc.includes(p.mainCategory ?? "")
-          : p.mainCategory === mc
-      );
-    }
+  const apiParams: GetProductsParams = {
+    sort,
+    ...(q ? { search: q } : {}),
+  };
+
+  if (activeSlug !== "all" && OLD_CATEGORY_SLUGS.includes(activeSlug)) {
+    apiParams.category = activeSlug;
+  } else if (
+    activeSlug !== "all" &&
+    MAIN_CATEGORY_MAP[activeSlug] &&
+    !Array.isArray(MAIN_CATEGORY_MAP[activeSlug])
+  ) {
+    apiParams.mainCategory = MAIN_CATEGORY_MAP[activeSlug] as string;
   }
+
+  let products = needsClientMainFilter
+    ? await fetchProducts({ sort, ...(q ? { search: q } : {}) })
+    : await fetchProducts(apiParams);
+
+  if (needsClientMainFilter) {
+    const mc = MAIN_CATEGORY_MAP[activeSlug] as string[];
+    products = products.filter((p) => mc.includes(p.mainCategory ?? ""));
+  }
+
+  const noStockGlobally = products.length === 0 && activeSlug === "all" && !q;
 
   return (
     <>
@@ -123,7 +167,7 @@ export default async function ProductsPage({ searchParams }: Props) {
                 return (
                   <Link
                     key={cat.slug}
-                    href={cat.slug === "all" ? "/products" : `/products?category=${cat.slug}`}
+                    href={categoryHref(cat.slug, q || undefined, sort)}
                     className="text-xs tracking-widest uppercase px-5 py-2.5 border transition-all"
                     style={
                       isActive
@@ -147,6 +191,44 @@ export default async function ProductsPage({ searchParams }: Props) {
                 );
               })}
             </div>
+
+            {/* Search & sort (GET → shareable URLs, works with ISR) */}
+            <form
+              action="/products"
+              method="get"
+              className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8"
+            >
+              {activeSlug !== "all" ? (
+                <input type="hidden" name="category" value={activeSlug} />
+              ) : null}
+              <input
+                type="search"
+                name="q"
+                defaultValue={q}
+                placeholder="Search name, description, SKU…"
+                className="flex-1 min-w-[200px] rounded-full border px-4 py-2.5 text-sm bg-[var(--color-bg)] focus:outline-none focus:ring-2"
+                style={{ borderColor: "var(--color-border)", color: "var(--color-text)" }}
+              />
+              <select
+                name="sort"
+                defaultValue={sort}
+                className="rounded-full border px-4 py-2.5 text-xs tracking-wider uppercase bg-[var(--color-bg)] cursor-pointer"
+                style={{ borderColor: "var(--color-border)", color: "var(--color-text-mid)" }}
+              >
+                {SORT_OPTIONS.map((o) => (
+                  <option key={o.value} value={o.value}>
+                    {o.label}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="submit"
+                className="rounded-full px-6 py-2.5 text-xs font-semibold tracking-widest uppercase"
+                style={{ background: "var(--color-gold)", color: "#000" }}
+              >
+                Apply
+              </button>
+            </form>
           </div>
 
           {/* Product grid */}
@@ -155,7 +237,7 @@ export default async function ProductsPage({ searchParams }: Props) {
               className="text-center py-24 max-w-lg mx-auto px-4"
               style={{ color: "var(--color-text-muted)" }}
             >
-              {allProducts.length === 0 ? (
+              {noStockGlobally ? (
                 <>
                   <p style={{ color: "var(--color-text)", marginBottom: "0.5rem" }}>
                     No products loaded
@@ -169,7 +251,11 @@ export default async function ProductsPage({ searchParams }: Props) {
                   </p>
                 </>
               ) : (
-                <p>No products found in this category.</p>
+                <p>
+                  {q
+                    ? "No pieces match your search. Try different keywords."
+                    : "No products found in this category."}
+                </p>
               )}
             </div>
           ) : (

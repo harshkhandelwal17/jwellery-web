@@ -13,12 +13,13 @@ import WhatsAppCTASection from "./components/home/WhatsAppCTASection";
 import SignatureShowcaseSection from "./components/home/SignatureShowcaseSection";
 import { fetchProducts } from "./lib/api";
 import { cloudinaryUrl } from "./lib/cloudinary";
+import { pickHomeSpotlight } from "./lib/product-display";
 
 export const revalidate = 300;
 
 export default async function HomePage() {
   const products = await fetchProducts();
-  const featured = products.slice(0, 4);
+  const featured = pickHomeSpotlight(products, 4);
 
   const rings = products.filter((p) => p.category === "rings");
   const necklaces = products.filter((p) => p.category === "necklaces");

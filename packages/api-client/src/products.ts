@@ -2,10 +2,22 @@ import type { ProductWithPrice, CreateProductInput, UpdateProductInput } from "@
 import { apiFetch } from "./client";
 
 export interface GetProductsParams {
-  sort?: "price_asc" | "price_desc" | "weight_asc" | "weight_desc";
+  sort?:
+    | "price_asc"
+    | "price_desc"
+    | "weight_asc"
+    | "weight_desc"
+    | "newest"
+    | "oldest"
+    | "name_asc"
+    | "name_desc";
   mainCategory?: string;
   subCategory?: string;
   occasion?: string;
+  /** Legacy slug: rings, necklaces, … */
+  category?: string;
+  /** Search name, description, SKU */
+  search?: string;
 }
 
 export async function getProducts(
@@ -17,6 +29,8 @@ export async function getProducts(
   if (params?.mainCategory) searchParams.set("mainCategory", params.mainCategory);
   if (params?.subCategory) searchParams.set("subCategory", params.subCategory);
   if (params?.occasion) searchParams.set("occasion", params.occasion);
+  if (params?.category) searchParams.set("category", params.category);
+  if (params?.search?.trim()) searchParams.set("q", params.search.trim());
   const query = searchParams.toString();
   return apiFetch<ProductWithPrice[]>(
     `${baseUrl}/products${query ? `?${query}` : ""}`

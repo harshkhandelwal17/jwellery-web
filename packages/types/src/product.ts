@@ -1,3 +1,17 @@
+/** Shown on cards when set by admin (e.g. “Top Rated”, “Bestseller”). */
+export type ProductPromoBadge =
+  | "bestseller"
+  | "top_rated"
+  | "staff_pick"
+  | "new_arrival";
+
+export const PRODUCT_PROMO_BADGE_LABELS: Record<ProductPromoBadge, string> = {
+  bestseller: "Bestseller",
+  top_rated: "Top Rated",
+  staff_pick: "Staff Pick",
+  new_arrival: "New Arrival",
+};
+
 export interface Product {
   id: string;
   name: string;
@@ -13,6 +27,13 @@ export interface Product {
   mainCategory?: MainCategory;
   subCategory?: string;
   occasion?: Occasion;
+  /** Admin: show in homepage “Featured / Loved This Season” block (ordered by homeSpotlightOrder). */
+  featuredOnHome?: boolean;
+  /** Lower = earlier in that block (1 first). Default 999 = end of featured group. */
+  homeSpotlightOrder?: number;
+  promoBadge?: ProductPromoBadge;
+  /** Optional SKU / item code for inventory */
+  sku?: string;
 }
 
 export type MainCategory =
@@ -82,6 +103,10 @@ export interface CreateProductInput {
   mainCategory?: MainCategory;
   subCategory?: string;
   occasion?: Occasion;
+  featuredOnHome?: boolean;
+  homeSpotlightOrder?: number;
+  promoBadge?: ProductPromoBadge;
+  sku?: string;
 }
 
 export type UpdateProductInput = Partial<CreateProductInput>;

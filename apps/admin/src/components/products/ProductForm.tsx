@@ -12,7 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.j
 import { toast } from "@/hooks/use-toast.js";
 import { createProduct, updateProduct, getGoldPrice } from "@jwell/api-client";
 import { CreateProductSchema, formatCurrency, calculatePrice, normalizeImageUrl } from "@jwell/utils";
-import type { ProductWithPrice } from "@jwell/types";
+import type { CreateProductInput, ProductPromoBadge, ProductWithPrice, UpdateProductInput } from "@jwell/types";
+import { PRODUCT_PROMO_BADGE_LABELS } from "@jwell/types";
 import type { z } from "zod";
 import { ADMIN_API_URL, ADMIN_API_KEY } from "@/lib/api-config.js";
 
@@ -109,6 +110,10 @@ export default function ProductForm({ product }: Props) {
           mainCategory: product.mainCategory,
           subCategory: product.subCategory,
           occasion: product.occasion,
+          featuredOnHome: product.featuredOnHome ?? false,
+          homeSpotlightOrder: product.homeSpotlightOrder ?? 999,
+          promoBadge: product.promoBadge,
+          sku: product.sku ?? "",
         }
       : {
           name: "",
@@ -121,6 +126,10 @@ export default function ProductForm({ product }: Props) {
           mainCategory: undefined,
           subCategory: undefined,
           occasion: undefined,
+          featuredOnHome: false,
+          homeSpotlightOrder: 999,
+          promoBadge: undefined,
+          sku: "",
         },
   });
 
@@ -173,10 +182,15 @@ export default function ProductForm({ product }: Props) {
 
   const mutation = useMutation({
     mutationFn: (data: FormData) => {
-      const payload: any = { description: "", ...data };
+      const payload: Record<string, unknown> = { description: "", ...data };
+      const badge = payload["promoBadge"];
+      if (badge === undefined || badge === "" || badge === null) {
+        if (isEdit) payload["promoBadge"] = null;
+        else delete payload["promoBadge"];
+      }
       return isEdit
-        ? updateProduct(API_URL, product!.id, payload, ADMIN_KEY)
-        : createProduct(API_URL, payload, ADMIN_KEY);
+        ? updateProduct(API_URL, product!.id, payload as UpdateProductInput, ADMIN_KEY)
+        : createProduct(API_URL, payload as CreateProductInput, ADMIN_KEY);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
@@ -319,6 +333,76 @@ export default function ProductForm({ product }: Props) {
                   } as React.CSSProperties}
                   {...register("description")}
                 />
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="sku">SKU / item code (optional)</Label>
+                <Input id="sku" placeholder="e.g. SHR-RING-001" {...register("sku")} />
+                {errors.sku && <p className="text-xs text-red-500 mt-1">{errors.sku.message}</p>}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="font-display2 text-base">Homepage &amp; labels</CardTitle>
+              <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
+                Control the “Featured / Loved This Season” block on the main site. Lower order = shown first among highlighted pieces.
+              </p>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-5">
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  className="mt-1 rounded border-[var(--color-border)]"
+                  {...register("featuredOnHome")}
+                />
+                <div>
+                  <span className="text-sm font-medium" style={{ color: "var(--color-text)" }}>Feature on homepage</span>
+                  <p className="text-xs mt-0.5" style={{ color: "var(--color-text-muted)" }}>
+                    When checked, this piece is prioritised in the featured grid (order below). Others fill remaining slots by newest.
+                  </p>
+                </div>
+              </label>
+
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="homeSpotlightOrder">Homepage order (1 = first)</Label>
+                <Input
+                  id="homeSpotlightOrder"
+                  type="number"
+                  min={1}
+                  max={999}
+                  placeholder="999 = default / last among featured"
+                  {...register("homeSpotlightOrder", { valueAsNumber: true })}
+                />
+                {errors.homeSpotlightOrder && (
+                  <p className="text-xs text-red-500 mt-1">{errors.homeSpotlightOrder.message}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col gap-1.5">
+                <Label>Customer-facing badge</Label>
+                <Select
+                  value={(watch("promoBadge") as ProductPromoBadge | undefined) ?? "__none__"}
+                  onValueChange={(v) =>
+                    setValue("promoBadge", v === "__none__" ? undefined : (v as ProductPromoBadge))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="No badge" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="__none__">None</SelectItem>
+                    {(Object.keys(PRODUCT_PROMO_BADGE_LABELS) as ProductPromoBadge[]).map((key) => (
+                      <SelectItem key={key} value={key}>
+                        {PRODUCT_PROMO_BADGE_LABELS[key]}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.promoBadge && (
+                  <p className="text-xs text-red-500 mt-1">{errors.promoBadge.message}</p>
+                )}
               </div>
             </CardContent>
           </Card>

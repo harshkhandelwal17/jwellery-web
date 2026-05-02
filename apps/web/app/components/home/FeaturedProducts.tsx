@@ -55,6 +55,9 @@ export default function FeaturedProducts({ products }: Props) {
           <h2 className="section-heading" style={{ fontSize: "clamp(1.35rem, 2.4vw, 1.95rem)" }}>
             Loved This Season
           </h2>
+          <p className="text-xs mt-2 max-w-md" style={{ color: "var(--color-text-mid)", fontWeight: 300, lineHeight: 1.5 }}>
+            Highlights are chosen in admin (“Feature on homepage”). Remaining slots show newest pieces so the row stays full.
+          </p>
         </div>
         <Link href="/products" style={{
           fontSize: "0.75rem", color: "var(--color-text-mid)",

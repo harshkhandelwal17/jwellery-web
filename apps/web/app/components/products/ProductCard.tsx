@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { ProductWithPrice } from "@jwell/types";
+import { PRODUCT_PROMO_BADGE_LABELS, type ProductWithPrice } from "@jwell/types";
 import { formatCurrency } from "@jwell/utils";
 import { productImageUrl } from "../../lib/cloudinary";
 import SafeImage from "./SafeImage";
@@ -34,16 +34,31 @@ export default function ProductCard({ product }: Props) {
 
       {/* Body */}
       <div style={{ padding: "0.75rem 0.875rem 0.875rem" }}>
-        <span style={{
-          display: "inline-block",
-          background: "rgba(212, 175, 55, 0.1)", color: "var(--color-gold)",
-          padding: "0.2rem 0.65rem", borderRadius: "100px",
-          fontSize: "0.58rem", letterSpacing: "0.08em", fontWeight: 500,
-          marginBottom: "0.4rem", textTransform: "capitalize",
-          border: "1px solid rgba(212, 175, 55, 0.2)"
-        }}>
-          {product.category}
-        </span>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "0.4rem" }}>
+          {product.promoBadge ? (
+            <span style={{
+              display: "inline-block",
+              background: "linear-gradient(135deg, rgba(212,175,55,0.22), rgba(212,175,55,0.08))",
+              color: "var(--color-gold)",
+              padding: "0.2rem 0.65rem", borderRadius: "100px",
+              fontSize: "0.55rem", letterSpacing: "0.12em", fontWeight: 600,
+              textTransform: "uppercase",
+              border: "1px solid rgba(212, 175, 55, 0.35)",
+            }}>
+              {PRODUCT_PROMO_BADGE_LABELS[product.promoBadge]}
+            </span>
+          ) : null}
+          <span style={{
+            display: "inline-block",
+            background: "rgba(212, 175, 55, 0.1)", color: "var(--color-gold)",
+            padding: "0.2rem 0.65rem", borderRadius: "100px",
+            fontSize: "0.58rem", letterSpacing: "0.08em", fontWeight: 500,
+            textTransform: "capitalize",
+            border: "1px solid rgba(212, 175, 55, 0.2)",
+          }}>
+            {product.category}
+          </span>
+        </div>
 
         <div style={{ fontSize: "0.85rem", fontWeight: 500, lineHeight: 1.4, color: "var(--color-text)" }}>{product.name}</div>
         <div style={{ fontSize: "0.68rem", color: "var(--color-text-mid)", marginTop: "0.2rem" }}>

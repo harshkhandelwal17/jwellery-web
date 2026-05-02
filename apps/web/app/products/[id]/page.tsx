@@ -7,7 +7,7 @@ import EnquireButton from "../../components/products/EnquireButton";
 import PriceDisplay from "../../components/products/PriceDisplay";
 import SafeImage from "../../components/products/SafeImage";
 import { fetchProduct, fetchProducts } from "../../lib/api";
-import type { ProductCategory } from "@jwell/types";
+import { PRODUCT_PROMO_BADGE_LABELS, type ProductCategory } from "@jwell/types";
 import { productImageUrl } from "../../lib/cloudinary";
 
 export const revalidate = 300;
@@ -67,12 +67,26 @@ export default async function ProductDetailPage({ params }: Props) {
             {/* Details */}
             <div className="flex flex-col">
               {/* Category */}
-              <p
-                className="hero-enter hero-enter-1 text-xs tracking-widest uppercase mb-3"
-                style={{ color: "var(--color-gold)" }}
-              >
-                {product.category}
-              </p>
+              <div className="hero-enter hero-enter-1 flex flex-wrap items-center gap-2 mb-3">
+                <p
+                  className="text-xs tracking-widest uppercase"
+                  style={{ color: "var(--color-gold)" }}
+                >
+                  {product.category}
+                </p>
+                {product.promoBadge ? (
+                  <span
+                    className="text-[0.65rem] tracking-[0.15em] uppercase px-2.5 py-1 rounded-full font-semibold"
+                    style={{
+                      color: "var(--color-gold)",
+                      border: "1px solid rgba(212,175,55,0.4)",
+                      background: "rgba(212,175,55,0.12)",
+                    }}
+                  >
+                    {PRODUCT_PROMO_BADGE_LABELS[product.promoBadge]}
+                  </span>
+                ) : null}
+              </div>
 
               {/* Name */}
               <h1
@@ -117,6 +131,12 @@ export default async function ProductDetailPage({ params }: Props) {
                   <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>Hallmark</p>
                   <p className="text-sm font-medium" style={{ color: "var(--color-text)" }}>BIS 916</p>
                 </div>
+                {product.sku ? (
+                  <div className="col-span-2">
+                    <p className="text-xs tracking-widest uppercase mb-1" style={{ color: "var(--color-text-muted)" }}>SKU</p>
+                    <p className="text-sm font-medium font-mono" style={{ color: "var(--color-text)" }}>{product.sku}</p>
+                  </div>
+                ) : null}
               </div>
 
               {/* Price */}

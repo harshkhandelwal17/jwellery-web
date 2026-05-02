@@ -1,5 +1,7 @@
-import { getProducts, getProduct } from "@jwell/api-client";
+import { getProducts, getProduct, type GetProductsParams } from "@jwell/api-client";
 import type { ProductWithPrice } from "@jwell/types";
+
+export type { GetProductsParams };
 
 /**
  * Server components use this. On Vercel, `API_URL` is often unset while
@@ -14,12 +16,12 @@ function serverApiBase(): string {
   return raw.replace(/\/$/, "");
 }
 
-export async function fetchProducts(): Promise<ProductWithPrice[]> {
+export async function fetchProducts(params?: GetProductsParams): Promise<ProductWithPrice[]> {
   const base = serverApiBase();
   try {
-    return await getProducts(base);
+    return await getProducts(base, params);
   } catch (err) {
-    console.error("[jwell] fetchProducts failed", { base, err });
+    console.error("[jwell] fetchProducts failed", { base, params, err });
     return [];
   }
 }
