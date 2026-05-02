@@ -14,9 +14,10 @@ import { createProduct, updateProduct, getGoldPrice } from "@jwell/api-client";
 import { CreateProductSchema, formatCurrency, calculatePrice, normalizeImageUrl } from "@jwell/utils";
 import type { ProductWithPrice } from "@jwell/types";
 import type { z } from "zod";
+import { ADMIN_API_URL, ADMIN_API_KEY } from "@/lib/api-config.js";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
-const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
+const API_URL = ADMIN_API_URL;
+const ADMIN_KEY = ADMIN_API_KEY ?? "";
 
 // FormData type derived from Zod schema
 // Using z.input to get the pre-transform shape (description is optional)

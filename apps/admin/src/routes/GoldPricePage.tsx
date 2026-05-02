@@ -5,8 +5,9 @@ import GoldPriceForm from "@/components/gold-price/GoldPriceForm.js";
 import { useGoldPriceStore } from "@/store/goldPriceStore.js";
 import { getGoldPrice } from "@jwell/api-client";
 import { formatCurrency } from "@jwell/utils";
+import { ADMIN_API_URL } from "@/lib/api-config.js";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
+const API_URL = ADMIN_API_URL;
 
 export default function GoldPricePage() {
   const { data: goldPrice, isLoading } = useQuery({

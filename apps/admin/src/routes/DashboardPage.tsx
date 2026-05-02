@@ -4,8 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.j
 import { getProducts } from "@jwell/api-client";
 import { getGoldPrice } from "@jwell/api-client";
 import { formatCurrency, normalizeImageUrl } from "@jwell/utils";
+import { ADMIN_API_URL, ADMIN_IMAGE_PLACEHOLDER } from "@/lib/api-config.js";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
+const API_URL = ADMIN_API_URL;
 
 export default function DashboardPage() {
   const { data: products } = useQuery({
@@ -118,10 +119,12 @@ export default function DashboardPage() {
               {products.slice(0, 5).map((p) => (
                 <div key={p.id} className="flex items-center gap-4 py-3 transition-colors hover:bg-[var(--color-bg-warm)] rounded-lg px-2 -mx-2">
                   <img
-                    src={normalizeImageUrl(p.image)}
+                    src={p.image?.trim() ? normalizeImageUrl(p.image) : ADMIN_IMAGE_PLACEHOLDER}
                     alt={p.name}
                     className="h-11 w-11 rounded-xl object-cover shrink-0 border border-[var(--color-border)]"
-                    onError={(e) => { e.currentTarget.src = "/fallback.jpg"; }}
+                    onError={(e) => {
+                      e.currentTarget.src = ADMIN_IMAGE_PLACEHOLDER;
+                    }}
                   />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate" style={{ color: "var(--color-text)" }}>

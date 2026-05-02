@@ -11,9 +11,10 @@ import { toast } from "@/hooks/use-toast.js";
 import { useGoldPriceStore } from "@/store/goldPriceStore.js";
 import { updateGoldPrice } from "@jwell/api-client";
 import type { GoldPrice } from "@jwell/types";
+import { ADMIN_API_URL, ADMIN_API_KEY } from "@/lib/api-config.js";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
-const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
+const API_URL = ADMIN_API_URL;
+const ADMIN_KEY = ADMIN_API_KEY ?? "";
 
 const schema = z.object({
   pricePerGram: z.coerce.number().positive("Must be a positive number"),

@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button.js";
 import { Input } from "@/components/ui/input.js";
 import ProductTable from "@/components/products/ProductTable.js";
 import { getProducts } from "@jwell/api-client";
+import { ADMIN_API_URL } from "@/lib/api-config.js";
 
-const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
+const API_URL = ADMIN_API_URL;
 const PAGE_SIZE = 9;
 
 export default function ProductsPage() {
