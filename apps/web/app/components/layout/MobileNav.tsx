@@ -79,9 +79,19 @@ export default function MobileNav({ open, onClose }: Props) {
             display: "flex", alignItems: "center", gap: "0.6rem",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-            <Image src="/logo.jpeg" alt="Shreeva Jewellers" width={40} height={40} style={{ borderRadius: "0.35rem", objectFit: "cover" }} />
-            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.8rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <Image
+              src="/logo.jpeg"
+              alt="Shreeva Jewellers"
+              width={54}
+              height={54}
+              style={{
+                borderRadius: "0.5rem",
+                objectFit: "cover",
+                boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
+              }}
+            />
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.95rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.25 }}>
               Shreeva Jewellers
             </span>
           </div>

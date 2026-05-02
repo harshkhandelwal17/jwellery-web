@@ -49,8 +49,8 @@ export default function Header() {
         display: "grid",
         gridTemplateColumns: "1fr auto 1fr",
         alignItems: "center",
-        padding: "0 1.25rem",
-        height: "70px",
+        padding: "0 clamp(0.75rem, 3.6vw, 1.25rem)",
+        height: "clamp(74px, 12vw, 82px)",
       }}>
         {/* Left — burger on mobile, nav links on desktop */}
         <div className="flex items-center gap-8">
@@ -94,20 +94,25 @@ export default function Header() {
           display: "flex", alignItems: "center", justifyContent: "center",
           justifySelf: "center",
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
             <Image
               src="/logo.jpeg"
               alt="Shreeva Jewellers"
-              width={44}
-              height={44}
-              style={{ borderRadius: "0.4rem", objectFit: "cover" }}
+              width={56}
+              height={56}
+              style={{
+                borderRadius: "0.55rem",
+                objectFit: "cover",
+                boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
+              }}
               priority
             />
-            <span className="hidden min-[430px]:inline text-[0.7rem] sm:text-[0.85rem]" style={{
+            <span className="text-[0.72rem] min-[380px]:text-[0.78rem] sm:text-[0.9rem]" style={{
               fontFamily: "'Cinzel', serif",
               fontWeight: 600,
               color: "var(--color-gold)", letterSpacing: "0.1em",
               textTransform: "uppercase", whiteSpace: "nowrap",
+              textShadow: "0 1px 8px rgba(212,175,55,0.18)",
             }}>
               Shreeva Jewellers
             </span>
