@@ -17,7 +17,7 @@ export async function create(req: Request, res: Response, next: NextFunction): P
 
 export async function updateStatus(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const { status } = req.body as { status: string };
+    const { status } = req.body as { status: "new" | "contacted" | "closed" };
     const enquiry = await enquiriesService.updateEnquiryStatus(req.params["id"] as string, status);
     if (!enquiry) { res.status(404).json({ success: false, error: "Enquiry not found" }); return; }
     res.json({ success: true, data: enquiry });

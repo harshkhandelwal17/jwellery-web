@@ -60,7 +60,8 @@ export const ContactFormSchema = z.object({
 export const CreateEnquirySchema = z.object({
   name: z.string().min(2, "Name is required"),
   phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian mobile number"),
-  email: z.string().email("Invalid email").optional().nullable(),
+  email: z
+    .preprocess((v) => (v === "" || v === null || v === undefined ? undefined : v), z.string().email("Invalid email").optional()),
   message: z.string().max(1000).optional().nullable(),
   productId: z.string().optional().nullable(),
   productName: z.string().optional().nullable(),

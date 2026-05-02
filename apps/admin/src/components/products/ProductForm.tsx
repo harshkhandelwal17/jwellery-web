@@ -222,7 +222,7 @@ export default function ProductForm({ product }: Props) {
               <div className="flex flex-col gap-1.5">
                 <Label>Category</Label>
                 <Select
-                  defaultValue={product?.category}
+                  value={watch("category")}
                   onValueChange={(v) => setValue("category", v as FormData["category"])}
                 >
                   <SelectTrigger>

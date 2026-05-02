@@ -21,6 +21,12 @@ export async function getGoldPrice(req: Request, res: Response, next: NextFuncti
 export async function updateGoldPrice(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const data = await goldPriceService.updateGoldPrice(req.body.pricePerGram);
-    res.json({ success: true, data });
-  } catch (err) { next(err); }
+    const updatedAt = data.updatedAt instanceof Date ? data.updatedAt.toISOString() : String(data.updatedAt);
+    res.json({
+      success: true,
+      data: { id: "gold", pricePerGram: data.pricePerGram, updatedAt },
+    });
+  } catch (err) {
+    next(err);
+  }
 }

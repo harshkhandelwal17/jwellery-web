@@ -5,22 +5,18 @@ const API_URL = process.env.API_URL || "http://localhost:4000/api";
 
 export async function fetchProducts(): Promise<ProductWithPrice[]> {
   try {
-    const products = await getProducts(API_URL);
-    console.log("[API] Products loaded:", products.length, "items");
-    return products;
+    return await getProducts(API_URL);
   } catch (err) {
-    console.error("[API] Failed to load products:", err);
+    if (process.env.NODE_ENV === "development") console.error("[API] fetchProducts:", err);
     return [];
   }
 }
 
 export async function fetchProduct(id: string): Promise<ProductWithPrice | null> {
   try {
-    const product = await getProduct(API_URL, id);
-    console.log("[API] Product loaded:", product?.name, product?.image);
-    return product;
+    return await getProduct(API_URL, id);
   } catch (err) {
-    console.error("[API] Failed to load product:", id, err);
+    if (process.env.NODE_ENV === "development") console.error("[API] fetchProduct:", id, err);
     return null;
   }
 }

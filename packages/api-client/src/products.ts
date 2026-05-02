@@ -1,9 +1,4 @@
-import type {
-  Product,
-  ProductWithPrice,
-  CreateProductInput,
-  UpdateProductInput,
-} from "@jwell/types";
+import type { ProductWithPrice, CreateProductInput, UpdateProductInput } from "@jwell/types";
 import { apiFetch } from "./client";
 
 export interface GetProductsParams {
@@ -39,8 +34,8 @@ export async function createProduct(
   baseUrl: string,
   data: CreateProductInput,
   adminKey: string
-): Promise<Product> {
-  return apiFetch<Product>(`${baseUrl}/products`, {
+): Promise<ProductWithPrice> {
+  return apiFetch<ProductWithPrice>(`${baseUrl}/products`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: { "x-admin-key": adminKey },
@@ -52,8 +47,8 @@ export async function updateProduct(
   id: string,
   data: UpdateProductInput,
   adminKey: string
-): Promise<Product> {
-  return apiFetch<Product>(`${baseUrl}/products/${id}`, {
+): Promise<ProductWithPrice> {
+  return apiFetch<ProductWithPrice>(`${baseUrl}/products/${id}`, {
     method: "PUT",
     body: JSON.stringify(data),
     headers: { "x-admin-key": adminKey },
