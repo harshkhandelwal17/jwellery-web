@@ -16,9 +16,14 @@ interface Props {
 
 export default function CategoriesSection({ categoryImages = {} }: Props) {
   return (
-    <section className="categories-section section-shell" style={{ padding: "6rem 5rem", background: "var(--color-bg)" }}>
+    <section
+      className="categories-section section-shell"
+      style={{
+        padding: "clamp(3.25rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem)",
+        background: "var(--color-bg)",
+      }}
+    >
       <style>{`
-        .categories-section { padding: 6rem 5rem; }
         .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; max-width: 1200px; margin: 0 auto; }
         .cat-card-link { position: relative; }
         .cat-card-link .media-wrap img { transition: transform 0.55s ease; }
@@ -40,7 +45,6 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
           .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
         }
         @media (max-width: 768px) {
-          .categories-section { padding: 3rem 1rem !important; }
           .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; gap: 0.75rem; }
           .categories-section h2 { font-size: 1.25rem !important; }
           .categories-section .section-subtitle { font-size: 0.6rem !important; }

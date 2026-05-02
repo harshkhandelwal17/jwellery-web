@@ -189,8 +189,8 @@ export default function ProductForm({ product }: Props) {
         else delete payload["promoBadge"];
       }
       return isEdit
-        ? updateProduct(API_URL, product!.id, payload as UpdateProductInput, ADMIN_KEY)
-        : createProduct(API_URL, payload as CreateProductInput, ADMIN_KEY);
+        ? updateProduct(API_URL, product!.id, payload as unknown as UpdateProductInput, ADMIN_KEY)
+        : createProduct(API_URL, payload as unknown as CreateProductInput, ADMIN_KEY);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["products"] });

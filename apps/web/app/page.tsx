@@ -11,6 +11,7 @@ import CTASection from "./components/home/CTASection";
 import CraftsmanshipSection from "./components/home/CraftsmanshipSection";
 import WhatsAppCTASection from "./components/home/WhatsAppCTASection";
 import SignatureShowcaseSection from "./components/home/SignatureShowcaseSection";
+import BlessingsSection from "./components/home/BlessingsSection";
 import { fetchProducts } from "./lib/api";
 import { cloudinaryUrl } from "./lib/cloudinary";
 import { pickHomeSpotlight } from "./lib/product-display";
@@ -46,12 +47,13 @@ export default async function HomePage() {
   return (
     <>
       <Header />
-      <main>
+      <main className="home-page-main">
         <HeroSection />
         <CategoriesSection categoryImages={categoryImages} />
         <FeaturedProducts products={featured} />
         <BridalSection />
         <AboutSection mainImage={aboutMainImage} accentImage={aboutAccentImage} />
+        <BlessingsSection />
         <CraftsmanshipSection />
         <SignatureShowcaseSection />
         <CuratedSection />

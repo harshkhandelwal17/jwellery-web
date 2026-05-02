@@ -185,8 +185,14 @@ body::after {
 }
 
 .section-inner {
-  width: min(1200px, calc(100% - 2rem));
+  width: min(1180px, calc(100% - 2rem));
   margin: 0 auto;
+}
+
+/* Sticky header offset when linking in-page */
+main.home-page-main > .section-shell,
+main.home-page-main > section {
+  scroll-margin-top: 96px;
 }
 
 .luxury-card {
@@ -387,7 +393,7 @@ body::after {
 
 @media (max-width: 768px) {
   .section-inner {
-    width: min(1200px, calc(100% - 1.2rem));
+    width: min(1180px, calc(100% - 1.2rem));
   }
 
   .section-heading {

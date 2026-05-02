@@ -8,12 +8,17 @@ interface Props {
 
 export default function FeaturedProducts({ products }: Props) {
   return (
-    <section className="featured-section section-shell" style={{ padding: "6rem 5rem", background: "var(--color-bg-warm)" }}>
+    <section
+      className="featured-section section-shell"
+      style={{
+        padding: "clamp(3.25rem, 7vw, 6rem) clamp(1rem, 4vw, 3rem)",
+        background: "var(--color-bg-warm)",
+      }}
+    >
       <style>{`
-        .featured-section { padding: 6rem 5rem; }
-        .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; max-width: 1060px; margin: 0 auto; }
+        .featured-section .section-inner { width: min(1180px, 100%); margin: 0 auto; }
+        .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; width: 100%; }
         .featured-strip {
-          max-width: 1060px;
           margin: 0 auto 1.1rem;
           display: flex;
           gap: 0.7rem;
@@ -27,11 +32,10 @@ export default function FeaturedProducts({ products }: Props) {
           color: var(--color-text-mid);
         }
         @media (max-width: 768px) {
-          .featured-section { padding: 3rem 1rem !important; }
           .featured-header { flex-direction: row; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
           .featured-header h2 { font-size: 1.1rem !important; }
           .featured-header a { font-size: 0.7rem !important; }
-          .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; max-width: 100%; }
+          .featured-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
         }
         .featured-header a:hover {
           color: var(--color-gold) !important;
@@ -39,38 +43,39 @@ export default function FeaturedProducts({ products }: Props) {
         }
       `}</style>
 
-      <div className="featured-strip">
-        <span className="gold-dot" />
-        <span>Trending in 2026</span>
-      </div>
-
-      <div className="featured-header mb-6 md:mb-12" style={{
-        display: "flex", alignItems: "flex-end",
-        justifyContent: "space-between",
-      }}>
-        <div>
-          <p className="section-kicker" style={{ marginBottom: "0.5rem" }}>
-            Featured
-          </p>
-          <h2 className="section-heading" style={{ fontSize: "clamp(1.35rem, 2.4vw, 1.95rem)" }}>
-            Loved This Season
-          </h2>
-          <p className="text-xs mt-2 max-w-md" style={{ color: "var(--color-text-mid)", fontWeight: 300, lineHeight: 1.5 }}>
-            Highlights are chosen in admin (“Feature on homepage”). Remaining slots show newest pieces so the row stays full.
-          </p>
+      <div className="section-inner">
+        <div className="featured-strip">
+          <span className="gold-dot" />
+          <span>Trending in 2026</span>
         </div>
-        <Link href="/products" style={{
-          fontSize: "0.75rem", color: "var(--color-text-mid)",
-          textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem",
-          borderBottom: "1px solid var(--color-border)", paddingBottom: "2px",
-          transition: "all 0.3s ease-in-out",
-          whiteSpace: "nowrap",
-        }}>
-          See all pieces →
-        </Link>
-      </div>
 
-      <div className="featured-grid">
+        <div className="featured-header mb-6 md:mb-12" style={{
+          display: "flex", alignItems: "flex-end",
+          justifyContent: "space-between",
+        }}>
+          <div>
+            <p className="section-kicker" style={{ marginBottom: "0.5rem" }}>
+              Featured
+            </p>
+            <h2 className="section-heading" style={{ fontSize: "clamp(1.35rem, 2.4vw, 1.95rem)" }}>
+              Loved This Season
+            </h2>
+            <p className="text-xs mt-2 max-w-md" style={{ color: "var(--color-text-mid)", fontWeight: 300, lineHeight: 1.5 }}>
+              Highlights are chosen in admin (“Feature on homepage”). Remaining slots show newest pieces so the row stays full.
+            </p>
+          </div>
+          <Link href="/products" style={{
+            fontSize: "0.75rem", color: "var(--color-text-mid)",
+            textDecoration: "none", display: "flex", alignItems: "center", gap: "0.4rem",
+            borderBottom: "1px solid var(--color-border)", paddingBottom: "2px",
+            transition: "all 0.3s ease-in-out",
+            whiteSpace: "nowrap",
+          }}>
+            See all pieces →
+          </Link>
+        </div>
+
+        <div className="featured-grid">
         {products.length === 0 ? (
           <div
             className="col-span-full text-center py-12 px-4 rounded-2xl border"
@@ -105,6 +110,7 @@ export default function FeaturedProducts({ products }: Props) {
         ) : (
           products.map((product) => <ProductCard key={product.id} product={product} />)
         )}
+        </div>
       </div>
     </section>
   );
