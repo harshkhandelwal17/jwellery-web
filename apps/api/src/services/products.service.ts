@@ -45,6 +45,12 @@ function toProductWithPrice(p: any, goldRate: number): ProductWithPrice {
   };
 }
 
+// Reverse map: mainCategory → old category values that default to it
+const MAIN_CATEGORY_TO_OLD: Record<string, string[]> = {
+  "Gold Jewellery":    ["rings", "necklaces", "earrings", "bracelets"],
+  "Unique Categories": ["watches"],
+};
+
 export async function getProducts(options?: GetProductsOptions): Promise<ProductWithPrice[]> {
   const query: Record<string, unknown> = {};
 
@@ -53,7 +59,18 @@ export async function getProducts(options?: GetProductsOptions): Promise<Product
     query.occasion = options.occasion;
   }
   if (options?.mainCategory) {
-    query.mainCategory = options.mainCategory;
+    const oldCategories = MAIN_CATEGORY_TO_OLD[options.mainCategory];
+    if (oldCategories) {
+      // Include products with the explicit mainCategory OR old products
+      // that don't have mainCategory set but whose category maps to it
+      query.$or = [
+        { mainCategory: options.mainCategory },
+        { mainCategory: { $exists: false }, category: { $in: oldCategories } },
+        { mainCategory: null, category: { $in: oldCategories } },
+      ];
+    } else {
+      query.mainCategory = options.mainCategory;
+    }
   }
   if (options?.subCategory) {
     query.subCategory = options.subCategory;
