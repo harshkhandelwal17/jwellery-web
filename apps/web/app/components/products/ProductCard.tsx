@@ -21,14 +21,21 @@ export default function ProductCard({ product }: Props) {
       }}
     >
       {/* Image */}
-      <div className="product-img-wrap" style={{ position: "relative", aspectRatio: "3/4" }}>
+      <div
+        className="product-img-wrap"
+        style={{
+          position: "relative",
+          aspectRatio: "4/5",
+          maxHeight: "min(320px, 70vw)",
+        }}
+      >
         <SafeImage
-          src={productImageUrl(product.image, { width: 800, quality: 90 })}
+          src={productImageUrl(product.image, { width: 520, quality: 86 })}
           alt={product.name}
           fill
-          quality={90}
+          quality={86}
           className="object-cover"
-          sizes="(max-width: 768px) 50vw, 25vw"
+          sizes="(max-width: 768px) 44vw, 240px"
         />
       </div>
 
@@ -97,7 +104,7 @@ export default function ProductCard({ product }: Props) {
           background: var(--color-gold-light);
         }
         .product-card-link:hover .product-img-wrap img {
-          transform: scale(1.08);
+          transform: scale(1.04);
         }
       `}</style>
     </Link>

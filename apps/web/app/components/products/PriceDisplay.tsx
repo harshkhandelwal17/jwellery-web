@@ -22,8 +22,11 @@ export default function PriceDisplay({ product }: Props) {
       </p>
 
       <div
-        className="font-display leading-none mb-4"
-        style={{ fontSize: "3rem", color: "var(--color-gold-500)" }}
+        className="font-display leading-none mb-4 tracking-tight"
+        style={{
+          fontSize: "clamp(1.85rem, 4.5vw, 2.65rem)",
+          color: "var(--color-gold-500)",
+        }}
       >
         {formatCurrency(product.calculatedPrice)}
       </div>
