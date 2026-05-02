@@ -8,15 +8,17 @@ interface Props {
 export default function PriceDisplay({ product }: Props) {
   return (
     <div
-      className="p-6 border"
+      className="p-5 md:p-6 rounded-xl border"
       style={{
-        borderColor: "var(--color-ivory-200)",
-        backgroundColor: "var(--color-ivory-100)",
+        borderColor: "var(--color-border)",
+        background:
+          "linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.02))",
+        boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)",
       }}
     >
       <p
-        className="text-xs tracking-widest uppercase mb-2"
-        style={{ color: "var(--color-text-500)" }}
+        className="text-xs tracking-widest uppercase mb-2 font-medium"
+        style={{ color: "var(--color-text-muted)" }}
       >
         Live Price
       </p>
@@ -25,33 +27,40 @@ export default function PriceDisplay({ product }: Props) {
         className="font-display leading-none mb-4 tracking-tight"
         style={{
           fontSize: "clamp(1.85rem, 4.5vw, 2.65rem)",
-          color: "var(--color-gold-500)",
+          color: "var(--color-gold)",
         }}
       >
         {formatCurrency(product.calculatedPrice)}
       </div>
 
-      <div className="space-y-2 text-xs" style={{ color: "var(--color-text-500)" }}>
-        <div className="flex justify-between">
-          <span>Gold ({product.weight}g × ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g)</span>
-          <span>{formatCurrency(product.goldPriceUsed * product.weight)}</span>
+      <div className="space-y-2 text-xs" style={{ color: "var(--color-text-mid)" }}>
+        <div className="flex justify-between gap-3">
+          <span className="text-left">
+            Gold ({product.weight}g × ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g)
+          </span>
+          <span className="shrink-0 tabular-nums">
+            {formatCurrency(product.goldPriceUsed * product.weight)}
+          </span>
         </div>
-        <div className="flex justify-between">
-          <span>Making Charges</span>
-          <span>{formatCurrency(product.makingCharges)}</span>
+        <div className="flex justify-between gap-3">
+          <span>Making charges</span>
+          <span className="shrink-0 tabular-nums">{formatCurrency(product.makingCharges)}</span>
         </div>
         <div
-          className="flex justify-between pt-2 border-t font-medium"
-          style={{ borderColor: "var(--color-ivory-200)", color: "var(--color-text-700)" }}
+          className="flex justify-between pt-2.5 border-t font-semibold text-[0.8125rem]"
+          style={{
+            borderColor: "var(--color-border)",
+            color: "var(--color-text)",
+          }}
         >
           <span>Total</span>
-          <span>{formatCurrency(product.calculatedPrice)}</span>
+          <span className="tabular-nums">{formatCurrency(product.calculatedPrice)}</span>
         </div>
       </div>
 
       <p
-        className="mt-3 text-xs"
-        style={{ color: "var(--color-text-300)" }}
+        className="mt-3 text-[0.7rem] leading-relaxed"
+        style={{ color: "var(--color-text-muted)" }}
       >
         Price calculated at ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g gold rate
       </p>

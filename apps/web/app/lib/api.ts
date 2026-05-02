@@ -4,16 +4,28 @@ import type { ProductWithPrice } from "@jwell/types";
 export type { GetProductsParams };
 
 /**
- * Server components use this. On Vercel, `API_URL` is often unset while
- * `NEXT_PUBLIC_API_URL` is set for the browser — without a fallback the server
- * defaulted to localhost and returned no products (empty home + catalogue).
+ * Server components use this. On Vercel, set one of:
+ * - `JWELL_API_BASE` or `API_URL` or `NEXT_PUBLIC_API_URL`
+ * Value must be the **API** origin including `/api`, e.g. `https://your-api.vercel.app/api`
+ * (not the Next.js site URL — otherwise `/products` hits the wrong host and you get no data).
  */
 function serverApiBase(): string {
   const raw =
+    process.env.JWELL_API_BASE?.trim() ||
     process.env.API_URL?.trim() ||
     process.env.NEXT_PUBLIC_API_URL?.trim() ||
     "http://localhost:4000/api";
-  return raw.replace(/\/$/, "");
+
+  let base = raw.replace(/\/$/, "");
+
+  if (!base.endsWith("/api")) {
+    console.warn(
+      "[jwell] API base should end with /api (example: https://xxx.vercel.app/api). Current:",
+      base
+    );
+  }
+
+  return base;
 }
 
 export async function fetchProducts(params?: GetProductsParams): Promise<ProductWithPrice[]> {

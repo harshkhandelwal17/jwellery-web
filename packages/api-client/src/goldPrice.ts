@@ -2,7 +2,7 @@ import type { GoldPrice, UpdateGoldPriceInput } from "@jwell/types";
 import { apiFetch } from "./client";
 
 export async function getGoldPrice(baseUrl: string): Promise<GoldPrice> {
-  return apiFetch<GoldPrice>(`${baseUrl}/gold-price`);
+  return apiFetch<GoldPrice>(`${baseUrl}/gold-price`, { cache: "no-store" });
 }
 
 export async function updateGoldPrice(

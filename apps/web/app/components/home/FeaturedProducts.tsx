@@ -91,10 +91,11 @@ export default function FeaturedProducts({ products }: Props) {
               No pieces to show yet
             </p>
             <p className="text-sm mb-4">
-              The catalogue could not be loaded from the API, or there are no products. Check that{" "}
+              The catalogue could not be loaded from the API, or there are no products. On Vercel, set{" "}
               <code style={{ fontSize: "0.8em" }}>API_URL</code> or{" "}
-              <code style={{ fontSize: "0.8em" }}>NEXT_PUBLIC_API_URL</code> points to your live API
-              (e.g. <code style={{ fontSize: "0.8em" }}>…/api</code>) on the server.
+              <code style={{ fontSize: "0.8em" }}>NEXT_PUBLIC_API_URL</code> to your{" "}
+              <strong>Express API</strong> base — must end with{" "}
+              <code style={{ fontSize: "0.8em" }}>/api</code> (not your Next.js site URL). Redeploy the web app after saving env.
             </p>
             <Link
               href="/products"

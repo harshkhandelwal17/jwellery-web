@@ -33,7 +33,8 @@ export async function getProducts(
   if (params?.search?.trim()) searchParams.set("q", params.search.trim());
   const query = searchParams.toString();
   return apiFetch<ProductWithPrice[]>(
-    `${baseUrl}/products${query ? `?${query}` : ""}`
+    `${baseUrl}/products${query ? `?${query}` : ""}`,
+    { cache: "no-store" }
   );
 }
 
@@ -41,7 +42,9 @@ export async function getProduct(
   baseUrl: string,
   id: string
 ): Promise<ProductWithPrice> {
-  return apiFetch<ProductWithPrice>(`${baseUrl}/products/${id}`);
+  return apiFetch<ProductWithPrice>(`${baseUrl}/products/${id}`, {
+    cache: "no-store",
+  });
 }
 
 export async function createProduct(
