@@ -74,7 +74,7 @@ export default function GoldPriceForm({ currentPrice }: Props) {
           type="number"
           step="0.01"
           placeholder="e.g. 9450"
-          {...register("pricePerGram", { valueAsNumber: true })}
+          {...register("pricePerGram")}
         />
         {errors.pricePerGram && (
           <p className="text-xs text-red-500 mt-1">{errors.pricePerGram.message}</p>

@@ -26,8 +26,12 @@ export const OccasionSchema = z.enum([
 
 export const CreateProductSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
-  weight: z.number().positive("Weight must be greater than 0"),
-  makingCharges: z.number().min(0, "Making charges cannot be negative"),
+  weight: z.coerce
+    .number()
+    .refine((n) => Number.isFinite(n) && n > 0, { message: "Weight must be greater than 0" }),
+  makingCharges: z.coerce
+    .number()
+    .refine((n) => Number.isFinite(n) && n >= 0, { message: "Making charges cannot be negative" }),
   image: z.preprocess(
     (v) => (v === undefined || v === null ? "" : String(v).trim()),
     z.union([z.literal(""), z.string().url("Image must be a valid URL or leave empty")])
@@ -43,10 +47,16 @@ export const CreateProductSchema = z.object({
 export const UpdateProductSchema = CreateProductSchema.partial();
 
 export const UpdateGoldPriceSchema = z.object({
-  // Coerce: JSON / form often sends "9450" as string; z.number() alone returns 400.
-  pricePerGram: z.coerce
-    .number()
-    .refine((n) => Number.isFinite(n) && n > 0, { message: "Gold price must be a number greater than 0" }),
+  pricePerGram: z.preprocess(
+    (val) => {
+      if (val === null || val === undefined || val === "") return undefined;
+      const n = typeof val === "number" ? val : Number(val);
+      return Number.isFinite(n) ? n : undefined;
+    },
+    z
+      .number({ invalid_type_error: "Gold price must be a valid number" })
+      .refine((n) => n > 0, { message: "Gold price must be greater than 0" })
+  ),
 });
 
 export const ContactFormSchema = z.object({

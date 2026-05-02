@@ -6,10 +6,24 @@ export async function apiFetch<T>(
   url: string,
   options?: RequestInit
 ): Promise<T> {
+  const { headers: optionHeaders, ...rest } = options ?? {};
+  const headers = new Headers();
+  const body = rest.body;
+  const isFormData =
+    typeof FormData !== "undefined" && body instanceof FormData;
+  if (!isFormData) {
+    headers.set("Content-Type", "application/json");
+  }
+  if (optionHeaders) {
+    new Headers(optionHeaders as HeadersInit).forEach((value, key) => {
+      headers.set(key, value);
+    });
+  }
+
   const res = await fetch(url, {
     credentials: "include",
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    ...options,
+    ...rest,
+    headers,
   });
 
   const text = await res.text();
