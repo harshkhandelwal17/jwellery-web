@@ -94,25 +94,38 @@ export default function Header() {
           display: "flex", alignItems: "center", justifyContent: "center",
           justifySelf: "center",
         }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.75rem",
+            padding: "0.3rem 0.55rem",
+            borderRadius: "999px",
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(212,175,55,0.22)",
+            boxShadow: "0 8px 22px rgba(0,0,0,0.22)",
+          }}>
             <Image
               src="/logo.jpeg"
               alt="Shreeva Jewellers"
-              width={56}
-              height={56}
+              width={60}
+              height={60}
               style={{
-                borderRadius: "0.55rem",
+                borderRadius: "0.62rem",
                 objectFit: "cover",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
+                border: "1px solid rgba(212,175,55,0.45)",
+                boxShadow: "0 10px 24px rgba(0,0,0,0.42)",
               }}
               priority
             />
-            <span className="text-[0.72rem] min-[380px]:text-[0.78rem] sm:text-[0.9rem]" style={{
-              fontFamily: "'Cinzel', serif",
-              fontWeight: 600,
-              color: "var(--color-gold)", letterSpacing: "0.1em",
-              textTransform: "uppercase", whiteSpace: "nowrap",
-              textShadow: "0 1px 8px rgba(212,175,55,0.18)",
+            <span className="text-[0.84rem] min-[380px]:text-[0.92rem] sm:text-[1.02rem]" style={{
+              fontFamily: "'Playfair Display', 'Cinzel', serif",
+              fontWeight: 700,
+              color: "var(--color-gold)",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              whiteSpace: "nowrap",
+              lineHeight: 1.1,
+              textShadow: "0 1px 10px rgba(212,175,55,0.26)",
             }}>
               Shreeva Jewellers
             </span>
