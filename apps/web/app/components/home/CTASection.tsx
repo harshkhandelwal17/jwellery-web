@@ -17,7 +17,7 @@ export default function CTASection() {
           .cta-section .cta-subtitle { font-size: 0.6rem !important; }
           .cta-section .cta-desc { font-size: 0.8rem !important; margin-bottom: 1.5rem !important; }
           .cta-btns { flex-direction: column !important; gap: 0.75rem !important; }
-          .cta-btns a { padding: 0.8rem 1.75rem !important; font-size: 0.7rem !important; }
+          .cta-btns a { padding: 0.8rem 1.75rem !important; font-size: 0.7rem !important; width: min(92vw, 320px); justify-content: center; }
           .cta-watermark { font-size: 10rem !important; }
         }
         .cta-btn {

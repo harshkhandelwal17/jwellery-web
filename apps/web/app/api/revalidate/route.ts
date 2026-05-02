@@ -8,8 +8,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Revalidate all pages (layout scope covers the whole tree)
   revalidatePath("/", "layout");
+  // Explicitly revalidate product pages so new gold prices reflect immediately
+  revalidatePath("/products", "page");
+  revalidatePath("/products/[id]", "page");
 
   return NextResponse.json({ revalidated: true });
 }
-//for redeploy

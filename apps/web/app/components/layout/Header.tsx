@@ -2,12 +2,21 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobileNav from "./MobileNav";
-import ThemeToggle from "../ui/ThemeToggle";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000/api";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [goldRate, setGoldRate] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`${API_URL}/gold-price`)
+      .then((r) => r.json())
+      .then((d) => { if (d.success) setGoldRate(d.data.pricePerGram); })
+      .catch(() => {});
+  }, []);
 
   return (
     <>
@@ -25,13 +34,15 @@ export default function Header() {
           Free consultation &amp; home delivery available &nbsp;·&nbsp;
         </span>
         Today&apos;s Gold Rate:{" "}
-        <span style={{ color: "var(--color-gold)", fontWeight: 600 }}>₹9,450 / gram</span>
+        <span style={{ color: "var(--color-gold)", fontWeight: 600 }}>
+          {goldRate ? `₹${goldRate.toLocaleString("en-IN")} / gram` : "Live Market Pricing"}
+        </span>
         <span className="hidden sm:inline">&nbsp;·&nbsp; BIS Hallmarked 22KT Gold</span>
       </div>
 
       <header style={{
         position: "sticky", top: 0, zIndex: 100,
-        background: "var(--color-bg-overlay)",
+        background: "linear-gradient(180deg, rgba(8,8,30,0.98), rgba(8,8,30,0.86))",
         backdropFilter: "blur(12px)",
         WebkitBackdropFilter: "blur(12px)",
         borderBottom: "1px solid var(--color-border)",
@@ -62,6 +73,7 @@ export default function Header() {
             {[
               { href: "/", label: "Home" },
               { href: "/products", label: "Products" },
+              { href: "/products?category=bridal", label: "Bridal" },
             ].map((l) => (
               <Link key={l.href} href={l.href} className="gold-underline" style={{
                 fontSize: "0.78rem", color: "var(--color-text-mid)", fontWeight: 400,
@@ -91,7 +103,7 @@ export default function Header() {
               style={{ borderRadius: "0.4rem", objectFit: "cover" }}
               priority
             />
-            <span className="text-[0.7rem] sm:text-[0.85rem]" style={{
+            <span className="hidden min-[430px]:inline text-[0.7rem] sm:text-[0.85rem]" style={{
               fontFamily: "'Cinzel', serif",
               fontWeight: 600,
               color: "var(--color-gold)", letterSpacing: "0.1em",
@@ -105,7 +117,6 @@ export default function Header() {
         {/* Right — hidden on mobile, nav + CTA on desktop */}
         <div className="flex items-center justify-end gap-6">
           <nav className="hidden md:flex items-center gap-6">
-            <ThemeToggle />
             <Link href="/contact" className="gold-underline" style={{
               fontSize: "0.78rem", color: "var(--color-text-mid)", fontWeight: 400,
               textDecoration: "none", transition: "color 0.3s ease-in-out",
@@ -118,8 +129,10 @@ export default function Header() {
             <Link href="/contact" style={{
               fontSize: "0.7rem", letterSpacing: "0.1em", textTransform: "uppercase",
               color: "var(--color-text)", border: "1px solid var(--color-gold)",
-              padding: "0.5rem 1.25rem", textDecoration: "none", transition: "all 0.3s ease-in-out",
+              padding: "0.55rem 1.25rem", textDecoration: "none", transition: "all 0.3s ease-in-out",
               whiteSpace: "nowrap",
+              borderRadius: "999px",
+              background: "rgba(255,255,255,0.02)",
             }}
             onMouseEnter={e => {
               (e.currentTarget as HTMLAnchorElement).style.background = "var(--color-gold)";

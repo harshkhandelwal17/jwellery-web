@@ -27,9 +27,18 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
             cn(
               "flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
               isActive
-                ? "bg-[var(--color-blush)] text-white shadow-sm"
-                : "text-[var(--color-text-mid)] hover:bg-[var(--color-blush-light)] hover:text-[var(--color-blush)]"
+                ? "text-black shadow-sm"
+                : "text-[var(--color-text-mid)] hover:bg-[var(--color-bg-warm)] hover:text-[var(--color-gold)]"
             )
+          }
+          style={
+            ({ isActive }) =>
+              isActive
+                ? {
+                    background:
+                      "linear-gradient(90deg, var(--color-gold), var(--color-gold-light))",
+                  }
+                : undefined
           }
         >
           <Icon size={16} strokeWidth={1.8} />

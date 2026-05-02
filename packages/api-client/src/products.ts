@@ -6,8 +6,26 @@ import type {
 } from "@jwell/types";
 import { apiFetch } from "./client";
 
-export async function getProducts(baseUrl: string): Promise<ProductWithPrice[]> {
-  return apiFetch<ProductWithPrice[]>(`${baseUrl}/products`);
+export interface GetProductsParams {
+  sort?: "price_asc" | "price_desc" | "weight_asc" | "weight_desc";
+  mainCategory?: string;
+  subCategory?: string;
+  occasion?: string;
+}
+
+export async function getProducts(
+  baseUrl: string,
+  params?: GetProductsParams
+): Promise<ProductWithPrice[]> {
+  const searchParams = new URLSearchParams();
+  if (params?.sort) searchParams.set("sort", params.sort);
+  if (params?.mainCategory) searchParams.set("mainCategory", params.mainCategory);
+  if (params?.subCategory) searchParams.set("subCategory", params.subCategory);
+  if (params?.occasion) searchParams.set("occasion", params.occasion);
+  const query = searchParams.toString();
+  return apiFetch<ProductWithPrice[]>(
+    `${baseUrl}/products${query ? `?${query}` : ""}`
+  );
 }
 
 export async function getProduct(

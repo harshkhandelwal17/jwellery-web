@@ -13,7 +13,7 @@ export default function ProductCard({ product }: Props) {
     <Link href={`/products/${product.id}`}
       className="product-card-link"
       style={{
-        background: "var(--color-bg-card)",
+        background: "linear-gradient(150deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
         borderRadius: "1rem", overflow: "hidden",
         border: "1px solid var(--color-border)",
         textDecoration: "none", color: "var(--color-text)",
@@ -73,13 +73,16 @@ export default function ProductCard({ product }: Props) {
 
       <style>{`
         .product-card-link:hover {
-          transform: translateY(-4px) scale(1.01);
-          border-color: var(--color-gold);
-          box-shadow: 0 12px 40px rgba(212,175,55,0.15);
+          transform: translateY(-7px) scale(1.01);
+          border-color: rgba(212,175,55,0.7);
+          box-shadow: 0 20px 50px rgba(212,175,55,0.2);
         }
         .product-card-link:hover .arrow-btn {
           transform: scale(1.1);
           background: var(--color-gold-light);
+        }
+        .product-card-link:hover .product-img-wrap img {
+          transform: scale(1.08);
         }
       `}</style>
     </Link>

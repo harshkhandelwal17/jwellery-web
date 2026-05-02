@@ -11,12 +11,14 @@ const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
 
 export default function EnquiriesPage() {
   const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "new" | "contacted" | "closed">("all");
   const { data: enquiries, isLoading } = useQuery({
     queryKey: ["enquiries"],
     queryFn: () => getEnquiries(API_URL, ADMIN_KEY),
   });
 
   const filteredEnquiries = enquiries?.filter((e: Enquiry) => {
+    if (statusFilter !== "all" && e.status !== statusFilter) return false;
     if (!search) return true;
     const query = search.toLowerCase();
     return (
@@ -27,6 +29,9 @@ export default function EnquiriesPage() {
   });
 
   const newCount = enquiries?.filter((e: Enquiry) => e.status === "new").length ?? 0;
+  const contactedCount = enquiries?.filter((e: Enquiry) => e.status === "contacted").length ?? 0;
+  const closedCount = enquiries?.filter((e: Enquiry) => e.status === "closed").length ?? 0;
+  const allCount = enquiries?.length ?? 0;
 
   return (
     <div className="p-6 lg:p-8">
@@ -58,6 +63,32 @@ export default function EnquiriesPage() {
           onChange={(e) => setSearch(e.target.value)}
           className="pl-10"
         />
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        {[
+          { key: "all", label: `All (${allCount})` },
+          { key: "new", label: `New (${newCount})` },
+          { key: "contacted", label: `Contacted (${contactedCount})` },
+          { key: "closed", label: `Closed (${closedCount})` },
+        ].map((item) => {
+          const active = statusFilter === item.key;
+          return (
+            <button
+              key={item.key}
+              type="button"
+              onClick={() => setStatusFilter(item.key as typeof statusFilter)}
+              className="text-xs tracking-widest uppercase px-3 py-1.5 border rounded-full transition-colors"
+              style={
+                active
+                  ? { background: "var(--color-gold)", color: "#000", borderColor: "var(--color-gold)" }
+                  : { color: "var(--color-text-mid)", borderColor: "var(--color-border)" }
+              }
+            >
+              {item.label}
+            </button>
+          );
+        })}
       </div>
 
       {isLoading ? (

@@ -1,15 +1,12 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  ChevronDown,
-  ChevronUp,
   Phone,
   Mail,
   Package,
   Calendar,
   MoreHorizontal,
   Loader2,
-  Trash2,
   Eye,
 } from "lucide-react";
 import { Button } from "@/components/ui/button.js";
@@ -42,7 +39,6 @@ interface Props {
 
 export default function EnquiryTable({ enquiries }: Props) {
   const queryClient = useQueryClient();
-  const [expandedId, setExpandedId] = useState<string | null>(null);
   const [viewingId, setViewingId] = useState<string | null>(null);
 
   const statusMutation = useMutation({
@@ -116,9 +112,8 @@ export default function EnquiryTable({ enquiries }: Props) {
           </thead>
           <tbody>
             {enquiries.map((enquiry) => (
-              <>
+              <Fragment key={enquiry.id}>
                 <tr
-                  key={enquiry.id}
                   className="border-b border-[var(--color-border)] last:border-b-0 hover:bg-[var(--color-bg-warm)] transition-colors"
                 >
                   <td className="px-4 py-3">
@@ -136,10 +131,10 @@ export default function EnquiryTable({ enquiries }: Props) {
                     )}
                   </td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
+                    <a href={`tel:${enquiry.phone}`} className="flex items-center gap-2 hover:underline">
                       <Phone size={14} style={{ color: "var(--color-blush)" }} />
                       <span style={{ color: "var(--color-text)" }}>{enquiry.phone}</span>
-                    </div>
+                    </a>
                   </td>
                   <td className="px-4 py-3">
                     {enquiry.productName ? (
@@ -223,22 +218,7 @@ export default function EnquiryTable({ enquiries }: Props) {
                     </div>
                   </td>
                 </tr>
-                {expandedId === enquiry.id && enquiry.message && (
-                  <tr className="bg-[var(--color-bg-warm)]">
-                    <td colSpan={6} className="px-4 py-3">
-                      <div
-                        className="text-sm"
-                        style={{ color: "var(--color-text)" }}
-                      >
-                        <span className="font-medium">Message:</span>
-                        <p className="mt-1" style={{ color: "var(--color-text-muted)" }}>
-                          {enquiry.message}
-                        </p>
-                      </div>
-                    </td>
-                  </tr>
-                )}
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>

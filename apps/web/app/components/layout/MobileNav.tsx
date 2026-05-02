@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import ThemeToggle from "../ui/ThemeToggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -44,12 +43,13 @@ export default function MobileNav({ open, onClose }: Props) {
       <nav className="mobile-nav-drawer" style={{
         position: "relative",
         marginLeft: "auto",
-        width: "280px",
+        width: "min(86vw, 320px)",
         height: "100%",
         display: "flex",
         flexDirection: "column",
-        padding: "2rem",
-        background: "var(--color-bg)",
+        padding: "1.25rem 1.1rem 1.5rem",
+        background: "linear-gradient(180deg, rgba(12,12,40,0.98), rgba(8,8,30,0.98))",
+        borderLeft: "1px solid var(--color-border)",
         overflowY: "auto",
         zIndex: 10,
       }}>
@@ -60,7 +60,7 @@ export default function MobileNav({ open, onClose }: Props) {
           style={{
             alignSelf: "flex-end",
             background: "none", border: "none",
-            cursor: "pointer", color: "#1e1a3a",
+            cursor: "pointer", color: "var(--color-text-mid)",
             marginBottom: "2rem", padding: "4px",
           }}
         >
@@ -101,19 +101,12 @@ export default function MobileNav({ open, onClose }: Props) {
               borderBottom: "1px solid var(--color-border)",
               transition: "color 0.2s",
               display: "block",
+              borderRadius: "0.4rem",
             }}
           >
             {l.label}
           </Link>
         ))}
-
-        {/* Theme toggle */}
-        <div style={{ marginTop: "1.5rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <span style={{ fontSize: "0.72rem", letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>
-            Theme
-          </span>
-          <ThemeToggle />
-        </div>
 
         {/* CTA */}
         <Link
@@ -123,10 +116,12 @@ export default function MobileNav({ open, onClose }: Props) {
             marginTop: "2rem",
             textAlign: "center",
             fontSize: "0.7rem", letterSpacing: "0.15em", textTransform: "uppercase",
-            padding: "0.875rem 1rem",
+            padding: "0.9rem 1rem",
             border: "1px solid var(--color-gold)",
             color: "var(--color-gold)", textDecoration: "none",
             display: "block",
+            borderRadius: "999px",
+            background: "rgba(212,175,55,0.08)",
           }}
         >
           Book Appointment

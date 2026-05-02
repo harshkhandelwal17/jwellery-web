@@ -7,13 +7,13 @@ const CRAFT_FEATURES = [
 
 export default function CuratedSection() {
   return (
-    <section className="curated-section" style={{ background: "var(--color-bg)" }}>
+    <section className="curated-section section-shell" style={{ background: "var(--color-bg)" }}>
       <style>{`
         .curated-section { padding: 6rem 5rem; }
         .curated-content { max-width: 900px; margin: 0 auto; }
         .curated-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.75rem; margin-top: 3rem; }
         .curated-card {
-          background: var(--color-bg-card);
+          background: linear-gradient(155deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
           border: 1px solid var(--color-border);
           border-radius: 1rem;
           padding: 1.5rem;
@@ -52,19 +52,16 @@ export default function CuratedSection() {
             fontWeight: 600, letterSpacing: "0.08em",
             color: "var(--color-text)", marginBottom: "1.5rem",
           }}>
-            Our Crafts
+            Crafted Excellence
           </h2>
           <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
-            At Shreeva Jewellers, craftsmanship lies at the heart of everything we create. With a legacy rooted in generations of expertise, each piece is thoughtfully designed to reflect both tradition and individuality.
+            Every design is shaped with sharp detailing, balanced proportions, and premium finishing for a refined luxury look.
           </p>
-          <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "1.5rem auto 0", lineHeight: 1.85, fontWeight: 300 }}>
-            We specialize in intricate and distinctive jewellery designs, carefully balancing detail, precision, and artistry. From minimal, everyday pieces that add a touch of elegance to your daily style, to bold statement creations that define special occasions—our collection is crafted to suit every moment and every personality.
+          <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "1.1rem auto 0", lineHeight: 1.85, fontWeight: 300 }}>
+            Minimal everyday pieces or statement bridal styles, each collection keeps comfort, finish, and elegance in focus.
           </p>
-          <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "1.5rem auto 0", lineHeight: 1.85, fontWeight: 300 }}>
-            Every design goes through a meticulous process, where skilled artisans bring concepts to life with fine detailing and high-quality finishes. We pay close attention to the smallest elements, ensuring that each piece not only looks beautiful but also feels meaningful and timeless.
-          </p>
-          <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "1.5rem auto 0", lineHeight: 1.85, fontWeight: 300 }}>
-            Our craft is not just about jewellery—it is about creating pieces that become a part of your story, your identity, and your most cherished celebrations.
+          <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "720px", margin: "1.1rem auto 0", lineHeight: 1.85, fontWeight: 300 }}>
+            Our digital-first journey is designed to support future showroom experience with the same premium brand identity.
           </p>
         </div>
 

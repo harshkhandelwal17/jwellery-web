@@ -10,10 +10,16 @@ const FALLBACK_ACCENT = "https://picsum.photos/seed/abjw2/400/400";
 
 export default function AboutSection({ mainImage, accentImage }: Props) {
   return (
-    <section className="about-section" style={{ background: "var(--color-bg)" }}>
+    <section className="about-section section-shell" style={{ background: "var(--color-bg)" }}>
       <style>{`
         .about-section { padding: 7rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
         .about-image-wrap { position: relative; height: 520px; }
+        .about-card {
+          background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+          border: 1px solid var(--color-border);
+          border-radius: 1.25rem;
+          padding: 1.25rem 1.2rem;
+        }
         @media (max-width: 768px) {
           .about-section { grid-template-columns: 1fr; gap: 2.5rem; padding: 3rem 1.25rem; }
           .about-image-wrap { height: 300px; }
@@ -58,7 +64,7 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
       {/* Text */}
       <div className="scroll-reveal">
         <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
-          Our Journey
+          Heritage
         </p>
         <h2 style={{
           fontFamily: "'Cinzel', serif",
@@ -67,17 +73,19 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           color: "var(--color-text)",
         }}>
           Jewellery Crafted with<br />
-          <span style={{ color: "var(--color-gold)" }}>Heart &amp; Heritage</span>
+          <span style={{ color: "var(--color-gold)" }}>Precision &amp; Trust</span>
         </h2>
 
-        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          Since 1987, GP Jewellers has been a trusted name in the bustling gold markets of Sarafa, Indore, built through years of dedication and strong customer relationships. Our roots, however, go even deeper—grounded in a rich ancestral legacy of craftsmanship and expertise in jewellery.
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "0.9rem", fontWeight: 300 }}>
+          Built on decades of jewellery expertise, Shreeva blends timeless craftsmanship with modern elegance.
+          Each piece is made to feel premium, wearable, and memorable.
         </p>
-        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          For decades, we have proudly served customers across Madhya Pradesh, earning their trust with every piece we create. Today, we take a new step forward—expanding our presence across India.
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "0.8rem", fontWeight: 300 }}>
+          We are scaling online with the same trust and service standards that define strong offline jewellery relationships.
+          This is a long-term brand journey, not just a catalog.
         </p>
-        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "1rem", fontWeight: 300 }}>
-          Same trust. Same relationships. Just a new platform. With this vision, we introduce Shreeva Jewellers—a brand that goes beyond jewellery. We aim to become a part of your stories, your milestones, and the celebrations that define who you are. We stand with you—not just in your special moments, but in your journey of self-expression.
+        <p style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", lineHeight: 1.95, marginBottom: "0.8rem", fontWeight: 300 }}>
+          As we expand into wider offline presence, every customer touchpoint is being built to feel premium, transparent, and dependable.
         </p>
 
         <div style={{
@@ -89,16 +97,22 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
             { num: "4K+", label: "Happy Customers" },
             { num: "22KT", label: "Pure Gold" },
             { num: "BIS", label: "Hallmarked" },
+            { num: "Online → Offline", label: "Growth Vision" },
           ].map((s) => (
             <div key={s.label}>
               <div style={{ fontFamily: "'Cinzel', serif", fontSize: "1.8rem", fontWeight: 700, color: "var(--color-gold)", lineHeight: 1, letterSpacing: "0.04em" }}>
                 {s.num}
               </div>
-              <div style={{ fontSize: "0.72rem", color: "var(--color-text-mid)", marginTop: "0.2rem", fontWeight: 400 }}>
+              <div style={{ fontSize: "0.72rem", color: "var(--color-text-mid)", marginTop: "0.2rem", fontWeight: 400, letterSpacing: "0.08em", textTransform: "uppercase" }}>
                 {s.label}
               </div>
             </div>
           ))}
+        </div>
+        <div className="about-card" style={{ marginTop: "1.1rem" }}>
+          <p style={{ fontSize: "0.76rem", color: "var(--color-text-mid)", letterSpacing: "0.13em", textTransform: "uppercase" }}>
+            Premium Craft. Clean Design. Trusted Quality.
+          </p>
         </div>
       </div>
     </section>

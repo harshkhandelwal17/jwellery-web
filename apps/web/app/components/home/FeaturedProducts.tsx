@@ -8,10 +8,24 @@ interface Props {
 
 export default function FeaturedProducts({ products }: Props) {
   return (
-    <section className="featured-section" style={{ padding: "6rem 5rem", background: "var(--color-bg-warm)" }}>
+    <section className="featured-section section-shell" style={{ padding: "6rem 5rem", background: "var(--color-bg-warm)" }}>
       <style>{`
         .featured-section { padding: 6rem 5rem; }
-        .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; max-width: 960px; margin: 0 auto; }
+        .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; max-width: 1060px; margin: 0 auto; }
+        .featured-strip {
+          max-width: 1060px;
+          margin: 0 auto 1.1rem;
+          display: flex;
+          gap: 0.7rem;
+          align-items: center;
+          opacity: 0.9;
+        }
+        .featured-strip span {
+          font-size: 0.62rem;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: var(--color-text-mid);
+        }
         @media (max-width: 768px) {
           .featured-section { padding: 3rem 1rem !important; }
           .featured-header { flex-direction: row; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
@@ -25,15 +39,20 @@ export default function FeaturedProducts({ products }: Props) {
         }
       `}</style>
 
+      <div className="featured-strip">
+        <span className="gold-dot" />
+        <span>Trending in 2026</span>
+      </div>
+
       <div className="featured-header mb-6 md:mb-12" style={{
         display: "flex", alignItems: "flex-end",
         justifyContent: "space-between",
       }}>
         <div>
-          <p style={{ fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--color-gold)", marginBottom: "0.5rem" }}>
+          <p className="section-kicker" style={{ marginBottom: "0.5rem" }}>
             Featured
           </p>
-          <h2 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.4rem, 2.5vw, 2rem)", fontWeight: 600, letterSpacing: "0.06em", color: "var(--color-text)" }}>
+          <h2 className="section-heading" style={{ fontSize: "clamp(1.35rem, 2.4vw, 1.95rem)" }}>
             Loved This Season
           </h2>
         </div>

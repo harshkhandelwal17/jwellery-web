@@ -4,17 +4,30 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
+:root {
+  --font-sans-admin: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display-admin: "Cinzel", "Playfair Display", Georgia, serif;
+}
+
 body {
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: var(--font-sans-admin);
+  font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
   background: var(--color-bg);
   color: var(--color-text);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
 }
 
-.font-display  { font-family: "Cinzel", serif; letter-spacing: 0.04em; }
-.font-display2 { font-family: "Cinzel", serif; letter-spacing: 0.06em; }
+::selection {
+  background: rgba(212, 175, 55, 0.22);
+  color: var(--color-text);
+}
+
+.font-display  { font-family: var(--font-display-admin); letter-spacing: 0.04em; font-feature-settings: "kern" 1; }
+.font-display2 { font-family: var(--font-display-admin); letter-spacing: 0.055em; font-feature-settings: "kern" 1; }
 .font-script   { font-family: "Corinthia", cursive; }
 
 /* ── Animation Keyframes ─────────────────────────────────────── */
@@ -54,10 +67,10 @@ body {
 
 /* ── Admin specific utilities ───────────────────────────────── */
 .admin-page-title {
-  font-family: "Cinzel", serif;
+  font-family: var(--font-display-admin);
   font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.045em;
   color: var(--color-text);
 }
 

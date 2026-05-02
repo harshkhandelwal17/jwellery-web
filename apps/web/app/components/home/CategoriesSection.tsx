@@ -16,10 +16,26 @@ interface Props {
 
 export default function CategoriesSection({ categoryImages = {} }: Props) {
   return (
-    <section className="categories-section" style={{ padding: "6rem 5rem", background: "var(--color-bg)" }}>
+    <section className="categories-section section-shell" style={{ padding: "6rem 5rem", background: "var(--color-bg)" }}>
       <style>{`
         .categories-section { padding: 6rem 5rem; }
         .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; max-width: 1200px; margin: 0 auto; }
+        .cat-card-link { position: relative; }
+        .cat-card-link .media-wrap img { transition: transform 0.55s ease; }
+        .cat-card-link::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 0.95rem;
+          padding: 1px;
+          background: linear-gradient(155deg, rgba(212,175,55,0.35), transparent 45%, rgba(255,255,255,0.06));
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
         @media (max-width: 900px) {
           .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
         }
@@ -52,13 +68,13 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
             className="cat-card-link"
             style={{
               textDecoration: "none", color: "var(--color-text)",
-              background: "var(--color-bg-card)",
-              borderRadius: "0.75rem", overflow: "hidden",
+              background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
+              borderRadius: "0.95rem", overflow: "hidden",
               border: "1px solid var(--color-border)",
               transition: "all 0.3s ease-in-out", display: "block",
             }}
           >
-            <div style={{ position: "relative", width: "100%", aspectRatio: "1/1" }}>
+            <div className="media-wrap" style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
               <Image
                 src={categoryImages[cat.slug] ?? cat.fallback}
                 alt={cat.name}
@@ -95,6 +111,8 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
           box-shadow: 0 12px 32px rgba(212,175,55,0.12);
           border-color: var(--color-gold) !important;
         }
+        .cat-card-link:hover::before { opacity: 1; }
+        .cat-card-link:hover .media-wrap img { transform: scale(1.08); }
         .cat-card-link:hover .cat-arrow {
           background: var(--color-gold) !important;
           color: #000000 !important;

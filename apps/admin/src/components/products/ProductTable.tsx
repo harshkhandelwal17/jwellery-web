@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Pencil, Trash2, Loader2, ArrowUpRight } from "lucide-react";
+import { Pencil, Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button.js";
 import { Badge } from "@/components/ui/badge.js";
 import {
@@ -75,7 +75,7 @@ export default function ProductTable({ products }: Props) {
                 </Badge>
               </div>
               {/* Actions — top-right, visible on hover */}
-              <div className="absolute top-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+              <div className="absolute top-3 right-3 flex gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-200">
                 <Button
                   variant="ghost"
                   size="icon"

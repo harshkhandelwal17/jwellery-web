@@ -4,50 +4,228 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
-/* ── Luxury Theme (Default) ───────────────────────────────────── */
+/* ── Royal Navy + Gold Theme — matched to logo ───────────────── */
 :root {
-  --color-bg:          #0B0B0B;
-  --color-bg-warm:     #121212;
-  --color-bg-card:     #1A1A1A;
-  --color-surface:     #1A1A1A;
-  --color-bg-overlay:  rgba(11, 11, 11, 0.98);
-  --color-text:        #FFFFFF;
-  --color-text-mid:    #CFCFCF;
-  --color-text-muted:  #9A9A9A;
-  --color-border:      #333333;
-  --color-gold:        #D4AF37;
-  --color-gold-light:  #E5C158;
-  --color-dark-footer: #080808;
-}
+  /* Background layers — deep royal navy, same as logo background */
+  --color-bg:          #08081E;
+  --color-bg-warm:     #0C0C28;
+  --color-bg-card:     #111132;
+  --color-surface:     #111132;
+  --color-bg-overlay:  rgba(8, 8, 30, 0.97);
 
-/* ── Dark theme overrides (same as default for consistency) ─── */
-[data-theme="dark"] {
-  --color-bg:          #0B0B0B;
-  --color-bg-warm:     #121212;
-  --color-bg-card:     #1A1A1A;
-  --color-surface:     #1A1A1A;
-  --color-bg-overlay:  rgba(11, 11, 11, 0.98);
+  /* Text */
   --color-text:        #FFFFFF;
-  --color-text-mid:    #CFCFCF;
-  --color-text-muted:  #9A9A9A;
-  --color-border:      #333333;
+  --color-text-mid:    #D0CFDF;
+  --color-text-muted:  #8A89A8;
+
+  /* Borders */
+  --color-border:      #22225A;
+
+  /* Gold — the logo's signature colour */
   --color-gold:        #D4AF37;
   --color-gold-light:  #E5C158;
-  --color-dark-footer: #080808;
+  --color-gold-500:    #D4AF37;
+
+  /* Footer */
+  --color-dark-footer: #040410;
+
+  /* Ivory / cream palette — price cards, CTAs */
+  --color-ivory-50:    #FDFAF5;
+  --color-ivory-100:   #F9F1E0;
+  --color-ivory-200:   #E8D9A8;
+
+  /* Numeric opacity scale — used by various components */
+  --color-text-300:    rgba(255, 255, 255, 0.30);
+  --color-text-500:    rgba(255, 255, 255, 0.55);
+  --color-text-700:    rgba(255, 255, 255, 0.78);
+  --color-text-900:    #C9972A;   /* deep gold — CTA button backgrounds */
+  --radius-lg: 1.25rem;
+  --radius-xl: 1.75rem;
+  --shadow-gold-soft: 0 20px 60px rgba(212, 175, 55, 0.14);
+
+  /* Typography — luxury readability */
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-accent: "Playfair Display", Georgia, serif;
 }
 
 body {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: var(--font-sans);
+  font-size: clamp(0.9375rem, 0.88rem + 0.35vw, 1.0625rem);
   background: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "kern" 1, "liga" 1;
+  font-optical-sizing: auto;
 }
 
-.font-display { font-family: 'Cinzel', 'Playfair Display', serif; letter-spacing: 0.06em; }
+::selection {
+  background: rgba(212, 175, 55, 0.28);
+  color: var(--color-text);
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  pointer-events: none;
+  filter: blur(80px);
+  opacity: 0.2;
+}
+
+body::before {
+  width: 420px;
+  height: 420px;
+  top: -140px;
+  left: -140px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.35), transparent 70%);
+}
+
+body::after {
+  width: 480px;
+  height: 480px;
+  right: -160px;
+  bottom: -180px;
+  background: radial-gradient(circle, rgba(92, 106, 255, 0.25), transparent 70%);
+}
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: var(--scroll-progress, 0%);
+  z-index: 999;
+  background: linear-gradient(90deg, var(--color-gold), #f6d77e);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.55);
+  transition: width 0.15s linear;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 6.2rem;
+  z-index: 70;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background: rgba(8, 8, 30, 0.82);
+  color: var(--color-gold);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.back-to-top:hover {
+  background: var(--color-gold);
+  color: #000;
+}
+
+.font-display { font-family: var(--font-display); letter-spacing: 0.05em; font-feature-settings: "kern" 1, "lnum" 1; }
 .font-script  { font-family: 'Corinthia', cursive; }
-.font-body    { font-family: 'DM Sans', 'Inter', system-ui, sans-serif; }
+.font-body    { font-family: var(--font-sans); }
+
+/* Accent serif for softer editorial lines (quotes, sub-heroes) */
+.font-accent-serif {
+  font-family: var(--font-accent);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-feature-settings: "kern" 1;
+}
+
+/* Hero / major titles — depth without clutter */
+.luxury-hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  text-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 48px rgba(0, 0, 0, 0.35);
+}
+
+/* Section body copy — comfortable reading width */
+.text-lede {
+  font-size: clamp(0.9rem, 0.86rem + 0.25vw, 1rem);
+  line-height: 1.78;
+  color: var(--color-text-mid);
+  max-width: 36rem;
+}
+
+.text-caption-gold {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.section-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.section-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+  background-size: 90px 90px;
+  mask-image: radial-gradient(circle at 50% 40%, black, transparent 80%);
+}
+
+.section-inner {
+  width: min(1200px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+.luxury-card {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.01));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(6px);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.luxury-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: var(--shadow-gold-soft);
+}
+
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.55rem, 2.8vw, 2.65rem);
+  font-weight: 600;
+  letter-spacing: 0.055em;
+  line-height: 1.18;
+  color: var(--color-text);
+}
+
+.section-kicker {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.gold-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-gold);
+}
 
 /* Ticker */
 .ticker-inner {
@@ -71,6 +249,11 @@ body {
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes float {
@@ -146,6 +329,16 @@ body {
 
 .hero-float { animation: float 5s ease-in-out infinite; }
 
+.slow-spin {
+  animation: spin-3d 22s linear infinite;
+  transform-style: preserve-3d;
+}
+
+@keyframes spin-3d {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
 /* ── Gold badge pulse ────────────────────────────────────────── */
 
 .gold-badge-pulse { animation: shimmer-gold 3s ease-in-out infinite 1.2s; }
@@ -175,5 +368,29 @@ body {
     animation: fade-up 0.7s ease both;
     animation-timeline: view();
     animation-range: entry 0% entry 28%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ticker-inner,
+  .hero-enter,
+  .slow-spin,
+  .hero-float,
+  .gold-badge-pulse {
+    animation: none !important;
+  }
+  @supports (animation-timeline: scroll()) {
+    .scroll-reveal { animation: none !important; }
+  }
+}
+
+@media (max-width: 768px) {
+  .section-inner {
+    width: min(1200px, calc(100% - 1.2rem));
+  }
+
+  .section-heading {
+    letter-spacing: 0.04em;
   }
 }

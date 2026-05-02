@@ -20,7 +20,7 @@ const BRIDAL_FEATURES = [
 
 export default function BridalSection() {
   return (
-    <section className="bridal-section" style={{ background: "var(--color-bg-warm)" }}>
+    <section className="bridal-section section-shell" style={{ background: "var(--color-bg-warm)" }}>
       <style>{`
         .bridal-section { padding: 6rem 5rem; }
         .bridal-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
@@ -57,15 +57,14 @@ export default function BridalSection() {
           <span style={{ color: "var(--color-gold)" }}>Radiant as a Bride</span>
         </h2>
         <p className="section-desc" style={{ fontSize: "0.9rem", color: "var(--color-text-mid)", maxWidth: "520px", margin: "0 auto", lineHeight: 1.85, fontWeight: 300 }}>
-          We specialise in lightweight bridal jewellery — designed to adorn without burden.
-          Perfect for the modern bride who values elegance and comfort in equal measure.
+          Lightweight bridal designs that look grand, feel comfortable, and photograph beautifully.
         </p>
       </div>
 
       <div className="bridal-grid">
         {BRIDAL_FEATURES.map((f) => (
           <div key={f.title} className="bridal-card scroll-reveal" style={{
-            background: "var(--color-surface)",
+            background: "linear-gradient(150deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
             borderRadius: "1.25rem",
             padding: "2.25rem 2rem",
             border: "1px solid transparent",

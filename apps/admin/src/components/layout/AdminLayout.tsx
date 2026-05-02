@@ -40,7 +40,7 @@ export default function AdminLayout() {
             </div>
           </div>
           <button
-            className="lg:hidden p-1 rounded-md hover:bg-[var(--color-blush-light)] transition-colors"
+            className="lg:hidden p-1 rounded-md hover:bg-[var(--color-bg-warm)] transition-colors"
             onClick={() => setMobileOpen(false)}
             style={{ color: "var(--color-text)" }}
           >
@@ -61,7 +61,7 @@ export default function AdminLayout() {
           style={{ background: "var(--color-bg-card)", backdropFilter: "blur(12px)" }}
         >
           <button
-            className="p-2 rounded-lg hover:bg-[var(--color-blush-light)] transition-colors"
+            className="p-2 rounded-lg hover:bg-[var(--color-bg-warm)] transition-colors"
             onClick={() => setMobileOpen(true)}
             style={{ color: "var(--color-text)" }}
           >

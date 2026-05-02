@@ -10,6 +10,7 @@ import WhyChooseUs from "./components/home/WhyChooseUs";
 import CTASection from "./components/home/CTASection";
 import CraftsmanshipSection from "./components/home/CraftsmanshipSection";
 import WhatsAppCTASection from "./components/home/WhatsAppCTASection";
+import SignatureShowcaseSection from "./components/home/SignatureShowcaseSection";
 import { fetchProducts } from "./lib/api";
 import { cloudinaryUrl } from "./lib/cloudinary";
 
@@ -51,6 +52,7 @@ export default async function HomePage() {
         <BridalSection />
         <AboutSection mainImage={aboutMainImage} accentImage={aboutAccentImage} />
         <CraftsmanshipSection />
+        <SignatureShowcaseSection />
         <CuratedSection />
         <WhyChooseUs />
         <WhatsAppCTASection />

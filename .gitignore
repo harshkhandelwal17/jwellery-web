@@ -10,3 +10,4 @@ dist
 coverage
 .DS_Store
 Screenshot*
+apps/web/public/admin

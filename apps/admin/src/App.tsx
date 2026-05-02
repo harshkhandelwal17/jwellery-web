@@ -9,7 +9,7 @@ import { Toaster } from "./components/ui/toaster.js";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/admin">
       <Routes>
         <Route path="/" element={<AdminLayout />}>
           <Route index element={<Navigate to="/dashboard" replace />} />

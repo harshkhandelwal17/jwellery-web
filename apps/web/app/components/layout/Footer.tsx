@@ -3,10 +3,19 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="footer-root" style={{ background: "var(--color-dark-footer)", color: "var(--color-text-muted)" }}>
+    <footer className="footer-root section-shell" style={{ background: "var(--color-dark-footer)", color: "var(--color-text-muted)" }}>
       <style>{`
         .footer-root { padding: 5rem 5rem 3rem; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 3.5rem; border-bottom: 1px solid var(--color-border); position: relative; }
+        .footer-grid::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: -1px;
+          width: 180px;
+          height: 1px;
+          background: linear-gradient(90deg, var(--color-gold), transparent);
+        }
         .footer-bottom { padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: rgba(255,255,255,0.3); }
         @media (max-width: 768px) {
           .footer-root { padding: 3rem 1.5rem 2rem; }
@@ -35,6 +44,24 @@ export default function Footer() {
           <p style={{ fontSize: "0.82rem", lineHeight: 1.9, fontWeight: 300, color: "var(--color-text-mid)" }}>
             Feel with Luxury — Handcrafted gold jewellery crafted with passion and presented with pride.
           </p>
+          <p style={{ fontSize: "0.76rem", lineHeight: 1.8, fontWeight: 300, color: "var(--color-text-muted)", marginTop: "0.6rem" }}>
+            Building trust online today, expanding into stronger offline presence tomorrow.
+          </p>
+          <div style={{ display: "flex", gap: "0.65rem", marginTop: "1.1rem", flexWrap: "wrap" }}>
+            {["BIS Certified", "Premium Finish", "Lifetime Service"].map((point) => (
+              <span key={point} style={{
+                fontSize: "0.6rem",
+                letterSpacing: "0.14em",
+                textTransform: "uppercase",
+                color: "var(--color-text-mid)",
+                border: "1px solid var(--color-border)",
+                borderRadius: "999px",
+                padding: "0.3rem 0.6rem",
+              }}>
+                {point}
+              </span>
+            ))}
+          </div>
           <p style={{ fontSize: "0.75rem", lineHeight: 1.8, fontWeight: 300, marginTop: "1rem", color: "var(--color-text-muted)", fontStyle: "italic" }}>
             Rooted in tradition, crafted with integrity, trusted by generations, made for you.
           </p>

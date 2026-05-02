@@ -30,6 +30,9 @@ export default async function ContactPage({ searchParams }: Props) {
           >
             Get In Touch
           </h1>
+          <p style={{ marginTop: "0.8rem", color: "var(--color-text-mid)", fontSize: "0.88rem" }}>
+            Quick assistance for orders, custom designs, and appointments.
+          </p>
         </div>
 
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-16">
@@ -42,7 +45,9 @@ export default async function ContactPage({ searchParams }: Props) {
               >
                 Send Us a Message
               </h2>
-              <ContactForm defaultProduct={product} />
+              <div style={{ background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))", border: "1px solid var(--color-border)", borderRadius: "1rem", padding: "1rem" }}>
+                <ContactForm defaultProduct={product} />
+              </div>
             </div>
 
             {/* Business details */}
@@ -54,7 +59,7 @@ export default async function ContactPage({ searchParams }: Props) {
                 Visit Our Store
               </h2>
 
-              <div className="space-y-8">
+              <div className="space-y-8" style={{ background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))", border: "1px solid var(--color-border)", borderRadius: "1rem", padding: "1.25rem" }}>
                 <div>
                   <p
                     className="text-xs tracking-widest uppercase mb-2"
@@ -63,7 +68,7 @@ export default async function ContactPage({ searchParams }: Props) {
                     Address
                   </p>
                   <p className="text-base" style={{ color: "var(--color-text-mid)" }}>
-                    Address to be updated
+                    Address details will be updated shortly
                   </p>
                 </div>
 

@@ -1,13 +1,13 @@
 const reasons = [
-  { icon: "◈", title: "Live Gold Pricing", body: "Prices reflect the daily market rate. You always know you're getting honest value for every gram of gold." },
-  { icon: "✦", title: "BIS Hallmarked", body: "Every piece carries the BIS hallmark certifying 22KT purity. Authenticity you can see and trust." },
-  { icon: "◉", title: "Handcrafted Always", body: "No mass production, ever. Each piece is shaped by skilled karigars with 15+ years of expertise." },
-  { icon: "◇", title: "Lifetime Servicing", body: "Bring your Shreeva Jewellers piece in anytime for complimentary cleaning, polishing, and minor repairs." },
+  { icon: "◈", title: "Live Gold Pricing", body: "Daily-rate pricing with complete transparency." },
+  { icon: "✦", title: "BIS Hallmarked", body: "Certified 22KT purity across all gold pieces." },
+  { icon: "◉", title: "Handcrafted Always", body: "Skilled artisans, precision work, premium finish." },
+  { icon: "◇", title: "Lifetime Servicing", body: "Cleaning, polishing, and minor care support anytime." },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="why-section" style={{ background: "var(--color-bg-warm)" }}>
+    <section className="why-section section-shell" style={{ background: "var(--color-bg-warm)" }}>
       <style>{`
         .why-section { padding: 6rem 5rem; }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
       <div className="why-grid">
         {reasons.map((r) => (
           <div key={r.title} className="why-card scroll-reveal" style={{
-            background: "var(--color-surface)", borderRadius: "1.25rem", padding: "2rem 1.75rem",
+            background: "linear-gradient(150deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))", borderRadius: "1.25rem", padding: "2rem 1.75rem",
             border: "1px solid transparent", transition: "all 0.3s",
           }}>
             <div className="why-icon" style={{
