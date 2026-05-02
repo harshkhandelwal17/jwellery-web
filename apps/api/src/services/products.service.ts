@@ -117,9 +117,9 @@ export async function getProduct(id: string): Promise<ProductWithPrice | null> {
 
 export async function createProduct(data: {
   name: string; weight: number; makingCharges: number;
-  image: string; category: string; description?: string; modelPath?: string | null;
+  image?: string; category: string; description?: string; modelPath?: string | null;
 }): Promise<ProductWithPrice> {
-  const product = await ProductModel.create(data);
+  const product = await ProductModel.create({ ...data, image: data.image?.trim() ?? "" });
   const goldDoc = await GoldPriceModel.findOne().lean();
   const goldRate = goldDoc?.pricePerGram ?? 0;
   return toProductWithPrice(product.toObject(), goldRate);

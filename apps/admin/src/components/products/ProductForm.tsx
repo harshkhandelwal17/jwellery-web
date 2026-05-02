@@ -109,7 +109,18 @@ export default function ProductForm({ product }: Props) {
           subCategory: product.subCategory,
           occasion: product.occasion,
         }
-      : undefined,
+      : {
+          name: "",
+          weight: 1,
+          makingCharges: 0,
+          image: "",
+          category: "rings",
+          description: "",
+          modelPath: undefined,
+          mainCategory: undefined,
+          subCategory: undefined,
+          occasion: undefined,
+        },
   });
 
   const weight = watch("weight") ?? 0;
@@ -124,18 +135,36 @@ export default function ProductForm({ product }: Props) {
     try {
       const formData = new FormData();
       formData.append("image", file);
-      const res = await fetch(`${API_URL}/upload`, {
+      const res = await fetch(`${API_URL}/products/upload`, {
         method: "POST",
-        headers: { "x-admin-key": ADMIN_KEY },
         body: formData,
       });
-      const json = (await res.json()) as { success: boolean; url: string };
-      if (!json.success) throw new Error("Upload failed");
+      const json = (await res.json().catch(() => ({}))) as {
+        success?: boolean;
+        url?: string;
+        error?: string;
+        message?: string;
+      };
+      if (!res.ok || !json.success || !json.url) {
+        const msg = json.error ?? json.message ?? `HTTP ${res.status}`;
+        toast({
+          variant: "destructive",
+          title: "Image upload failed",
+          description: msg.includes("Cloudinary") || res.status === 500
+            ? "Add Cloudinary env on the API, or save without an image for now."
+            : msg,
+        });
+        return;
+      }
       const normalizedUrl = normalizeImageUrl(json.url);
       setValue("image", normalizedUrl);
       setImagePreview(normalizedUrl);
-    } catch {
-      toast({ variant: "destructive", title: "Image upload failed" });
+    } catch (e) {
+      toast({
+        variant: "destructive",
+        title: "Image upload failed",
+        description: e instanceof Error ? e.message : "Network error",
+      });
     } finally {
       setUploadingImage(false);
     }
@@ -295,7 +324,10 @@ export default function ProductForm({ product }: Props) {
 
           <Card>
             <CardHeader>
-              <CardTitle className="font-display2 text-base">Product Image</CardTitle>
+              <CardTitle className="font-display2 text-base">Product image (optional)</CardTitle>
+              <p className="text-xs mt-1" style={{ color: "var(--color-text-muted)" }}>
+                Save without uploading — add Cloudinary keys on the API later for uploads.
+              </p>
             </CardHeader>
             <CardContent>
               <input type="hidden" {...register("image")} />

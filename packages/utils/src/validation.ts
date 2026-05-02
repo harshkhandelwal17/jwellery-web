@@ -28,7 +28,10 @@ export const CreateProductSchema = z.object({
   name: z.string().min(1, "Name is required").max(100),
   weight: z.number().positive("Weight must be greater than 0"),
   makingCharges: z.number().min(0, "Making charges cannot be negative"),
-  image: z.string().url("Image must be a valid URL"),
+  image: z.preprocess(
+    (v) => (v === undefined || v === null ? "" : String(v).trim()),
+    z.union([z.literal(""), z.string().url("Image must be a valid URL or leave empty")])
+  ),
   category: ProductCategorySchema,
   description: z.string().max(1000).default(""),
   modelPath: z.string().nullable().optional(),
@@ -40,7 +43,10 @@ export const CreateProductSchema = z.object({
 export const UpdateProductSchema = CreateProductSchema.partial();
 
 export const UpdateGoldPriceSchema = z.object({
-  pricePerGram: z.number().positive("Gold price must be greater than 0"),
+  // Coerce: JSON / form often sends "9450" as string; z.number() alone returns 400.
+  pricePerGram: z.coerce
+    .number()
+    .refine((n) => Number.isFinite(n) && n > 0, { message: "Gold price must be a number greater than 0" }),
 });
 
 export const ContactFormSchema = z.object({

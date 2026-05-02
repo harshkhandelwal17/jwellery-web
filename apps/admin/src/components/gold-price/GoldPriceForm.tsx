@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -30,11 +31,18 @@ export default function GoldPriceForm({ currentPrice }: Props) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { pricePerGram: currentPrice?.pricePerGram ?? 0 },
+    defaultValues: { pricePerGram: currentPrice && currentPrice.pricePerGram > 0 ? currentPrice.pricePerGram : undefined },
   });
+
+  useEffect(() => {
+    if (currentPrice && currentPrice.pricePerGram > 0) {
+      reset({ pricePerGram: currentPrice.pricePerGram });
+    }
+  }, [currentPrice, reset]);
 
   const mutation = useMutation({
     mutationFn: (data: FormData) =>
@@ -65,7 +73,7 @@ export default function GoldPriceForm({ currentPrice }: Props) {
           type="number"
           step="0.01"
           placeholder="e.g. 9450"
-          {...register("pricePerGram")}
+          {...register("pricePerGram", { valueAsNumber: true })}
         />
         {errors.pricePerGram && (
           <p className="text-xs text-red-500 mt-1">{errors.pricePerGram.message}</p>

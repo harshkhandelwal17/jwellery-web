@@ -16,6 +16,8 @@ import type { ProductWithPrice } from "@jwell/types";
 const API_URL = (import.meta.env.VITE_API_URL as string) || "http://localhost:4000/api";
 const ADMIN_KEY = import.meta.env.VITE_ADMIN_API_KEY as string;
 
+const NO_IMG = "https://picsum.photos/seed/jwell-admin-thumb/400/300";
+
 interface Props {
   products: ProductWithPrice[];
 }
@@ -61,7 +63,7 @@ export default function ProductTable({ products }: Props) {
             {/* Image */}
             <div className="relative aspect-[4/3] overflow-hidden bg-[var(--color-bg-warm)]">
               <img
-                src={normalizeImageUrl(p.image)}
+                src={p.image?.trim() ? normalizeImageUrl(p.image) : NO_IMG}
                 alt={p.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 onError={(e) => {

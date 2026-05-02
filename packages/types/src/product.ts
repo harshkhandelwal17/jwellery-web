@@ -74,7 +74,8 @@ export interface CreateProductInput {
   name: string;
   weight: number;
   makingCharges: number;
-  image: string;
+  /** Empty until Cloudinary upload or manual URL */
+  image?: string;
   category: ProductCategory;
   description: string;
   modelPath?: string | null;

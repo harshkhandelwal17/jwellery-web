@@ -5,6 +5,15 @@ export async function getCurrentGoldPrice(): Promise<number> {
   return doc?.pricePerGram ?? 0;
 }
 
+export async function getCurrentGoldPriceDoc(): Promise<{
+  pricePerGram: number;
+  updatedAt: Date | null;
+} | null> {
+  const doc = await GoldPriceModel.findOne().lean();
+  if (!doc) return null;
+  return { pricePerGram: doc.pricePerGram, updatedAt: doc.updatedAt ?? null };
+}
+
 export async function updateGoldPrice(pricePerGram: number): Promise<{ pricePerGram: number; updatedAt: Date }> {
   const doc = await GoldPriceModel.findOneAndUpdate(
     {},

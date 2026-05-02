@@ -1,3 +1,16 @@
+/** Use when `product.image` is empty — remote so Next/Image works without a local asset. */
+export const PRODUCT_IMAGE_FALLBACK =
+  "https://picsum.photos/seed/jwell-placeholder/800/1067";
+
+export function productImageUrl(
+  url: string | undefined,
+  opts: { width?: number; quality?: number | "auto" } = {}
+): string {
+  const t = url?.trim();
+  if (!t) return PRODUCT_IMAGE_FALLBACK;
+  return cloudinaryUrl(normalizeImageUrl(t), opts);
+}
+
 export function normalizeImageUrl(url: string): string {
   if (!url) return url;
   // Fix path duplication

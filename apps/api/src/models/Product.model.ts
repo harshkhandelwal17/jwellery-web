@@ -34,7 +34,7 @@ const ProductSchema = new Schema<IProduct>(
     name:          { type: String, required: true, trim: true },
     weight:        { type: Number, required: true, min: 0 },
     makingCharges: { type: Number, required: true, min: 0 },
-    image:         { type: String, required: true },
+    image:         { type: String, default: "" },
     category:      { type: String, required: true, enum: ["rings", "necklaces", "earrings", "bracelets", "watches"] },
     description:   { type: String, default: "" },
     modelPath:     { type: String, default: null },
