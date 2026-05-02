@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1067" viewBox="0 0 800 1067" fill="none">
+  <defs>
+    <linearGradient id="pj-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#12122e"/>
+      <stop offset="100%" stop-color="#08081e"/>
+    </linearGradient>
+    <radialGradient id="pj-glow" cx="50%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="rgba(212,175,55,0.12)"/>
+      <stop offset="70%" stop-color="rgba(212,175,55,0)"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1067" fill="url(#pj-bg)"/>
+  <rect width="800" height="1067" fill="url(#pj-glow)"/>
+  <ellipse cx="400" cy="460" rx="140" ry="165" stroke="#D4AF37" stroke-opacity="0.35" stroke-width="1.5" fill="none"/>
+  <circle cx="400" cy="455" r="95" stroke="#D4AF37" stroke-opacity="0.22" stroke-width="1" fill="none"/>
+  <path d="M400 295v320" stroke="#D4AF37" stroke-opacity="0.15" stroke-width="1"/>
+</svg>

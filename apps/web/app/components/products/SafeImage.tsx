@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { imageSrcNeedsUnoptimized, PRODUCT_IMAGE_FALLBACK } from "../../lib/cloudinary";
 
 interface Props {
   src: string;
@@ -16,8 +17,6 @@ interface Props {
   sizes?: string;
 }
 
-const FALLBACK = "/fallback.jpg";
-
 export default function SafeImage({ src, alt, ...props }: Props) {
   const [imgSrc, setImgSrc] = useState(src);
 
@@ -26,8 +25,9 @@ export default function SafeImage({ src, alt, ...props }: Props) {
       {...props}
       src={imgSrc}
       alt={alt}
+      unoptimized={imageSrcNeedsUnoptimized(imgSrc)}
       onError={() => {
-        if (imgSrc !== FALLBACK) setImgSrc(FALLBACK);
+        if (imgSrc !== PRODUCT_IMAGE_FALLBACK) setImgSrc(PRODUCT_IMAGE_FALLBACK);
       }}
     />
   );

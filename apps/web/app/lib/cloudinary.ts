@@ -1,6 +1,17 @@
-/** Use when `product.image` is empty — remote so Next/Image works without a local asset. */
-export const PRODUCT_IMAGE_FALLBACK =
-  "https://picsum.photos/seed/jwell-placeholder/800/1067";
+/** Local asset — avoids 403 from remote placeholders through `/_next/image`. */
+export const PRODUCT_IMAGE_FALLBACK = "/placeholder-jewelry.svg";
+
+/** SVG + picsum: skip Next optimizer (403 / CSP on some hosts). */
+export function imageSrcNeedsUnoptimized(src: string): boolean {
+  if (src.endsWith(".svg")) return true;
+  try {
+    const h = new URL(src, "https://example.com").hostname;
+    if (h === "picsum.photos") return true;
+  } catch {
+    /* ignore */
+  }
+  return false;
+}
 
 export function productImageUrl(
   url: string | undefined,

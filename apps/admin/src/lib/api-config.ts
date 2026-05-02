@@ -9,6 +9,5 @@ export const ADMIN_API_URL =
 
 export const ADMIN_API_KEY = import.meta.env.VITE_ADMIN_API_KEY as string | undefined;
 
-/** Thumbnail when product has no image (same as catalogue grid). */
-export const ADMIN_IMAGE_PLACEHOLDER =
-  "https://picsum.photos/seed/jwell-admin-thumb/400/300";
+/** Same-origin placeholder — works on Vercel + avoids picsum/optimizer 403. */
+export const ADMIN_IMAGE_PLACEHOLDER = "/placeholder-jewelry.svg";

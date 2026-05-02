@@ -1,14 +1,14 @@
 import Image from "next/image";
+import { imageSrcNeedsUnoptimized, PRODUCT_IMAGE_FALLBACK } from "../../lib/cloudinary";
 
 interface Props {
   mainImage?: string;
   accentImage?: string;
 }
 
-const FALLBACK_MAIN = "https://picsum.photos/seed/abjw1/500/625";
-const FALLBACK_ACCENT = "https://picsum.photos/seed/abjw2/400/400";
-
 export default function AboutSection({ mainImage, accentImage }: Props) {
+  const mainSrc = mainImage ?? PRODUCT_IMAGE_FALLBACK;
+  const accentSrc = accentImage ?? PRODUCT_IMAGE_FALLBACK;
   return (
     <section className="about-section section-shell" style={{ background: "var(--color-bg)" }}>
       <style>{`
@@ -35,10 +35,11 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           background: "var(--color-bg-card)",
         }}>
           <Image
-            src={mainImage ?? FALLBACK_MAIN}
+            src={mainSrc}
             alt="Gold jewellery piece"
             fill
             quality={90}
+            unoptimized={imageSrcNeedsUnoptimized(mainSrc)}
             style={{ objectFit: "contain", padding: "1.5rem" }}
             sizes="(max-width: 768px) 70vw, 35vw"
           />
@@ -51,10 +52,11 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           background: "var(--color-bg-card)",
         }}>
           <Image
-            src={accentImage ?? FALLBACK_ACCENT}
+            src={accentSrc}
             alt="Gold jewellery detail"
             fill
             quality={88}
+            unoptimized={imageSrcNeedsUnoptimized(accentSrc)}
             style={{ objectFit: "contain", padding: "1rem" }}
             sizes="(max-width: 768px) 50vw, 25vw"
           />
