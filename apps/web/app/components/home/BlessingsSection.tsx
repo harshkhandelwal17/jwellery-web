@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { BLESSING_PATHS } from "../../lib/blessings";
+import { imageSrcNeedsUnoptimized } from "../../lib/cloudinary";
 
 function Portrait({
   primarySrc,
@@ -18,7 +19,7 @@ function Portrait({
   subtitle: string;
 }) {
   const [src, setSrc] = useState(primarySrc);
-  const unoptimized = src.endsWith(".svg");
+  const unoptimized = imageSrcNeedsUnoptimized(src);
 
   return (
     <figure className="blessing-portrait scroll-reveal">

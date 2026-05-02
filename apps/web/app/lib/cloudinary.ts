@@ -1,16 +1,17 @@
 /** Local asset — avoids 403 from remote placeholders through `/_next/image`. */
 export const PRODUCT_IMAGE_FALLBACK = "/placeholder-jewelry.svg";
 
-/** SVG + picsum: skip Next optimizer (403 / CSP on some hosts). */
+/**
+ * When `false`, Next.js serves the file via `/_next/image` (remote hosts must be in `remotePatterns`).
+ * Many CDNs / signed URLs block that fetcher → **403** in the browser.
+ * Rule: optimize only same-site `/…` paths; skip optimizer for every `http(s)://` URL.
+ */
 export function imageSrcNeedsUnoptimized(src: string): boolean {
-  if (src.endsWith(".svg")) return true;
-  try {
-    const h = new URL(src, "https://example.com").hostname;
-    if (h === "picsum.photos") return true;
-  } catch {
-    /* ignore */
-  }
-  return false;
+  const s = src.trim();
+  if (s.endsWith(".svg")) return true;
+  if (s.startsWith("/") && !s.startsWith("//")) return false;
+  if (/^https?:\/\//i.test(s)) return true;
+  return true;
 }
 
 export function productImageUrl(

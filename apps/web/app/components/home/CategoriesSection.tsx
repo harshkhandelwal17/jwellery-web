@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { imageSrcNeedsUnoptimized } from "../../lib/cloudinary";
 
 const CATEGORIES = [
   { name: "Rings", slug: "rings", fallback: "/shreeva/ring_green_stone_flower_008.jpeg" },
@@ -86,6 +87,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
                 className="object-cover"
                 sizes="(max-width: 768px) 45vw, 225px"
                 quality={85}
+                unoptimized={imageSrcNeedsUnoptimized(categoryImages[cat.slug] ?? cat.fallback)}
               />
             </div>
             <div style={{
