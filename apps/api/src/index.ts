@@ -23,16 +23,31 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use(async (_req, _res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.use("/api/gold-price", goldPriceRoutes);
-app.use("/api/products",   productsRoutes);
-app.use("/api/enquiries",  enquiriesRoutes);
+app.use("/api/products", productsRoutes);
+app.use("/api/enquiries", enquiriesRoutes);
 
 app.use(errorHandler);
 
-connectDB().then(() => {
-  app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
-}).catch((err) => {
-  console.error("Failed to connect to MongoDB:", err);
-  process.exit(1);
-});
+if (!process.env.VERCEL) {
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => console.log(`API running on http://localhost:${PORT}`));
+    })
+    .catch((err) => {
+      console.error("Failed to connect to MongoDB:", err);
+      process.exit(1);
+    });
+}
+
+export default app;
