@@ -10,17 +10,14 @@ import { errorHandler } from "./middleware/errorHandler.js";
 const app = express();
 const PORT = Number(process.env.PORT ?? 4000);
 
-const corsOrigins = process.env.CORS_ORIGINS?.split(",") ?? [
-  "http://localhost:3000",
-  "http://localhost:5173",
-  "https://shreeva-one.vercel.app",
-];
-
-app.use(cors({
-  origin: corsOrigins,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-  credentials: true,
-}));
+/** Reflects request Origin — allows browser calls from any domain (no CORS allowlist). */
+app.use(
+  cors({
+    origin: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use(async (_req, _res, next) => {
