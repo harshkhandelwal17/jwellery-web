@@ -240,7 +240,7 @@ export default function HeroSection() {
             <div className="hero-image-stack">
               <div className="hero-glow" />
               <Image
-                src="/heroImage.webp"
+                src="/cheroImage-removebg-preview.png"
                 alt="Handcrafted gold diamond ring"
                 fill
                 className="object-contain"

@@ -79,7 +79,7 @@ export default function SignatureShowcaseSection() {
         <div className="signature-visual">
           <div className="signature-main-card">
             <Image
-              src="/heroImage.webp"
+              src="/cheroImage-removebg-preview.png"
               alt="Signature jewellery showcase"
               fill
               quality={94}
