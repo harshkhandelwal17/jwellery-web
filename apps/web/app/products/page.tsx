@@ -152,10 +152,25 @@ export default async function ProductsPage({ searchParams }: Props) {
           {/* Product grid */}
           {products.length === 0 ? (
             <div
-              className="text-center py-24"
+              className="text-center py-24 max-w-lg mx-auto px-4"
               style={{ color: "var(--color-text-muted)" }}
             >
-              No products found in this category.
+              {allProducts.length === 0 ? (
+                <>
+                  <p style={{ color: "var(--color-text)", marginBottom: "0.5rem" }}>
+                    No products loaded
+                  </p>
+                  <p className="text-sm leading-relaxed">
+                    The API returned an empty list or the server could not reach it. Set{" "}
+                    <code className="text-xs">API_URL</code> or{" "}
+                    <code className="text-xs">NEXT_PUBLIC_API_URL</code> to your deployed API base
+                    (ending in <code className="text-xs">/api</code>), redeploy, or use{" "}
+                    <strong>Revalidate</strong> in dev after fixing env.
+                  </p>
+                </>
+              ) : (
+                <p>No products found in this category.</p>
+              )}
             </div>
           ) : (
             <div className="products-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(200px, 220px))", gap: "1rem" }}>

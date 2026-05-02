@@ -68,9 +68,40 @@ export default function FeaturedProducts({ products }: Props) {
       </div>
 
       <div className="featured-grid">
-        {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {products.length === 0 ? (
+          <div
+            className="col-span-full text-center py-12 px-4 rounded-2xl border"
+            style={{
+              borderColor: "var(--color-border)",
+              background: "var(--color-bg-card)",
+              color: "var(--color-text-mid)",
+              fontSize: "0.9rem",
+              lineHeight: 1.6,
+            }}
+          >
+            <p className="mb-2" style={{ color: "var(--color-text)" }}>
+              No pieces to show yet
+            </p>
+            <p className="text-sm mb-4">
+              The catalogue could not be loaded from the API, or there are no products. Check that{" "}
+              <code style={{ fontSize: "0.8em" }}>API_URL</code> or{" "}
+              <code style={{ fontSize: "0.8em" }}>NEXT_PUBLIC_API_URL</code> points to your live API
+              (e.g. <code style={{ fontSize: "0.8em" }}>…/api</code>) on the server.
+            </p>
+            <Link
+              href="/products"
+              style={{
+                fontSize: "0.8rem",
+                color: "var(--color-gold)",
+                textDecoration: "underline",
+              }}
+            >
+              Open catalogue →
+            </Link>
+          </div>
+        ) : (
+          products.map((product) => <ProductCard key={product.id} product={product} />)
+        )}
       </div>
     </section>
   );
