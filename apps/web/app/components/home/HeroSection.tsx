@@ -49,19 +49,23 @@ export default function HeroSection() {
           min-height: calc(100vh - 96px);
           position: relative;
           overflow: hidden;
+          isolation: isolate;
+          /* Single “stage” — shared depth for copy + product (no split-column colour blocks) */
           background:
-            radial-gradient(ellipse 80% 60% at 10% 15%, rgba(212,175,55,0.14), transparent 50%),
-            radial-gradient(ellipse 70% 50% at 85% 75%, rgba(80, 90, 200, 0.12), transparent 45%),
-            var(--color-bg);
+            radial-gradient(ellipse 95% 80% at 50% 108%, rgba(4, 4, 18, 0.85) 0%, transparent 52%),
+            radial-gradient(ellipse 85% 70% at 22% 28%, rgba(212, 175, 55, 0.14), transparent 55%),
+            radial-gradient(ellipse 75% 60% at 82% 48%, rgba(120, 130, 255, 0.08), transparent 52%),
+            linear-gradient(168deg, #07071c 0%, var(--color-bg) 42%, #050514 100%);
         }
         .hero-section::after {
           content: "";
           pointer-events: none;
           position: absolute;
           inset: 0;
-          opacity: 0.35;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.07'%3E%3Cpath d='M0 70h140M70 0v140'/%3E%3C/g%3E%3C/svg%3E");
-          mask-image: radial-gradient(circle at 40% 35%, black 0%, transparent 72%);
+          opacity: 0.2;
+          z-index: 0;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.08'%3E%3Cpath d='M0 70h140M70 0v140'/%3E%3C/g%3E%3C/svg%3E");
+          mask-image: radial-gradient(ellipse 88% 78% at 50% 44%, black 0%, transparent 82%);
         }
         .hero-text {
           padding: 5.5rem 4.25rem 5rem 5rem;
@@ -101,27 +105,27 @@ export default function HeroSection() {
         .hero-image-col {
           height: calc(100vh - 96px);
           position: relative;
-          background:
-            radial-gradient(circle at 50% 35%, rgba(212,175,55,0.08), transparent 55%),
-            linear-gradient(165deg, rgba(17,17,50,0.9), var(--color-bg-warm));
+          background: transparent;
           display: flex; align-items: center; justify-content: center;
           overflow: hidden;
-          perspective: 1200px;
+          perspective: 1400px;
         }
+        /* Soft halo behind jewellery only — same gold tone as section, not a second “room” */
         .hero-image-col::before {
           content: "";
           position: absolute;
           inset: 0;
           pointer-events: none;
-          background: radial-gradient(circle at 50% 50%, transparent 35%, rgba(8,8,30,0.55) 100%);
-          z-index: 1;
+          z-index: 0;
+          background: radial-gradient(ellipse 58% 52% at 52% 46%, rgba(212, 175, 55, 0.11), transparent 72%);
+          opacity: 1;
         }
         .hero-orbit {
           position: absolute;
           inset: 14% 14%;
-          border: 1px solid rgba(212,175,55,0.22);
+          border: 1px solid rgba(212,175,55,0.18);
           border-radius: 999px;
-          opacity: 0.55;
+          opacity: 0.4;
           z-index: 0;
         }
         .hero-orbit::after {
@@ -137,21 +141,34 @@ export default function HeroSection() {
           border-radius: 1.5rem;
           position: relative;
           transform-style: preserve-3d;
-          transform: rotateY(-10deg) rotateX(4deg);
-          transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+          transform: rotateY(-12deg) rotateX(5deg) translateZ(12px);
+          transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
           z-index: 2;
         }
-        .hero-image-stack:hover { transform: rotateY(-5deg) rotateX(2deg) scale(1.02); }
+        .hero-image-stack:hover {
+          transform: rotateY(-6deg) rotateX(3deg) translateZ(18px) scale(1.03);
+        }
         .hero-glow {
           position: absolute;
-          inset: -14%;
-          background: radial-gradient(circle, rgba(212,175,55,0.28), transparent 62%);
-          filter: blur(28px);
+          inset: -18%;
+          background: radial-gradient(circle, rgba(212,175,55,0.32), transparent 58%);
+          filter: blur(36px);
           z-index: 0;
+        }
+        .hero-jewel-img {
+          border-radius: 1.25rem;
+          padding: 0.35rem !important;
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          filter:
+            drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55))
+            drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35))
+            drop-shadow(0 0 52px rgba(212, 175, 55, 0.22));
         }
         @media (max-width: 768px) {
           .hero-section { grid-template-columns: 1fr; min-height: auto; }
-          .hero-section::after { opacity: 0.22; }
+          .hero-section::after { opacity: 0.16; }
           .hero-text { padding: 2.6rem 1.15rem 1.6rem; align-items: center; text-align: center; }
           .hero-kicker-row { justify-content: center; margin-bottom: 1.25rem; }
           .hero-kicker-line { display: none; }
@@ -172,8 +189,8 @@ export default function HeroSection() {
           }
           .hero-cta a { width: 100%; justify-content: center; text-align: center; }
           .hero-image-col { height: min(72vw, 380px); min-height: 260px; }
-          .hero-image-col img { padding: 1rem !important; }
-          .hero-image-stack { width: 78%; border-radius: 1.05rem; }
+          .hero-jewel-img { padding: 0.25rem !important; }
+          .hero-image-stack { width: 78%; border-radius: 1.05rem; transform: rotateY(-8deg) rotateX(4deg) translateZ(8px); }
           .hero-orbit { inset: 10% 6%; }
           .hero-gold-tag { bottom: 0.85rem !important; left: 0.85rem !important; padding: 0.55rem 0.85rem !important; }
           .hero-gold-tag div:first-child { font-size: 0.52rem !important; letter-spacing: 0.16em !important; }
@@ -243,18 +260,10 @@ export default function HeroSection() {
                 src="/cheroImage-removebg-preview.png"
                 alt="Handcrafted gold diamond ring"
                 fill
-                className="object-contain"
+                className="object-contain hero-jewel-img"
                 priority
                 quality={95}
                 sizes="(max-width: 768px) 100vw, 50vw"
-                style={{
-                  padding: "2.2rem",
-                  borderRadius: "1.5rem",
-                  background: "linear-gradient(155deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
-                  border: "1px solid rgba(212,175,55,0.35)",
-                  boxShadow:
-                    "0 28px 80px rgba(0,0,0,0.45), 0 12px 40px rgba(212,175,55,0.12), inset 0 1px 0 rgba(255,255,255,0.06)",
-                }}
               />
             </div>
           </div>
