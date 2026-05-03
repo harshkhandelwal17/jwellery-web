@@ -167,6 +167,15 @@ export default function Footer() {
         <Link href="/contact" className="footer-link" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}>
           Contact us
         </Link>
+        <a
+          href="https://nexisparkx.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-link"
+          style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none" }}
+        >
+          Developed by Nexisparkx Technologies
+        </a>
       </div>
     </footer>
   );
