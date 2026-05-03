@@ -91,7 +91,7 @@ export default function MobileNav({ open, onClose }: Props) {
                 boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
               }}
             />
-            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.95rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.25 }}>
+            <span style={{ fontFamily: "'Cinzel', serif", fontSize: "1.02rem", fontWeight: 600, color: "var(--color-gold)", letterSpacing: "0.1em", textTransform: "uppercase", lineHeight: 1.25 }}>
               Shreeva Jewellers
             </span>
           </div>

@@ -202,7 +202,8 @@ export default function HeroSection() {
           }
           .hero-kicker-row { justify-content: center; margin-bottom: 0.75rem; }
           .hero-kicker-line { display: none; }
-          .hero-text h1 { font-size: clamp(2.5rem, 10vw, 3.5rem) !important; line-height: 1.1 !important; margin-bottom: 0.5rem; }
+          .hero-text h1 { font-size: clamp(2.15rem, 8.5vw, 3.1rem) !important; line-height: 1.1 !important; margin-bottom: 0.5rem; }
+          .hero-text h1 .hero-title-accent { font-size: 0.9em !important; }
           .hero-text .text-lede { font-size: 0.85rem !important; max-width: 18rem !important; margin-top: 0.5rem !important;}
           .hero-badges { justify-content: center; gap: 0.5rem !important; margin-top: 1.25rem !important; }
           .hero-pill { font-size: 0.55rem !important; padding: 0.4rem 0.6rem !important; }
@@ -250,12 +251,14 @@ export default function HeroSection() {
           </div>
 
           <h1 className="hero-enter hero-enter-2 luxury-hero-title" style={{
-            fontSize: "clamp(2.15rem, 5vw, 4.35rem)",
+            fontSize: "clamp(1.95rem, 4.5vw, 3.85rem)",
             lineHeight: 1.12,
             color: "var(--color-text, #ffffff)",
           }}>
             Moments To<br />
-            <span className="hero-title-accent font-serif italic">Mementos</span>
+            <span className="hero-title-accent font-serif italic" style={{ fontSize: "0.9em" }}>
+              Mementos
+            </span>
           </h1>
 
           <p className="hero-enter hero-enter-3 text-lede mx-auto md:mx-0" style={{ fontWeight: 300, maxWidth: "24rem", marginTop: "1.15rem", color: "var(--color-text-mid, #a0a0b0)" }}>

@@ -53,8 +53,8 @@ function BrandLink({
       <Image
         src="/logo.jpeg"
         alt="Shreeva Jewellers"
-        width={isDesktop ? 62 : 54}
-        height={isDesktop ? 62 : 54}
+        width={isDesktop ? 64 : 56}
+        height={isDesktop ? 64 : 56}
         style={{
           borderRadius: "0.55rem",
           objectFit: "cover",
@@ -67,8 +67,8 @@ function BrandLink({
       <span
         className={
           isDesktop
-            ? "text-[0.95rem] sm:text-[1.05rem] lg:text-[1.12rem]"
-            : "text-[0.82rem] min-[400px]:text-[0.9rem]"
+            ? "text-[1.06rem] sm:text-[1.14rem] lg:text-[1.26rem]"
+            : "text-[0.92rem] min-[400px]:text-[1.02rem]"
         }
         style={{
           fontFamily: "'Playfair Display', 'Cinzel', serif",
