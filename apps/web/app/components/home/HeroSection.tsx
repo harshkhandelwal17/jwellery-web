@@ -11,7 +11,10 @@ const TICKER_ITEMS = [
   "Lab Grown Diamonds Available",
 ];
 
-const BADGES = ["BIS Hallmarked", "Handcrafted", "Secure Shipping"] as const;
+const BADGES = ["BIS Hallmarked", "Bridal & Daily", "Secure Shipping"] as const;
+
+const HERO_TAGLINE =
+  "BIS-hallmarked 22KT gold and fine diamonds—bridal trousseau, festivals, and everyday elegance. Honest pricing, heirloom finish.";
 
 export default function HeroSection() {
   return (
@@ -91,6 +94,49 @@ export default function HeroSection() {
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
+        }
+        .hero-brand-headline {
+          font-size: clamp(2.45rem, 7.2vw, 6rem);
+          line-height: 1.02;
+          letter-spacing: 0.04em;
+          text-transform: none;
+          color: var(--color-text, #ffffff);
+          margin: 0;
+          max-width: 100%;
+        }
+        .hero-brand-line1 {
+          display: block;
+          font-weight: 600;
+          text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.06),
+            0 14px 52px rgba(0, 0, 0, 0.38);
+        }
+        .hero-brand-line2 {
+          display: block;
+          margin-top: 0.06em;
+          font-weight: 600;
+          font-style: italic;
+          letter-spacing: 0.06em;
+          text-shadow:
+            0 1px 0 rgba(255, 255, 255, 0.05),
+            0 12px 40px rgba(0, 0, 0, 0.35);
+        }
+        .hero-tagline {
+          margin-top: 1.35rem;
+          font-weight: 350;
+          font-size: clamp(0.94rem, 1.45vw, 1.18rem);
+          line-height: 1.68;
+          max-width: min(32rem, 100%);
+          color: var(--color-text-mid, #a8a8bc);
+        }
+        @media (min-width: 769px) and (max-width: 1100px) {
+          .hero-text {
+            padding-left: 2.25rem;
+            padding-right: 2.25rem;
+          }
+          .hero-brand-headline {
+            font-size: clamp(2.15rem, 5.8vw, 4.35rem);
+          }
         }
         .hero-pill {
           font-size: 0.64rem;
@@ -200,11 +246,20 @@ export default function HeroSection() {
             text-align: center; 
             width: 100%;
           }
-          .hero-kicker-row { justify-content: center; margin-bottom: 0.75rem; }
+          .hero-kicker-row { justify-content: center; margin-bottom: 0.65rem; }
           .hero-kicker-line { display: none; }
-          .hero-text h1 { font-size: clamp(2.15rem, 8.5vw, 3.1rem) !important; line-height: 1.1 !important; margin-bottom: 0.5rem; }
-          .hero-text h1 .hero-title-accent { font-size: 0.9em !important; }
-          .hero-text .text-lede { font-size: 0.85rem !important; max-width: 18rem !important; margin-top: 0.5rem !important;}
+          .hero-text h1.hero-brand-headline {
+            font-size: clamp(2.15rem, 10.5vw, 3.65rem) !important;
+            line-height: 1.04 !important;
+            letter-spacing: 0.03em !important;
+          }
+          .hero-text .hero-tagline {
+            font-size: 0.9rem !important;
+            line-height: 1.62 !important;
+            max-width: 21rem !important;
+            margin-top: 1.05rem !important;
+            padding: 0 0.35rem;
+          }
           .hero-badges { justify-content: center; gap: 0.5rem !important; margin-top: 1.25rem !important; }
           .hero-pill { font-size: 0.55rem !important; padding: 0.4rem 0.6rem !important; }
           
@@ -245,24 +300,18 @@ export default function HeroSection() {
         <div className="hero-text">
           <div className="hero-enter hero-enter-1 hero-kicker-row">
             <span className="hero-kicker-line" aria-hidden />
-            <p className="text-caption-gold" style={{ marginBottom: 0, color: "var(--color-gold, #d4af37)", textTransform: "uppercase", letterSpacing: "0.1em", fontSize: "0.75rem", fontWeight: "600" }}>
-              The Luxury Standard
+            <p className="text-caption-gold" style={{ marginBottom: 0, color: "var(--color-gold, #d4af37)", textTransform: "uppercase", letterSpacing: "0.22em", fontSize: "0.68rem", fontWeight: "600" }}>
+              Hallmarked gold · Honest craft
             </p>
           </div>
 
-          <h1 className="hero-enter hero-enter-2 luxury-hero-title" style={{
-            fontSize: "clamp(1.95rem, 4.5vw, 3.85rem)",
-            lineHeight: 1.12,
-            color: "var(--color-text, #ffffff)",
-          }}>
-            Moments To<br />
-            <span className="hero-title-accent font-serif italic" style={{ fontSize: "0.9em" }}>
-              Mementos
-            </span>
+          <h1 className="hero-enter hero-enter-2 luxury-hero-title hero-brand-headline">
+            <span className="hero-brand-line1">Shreeva</span>
+            <span className="hero-brand-line2 hero-title-accent font-serif">Jewellers</span>
           </h1>
 
-          <p className="hero-enter hero-enter-3 text-lede mx-auto md:mx-0" style={{ fontWeight: 300, maxWidth: "24rem", marginTop: "1.15rem", color: "var(--color-text-mid, #a0a0b0)" }}>
-            Handpicked gold craftsmanship — hallmarked purity, honest pricing, and a finish meant to turn heads.
+          <p className="hero-enter hero-enter-3 hero-tagline mx-auto md:mx-0 text-center md:text-left">
+            {HERO_TAGLINE}
           </p>
 
           <div className="hero-enter hero-enter-3 hero-badges" style={{ display: "flex", gap: "0.75rem", marginTop: "1.35rem", flexWrap: "wrap" }}>
