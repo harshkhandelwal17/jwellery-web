@@ -123,8 +123,8 @@ export default function HeroSection() {
           font-family: "Cinzel", var(--font-display, Georgia), serif;
           font-weight: 600;
           font-style: normal;
-          font-size: clamp(0.62rem, 1.55vw, 0.95rem);
-          letter-spacing: 0.38em;
+          font-size: clamp(0.78rem, 1.95vw, 1.18rem);
+          letter-spacing: 0.32em;
           text-transform: uppercase;
           text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
         }
@@ -264,8 +264,8 @@ export default function HeroSection() {
             letter-spacing: 0.12em !important;
           }
           .hero-text h1.hero-brand-headline .hero-brand-line2 {
-            font-size: clamp(0.52rem, 2.8vw, 0.78rem) !important;
-            letter-spacing: 0.22em !important;
+            font-size: clamp(0.64rem, 3.4vw, 0.92rem) !important;
+            letter-spacing: 0.2em !important;
             margin-top: 0.55em !important;
           }
           .hero-text .hero-tagline {
