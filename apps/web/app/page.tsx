@@ -37,13 +37,6 @@ export default async function HomePage() {
     watches:   watches[0]   ? cloudinaryUrl(watches[0].image,   { width: 600, quality: 85 }) : undefined,
   };
 
-  const aboutMainImage = rings[3]
-    ? cloudinaryUrl(rings[3].image, { width: 800, quality: 90 })
-    : undefined;
-  const aboutAccentImage = necklaces[3]
-    ? cloudinaryUrl(necklaces[3].image, { width: 600, quality: 88 })
-    : undefined;
-
   return (
     <>
       <Header />
@@ -52,7 +45,7 @@ export default async function HomePage() {
         <CategoriesSection categoryImages={categoryImages} />
         <FeaturedProducts products={featured} />
         <BridalSection />
-        <AboutSection mainImage={aboutMainImage} accentImage={aboutAccentImage} />
+        <AboutSection mainImage="/about-main.jpg" accentImage="/about-accent.jpg" />
         <BlessingsSection />
         <CraftsmanshipSection />
         <SignatureShowcaseSection />

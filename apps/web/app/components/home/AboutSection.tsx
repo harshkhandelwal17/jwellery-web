@@ -14,6 +14,17 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
       <style>{`
         .about-section { padding: 7rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
         .about-image-wrap { position: relative; height: 520px; }
+        .about-img-slot {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          border-radius: inherit;
+        }
+        .about-img-slot img {
+          object-fit: cover !important;
+          object-position: center;
+        }
         .about-card {
           background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
           border: 1px solid var(--color-border);
@@ -34,15 +45,17 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           boxShadow: "0 16px 48px rgba(0,0,0,0.1)",
           background: "var(--color-bg-card)",
         }}>
-          <Image
-            src={mainSrc}
-            alt="Gold jewellery piece"
-            fill
-            quality={90}
-            unoptimized={imageSrcNeedsUnoptimized(mainSrc)}
-            style={{ objectFit: "contain", padding: "1.5rem" }}
-            sizes="(max-width: 768px) 70vw, 35vw"
-          />
+          <div className="about-img-slot">
+            <Image
+              src={mainSrc}
+              alt="Gold jewellery piece"
+              fill
+              quality={90}
+              unoptimized={imageSrcNeedsUnoptimized(mainSrc)}
+              sizes="(max-width: 768px) 70vw, 35vw"
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
+          </div>
         </div>
         <div style={{
           position: "absolute", bottom: 0, right: 0, width: "52%",
@@ -51,15 +64,17 @@ export default function AboutSection({ mainImage, accentImage }: Props) {
           boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
           background: "var(--color-bg-card)",
         }}>
-          <Image
-            src={accentSrc}
-            alt="Gold jewellery detail"
-            fill
-            quality={88}
-            unoptimized={imageSrcNeedsUnoptimized(accentSrc)}
-            style={{ objectFit: "contain", padding: "1rem" }}
-            sizes="(max-width: 768px) 50vw, 25vw"
-          />
+          <div className="about-img-slot">
+            <Image
+              src={accentSrc}
+              alt="Gold jewellery detail"
+              fill
+              quality={88}
+              unoptimized={imageSrcNeedsUnoptimized(accentSrc)}
+              sizes="(max-width: 768px) 50vw, 25vw"
+              style={{ objectFit: "cover", objectPosition: "center top" }}
+            />
+          </div>
         </div>
       </div>
 
