@@ -132,6 +132,16 @@ body::after {
 .font-script  { font-family: 'Corinthia', cursive; }
 .font-body    { font-family: var(--font-sans); }
 
+/* Logo wordmark — same Cinzel caps treatment as hero “Shreeva / Jewellers” */
+.brand-wordmark-text {
+  font-family: "Cinzel", var(--font-display), Georgia, serif;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-feature-settings: "kern" 1;
+}
+
 /* Accent serif for softer editorial lines (quotes, sub-heroes) */
 .font-accent-serif {
   font-family: var(--font-accent);

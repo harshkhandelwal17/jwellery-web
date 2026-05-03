@@ -332,7 +332,7 @@ export default function HeroSection() {
           </div>
 
           <h1 className="hero-enter hero-enter-2 hero-brand-headline" aria-label="Shreeva Jewellers">
-            <span className="hero-brand-line1">Shreeva</span>
+            <span className="hero-brand-line1 brand-wordmark-text">Shreeva</span>
             <span className="hero-brand-line2 hero-title-accent">• Jewellers •</span>
           </h1>
 

@@ -65,17 +65,13 @@ function BrandLink({
         priority
       />
       <span
-        className={
+        className={`brand-wordmark-text ${
           isDesktop
             ? "text-[1.06rem] sm:text-[1.14rem] lg:text-[1.26rem]"
             : "text-[0.92rem] min-[400px]:text-[1.02rem]"
-        }
+        }`}
         style={{
-          fontFamily: "'Cinzel', var(--font-display, Georgia), serif",
-          fontWeight: 700,
           color: "var(--color-gold)",
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
           lineHeight: 1.12,
           textShadow: "0 1px 12px rgba(212,175,55,0.22)",
         }}
