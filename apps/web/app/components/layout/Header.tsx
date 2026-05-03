@@ -71,10 +71,10 @@ function BrandLink({
             : "text-[0.92rem] min-[400px]:text-[1.02rem]"
         }
         style={{
-          fontFamily: "'Playfair Display', 'Cinzel', serif",
+          fontFamily: "'Cinzel', var(--font-display, Georgia), serif",
           fontWeight: 700,
           color: "var(--color-gold)",
-          letterSpacing: "0.05em",
+          letterSpacing: "0.1em",
           textTransform: "uppercase",
           lineHeight: 1.12,
           textShadow: "0 1px 12px rgba(212,175,55,0.22)",

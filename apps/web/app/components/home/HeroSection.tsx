@@ -95,31 +95,38 @@ export default function HeroSection() {
           background-clip: text;
           color: transparent;
         }
+        /* Logo-matched type: Cinzel uppercase — SHREEVA (white) + • JEWELLERS • (gold) */
         .hero-brand-headline {
-          font-size: clamp(2.45rem, 7.2vw, 6rem);
-          line-height: 1.02;
-          letter-spacing: 0.04em;
-          text-transform: none;
+          font-family: "Cinzel", var(--font-display, Georgia), serif;
+          font-size: clamp(2.45rem, 7.2vw, 5.85rem);
+          line-height: 1.05;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          font-style: normal;
+          font-weight: 700;
           color: var(--color-text, #ffffff);
           margin: 0;
           max-width: 100%;
         }
         .hero-brand-line1 {
           display: block;
-          font-weight: 600;
+          font-weight: 700;
+          letter-spacing: 0.16em;
+          color: #ffffff;
           text-shadow:
             0 1px 0 rgba(255, 255, 255, 0.06),
             0 14px 52px rgba(0, 0, 0, 0.38);
         }
         .hero-brand-line2 {
           display: block;
-          margin-top: 0.06em;
+          margin-top: 0.42em;
+          font-family: "Cinzel", var(--font-display, Georgia), serif;
           font-weight: 600;
-          font-style: italic;
-          letter-spacing: 0.06em;
-          text-shadow:
-            0 1px 0 rgba(255, 255, 255, 0.05),
-            0 12px 40px rgba(0, 0, 0, 0.35);
+          font-style: normal;
+          font-size: clamp(0.62rem, 1.55vw, 0.95rem);
+          letter-spacing: 0.38em;
+          text-transform: uppercase;
+          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
         }
         .hero-tagline {
           margin-top: 1.35rem;
@@ -249,9 +256,17 @@ export default function HeroSection() {
           .hero-kicker-row { justify-content: center; margin-bottom: 0.65rem; }
           .hero-kicker-line { display: none; }
           .hero-text h1.hero-brand-headline {
-            font-size: clamp(2.15rem, 10.5vw, 3.65rem) !important;
-            line-height: 1.04 !important;
-            letter-spacing: 0.03em !important;
+            font-size: clamp(2.05rem, 9.5vw, 3.35rem) !important;
+            line-height: 1.06 !important;
+            letter-spacing: 0.1em !important;
+          }
+          .hero-text h1.hero-brand-headline .hero-brand-line1 {
+            letter-spacing: 0.12em !important;
+          }
+          .hero-text h1.hero-brand-headline .hero-brand-line2 {
+            font-size: clamp(0.52rem, 2.8vw, 0.78rem) !important;
+            letter-spacing: 0.22em !important;
+            margin-top: 0.55em !important;
           }
           .hero-text .hero-tagline {
             font-size: 0.9rem !important;
@@ -300,14 +315,25 @@ export default function HeroSection() {
         <div className="hero-text">
           <div className="hero-enter hero-enter-1 hero-kicker-row">
             <span className="hero-kicker-line" aria-hidden />
-            <p className="text-caption-gold" style={{ marginBottom: 0, color: "var(--color-gold, #d4af37)", textTransform: "uppercase", letterSpacing: "0.22em", fontSize: "0.68rem", fontWeight: "600" }}>
-              Hallmarked gold · Honest craft
+            <p
+              className="text-caption-gold"
+              style={{
+                marginBottom: 0,
+                color: "var(--color-text-mid, #d0cfdf)",
+                textTransform: "uppercase",
+                letterSpacing: "0.28em",
+                fontSize: "0.62rem",
+                fontWeight: 600,
+                fontFamily: "var(--font-sans, 'DM Sans', system-ui, sans-serif)",
+              }}
+            >
+              Feel the luxury
             </p>
           </div>
 
-          <h1 className="hero-enter hero-enter-2 luxury-hero-title hero-brand-headline">
+          <h1 className="hero-enter hero-enter-2 hero-brand-headline" aria-label="Shreeva Jewellers">
             <span className="hero-brand-line1">Shreeva</span>
-            <span className="hero-brand-line2 hero-title-accent font-serif">Jewellers</span>
+            <span className="hero-brand-line2 hero-title-accent">• Jewellers •</span>
           </h1>
 
           <p className="hero-enter hero-enter-3 hero-tagline mx-auto md:mx-0 text-center md:text-left">
