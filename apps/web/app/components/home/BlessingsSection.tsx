@@ -185,21 +185,21 @@ export default function BlessingsSection() {
             primarySrc={BLESSING_PATHS.grandfather.primary}
             fallbackSrc={BLESSING_PATHS.grandfather.fallback}
             alt="Grandfather — family blessing"
-            title="Grandfather"
+            title=""
             subtitle="Strength and values passed down"
           />
           <Portrait
             primarySrc={BLESSING_PATHS.mother.primary}
             fallbackSrc={BLESSING_PATHS.mother.fallback}
             alt="Mother — family blessing"
-            title="Mother"
+            title=""
             subtitle="Love and care in all we do"
           />
           <Portrait
             primarySrc={BLESSING_PATHS.divine.primary}
             fallbackSrc={BLESSING_PATHS.divine.fallback}
             alt="Divine blessings"
-            title="Divine grace"
+            title=""
             subtitle="Faith that lights our path"
           />
         </div>
