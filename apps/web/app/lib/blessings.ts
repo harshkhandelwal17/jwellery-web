@@ -13,15 +13,15 @@
  */
 export const BLESSING_PATHS = {
   grandfather: {
-    primary: process.env.NEXT_PUBLIC_BLESSING_GRANDFATHER?.trim() || "/blessings/grandfather.jpg",
+    primary: process.env.NEXT_PUBLIC_BLESSING_GRANDFATHER?.trim() || "/blessings/grandfather.jpeg",
     fallback: "/blessings/grandfather.svg",
   },
   mother: {
-    primary: process.env.NEXT_PUBLIC_BLESSING_MOTHER?.trim() || "/blessings/mother.jpg",
+    primary: process.env.NEXT_PUBLIC_BLESSING_MOTHER?.trim() || "/blessings/mother.jpeg",
     fallback: "/blessings/mother.svg",
   },
   divine: {
-    primary: process.env.NEXT_PUBLIC_BLESSING_DIVINE?.trim() || "/blessings/divine.jpg",
+    primary: process.env.NEXT_PUBLIC_BLESSING_DIVINE?.trim() || "/blessings/divine.jpeg",
     fallback: "/blessings/divine.svg",
   },
 } as const;
