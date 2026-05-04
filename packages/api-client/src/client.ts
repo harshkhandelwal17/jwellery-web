@@ -21,7 +21,9 @@ export async function apiFetch<T>(
   }
 
   const res = await fetch(url, {
-    credentials: "include",
+    // Cross-origin public APIs should not send cookies by default.
+    // This avoids intermittent 403/CORS issues from stale third-party cookies.
+    credentials: rest.credentials ?? "omit",
     ...rest,
     headers,
   });
