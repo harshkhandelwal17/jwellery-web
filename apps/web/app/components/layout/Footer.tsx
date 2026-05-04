@@ -104,11 +104,11 @@ export default function Footer() {
             <Image
               src="/logo.jpeg"
               alt="Shreeva Jewellers"
-              width={64}
-              height={64}
-              style={{ borderRadius: "0.5rem", objectFit: "cover" }}
+              width={84}
+              height={84}
+              style={{ borderRadius: "0.55rem", objectFit: "cover" }}
             />
-            <span className="brand-wordmark-text" style={{ fontSize: "1rem", color: "var(--color-gold)", lineHeight: 1.35 }}>
+            <span className="brand-wordmark-text" style={{ fontSize: "1.2rem", color: "var(--color-gold)", lineHeight: 1.35 }}>
               Shreeva
               <br />
               Jewellers

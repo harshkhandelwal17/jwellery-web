@@ -202,7 +202,7 @@ body::after {
 /* Sticky header offset when linking in-page */
 main.home-page-main > .section-shell,
 main.home-page-main > section {
-  scroll-margin-top: 96px;
+  scroll-margin-top: 136px;
 }
 
 .luxury-card {

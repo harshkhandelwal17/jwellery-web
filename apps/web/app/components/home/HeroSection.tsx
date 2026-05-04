@@ -11,155 +11,234 @@ const TICKER_ITEMS = [
   "Lab Grown Diamonds Available",
 ];
 
-const BADGES = ["BIS Hallmarked", "Bridal & Daily", "Secure Shipping"] as const;
-
-const HERO_TAGLINE =
-  "BIS-hallmarked 22KT gold and fine diamonds—bridal trousseau, festivals, and everyday elegance. Honest pricing, heirloom finish.";
+// Ornamental SVG divider — single thin line with a diamond centre
+function OrnamentDivider({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="220"
+      height="16"
+      viewBox="0 0 220 16"
+      fill="none"
+      aria-hidden
+      style={{ display: "block" }}
+    >
+      <line x1="0" y1="8" x2="96" y2="8" stroke="#d4af37" strokeOpacity="0.45" strokeWidth="0.8" />
+      <rect x="103" y="3" width="10" height="10" rx="1" transform="rotate(45 108 8)" fill="none" stroke="#d4af37" strokeOpacity="0.8" strokeWidth="1" />
+      <line x1="120" y1="8" x2="220" y2="8" stroke="#d4af37" strokeOpacity="0.45" strokeWidth="0.8" />
+    </svg>
+  );
+}
 
 export default function HeroSection() {
   return (
     <>
       <style>{`
+        /* ── buttons ── */
         .hero-btn-primary {
-          background: var(--color-gold, #d4af37) !important;
-          color: #000000 !important;
-          border: 1px solid var(--color-gold, #d4af37) !important;
-          border-radius: 999px !important;
-          transition: all 0.3s ease-in-out;
-          box-shadow: 0 4px 24px rgba(212,175,55,0.25);
+          background: linear-gradient(135deg, #c9a227, #d4af37 50%, #b8860b) !important;
+          color: #0a0800 !important;
+          border: none !important;
+          border-radius: 2px !important;
+          transition: all 0.35s ease;
+          box-shadow: 0 0 0 1px rgba(212,175,55,0.5), 0 6px 28px rgba(212,175,55,0.28);
+          letter-spacing: 0.22em;
         }
         .hero-btn-primary:hover {
-          background: var(--color-gold-light, #f4e5b3) !important;
-          border-color: var(--color-gold-light, #f4e5b3) !important;
-          box-shadow: 0 8px 32px rgba(212,175,55,0.35);
-          transform: translateY(-1px);
+          background: linear-gradient(135deg, #e0c44a, #f4e5b3 50%, #c9a227) !important;
+          box-shadow: 0 0 0 1px rgba(212,175,55,0.7), 0 10px 36px rgba(212,175,55,0.4);
+          transform: translateY(-2px);
         }
-        .hero-btn-ghost {
-          color: var(--color-text-mid, #a0a0b0) !important;
-          border: 1px solid var(--color-border, rgba(255,255,255,0.2)) !important;
-          background: rgba(255,255,255,0.03) !important;
-          border-radius: 999px !important;
-          transition: all 0.3s ease-in-out;
+        .hero-btn-outline {
+          color: rgba(212,175,55,0.9) !important;
+          border: 1px solid rgba(212,175,55,0.38) !important;
+          background: transparent !important;
+          border-radius: 2px !important;
+          transition: all 0.35s ease;
+          letter-spacing: 0.2em;
         }
-        .hero-btn-ghost:hover {
-          color: var(--color-gold, #d4af37) !important;
-          border-color: var(--color-gold, #d4af37) !important;
-          background: rgba(212,175,55,0.08) !important;
+        .hero-btn-outline:hover {
+          color: #d4af37 !important;
+          border-color: rgba(212,175,55,0.75) !important;
+          background: rgba(212,175,55,0.06) !important;
+          transform: translateY(-2px);
         }
+
+        /* ── section shell ── */
         .hero-section {
           display: grid;
           grid-template-columns: 1.05fr 0.95fr;
-          min-height: calc(100vh - 96px);
+          min-height: calc(100dvh - 136px);
           position: relative;
           overflow: hidden;
           isolation: isolate;
           background:
-            radial-gradient(ellipse 95% 80% at 50% 108%, rgba(4, 4, 18, 0.85) 0%, transparent 52%),
-            radial-gradient(ellipse 85% 70% at 22% 28%, rgba(212, 175, 55, 0.14), transparent 55%),
-            radial-gradient(ellipse 75% 60% at 82% 48%, rgba(120, 130, 255, 0.08), transparent 52%),
-            linear-gradient(168deg, #07071c 0%, var(--color-bg, #050514) 42%, #050514 100%);
+            radial-gradient(ellipse 100% 60% at 50% 110%, rgba(3,3,14,0.95) 0%, transparent 55%),
+            radial-gradient(ellipse 70% 65% at 18% 30%, rgba(212,175,55,0.09), transparent 58%),
+            radial-gradient(ellipse 65% 55% at 85% 52%, rgba(180,120,40,0.07), transparent 55%),
+            linear-gradient(162deg, #080818 0%, #050512 55%, #060614 100%);
         }
+
+        /* subtle grain texture overlay */
+        .hero-section::before {
+          content: "";
+          pointer-events: none;
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.035;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        /* faint geometric mesh */
         .hero-section::after {
           content: "";
           pointer-events: none;
           position: absolute;
           inset: 0;
-          opacity: 0.2;
+          opacity: 0.14;
           z-index: 0;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.08'%3E%3Cpath d='M0 70h140M70 0v140'/%3E%3C/g%3E%3C/svg%3E");
-          mask-image: radial-gradient(ellipse 88% 78% at 50% 44%, black 0%, transparent 82%);
-          -webkit-mask-image: radial-gradient(ellipse 88% 78% at 50% 44%, black 0%, transparent 82%);
+          background-image:
+            linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+          background-size: 72px 72px;
+          mask-image: radial-gradient(ellipse 80% 70% at 50% 44%, black 0%, transparent 80%);
+          -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 44%, black 0%, transparent 80%);
         }
+
+        /* ── text column ── */
         .hero-text {
-          padding: 5.5rem 4.25rem 5rem 5rem;
-          display: flex; flex-direction: column;
-          justify-content: center; align-items: flex-start;
+          padding: 3rem 2.5rem 3rem 4.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
           position: relative;
           z-index: 1;
         }
-        .hero-kicker-row {
+
+        /* eyebrow / kicker */
+        .hero-eyebrow {
           display: flex;
           align-items: center;
-          gap: 1rem;
-          margin-bottom: 1.5rem;
+          gap: 0.9rem;
+          margin-bottom: 1.1rem;
         }
-        .hero-kicker-line {
-          width: 48px;
+        .hero-eyebrow-line {
+          width: 38px;
           height: 1px;
-          background: linear-gradient(90deg, var(--color-gold, #d4af37), transparent);
+          background: linear-gradient(90deg, rgba(212,175,55,0.7), transparent);
           flex-shrink: 0;
         }
-        .hero-title-accent {
-          background: linear-gradient(105deg, #f4e5b3, var(--color-gold, #d4af37) 45%, #b8860b);
+        .hero-eyebrow-text {
+          font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 0.38em;
+          text-transform: uppercase;
+          color: rgba(212,175,55,0.75);
+          margin: 0;
+        }
+
+        /* main headline */
+        .hero-headline {
+          font-family: "Cinzel", Georgia, serif;
+          font-size: clamp(2rem, 4vw, 3.5rem);
+          line-height: 1.1;
+          font-weight: 400;
+          letter-spacing: 0.04em;
+          color: #fff;
+          margin: 0;
+        }
+        .hero-headline em {
+          font-style: italic;
+          font-family: "Cormorant Garamond", "Cormorant", Georgia, serif;
+          font-weight: 300;
+          font-size: 1.08em;
+          background: linear-gradient(108deg, #f8eecc 0%, #d4af37 45%, #c9952a 100%);
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
+          letter-spacing: 0.02em;
         }
-        /* Logo-matched type: Cinzel uppercase — SHREEVA (white) + • JEWELLERS • (gold) */
-        .hero-brand-headline {
-          font-family: "Cinzel", var(--font-display, Georgia), serif;
-          font-size: clamp(2.45rem, 7.2vw, 5.85rem);
-          line-height: 1.05;
-          letter-spacing: 0.12em;
+
+        /* subheading */
+        .hero-subheadline {
+          font-family: "Cormorant Garamond", "Cormorant", Georgia, serif;
+          font-size: clamp(0.95rem, 1.55vw, 1.28rem);
+          font-weight: 300;
+          font-style: italic;
+          color: rgba(230,220,200,0.72);
+          letter-spacing: 0.03em;
+          line-height: 1.5;
+          margin: 0.45rem 0 0;
+        }
+
+        /* ornament row */
+        .hero-ornament-row {
+          margin: 1.1rem 0 1.4rem;
+        }
+
+        /* mobile-only image inside text col */
+        .hero-mobile-img-wrap {
+          display: none;
+        }
+
+        /* CTA row */
+        .hero-cta {
+          display: flex;
+          gap: 0.85rem;
+          margin-top: 1.5rem;
+          flex-wrap: wrap;
+          align-items: center;
+        }
+        .hero-cta a {
+          padding: 0.78rem 1.9rem;
+          font-size: 0.6rem;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          font-style: normal;
           font-weight: 700;
-          color: var(--color-text, #ffffff);
-          margin: 0;
-          max-width: 100%;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 44px;
+          font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
         }
-        .hero-brand-line1 {
-          display: block;
-          font-weight: 700;
-          letter-spacing: 0.16em;
-          color: #ffffff;
-          text-shadow:
-            0 1px 0 rgba(255, 255, 255, 0.06),
-            0 14px 52px rgba(0, 0, 0, 0.38);
+
+        /* stat strip */
+        .hero-stat-strip {
+          display: flex;
+          gap: 1.75rem;
+          margin-top: 1.6rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid rgba(212,175,55,0.12);
         }
-        .hero-brand-line2 {
-          display: block;
-          margin-top: 0.42em;
-          font-family: "Cinzel", var(--font-display, Georgia), serif;
-          font-weight: 600;
-          font-style: normal;
-          font-size: clamp(0.78rem, 1.95vw, 1.18rem);
-          letter-spacing: 0.32em;
+        .hero-stat-item { display: flex; flex-direction: column; gap: 0.15rem; }
+        .hero-stat-num {
+          font-family: "Cinzel", Georgia, serif;
+          font-size: clamp(1.1rem, 1.75vw, 1.5rem);
+          font-weight: 400;
+          color: #d4af37;
+          letter-spacing: 0.04em;
+          line-height: 1;
+        }
+        .hero-stat-label {
+          font-size: 0.58rem;
+          letter-spacing: 0.2em;
           text-transform: uppercase;
-          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+          color: rgba(180,174,200,0.6);
+          font-weight: 500;
+          font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
         }
-        .hero-tagline {
-          margin-top: 1.35rem;
-          font-weight: 350;
-          font-size: clamp(0.94rem, 1.45vw, 1.18rem);
-          line-height: 1.68;
-          max-width: min(32rem, 100%);
-          color: var(--color-text-mid, #a8a8bc);
-        }
-        @media (min-width: 769px) and (max-width: 1100px) {
-          .hero-text {
-            padding-left: 2.25rem;
-            padding-right: 2.25rem;
-          }
-          .hero-brand-headline {
-            font-size: clamp(2.15rem, 5.8vw, 4.35rem);
-          }
-        }
-        .hero-pill {
-          font-size: 0.64rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: var(--color-text-mid, #e0e0e0);
-          border: 1px solid rgba(212,175,55,0.22);
-          border-radius: 999px;
-          padding: 0.42rem 0.85rem;
-          background: linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-        }
+
+        /* ── image column ── */
         .hero-image-col {
-          height: calc(100vh - 96px);
+          height: calc(100dvh - 136px);
           position: relative;
-          background: transparent;
-          display: flex; align-items: center; justify-content: center;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           overflow: hidden;
           perspective: 1400px;
         }
@@ -169,62 +248,105 @@ export default function HeroSection() {
           inset: 0;
           pointer-events: none;
           z-index: 0;
-          background: radial-gradient(ellipse 58% 52% at 52% 46%, rgba(212, 175, 55, 0.11), transparent 72%);
-          opacity: 1;
+          background: radial-gradient(ellipse 55% 50% at 50% 48%, rgba(212,175,55,0.12), transparent 70%);
         }
+
+        /* corner ornament lines */
+        .hero-corner {
+          position: absolute;
+          width: 56px;
+          height: 56px;
+          z-index: 1;
+          pointer-events: none;
+        }
+        .hero-corner--tl { top: 10%; left: 8%; border-top: 1px solid rgba(212,175,55,0.35); border-left: 1px solid rgba(212,175,55,0.35); }
+        .hero-corner--tr { top: 10%; right: 8%; border-top: 1px solid rgba(212,175,55,0.35); border-right: 1px solid rgba(212,175,55,0.35); }
+        .hero-corner--bl { bottom: 14%; left: 8%; border-bottom: 1px solid rgba(212,175,55,0.35); border-left: 1px solid rgba(212,175,55,0.35); }
+        .hero-corner--br { bottom: 14%; right: 8%; border-bottom: 1px solid rgba(212,175,55,0.35); border-right: 1px solid rgba(212,175,55,0.35); }
+
         .hero-orbit {
           position: absolute;
-          inset: 14% 14%;
-          border: 1px solid rgba(212,175,55,0.18);
+          inset: 12% 10%;
+          border: 1px solid rgba(212,175,55,0.1);
           border-radius: 999px;
-          opacity: 0.4;
           z-index: 0;
         }
-        .hero-orbit::after {
-          content: "";
+        .hero-orbit-inner {
           position: absolute;
-          inset: 12%;
-          border-radius: inherit;
-          border: 1px dashed rgba(212,175,55,0.18);
+          inset: 22% 20%;
+          border: 1px dashed rgba(212,175,55,0.09);
+          border-radius: 999px;
+          z-index: 0;
         }
-        
-        @keyframes desktop-float {
-          0%, 100% { transform: rotateY(-12deg) rotateX(5deg) translateZ(12px) translateY(0); }
-          50% { transform: rotateY(-12deg) rotateX(5deg) translateZ(12px) translateY(-15px); }
+
+        @keyframes jewel-float {
+          0%, 100% { transform: rotateY(-10deg) rotateX(4deg) translateY(0px); }
+          50% { transform: rotateY(-10deg) rotateX(4deg) translateY(-14px); }
         }
         .hero-image-stack {
-          width: min(440px, 82%);
+          width: min(500px, 92%);
           aspect-ratio: 4/5;
-          border-radius: 1.5rem;
           position: relative;
-          transform-style: preserve-3d;
-          animation: desktop-float 6s ease-in-out infinite;
-          transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
           z-index: 2;
+          transform-style: preserve-3d;
+          animation: jewel-float 7s ease-in-out infinite;
         }
         .hero-image-stack:hover {
           animation-play-state: paused;
-          transform: rotateY(-6deg) rotateX(3deg) translateZ(18px) scale(1.03);
+          transform: rotateY(-5deg) rotateX(2deg) scale(1.02);
+          transition: transform 0.6s cubic-bezier(0.22,1,0.36,1);
         }
         .hero-glow {
           position: absolute;
-          inset: -18%;
-          background: radial-gradient(circle, rgba(212,175,55,0.32), transparent 58%);
-          filter: blur(36px);
+          inset: -22%;
+          background: radial-gradient(circle, rgba(212,175,55,0.28), transparent 60%);
+          filter: blur(42px);
           z-index: 0;
         }
         .hero-jewel-img {
-          border-radius: 1.25rem;
-          padding: 0.35rem !important;
+          padding: 0 !important;
           background: transparent !important;
           border: none !important;
-          box-shadow: none !important;
           filter:
-            drop-shadow(0 28px 50px rgba(0, 0, 0, 0.55))
-            drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35))
-            drop-shadow(0 0 52px rgba(212, 175, 55, 0.22));
+            drop-shadow(0 32px 56px rgba(0,0,0,0.6))
+            drop-shadow(0 10px 24px rgba(0,0,0,0.35))
+            drop-shadow(0 0 60px rgba(212,175,55,0.2));
         }
 
+        /* image caption strip */
+        .hero-img-caption {
+          position: absolute;
+          bottom: 12%;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 3;
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          background: rgba(5,5,20,0.72);
+          border: 1px solid rgba(212,175,55,0.2);
+          backdrop-filter: blur(8px);
+          border-radius: 2px;
+          padding: 0.5rem 1.1rem;
+          white-space: nowrap;
+        }
+        .hero-img-caption-dot {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #d4af37;
+          flex-shrink: 0;
+        }
+        .hero-img-caption-text {
+          font-size: 0.58rem;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+          color: rgba(212,175,55,0.8);
+          font-weight: 600;
+          font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
+        }
+
+        /* ── ticker ── */
         @keyframes ticker-scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
@@ -232,180 +354,179 @@ export default function HeroSection() {
         .ticker-inner {
           display: flex;
           width: max-content;
-          animation: ticker-scroll 25s linear infinite;
+          animation: ticker-scroll 28s linear infinite;
         }
 
-        /* --- REDESIGNED MOBILE FIX --- */
+        /* ── tablet ── */
+        @media (min-width: 769px) and (max-width: 1100px) {
+          .hero-text { padding: 2.5rem 1.5rem 2.5rem 2.5rem; }
+          .hero-headline { font-size: clamp(1.7rem, 3.4vw, 2.8rem) !important; }
+          .hero-stat-strip { gap: 1.25rem; }
+          .hero-image-stack { width: min(420px, 90%) !important; }
+        }
+
+        /* ── mobile ── */
         @media (max-width: 768px) {
-          .hero-section { 
-            display: flex; 
+          .hero-section {
+            display: flex;
             flex-direction: column;
-            justify-content: center; /* This centers everything vertically */
+            justify-content: flex-start;
             align-items: center;
-            min-height: calc(100dvh - 80px); 
-            padding: 2rem 1rem;
-            gap: 2.5rem; /* Consistent gap between text and image, no empty voids */
+            min-height: calc(100dvh - 148px);
+            padding: 2rem 1.25rem 2rem;
+            gap: 2rem;
+            overflow-y: auto;
           }
-          .hero-section::after { opacity: 0.16; }
-          .hero-text { 
-            padding: 0; 
-            align-items: center; 
-            text-align: center; 
+          .hero-text {
+            padding: 0;
+            align-items: center;
+            text-align: center;
             width: 100%;
           }
-          .hero-kicker-row { justify-content: center; margin-bottom: 0.65rem; }
-          .hero-kicker-line { display: none; }
-          .hero-text h1.hero-brand-headline {
-            font-size: clamp(2.05rem, 9.5vw, 3.35rem) !important;
-            line-height: 1.06 !important;
-            letter-spacing: 0.1em !important;
-          }
-          .hero-text h1.hero-brand-headline .hero-brand-line1 {
-            letter-spacing: 0.12em !important;
-          }
-          .hero-text h1.hero-brand-headline .hero-brand-line2 {
-            font-size: clamp(0.64rem, 3.4vw, 0.92rem) !important;
-            letter-spacing: 0.2em !important;
-            margin-top: 0.55em !important;
-          }
-          .hero-text .hero-tagline {
-            font-size: 0.9rem !important;
-            line-height: 1.62 !important;
-            max-width: 21rem !important;
-            margin-top: 1.05rem !important;
-            padding: 0 0.35rem;
-          }
-          .hero-badges { justify-content: center; gap: 0.5rem !important; margin-top: 1.25rem !important; }
-          .hero-pill { font-size: 0.55rem !important; padding: 0.4rem 0.6rem !important; }
-          
-          .hero-cta {
-            flex-direction: row !important;
-            justify-content: center !important;
-            width: 100%;
-            margin-top: 1.5rem !important;
-            gap: 0.75rem !important;
-          }
-          .hero-cta a { 
-            width: auto; 
-            padding: 0.85rem 1.25rem !important; 
-            font-size: 0.65rem !important;
-            min-height: 44px !important;
-          }
-          
-          .hero-image-col { 
-            height: auto !important; 
-            width: 100%;
-            min-height: 280px; /* Base height for the image area */
+          .hero-eyebrow { justify-content: center; margin-bottom: 0.75rem; }
+          .hero-eyebrow-line { display: none; }
+          .hero-headline { font-size: clamp(1.9rem, 9vw, 2.9rem) !important; line-height: 1.12 !important; }
+          .hero-subheadline { font-size: clamp(0.9rem, 3.8vw, 1.12rem) !important; margin-top: 0.4rem !important; }
+          .hero-ornament-row { display: flex; justify-content: center; margin: 0.85rem 0 0; }
+          .hero-mobile-img-wrap {
             display: flex;
             justify-content: center;
             align-items: center;
+            width: 100%;
+            margin: 0.5rem 0 0.25rem;
+            position: relative;
+            height: 280px;
           }
-          .hero-jewel-img { padding: 0 !important; }
-          .hero-image-stack { 
-            width: min(280px, 75%); 
-            border-radius: 1.05rem; 
-            transform: none; 
-            animation: none; 
+          .hero-mobile-img-wrap .hero-glow {
+            inset: -10%;
+            filter: blur(32px);
           }
-          .hero-orbit { inset: -5% -5%; }
+          .hero-cta { justify-content: center; width: 100%; margin-top: 1rem !important; gap: 0.6rem !important; }
+          .hero-cta a { padding: 0.78rem 1.4rem !important; font-size: 0.58rem !important; min-height: 42px !important; }
+          .hero-stat-strip { justify-content: center; gap: 1.25rem; padding-top: 0.9rem; margin-top: 1rem; }
+          .hero-stat-num { font-size: 1.1rem !important; }
+          .hero-image-col { display: none !important; }
         }
       `}</style>
 
       <section className="hero-section section-shell">
+        {/* ── LEFT: editorial text ── */}
         <div className="hero-text">
-          <div className="hero-enter hero-enter-1 hero-kicker-row">
-            <span className="hero-kicker-line" aria-hidden />
-            <p
-              className="text-caption-gold"
-              style={{
-                marginBottom: 0,
-                color: "var(--color-text-mid, #d0cfdf)",
-                textTransform: "uppercase",
-                letterSpacing: "0.28em",
-                fontSize: "0.62rem",
-                fontWeight: 600,
-                fontFamily: "var(--font-sans, 'DM Sans', system-ui, sans-serif)",
-              }}
-            >
-              Feel the luxury
-            </p>
+
+          {/* eyebrow */}
+          <div className="hero-enter hero-enter-1 hero-eyebrow">
+            <span className="hero-eyebrow-line" aria-hidden />
+            <p className="hero-eyebrow-text">Fine Jewellery · Est. Heritage</p>
           </div>
 
-          <h1 className="hero-enter hero-enter-2 hero-brand-headline" aria-label="Shreeva Jewellers">
-            <span className="hero-brand-line1 brand-wordmark-text">Shreeva</span>
-            <span className="hero-brand-line2 hero-title-accent">• Jewellers •</span>
+          {/* main headline — NO brand name repeat */}
+          <h1 className="hero-enter hero-enter-2 hero-headline" aria-label="Crafted in Gold, Worn for Generations">
+            Crafted in Gold,<br />
+            Worn for <em>Generations</em>
           </h1>
 
-          <p className="hero-enter hero-enter-3 hero-tagline mx-auto md:mx-0 text-center md:text-left">
-            {HERO_TAGLINE}
+          {/* sub-headline */}
+          <p className="hero-enter hero-enter-2 hero-subheadline">
+            Where every piece tells a story of devotion
           </p>
 
-          <div className="hero-enter hero-enter-3 hero-badges" style={{ display: "flex", gap: "0.75rem", marginTop: "1.35rem", flexWrap: "wrap" }}>
-            {BADGES.map((badge) => (
-              <span key={badge} className="hero-pill">
-                {badge}
-              </span>
-            ))}
+          {/* ornamental divider */}
+          <div className="hero-enter hero-enter-2 hero-ornament-row">
+            <OrnamentDivider />
           </div>
 
-          <div className="hero-enter hero-enter-4 hero-cta" style={{ display: "flex", gap: "1rem", marginTop: "2.5rem", flexWrap: "wrap", alignItems: "center" }}>
-            <Link href="/products" className="hero-btn-primary" style={{
-              padding: "0.95rem 2.35rem",
-              fontSize: "0.68rem", letterSpacing: "0.2em", textTransform: "uppercase",
-              textDecoration: "none", fontWeight: 700,
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              minHeight: "48px",
-            }}>
-              Shop Collection
+          {/* Mobile-only image — appears between headline and CTAs on small screens */}
+          <div className="hero-mobile-img-wrap">
+            <div className="hero-glow" />
+            <Image
+              src="/cheroImage-removebg-preview.png"
+              alt="Handcrafted gold diamond jewellery"
+              fill
+              className="object-contain hero-jewel-img"
+              priority
+              quality={100}
+              sizes="80vw"
+            />
+          </div>
+
+          {/* CTA buttons */}
+          <div className="hero-enter hero-enter-4 hero-cta">
+            <Link href="/products" className="hero-btn-primary">
+              Explore Collection
             </Link>
-            <Link href="/contact" className="hero-btn-ghost" style={{
-              padding: "0.95rem 2rem",
-              fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase",
-              textDecoration: "none", fontWeight: 600,
-              display: "inline-flex", alignItems: "center", justifyContent: "center",
-              gap: "0.45rem",
-              minHeight: "48px",
-            }}>
-              Book Visit
+            <Link href="/contact" className="hero-btn-outline">
+              Book an Appointment
             </Link>
+          </div>
+
+          {/* stat strip */}
+          <div className="hero-enter hero-enter-4 hero-stat-strip">
+            {[
+              { num: "500+", label: "Designs" },
+              { num: "22KT", label: "Hallmarked" },
+              { num: "∞", label: "Lifetime Service" },
+            ].map((s) => (
+              <div key={s.label} className="hero-stat-item">
+                <span className="hero-stat-num">{s.num}</span>
+                <span className="hero-stat-label">{s.label}</span>
+              </div>
+            ))}
           </div>
         </div>
 
+        {/* ── RIGHT: jewellery showcase ── */}
         <div className="hero-image-col">
+          <div className="hero-corner hero-corner--tl" />
+          <div className="hero-corner hero-corner--tr" />
+          <div className="hero-corner hero-corner--bl" />
+          <div className="hero-corner hero-corner--br" />
           <div className="hero-orbit slow-spin" />
-          <div className="hero-float" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
+          <div className="hero-orbit-inner" />
+          <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2 }}>
             <div className="hero-image-stack">
               <div className="hero-glow" />
               <Image
                 src="/cheroImage-removebg-preview.png"
-                alt="Handcrafted gold diamond ring"
+                alt="Handcrafted gold diamond jewellery"
                 fill
                 className="object-contain hero-jewel-img"
                 priority
                 quality={100}
-                sizes="(max-width: 768px) 80vw, 50vw"
+                sizes="(max-width: 768px) 70vw, 45vw"
               />
             </div>
+          </div>
+          <div className="hero-img-caption">
+            <span className="hero-img-caption-dot" />
+            <span className="hero-img-caption-text">Handcrafted · BIS Hallmarked</span>
           </div>
         </div>
       </section>
 
+      {/* ── ticker bar ── */}
       <div style={{
-        background: "linear-gradient(180deg, var(--color-bg-card, #07071c), rgba(17,17,50,0.96))",
-        borderTop: "1px solid var(--color-border, rgba(255,255,255,0.05))",
-        borderBottom: "1px solid var(--color-border, rgba(255,255,255,0.05))",
-        padding: "0.9rem 0",
+        background: "linear-gradient(180deg, #06060f, rgba(10,10,28,0.97))",
+        borderTop: "1px solid rgba(212,175,55,0.1)",
+        borderBottom: "1px solid rgba(212,175,55,0.1)",
+        padding: "0.85rem 0",
         overflow: "hidden",
         whiteSpace: "nowrap",
       }}>
         <div className="ticker-inner">
           {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((text, i) => (
             <span key={i} style={{
-              fontSize: "0.66rem", letterSpacing: "0.22em", textTransform: "uppercase",
-              color: "var(--color-text-mid, #a0a0b0)", display: "inline-flex", alignItems: "center", gap: "0.75rem",
-              fontWeight: 500, marginRight: "3rem"
+              fontSize: "0.6rem",
+              letterSpacing: "0.26em",
+              textTransform: "uppercase",
+              color: "rgba(180,170,150,0.65)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.7rem",
+              fontWeight: 500,
+              marginRight: "3.5rem",
+              fontFamily: "var(--font-sans, 'DM Sans', system-ui, sans-serif)",
             }}>
-              <span style={{ width: "4px", height: "4px", borderRadius: "50%", background: "var(--color-gold, #d4af37)", display: "inline-block", flexShrink: 0 }} />
+              <span style={{ width: "3px", height: "3px", borderRadius: "50%", background: "rgba(212,175,55,0.6)", display: "inline-block", flexShrink: 0 }} />
               {text}
             </span>
           ))}

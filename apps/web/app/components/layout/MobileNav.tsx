@@ -83,15 +83,15 @@ export default function MobileNav({ open, onClose }: Props) {
             <Image
               src="/logo.jpeg"
               alt="Shreeva Jewellers"
-              width={54}
-              height={54}
+              width={76}
+              height={76}
               style={{
-                borderRadius: "0.5rem",
+                borderRadius: "0.55rem",
                 objectFit: "cover",
                 boxShadow: "0 8px 20px rgba(0,0,0,0.35)",
               }}
             />
-            <span className="brand-wordmark-text" style={{ fontSize: "1.02rem", color: "var(--color-gold)", lineHeight: 1.25 }}>
+            <span className="brand-wordmark-text" style={{ fontSize: "1.22rem", color: "var(--color-gold)", lineHeight: 1.25 }}>
               Shreeva Jewellers
             </span>
           </div>
