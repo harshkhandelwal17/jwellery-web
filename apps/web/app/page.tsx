@@ -7,6 +7,7 @@ import BridalSection from "./components/home/BridalSection";
 import AboutSection from "./components/home/AboutSection";
 import CuratedSection from "./components/home/CuratedSection";
 import WhyChooseUs from "./components/home/WhyChooseUs";
+import FAQSection from "./components/home/FAQSection";
 import CTASection from "./components/home/CTASection";
 import CraftsmanshipSection from "./components/home/CraftsmanshipSection";
 import WhatsAppCTASection from "./components/home/WhatsAppCTASection";
@@ -51,6 +52,7 @@ export default async function HomePage() {
         <SignatureShowcaseSection />
         <CuratedSection />
         <WhyChooseUs />
+        <FAQSection />
         <WhatsAppCTASection />
         <CTASection />
       </main>
