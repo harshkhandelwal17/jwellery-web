@@ -31,13 +31,31 @@ interface Props {
 const CATEGORIES = ["rings", "necklaces", "earrings", "bracelets", "watches"] as const;
 
 const MAIN_CATEGORIES = [
-  "Diamond Jewellery",
-  "Silver Jewellery",
-  "Chic Everyday Jewellery",
+  // ── Primary 3 shown prominently ──
   "Gold Jewellery",
+  "Silver Jewellery",
+  "Diamond Jewellery",
+  // ── Other collections ──
+  "Chic Everyday Jewellery",
   "Bridal Collection",
   "Unique Categories",
 ] as const;
+
+/** Auto-assign legacy `category` field from mainCategory so admin doesn't need to pick it manually. */
+function autoCategory(mc: string | undefined): "rings" | "necklaces" | "earrings" | "bracelets" | "watches" {
+  if (mc === "Silver Jewellery") return "rings"; // neutral fallback; category field is legacy
+  if (mc === "Diamond Jewellery") return "rings";
+  return "rings";
+}
+
+const MAIN_CATEGORY_LABELS: Record<string, string> = {
+  "Gold Jewellery":        "Gold Jewellery (22KT)",
+  "Silver Jewellery":      "Silver Jewellery (925)",
+  "Diamond Jewellery":     "Lab Grown Diamond",
+  "Chic Everyday Jewellery": "Chic Everyday",
+  "Bridal Collection":     "Bridal Collection",
+  "Unique Categories":     "Unique Categories",
+};
 
 const SUBCATEGORIES: Record<string, string[]> = {
   "Diamond Jewellery": [
@@ -140,6 +158,14 @@ export default function ProductForm({ product }: Props) {
   const mainCategoryValue = watch("mainCategory");
   const availableSubCategories: string[] = mainCategoryValue ? SUBCATEGORIES[mainCategoryValue] ?? [] : [];
 
+  // Auto-sync legacy category whenever mainCategory changes
+  function handleMainCategoryChange(v: string) {
+    const mc = v === "__none__" ? undefined : v as FormData["mainCategory"];
+    setValue("mainCategory", mc);
+    setValue("subCategory", undefined);
+    if (mc) setValue("category", autoCategory(mc));
+  }
+
   async function handleImageUpload(file: File) {
     setUploadingImage(true);
     try {
@@ -234,47 +260,54 @@ export default function ProductForm({ product }: Props) {
                 </div>
               </div>
 
+              {/* ── Main Category (primary) ── */}
               <div className="flex flex-col gap-1.5">
-                <Label>Category</Label>
+                <Label>Category <span className="text-[0.65rem] text-muted-foreground ml-1">(required)</span></Label>
+                <div className="grid grid-cols-3 gap-2">
+                  {(["Gold Jewellery", "Silver Jewellery", "Diamond Jewellery"] as const).map((mc) => {
+                    const isActive = mainCategoryValue === mc;
+                    const labels: Record<string, { short: string; sub: string; color: string }> = {
+                      "Gold Jewellery":    { short: "Gold",   sub: "22KT",  color: "#d4af37" },
+                      "Silver Jewellery":  { short: "Silver", sub: "925",   color: "#b0b8c8" },
+                      "Diamond Jewellery": { short: "Lab Diamond", sub: "IGI", color: "#a8d8f0" },
+                    };
+                    const meta = labels[mc];
+                    return (
+                      <button
+                        key={mc}
+                        type="button"
+                        onClick={() => handleMainCategoryChange(mc)}
+                        className="flex flex-col items-center justify-center gap-1 rounded-xl border-2 py-3 px-2 text-center transition-all"
+                        style={isActive
+                          ? { borderColor: meta.color, background: `${meta.color}18`, color: meta.color }
+                          : { borderColor: "var(--color-border)", background: "transparent", color: "var(--color-text-muted)" }
+                        }
+                      >
+                        <span className="text-xs font-semibold tracking-wide">{meta.short}</span>
+                        <span className="text-[0.55rem] font-bold tracking-widest uppercase opacity-70">{meta.sub}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Other categories dropdown */}
                 <Select
-                  value={watch("category")}
-                  onValueChange={(v) => setValue("category", v as FormData["category"])}
+                  value={MAIN_CATEGORIES.slice(3).includes(mainCategoryValue as never) ? mainCategoryValue ?? "__none__" : "__none__"}
+                  onValueChange={(v) => handleMainCategoryChange(v)}
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a category" />
+                  <SelectTrigger className="mt-1">
+                    <SelectValue placeholder="Or choose another collection…" />
                   </SelectTrigger>
                   <SelectContent>
-                    {CATEGORIES.map((c) => (
+                    <SelectItem value="__none__">Other collections…</SelectItem>
+                    {MAIN_CATEGORIES.slice(3).map((c) => (
                       <SelectItem key={c} value={c}>
-                        {c.charAt(0).toUpperCase() + c.slice(1)}
+                        {MAIN_CATEGORY_LABELS[c] ?? c}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
                 {errors.category && <p className="text-xs text-red-500 mt-1">{errors.category.message}</p>}
-              </div>
-
-              <div className="flex flex-col gap-1.5">
-                <Label>Main Category (Optional)</Label>
-                <Select
-                  value={mainCategoryValue ?? "__none__"}
-                  onValueChange={(v) => {
-                    setValue("mainCategory", v === "__none__" ? undefined : v as FormData["mainCategory"]);
-                    setValue("subCategory", undefined);
-                  }}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a main category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="__none__">None</SelectItem>
-                    {MAIN_CATEGORIES.map((c) => (
-                      <SelectItem key={c} value={c}>
-                        {c}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
               </div>
 
               {mainCategoryValue && availableSubCategories.length > 0 && (

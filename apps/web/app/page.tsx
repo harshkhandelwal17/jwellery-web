@@ -23,21 +23,24 @@ export default async function HomePage() {
   const products = await fetchProducts();
   const featured = pickHomeSpotlight(products, 4);
 
-  const rings = products.filter((p) => p.category === "rings");
-  const necklaces = products.filter((p) => p.category === "necklaces");
-  const earrings = products.filter((p) => p.category === "earrings");
-  const bracelets = products.filter((p) => p.category === "bracelets");
-  const watches = products.filter((p) => p.category === "watches");
-  const silverProducts = products.filter((p) => p.mainCategory === "Silver Jewellery");
+  // Pick one representative image per main category for the homepage category cards
+  const goldProducts    = products.filter((p) => p.mainCategory === "Gold Jewellery");
+  const silverProducts  = products.filter((p) => p.mainCategory === "Silver Jewellery");
+  const diamondProducts = products.filter((p) => p.mainCategory === "Diamond Jewellery");
+
+  // Fallback to old-system category if mainCategory not set yet
+  const goldFallback    = products.filter((p) => p.category === "necklaces");
 
   const categoryImages: Record<string, string | undefined> = {
-    rings:             rings[0]          ? cloudinaryUrl(rings[0].image,          { width: 600, quality: 85 }) : undefined,
-    necklaces:         necklaces[0]      ? cloudinaryUrl(necklaces[0].image,       { width: 600, quality: 85 }) : undefined,
-    earrings:          earrings[0]       ? cloudinaryUrl(earrings[0].image,        { width: 600, quality: 85 }) : undefined,
-    bracelets:         bracelets[0]      ? cloudinaryUrl(bracelets[0].image,       { width: 600, quality: 85 }) : undefined,
-    bridal:            necklaces[1]      ? cloudinaryUrl(necklaces[1].image,       { width: 600, quality: 85 }) : undefined,
-    "silver-collection": silverProducts[0] ? cloudinaryUrl(silverProducts[0].image, { width: 600, quality: 85 }) : undefined,
-    watches:           watches[0]        ? cloudinaryUrl(watches[0].image,         { width: 600, quality: 85 }) : undefined,
+    "Gold Jewellery":    (goldProducts[0] ?? goldFallback[0])
+      ? cloudinaryUrl((goldProducts[0] ?? goldFallback[0]).image, { width: 700, quality: 85 })
+      : undefined,
+    "Silver Jewellery":  silverProducts[0]
+      ? cloudinaryUrl(silverProducts[0].image, { width: 700, quality: 85 })
+      : undefined,
+    "Diamond Jewellery": diamondProducts[0]
+      ? cloudinaryUrl(diamondProducts[0].image, { width: 700, quality: 85 })
+      : undefined,
   };
 
   return (
