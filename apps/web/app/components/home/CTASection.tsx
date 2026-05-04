@@ -71,7 +71,7 @@ export default function CTASection() {
           Find the Piece That<br />Speaks to You
         </h2>
         <p className="cta-desc" style={{ color: "var(--color-text-mid)", fontSize: "0.92rem", fontWeight: 300, marginBottom: "3rem", maxWidth: "460px", marginLeft: "auto", marginRight: "auto", lineHeight: 1.8 }}>
-          Visit us in Jaipur or enquire online — we would love to help you find something truly special.
+          Visit us in indore or enquire online — we would love to help you find something truly special.
         </p>
         <div className="cta-btns">
           <Link href="/contact" className="cta-btn" style={{
