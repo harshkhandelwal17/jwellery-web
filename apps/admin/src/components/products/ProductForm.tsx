@@ -293,7 +293,10 @@ export default function ProductForm({ product }: Props) {
                 {/* Other categories dropdown */}
                 <Select
                   value={MAIN_CATEGORIES.slice(3).includes(mainCategoryValue as never) ? mainCategoryValue ?? "__none__" : "__none__"}
-                  onValueChange={(v) => handleMainCategoryChange(v)}
+                  onValueChange={(v) => {
+                    // Only fire when user picks an actual "other" category — not the placeholder
+                    if (v !== "__none__") handleMainCategoryChange(v);
+                  }}
                 >
                   <SelectTrigger className="mt-1">
                     <SelectValue placeholder="Or choose another collection…" />

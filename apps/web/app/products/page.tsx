@@ -4,7 +4,8 @@ import ProductCard from "../components/products/ProductCard";
 import { fetchProducts, type GetProductsParams } from "../lib/api";
 import Link from "next/link";
 
-export const revalidate = 300;
+// Always fetch fresh data — new products added in admin must appear immediately
+export const dynamic = "force-dynamic";
 
 // ─── Sort ─────────────────────────────────────────────────────────────────────
 const SORT_OPTIONS = [
