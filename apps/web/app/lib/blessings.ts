@@ -12,16 +12,18 @@
  * If a file is missing, the UI falls back to the matching `.svg` placeholder.
  */
 export const BLESSING_PATHS = {
-  grandfather: {
-    primary: process.env.NEXT_PUBLIC_BLESSING_GRANDFATHER?.trim() || "/blessings/grandfather.jpeg",
-    fallback: "/blessings/grandfather.svg",
-  },
-  mother: {
-    primary: process.env.NEXT_PUBLIC_BLESSING_MOTHER?.trim() || "/blessings/mother.jpeg",
-    fallback: "/blessings/mother.svg",
-  },
-  divine: {
+    divine: {
     primary: process.env.NEXT_PUBLIC_BLESSING_DIVINE?.trim() || "/blessings/divine.jpeg",
     fallback: "/blessings/divine.svg",
   },
+   mother: {
+    primary: process.env.NEXT_PUBLIC_BLESSING_MOTHER?.trim() || "/blessings/mother.jpeg",
+    fallback: "/blessings/mother.svg",
+  },
+  grandfather: {
+    primary: process.env.NEXT_PUBLIC_BLESSING_GRANDFATHER?.trim() || "/blessings/fatherji.jpeg",
+    fallback: "/blessings/grandfather.svg",
+  },
+ 
+ 
 } as const;

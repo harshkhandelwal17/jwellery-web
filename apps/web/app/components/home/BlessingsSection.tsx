@@ -181,26 +181,28 @@ export default function BlessingsSection() {
         </p>
 
         <div className="blessings-grid">
-          <Portrait
-            primarySrc={BLESSING_PATHS.grandfather.primary}
-            fallbackSrc={BLESSING_PATHS.grandfather.fallback}
-            alt="Grandfather — family blessing"
-            title=""
-            subtitle="Strength and values passed down"
-          />
-          <Portrait
-            primarySrc={BLESSING_PATHS.mother.primary}
-            fallbackSrc={BLESSING_PATHS.mother.fallback}
-            alt="Mother — family blessing"
-            title=""
-            subtitle="Love and care in all we do"
-          />
+         
+         
           <Portrait
             primarySrc={BLESSING_PATHS.divine.primary}
             fallbackSrc={BLESSING_PATHS.divine.fallback}
             alt="Divine blessings"
             title=""
-            subtitle="Faith that lights our path"
+            subtitle=""
+          />
+           <Portrait
+            primarySrc={BLESSING_PATHS.mother.primary}
+            fallbackSrc={BLESSING_PATHS.mother.fallback}
+            alt="Mother — family blessing"
+            title=""
+            subtitle=""
+          />
+           <Portrait
+            primarySrc={BLESSING_PATHS.grandfather.primary}
+            fallbackSrc={BLESSING_PATHS.grandfather.fallback}
+            alt="Grandfather — family blessing"
+            title=""
+            subtitle=""
           />
         </div>
       </div>

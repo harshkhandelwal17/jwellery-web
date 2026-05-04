@@ -213,9 +213,19 @@ export default async function ProductDetailPage({ params }: Props) {
             </h1>
 
             <div className="product-detail-trust" aria-hidden="true">
-              <span>BIS hallmarked</span>
-              <span>Live gold rate</span>
-              <span>Hand-finished</span>
+              {product.mainCategory === "Silver Jewellery" ? (
+                <>
+                  <span>Certified 925 Silver</span>
+                  <span>BIS hallmarked</span>
+                  <span>Hand-finished</span>
+                </>
+              ) : (
+                <>
+                  <span>BIS hallmarked</span>
+                  <span>Live gold rate</span>
+                  <span>Hand-finished</span>
+                </>
+              )}
             </div>
 
             {product.description?.trim() ? (
@@ -230,7 +240,9 @@ export default async function ProductDetailPage({ params }: Props) {
             <div className="product-detail-specs">
               <div>
                 <p className="product-detail-spec-label">Metal</p>
-                <p className="product-detail-spec-value">22KT gold</p>
+                <p className="product-detail-spec-value">
+                  {product.mainCategory === "Silver Jewellery" ? "925 Sterling Silver" : "22KT gold"}
+                </p>
               </div>
               <div>
                 <p className="product-detail-spec-label">Weight</p>
@@ -242,7 +254,9 @@ export default async function ProductDetailPage({ params }: Props) {
               </div>
               <div>
                 <p className="product-detail-spec-label">Hallmark</p>
-                <p className="product-detail-spec-value">BIS 916</p>
+                <p className="product-detail-spec-value">
+                  {product.mainCategory === "Silver Jewellery" ? "Certified 925" : "BIS 916"}
+                </p>
               </div>
               {product.mainCategory ? (
                 <div style={{ gridColumn: "1 / -1" }}>

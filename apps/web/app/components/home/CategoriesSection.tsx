@@ -8,6 +8,7 @@ const CATEGORIES = [
   { name: "Earrings", slug: "earrings", fallback: "/shreeva/earring_bali_oval_hoop_gold_018.jpeg" },
   { name: "Bracelets", slug: "bracelets", fallback: "/shreeva/kada_gold_chain_weave_013.jpeg" },
   { name: "Bridal", slug: "bridal", fallback: "/shreeva/necklace_set_rose_gold_flower_021.jpeg" },
+  { name: "Silver", slug: "silver-collection", fallback: "/shreeva/ring_green_stone_flower_008.jpeg", badge: "925 Sterling" },
   { name: "Watches", slug: "watches", fallback: "/shreeva/watch_ladies_GW875_titan_gold_019.jpeg" },
 ];
 
@@ -25,7 +26,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
       }}
     >
       <style>{`
-        .categories-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.25rem; max-width: 1200px; margin: 0 auto; }
+        .categories-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1.25rem; max-width: 1300px; margin: 0 auto; }
         .cat-card-link { position: relative; }
         .cat-card-link .media-wrap img { transition: transform 0.55s ease; }
         .cat-card-link::before {
@@ -42,8 +43,38 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
           opacity: 0;
           transition: opacity 0.3s ease;
         }
-        @media (max-width: 900px) {
-          .categories-grid { grid-template-columns: repeat(3, 1fr); max-width: 100%; }
+        /* silver card — slightly lighter border tint */
+        .cat-card-silver {
+          border-color: rgba(192,192,192,0.22) !important;
+        }
+        .cat-card-silver:hover {
+          border-color: rgba(192,192,192,0.6) !important;
+          box-shadow: 0 12px 32px rgba(192,192,192,0.1) !important;
+        }
+        .cat-card-silver:hover .cat-arrow {
+          background: #c0c0c0 !important;
+          color: #000 !important;
+          border-color: #c0c0c0 !important;
+        }
+        .cat-silver-badge {
+          position: absolute;
+          top: 0.5rem;
+          left: 0.5rem;
+          z-index: 2;
+          background: rgba(192,192,192,0.18);
+          border: 1px solid rgba(192,192,192,0.45);
+          color: #d8d8e8;
+          font-size: 0.48rem;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          padding: 0.22rem 0.5rem;
+          border-radius: 1px;
+          backdrop-filter: blur(4px);
+          font-family: var(--font-sans, 'DM Sans', system-ui, sans-serif);
+        }
+        @media (max-width: 1100px) {
+          .categories-grid { grid-template-columns: repeat(4, 1fr); max-width: 100%; }
         }
         @media (max-width: 768px) {
           .categories-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; gap: 0.75rem; }
@@ -70,7 +101,7 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
       <div className="categories-grid">
         {CATEGORIES.map((cat) => (
           <Link key={cat.slug} href={`/products?category=${cat.slug}`}
-            className="cat-card-link"
+            className={`cat-card-link${'badge' in cat ? ' cat-card-silver' : ''}`}
             style={{
               textDecoration: "none", color: "var(--color-text)",
               background: "linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))",
@@ -80,6 +111,9 @@ export default function CategoriesSection({ categoryImages = {} }: Props) {
             }}
           >
             <div className="media-wrap" style={{ position: "relative", width: "100%", aspectRatio: "1/1", overflow: "hidden" }}>
+              {'badge' in cat && (
+                <span className="cat-silver-badge">{cat.badge}</span>
+              )}
               <Image
                 src={categoryImages[cat.slug] ?? cat.fallback}
                 alt={cat.name}

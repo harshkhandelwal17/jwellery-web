@@ -5,7 +5,11 @@ import { useState } from "react";
 const FAQS = [
   {
     q: "Is all your jewellery BIS Hallmarked?",
-    a: "Yes — every gold piece we sell carries a BIS Hallmark certifying 22KT purity. You can trust the quality completely. We believe transparency in gold purity is non-negotiable.",
+    a: "Yes — every gold piece carries a BIS Hallmark certifying 22KT purity, and all our silver jewellery is certified 925 Sterling Silver. Authenticity and transparency are non-negotiable for us.",
+  },
+  {
+    q: "What is the difference between your Gold and Silver jewellery?",
+    a: "Our Gold jewellery is crafted in BIS Hallmarked 22KT gold with live market-rate pricing. Our Silver collection features Certified 925 Sterling Silver — same expert craftsmanship, lighter on the pocket. Both collections are stamped and verified for purity.",
   },
   {
     q: "How is the gold price calculated on my jewellery?",
