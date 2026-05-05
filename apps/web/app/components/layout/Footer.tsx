@@ -95,13 +95,18 @@ export default function Footer() {
           .footer-brand { grid-column: 1 / -1; }
           .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
           .footer-social-row {
-            flex-wrap: wrap;
-            gap: 0.55rem;
+            display: grid !important;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.5rem;
+            width: 100%;
           }
           .footer-social-btn {
-            width: 100%;
+            width: auto;
             justify-content: center;
-            padding: 0.5rem 0.85rem !important;
+            min-width: 0;
+            padding: 0.42rem 0.6rem !important;
+            font-size: 0.64rem !important;
+            letter-spacing: 0.02em !important;
           }
         }
         .footer-link:hover { color: var(--color-gold) !important; transition: color 0.3s ease-in-out; }
