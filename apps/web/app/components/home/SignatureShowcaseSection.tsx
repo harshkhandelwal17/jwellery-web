@@ -79,10 +79,10 @@ export default function SignatureShowcaseSection() {
         <div className="signature-visual">
           <div className="signature-main-card">
             <Image
-              src="/cheroImage-removebg-preview.png"
+              src="/cheroImage-removebg-preview1.png"
               alt="Signature jewellery showcase"
               fill
-              quality={94}
+              quality={95}
               className="object-contain"
               sizes="(max-width: 900px) 90vw, 45vw"
               style={{ padding: "1.8rem" }}

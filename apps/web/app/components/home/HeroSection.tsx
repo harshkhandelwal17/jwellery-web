@@ -439,12 +439,12 @@ export default function HeroSection() {
           <div className="hero-mobile-img-wrap">
             <div className="hero-glow" />
             <Image
-              src="/cheroImage-removebg-preview.png"
+              src="/cheroImage-removebg-preview2.png"
               alt="Handcrafted gold diamond jewellery"
               fill
               className="object-contain hero-jewel-img"
               priority
-              quality={100}
+              quality={95}
               sizes="80vw"
             />
           </div>
@@ -486,12 +486,12 @@ export default function HeroSection() {
             <div className="hero-image-stack">
               <div className="hero-glow" />
               <Image
-                src="/cheroImage-removebg-preview.png"
+                src="/cheroImage-removebg-preview2.png"
                 alt="Handcrafted gold diamond jewellery"
                 fill
                 className="object-contain hero-jewel-img"
                 priority
-                quality={100}
+                quality={95}
                 sizes="(max-width: 768px) 70vw, 45vw"
               />
             </div>

@@ -13,7 +13,7 @@ export default function InstagramShowcaseSection({ products }: Props) {
     {
       id: "fallback-ring",
       name: "Signature Ring",
-      image: "/cheroImage-removebg-preview.png",
+      image: "/cheroImage-removebg-preview1.png",
       mainCategory: "Gold Jewellery",
       weight: 12,
       calculatedPrice: 0,
