@@ -94,6 +94,15 @@ export default function Footer() {
           .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
           .footer-brand { grid-column: 1 / -1; }
           .footer-bottom { flex-direction: column; text-align: center; justify-content: center; }
+          .footer-social-row {
+            flex-wrap: wrap;
+            gap: 0.55rem;
+          }
+          .footer-social-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 0.5rem 0.85rem !important;
+          }
         }
         .footer-link:hover { color: var(--color-gold) !important; transition: color 0.3s ease-in-out; }
         .footer-social-btn:hover { background: rgba(255,255,255,0.08) !important; }
@@ -139,7 +148,7 @@ export default function Footer() {
             ))}
           </div>
           {/* Social connect buttons */}
-          <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.4rem" }}>
+          <div className="footer-social-row" style={{ display: "flex", gap: "0.75rem", marginTop: "1.4rem" }}>
             <a
               href="https://wa.me/919111452626"
               target="_blank"
