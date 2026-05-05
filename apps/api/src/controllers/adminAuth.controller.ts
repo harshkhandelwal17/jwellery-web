@@ -1,9 +1,8 @@
 import type { Request, Response, NextFunction } from "express";
-import { ensureDefaultAdminUser, verifyAdminLogin } from "../services/adminAuth.service.js";
+import { verifyAdminLogin } from "../services/adminAuth.service.js";
 
 export async function loginAdmin(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    await ensureDefaultAdminUser();
     const username = String(req.body?.username ?? "");
     const password = String(req.body?.password ?? "");
     if (!username || !password) {
