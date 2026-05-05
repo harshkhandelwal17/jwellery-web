@@ -1,6 +1,7 @@
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import HeroSection from "./components/home/HeroSection";
+import InstagramShowcaseSection from "./components/home/InstagramShowcaseSection";
 import CategoriesSection from "./components/home/CategoriesSection";
 import FeaturedProducts from "./components/home/FeaturedProducts";
 import BridalSection from "./components/home/BridalSection";
@@ -22,6 +23,7 @@ export const revalidate = 300;
 export default async function HomePage() {
   const products = await fetchProducts();
   const featured = pickHomeSpotlight(products, 4);
+  const instagramShowcase = pickHomeSpotlight(products, 8);
 
   // Pick one representative image per main category for the homepage category cards
   const goldProducts    = products.filter((p) => p.mainCategory === "Gold Jewellery");
@@ -48,6 +50,7 @@ export default async function HomePage() {
       <Header />
       <main className="home-page-main">
         <HeroSection />
+        <InstagramShowcaseSection products={instagramShowcase} />
         <CategoriesSection categoryImages={categoryImages} />
         <FeaturedProducts products={featured} />
         <BridalSection />

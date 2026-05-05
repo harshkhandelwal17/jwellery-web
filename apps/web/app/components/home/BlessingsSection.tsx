@@ -28,7 +28,7 @@ function Portrait({
           src={src}
           alt={alt}
           fill
-          sizes="(max-width: 768px) 33vw, 200px"
+          sizes="(max-width: 768px) 18vw, 100px"
           className="blessing-portrait-img object-cover"
           unoptimized={unoptimized}
           onError={() => {
@@ -108,7 +108,7 @@ export default function BlessingsSection() {
         .blessing-portrait-frame {
           position: relative;
           width: 100%;
-          max-width: 200px;
+          max-width: 100px;
           aspect-ratio: 3 / 4;
           border-radius: 1.15rem;
           overflow: hidden;
@@ -152,7 +152,7 @@ export default function BlessingsSection() {
             max-width: 100%;
           }
           .blessing-portrait-frame {
-            max-width: none;
+            max-width: 70px;
             border-radius: 0.85rem;
           }
           .blessing-portrait-title {
