@@ -5,12 +5,13 @@
 html { scroll-behavior: smooth; overflow-x: hidden; }
 
 :root {
-  --font-sans-admin: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-admin: "Cinzel", "Playfair Display", Georgia, serif;
   --font-display-admin: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-serif-admin: "Cinzel", "Playfair Display", Georgia, serif;
 }
 
 body {
-  font-family: var(--font-sans-admin);
+  font-family: var(--font-serif-admin);
   font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1rem);
   background: var(--color-bg);
   color: var(--color-text);

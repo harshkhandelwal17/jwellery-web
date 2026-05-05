@@ -44,13 +44,14 @@ html { scroll-behavior: smooth; overflow-x: hidden; }
   --shadow-gold-soft: 0 20px 60px rgba(212, 175, 55, 0.14);
 
   /* Typography — luxury readability */
-  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Cinzel", "Playfair Display", Georgia, serif;
   --font-display: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-serif: "Cinzel", "Playfair Display", Georgia, serif;
   --font-accent: "Playfair Display", Georgia, serif;
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-serif);
   font-size: clamp(0.9375rem, 0.88rem + 0.35vw, 1.0625rem);
   background: var(--color-bg);
   color: var(--color-text);

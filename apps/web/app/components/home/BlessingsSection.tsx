@@ -150,15 +150,16 @@ export default function BlessingsSection() {
         }
         @media (max-width: 640px) {
           .blessings-grid {
-            grid-template-columns: repeat(3, max-content);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             justify-content: center;
-            column-gap: 0.55rem;
+            column-gap: 0.65rem;
             row-gap: 0.6rem;
             max-width: 100%;
             padding-inline: 0.8rem;
           }
           .blessing-portrait-frame {
-            max-width: 70px;
+            width: min(100%, 96px);
+            max-width: 96px;
             border-radius: 0.85rem;
           }
           .blessing-portrait-title {
@@ -188,7 +189,13 @@ export default function BlessingsSection() {
 
         <div className="blessings-grid">
          
-         
+          <Portrait
+            primarySrc={BLESSING_PATHS.mother.primary}
+            fallbackSrc={BLESSING_PATHS.mother.fallback}
+            alt="Mother — family blessing"
+            title=""
+            subtitle=""
+          />
           <Portrait
             primarySrc={BLESSING_PATHS.divine.primary}
             fallbackSrc={BLESSING_PATHS.divine.fallback}
@@ -196,13 +203,7 @@ export default function BlessingsSection() {
             title=""
             subtitle=""
           />
-           <Portrait
-            primarySrc={BLESSING_PATHS.mother.primary}
-            fallbackSrc={BLESSING_PATHS.mother.fallback}
-            alt="Mother — family blessing"
-            title=""
-            subtitle=""
-          />
+          
            <Portrait
             primarySrc={BLESSING_PATHS.grandfather.primary}
             fallbackSrc={BLESSING_PATHS.grandfather.fallback}
