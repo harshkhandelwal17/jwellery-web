@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard, Coins, Package, PlusCircle, MessageSquare } from "lucide-react";
+import { LayoutDashboard, Coins, Package, PlusCircle, MessageSquare, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils.js";
 
 const links = [
@@ -12,9 +12,10 @@ const links = [
 
 export interface SidebarProps {
   onNavigate?: () => void;
+  onLogout?: () => void;
 }
 
-export default function Sidebar({ onNavigate }: SidebarProps) {
+export default function Sidebar({ onNavigate, onLogout }: SidebarProps) {
   return (
     <nav className="flex-1 py-4 px-3 flex flex-col gap-1">
       {links.map(({ to, icon: Icon, label }) => (
@@ -45,6 +46,14 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
           {label}
         </NavLink>
       ))}
+      <button
+        type="button"
+        onClick={onLogout}
+        className="mt-2 flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-[var(--color-text-mid)] hover:bg-[var(--color-bg-warm)] hover:text-[var(--color-gold)]"
+      >
+        <LogOut size={16} strokeWidth={1.8} />
+        Logout
+      </button>
     </nav>
   );
 }

@@ -3,7 +3,11 @@ import { Outlet } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Sidebar from "./Sidebar.js";
 
-export default function AdminLayout() {
+interface Props {
+  onLogout: () => void;
+}
+
+export default function AdminLayout({ onLogout }: Props) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -47,7 +51,7 @@ export default function AdminLayout() {
             <X size={20} />
           </button>
         </div>
-        <Sidebar onNavigate={() => setMobileOpen(false)} />
+        <Sidebar onNavigate={() => setMobileOpen(false)} onLogout={onLogout} />
         <div className="px-5 py-3 border-t border-[var(--color-border)] text-xs" style={{ color: "var(--color-text-muted)" }}>
           Shreeva Admin v1.0
         </div>

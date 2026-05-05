@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js";
 import goldPriceRoutes from "./routes/goldPrice.routes.js";
 import productsRoutes from "./routes/products.routes.js";
 import enquiriesRoutes from "./routes/enquiries.routes.js";
+import adminAuthRoutes from "./routes/adminAuth.routes.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -33,6 +34,7 @@ app.get("/health", (_req, res) => res.json({ ok: true }));
 app.use("/api/gold-price", goldPriceRoutes);
 app.use("/api/products", productsRoutes);
 app.use("/api/enquiries", enquiriesRoutes);
+app.use("/api/admin-auth", adminAuthRoutes);
 
 app.use(errorHandler);
 
