@@ -182,6 +182,27 @@ export default function Footer() {
               </svg>
               Facebook
             </a>
+            <a
+              href="https://www.instagram.com/shreeva.11111113?igsh=ZmppNzA4YndtN3Nj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-social-btn"
+              aria-label="Follow on Instagram"
+              style={{
+                display: "flex", alignItems: "center", gap: "0.45rem",
+                padding: "0.45rem 1rem", borderRadius: "999px",
+                background: "rgba(225,48,108,0.12)",
+                border: "1px solid rgba(225,48,108,0.38)",
+                color: "#f59ac2", fontSize: "0.72rem", fontWeight: 500,
+                textDecoration: "none", letterSpacing: "0.04em",
+                transition: "background 0.25s, border-color 0.25s",
+              }}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.8A3.95 3.95 0 003.8 7.75v8.5a3.95 3.95 0 003.95 3.95h8.5a3.95 3.95 0 003.95-3.95v-8.5a3.95 3.95 0 00-3.95-3.95h-8.5zm8.95 1.4a1.15 1.15 0 110 2.3 1.15 1.15 0 010-2.3zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.8A3.2 3.2 0 1015.2 12 3.2 3.2 0 0012 8.8z" />
+              </svg>
+              Instagram
+            </a>
           </div>
         </div>
 
