@@ -63,6 +63,29 @@ body {
   font-optical-sizing: auto;
 }
 
+/* Enforce one typography system across the entire website */
+body,
+button,
+input,
+textarea,
+select,
+option,
+a,
+span,
+p,
+li,
+label,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small,
+strong {
+  font-family: var(--font-serif) !important;
+}
+
 ::selection {
   background: rgba(212, 175, 55, 0.28);
   color: var(--color-text);
