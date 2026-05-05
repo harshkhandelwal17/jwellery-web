@@ -92,10 +92,13 @@ export default function BlessingsSection() {
         }
         .blessings-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: clamp(1rem, 3vw, 2rem);
+          grid-template-columns: repeat(3, max-content);
+          justify-content: center;
+          column-gap: clamp(0.7rem, 2vw, 1.4rem);
+          row-gap: 0.9rem;
           align-items: start;
-          max-width: 720px;
+          max-width: 100%;
+          padding-inline: clamp(0.75rem, 3vw, 1.5rem);
           margin: 0 auto;
         }
         .blessing-portrait {
@@ -147,9 +150,12 @@ export default function BlessingsSection() {
         }
         @media (max-width: 640px) {
           .blessings-grid {
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 0.65rem;
+            grid-template-columns: repeat(3, max-content);
+            justify-content: center;
+            column-gap: 0.55rem;
+            row-gap: 0.6rem;
             max-width: 100%;
+            padding-inline: 0.8rem;
           }
           .blessing-portrait-frame {
             max-width: 70px;
