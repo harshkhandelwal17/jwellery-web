@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HOMEPAGE_FAQS } from "../../lib/seo-data";
 
 const FAQS = [
   {
@@ -23,14 +24,11 @@ const FAQS = [
     q: "What is your return and exchange policy?",
     a: "We offer easy exchange on all pieces within 30 days of purchase. For custom/bridal orders, adjustments can be discussed at the time of booking. Gold is accepted for exchange at the prevailing market rate.",
   },
-  {
-    q: "Do you have lab-grown diamonds?",
-    a: "Yes. We stock certified lab-grown diamonds — chemically and physically identical to mined diamonds but at a significantly better price. Perfect for everyday and special-occasion jewellery.",
-  },
-  {
-    q: "Do you offer free home delivery?",
-    a: "Yes — we offer free insured home delivery across India for orders above a certain value. All shipments are fully insured and tracked. Contact us to know delivery timelines for your location.",
-  },
+  ...HOMEPAGE_FAQS.filter(
+    (faq) =>
+      faq.q === "Do you have lab-grown diamonds?" ||
+      faq.q === "Do you offer free home delivery?"
+  ),
   {
     q: "What does Lifetime Servicing include?",
     a: "We provide complimentary cleaning, polishing, and minor repair services for any piece purchased from us — for life. Simply bring or ship your jewellery to us and we'll restore it to its original shine.",

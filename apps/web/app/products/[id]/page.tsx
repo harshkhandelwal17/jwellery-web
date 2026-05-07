@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import Header from "../../components/layout/Header";
 import Footer from "../../components/layout/Footer";
 import EnquireButton from "../../components/products/EnquireButton";
@@ -9,11 +10,45 @@ import { fetchProduct, fetchProducts } from "../../lib/api";
 import { PRODUCT_PROMO_BADGE_LABELS } from "@jwell/types";
 import { formatCurrency } from "@jwell/utils";
 import { productImageUrl } from "../../lib/cloudinary";
+import { toAbsoluteUrl } from "../../lib/seo";
 
 export const revalidate = 300;
 
 interface Props {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const product = await fetchProduct(id);
+  if (!product) {
+    return {
+      title: "Product not found",
+      description: "The jewellery piece you are looking for is not available.",
+    };
+  }
+
+  return {
+    title: product.name,
+    description:
+      product.description?.trim() ||
+      `${product.name} by Shreeva Jewellers with fine craftsmanship and premium finish.`,
+    alternates: {
+      canonical: `/products/${product.id}`,
+    },
+    openGraph: {
+      title: product.name,
+      description:
+        product.description?.trim() ||
+        `${product.name} from Shreeva Jewellers collection.`,
+      images: [
+        {
+          url: productImageUrl(product.image, { width: 1200, quality: 85 }),
+          alt: product.name,
+        },
+      ],
+    },
+  };
 }
 
 export default async function ProductDetailPage({ params }: Props) {
@@ -28,9 +63,63 @@ export default async function ProductDetailPage({ params }: Props) {
     .slice(0, 4);
 
   const imgSrc = productImageUrl(product.image, { width: 720, quality: 88 });
+  const productUrl = toAbsoluteUrl(`/products/${product.id}`);
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description || `${product.name} by Shreeva Jewellers`,
+    image: [productImageUrl(product.image, { width: 1200, quality: 85 })],
+    sku: product.sku || undefined,
+    category: product.mainCategory || product.category,
+    brand: {
+      "@type": "Brand",
+      name: "Shreeva Jewellers",
+    },
+    offers: {
+      "@type": "Offer",
+      url: productUrl,
+      priceCurrency: "INR",
+      price: String(product.calculatedPrice),
+      availability: "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: toAbsoluteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Collections",
+        item: toAbsoluteUrl("/products"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.name,
+        item: productUrl,
+      },
+    ],
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <Header />
       <main className="product-detail-main" style={{ backgroundColor: "var(--color-bg)" }}>
         <style>{`

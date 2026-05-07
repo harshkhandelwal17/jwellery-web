@@ -3,6 +3,7 @@ import Footer from "../components/layout/Footer";
 import ProductCard from "../components/products/ProductCard";
 import { fetchProducts, type GetProductsParams } from "../lib/api";
 import Link from "next/link";
+import type { Metadata } from "next";
 
 // Always fetch fresh data — new products added in admin must appear immediately
 export const dynamic = "force-dynamic";
@@ -112,6 +113,37 @@ interface Props {
     q?: string;
     sort?: string;
   }>;
+}
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const sp = await searchParams;
+  const q = sp.q?.trim();
+  const activeCategory = sp.mainCategory?.trim();
+  const title = q
+    ? `Search results for "${q}"`
+    : activeCategory
+    ? `${activeCategory} Collection`
+    : "All Jewellery Collections";
+  const description = q
+    ? `Browse jewellery search results for "${q}" at Shreeva Jewellers.`
+    : activeCategory
+    ? `Discover ${activeCategory.toLowerCase()} pieces from Shreeva Jewellers.`
+    : "Browse all jewellery collections from Shreeva Jewellers.";
+
+  const params = new URLSearchParams();
+  if (sp.mainCategory) params.set("mainCategory", sp.mainCategory);
+  if (sp.subCategory) params.set("subCategory", sp.subCategory);
+  if (sp.q) params.set("q", sp.q);
+  if (sp.sort && sp.sort !== "newest") params.set("sort", sp.sort);
+  const query = params.toString();
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: query ? `/products?${query}` : "/products",
+    },
+  };
 }
 
 export default async function ProductsPage({ searchParams }: Props) {

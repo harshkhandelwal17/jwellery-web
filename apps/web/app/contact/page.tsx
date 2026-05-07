@@ -1,10 +1,20 @@
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import ContactForm from "../components/contact/ContactForm";
+import type { Metadata } from "next";
 
 interface Props {
   searchParams: Promise<{ product?: string }>;
 }
+
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Contact Shreeva Jewellers for custom jewellery orders, appointments, pricing and support.",
+  alternates: {
+    canonical: "/contact",
+  },
+};
 
 export default async function ContactPage({ searchParams }: Props) {
   const { product } = await searchParams;

@@ -17,13 +17,60 @@ import BlessingsSection from "./components/home/BlessingsSection";
 import { fetchProducts } from "./lib/api";
 import { cloudinaryUrl } from "./lib/cloudinary";
 import { pickHomeSpotlight } from "./lib/product-display";
+import type { Metadata } from "next";
+import { HOMEPAGE_FAQS } from "./lib/seo-data";
+import { getSiteUrl } from "./lib/seo";
 
 export const revalidate = 300;
+export const metadata: Metadata = {
+  title: "Luxury Jewellery Collections",
+  description:
+    "Explore featured jewellery collections by Shreeva Jewellers, including rings, necklaces, earrings and bridal designs.",
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function HomePage() {
+  const siteUrl = getSiteUrl();
   const products = await fetchProducts();
   const featured = pickHomeSpotlight(products, 4);
   const instagramShowcase = pickHomeSpotlight(products, 8);
+  const organizationJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    name: "Shreeva Jewellers",
+    url: siteUrl,
+    image: `${siteUrl}/about-main.jpg`,
+    telephone: "+91-91114-52626",
+    email: "support@shreevajewellers.com",
+    areaServed: "IN",
+    priceRange: "$$",
+    sameAs: [],
+  };
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Shreeva Jewellers",
+    url: siteUrl,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${siteUrl}/products?q={search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: HOMEPAGE_FAQS.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.a,
+      },
+    })),
+  };
 
   // Pick one representative image per main category for the homepage category cards
   const goldProducts    = products.filter((p) => p.mainCategory === "Gold Jewellery");
@@ -47,6 +94,18 @@ export default async function HomePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <Header />
       <main className="home-page-main">
         <HeroSection />
