@@ -29,6 +29,7 @@ interface Props {
 }
 
 const CATEGORIES = ["rings", "necklaces", "earrings", "bracelets", "watches"] as const;
+type LegacyCategory = (typeof CATEGORIES)[number];
 
 const MAIN_CATEGORIES = [
   // ── Primary 3 shown prominently ──
@@ -42,9 +43,15 @@ const MAIN_CATEGORIES = [
 ] as const;
 
 /** Auto-assign legacy `category` field from mainCategory so admin doesn't need to pick it manually. */
-function autoCategory(mc: string | undefined): "rings" | "necklaces" | "earrings" | "bracelets" | "watches" {
-  if (mc === "Silver Jewellery") return "rings"; // neutral fallback; category field is legacy
-  if (mc === "Diamond Jewellery") return "rings";
+function autoCategory(mainCategory: string | undefined, subCategory?: string): LegacyCategory {
+  const sub = (subCategory ?? "").toLowerCase();
+
+  if (sub.includes("ring")) return "rings";
+  if (sub.includes("earring")) return "earrings";
+  if (sub.includes("bracelet") || sub.includes("anklet")) return "bracelets";
+  if (sub.includes("necklace") || sub.includes("chain") || sub.includes("pendant")) return "necklaces";
+
+  if (mainCategory === "Unique Categories") return "watches";
   return "rings";
 }
 
@@ -153,9 +160,20 @@ export default function ProductForm({ product }: Props) {
 
   const weight = watch("weight") ?? 0;
   const makingCharges = watch("makingCharges") ?? 0;
-  const goldRate = goldPrice?.pricePerGram ?? 0;
-  const livePrice = calculatePrice(goldRate, Number(weight), Number(makingCharges));
   const mainCategoryValue = watch("mainCategory");
+  const ratesByMainCategory: Record<string, number> = {
+    "Gold Jewellery": goldPrice?.goldPricePerGram ?? goldPrice?.pricePerGram ?? 0,
+    "Silver Jewellery": goldPrice?.silverPricePerGram ?? 0,
+    "Diamond Jewellery": goldPrice?.diamondPricePerGram ?? 0,
+  };
+  const metalRate = mainCategoryValue ? (ratesByMainCategory[mainCategoryValue] ?? ratesByMainCategory["Gold Jewellery"]) : ratesByMainCategory["Gold Jewellery"];
+  const metalLabel =
+    mainCategoryValue === "Silver Jewellery"
+      ? "Silver"
+      : mainCategoryValue === "Diamond Jewellery"
+        ? "Diamond"
+        : "Gold";
+  const livePrice = calculatePrice(metalRate, Number(weight), Number(makingCharges));
   const availableSubCategories: string[] = mainCategoryValue ? SUBCATEGORIES[mainCategoryValue] ?? [] : [];
 
   // Auto-sync legacy category whenever mainCategory changes
@@ -318,7 +336,11 @@ export default function ProductForm({ product }: Props) {
                   <Label>Sub Category (Optional)</Label>
                   <Select
                     value={watch("subCategory") ?? "__none__"}
-                    onValueChange={(v) => setValue("subCategory", v === "__none__" ? undefined : v)}
+                    onValueChange={(v) => {
+                      const subCategory = v === "__none__" ? undefined : v;
+                      setValue("subCategory", subCategory);
+                      setValue("category", autoCategory(mainCategoryValue, subCategory));
+                    }}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a sub category" />
@@ -508,12 +530,12 @@ export default function ProductForm({ product }: Props) {
             </CardHeader>
             <CardContent className="flex flex-col gap-3">
               <div className="flex justify-between text-sm">
-                <span style={{ color: "var(--color-text-muted)" }}>Gold rate</span>
-                <span style={{ color: "var(--color-text-mid)" }}>{formatCurrency(goldRate)}/g</span>
+                <span style={{ color: "var(--color-text-muted)" }}>{metalLabel} rate</span>
+                <span style={{ color: "var(--color-text-mid)" }}>{formatCurrency(metalRate)}/g</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span style={{ color: "var(--color-text-muted)" }}>Weight × rate</span>
-                <span style={{ color: "var(--color-text-mid)" }}>{formatCurrency(goldRate * Number(weight))}</span>
+                <span style={{ color: "var(--color-text-mid)" }}>{formatCurrency(metalRate * Number(weight))}</span>
               </div>
               <div className="flex justify-between text-sm">
                 <span style={{ color: "var(--color-text-muted)" }}>Making charges</span>

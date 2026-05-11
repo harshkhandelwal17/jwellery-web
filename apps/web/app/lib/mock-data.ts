@@ -16,6 +16,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-01T00:00:00.000Z",
     updatedAt: "2024-01-01T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 4.2, 3500),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -30,6 +32,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-02T00:00:00.000Z",
     updatedAt: "2024-01-02T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 18.5, 8500),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -44,6 +48,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-03T00:00:00.000Z",
     updatedAt: "2024-01-03T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 6.8, 4200),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -58,6 +64,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-04T00:00:00.000Z",
     updatedAt: "2024-01-04T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 8.3, 5800),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -72,6 +80,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-05T00:00:00.000Z",
     updatedAt: "2024-01-05T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 3.8, 2800),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -86,6 +96,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-06T00:00:00.000Z",
     updatedAt: "2024-01-06T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 24.2, 12000),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -100,6 +112,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-07T00:00:00.000Z",
     updatedAt: "2024-01-07T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 5.1, 3600),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
   {
@@ -114,6 +128,8 @@ export const MOCK_PRODUCTS: ProductWithPrice[] = [
     createdAt: "2024-01-08T00:00:00.000Z",
     updatedAt: "2024-01-08T00:00:00.000Z",
     calculatedPrice: calculatePrice(MOCK_GOLD_RATE, 10.5, 6500),
+    pricePerGramUsed: MOCK_GOLD_RATE,
+    metalTypeUsed: "gold",
     goldPriceUsed: MOCK_GOLD_RATE,
   },
 ];

@@ -4,6 +4,8 @@ import { ProductModel } from "./models/Product.model.js";
 import { GoldPriceModel } from "./models/GoldPrice.model.js";
 
 const GOLD_RATE = 9450;
+const SILVER_RATE = 110;
+const DIAMOND_RATE = 65000;
 
 const PRODUCTS = [
   {
@@ -53,10 +55,16 @@ async function seed() {
 
   await GoldPriceModel.findOneAndUpdate(
     {},
-    { pricePerGram: GOLD_RATE, updatedAt: new Date() },
+    {
+      pricePerGram: GOLD_RATE,
+      goldPricePerGram: GOLD_RATE,
+      silverPricePerGram: SILVER_RATE,
+      diamondPricePerGram: DIAMOND_RATE,
+      updatedAt: new Date(),
+    },
     { upsert: true, new: true }
   );
-  console.log(`Gold price set to ₹${GOLD_RATE}/g`);
+  console.log(`Rates set to Gold ₹${GOLD_RATE}/g, Silver ₹${SILVER_RATE}/g, Diamond ₹${DIAMOND_RATE}/g`);
 
   await ProductModel.deleteMany({});
   await ProductModel.insertMany(PRODUCTS);

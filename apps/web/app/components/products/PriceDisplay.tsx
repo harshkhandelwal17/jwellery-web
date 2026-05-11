@@ -6,6 +6,14 @@ interface Props {
 }
 
 export default function PriceDisplay({ product }: Props) {
+  const metalLabel =
+    product.metalTypeUsed === "silver"
+      ? "Silver"
+      : product.metalTypeUsed === "diamond"
+        ? "Diamond"
+        : "Gold";
+  const unitRate = product.pricePerGramUsed ?? product.goldPriceUsed;
+
   return (
     <div
       className="p-5 md:p-6 rounded-xl border"
@@ -36,10 +44,10 @@ export default function PriceDisplay({ product }: Props) {
       <div className="space-y-2 text-xs" style={{ color: "var(--color-text-mid)" }}>
         <div className="flex justify-between gap-3">
           <span className="text-left">
-            Gold ({product.weight}g × ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g)
+            {metalLabel} ({product.weight}g × ₹{unitRate.toLocaleString("en-IN")}/g)
           </span>
           <span className="shrink-0 tabular-nums">
-            {formatCurrency(product.goldPriceUsed * product.weight)}
+            {formatCurrency(unitRate * product.weight)}
           </span>
         </div>
         <div className="flex justify-between gap-3">
@@ -62,7 +70,7 @@ export default function PriceDisplay({ product }: Props) {
         className="mt-3 text-[0.7rem] leading-relaxed"
         style={{ color: "var(--color-text-muted)" }}
       >
-        Price calculated at ₹{product.goldPriceUsed.toLocaleString("en-IN")}/g gold rate
+        Price calculated at ₹{unitRate.toLocaleString("en-IN")}/g {metalLabel.toLowerCase()} rate
       </p>
     </div>
   );

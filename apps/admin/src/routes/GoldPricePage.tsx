@@ -15,8 +15,10 @@ export default function GoldPricePage() {
     queryFn: () => getGoldPrice(API_URL),
   });
 
-  const optimisticPrice = useGoldPriceStore((s) => s.optimisticPrice);
-  const displayPrice = optimisticPrice ?? goldPrice?.pricePerGram ?? 0;
+  const optimisticRates = useGoldPriceStore((s) => s.optimisticRates);
+  const displayGoldRate = optimisticRates?.goldPricePerGram ?? goldPrice?.goldPricePerGram ?? goldPrice?.pricePerGram ?? 0;
+  const displaySilverRate = optimisticRates?.silverPricePerGram ?? goldPrice?.silverPricePerGram ?? 0;
+  const displayDiamondRate = optimisticRates?.diamondPricePerGram ?? goldPrice?.diamondPricePerGram ?? 0;
 
   return (
     <div className="p-6 lg:p-8 max-w-2xl">
@@ -24,10 +26,10 @@ export default function GoldPricePage() {
       <div className="mb-8">
         <p className="admin-section-label mb-2">Pricing</p>
         <h1 className="admin-page-title">
-          Gold Price
+          Metal Rates
         </h1>
         <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
-          Updating this rate instantly recalculates all product prices
+          Updating rates instantly recalculates product prices by category
         </p>
       </div>
 
@@ -44,22 +46,43 @@ export default function GoldPricePage() {
               </div>
               <div>
                 <CardTitle className="font-display2 text-base">Current Rate</CardTitle>
-                <CardDescription>Live gold price used for all calculations</CardDescription>
+                <CardDescription>Live rates used for gold, silver and diamond products</CardDescription>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="h-8 w-32 rounded animate-pulse" style={{ background: "var(--color-blush-light)" }} />
+              <div className="space-y-2">
+                <div className="h-6 w-44 rounded animate-pulse" style={{ background: "var(--color-blush-light)" }} />
+                <div className="h-6 w-44 rounded animate-pulse" style={{ background: "var(--color-blush-light)" }} />
+                <div className="h-6 w-44 rounded animate-pulse" style={{ background: "var(--color-blush-light)" }} />
+              </div>
             ) : (
-              <div className="flex items-baseline gap-2 flex-wrap">
-                <span className="text-3xl font-semibold font-display2" style={{ color: "var(--color-gold)" }}>
-                  {formatCurrency(displayPrice)}
-                </span>
-                <span className="text-sm" style={{ color: "var(--color-text-muted)" }}>per gram</span>
-                {optimisticPrice && (
+              <div className="space-y-2">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm w-24" style={{ color: "var(--color-text-muted)" }}>Gold</span>
+                  <span className="text-xl font-semibold font-display2" style={{ color: "var(--color-gold)" }}>
+                    {formatCurrency(displayGoldRate)}
+                  </span>
+                  <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>/g</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm w-24" style={{ color: "var(--color-text-muted)" }}>Silver</span>
+                  <span className="text-xl font-semibold font-display2" style={{ color: "#a0a7b7" }}>
+                    {formatCurrency(displaySilverRate)}
+                  </span>
+                  <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>/g</span>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm w-24" style={{ color: "var(--color-text-muted)" }}>Diamond</span>
+                  <span className="text-xl font-semibold font-display2" style={{ color: "#4aa6d6" }}>
+                    {formatCurrency(displayDiamondRate)}
+                  </span>
+                  <span className="text-xs" style={{ color: "var(--color-text-muted)" }}>/g</span>
+                </div>
+                {optimisticRates && (
                   <span
-                    className="text-xs px-2.5 py-0.5 rounded-full font-medium"
+                    className="inline-block text-xs px-2.5 py-0.5 rounded-full font-medium"
                     style={{ background: "var(--color-blush-light)", color: "var(--color-blush)" }}
                   >
                     saving…
@@ -87,7 +110,7 @@ export default function GoldPricePage() {
               </div>
               <div>
                 <CardTitle className="font-display2 text-base">Update Rate</CardTitle>
-                <CardDescription>Enter the new gold rate in ₹ per gram</CardDescription>
+                <CardDescription>Enter updated per-gram rates for all three metals</CardDescription>
               </div>
             </div>
           </CardHeader>

@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils.js";
 
 const links = [
   { to: "/dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/gold-price", icon: Coins, label: "Gold Price" },
+  { to: "/gold-price", icon: Coins, label: "Metal Rates" },
   { to: "/products", icon: Package, label: "Products" },
   { to: "/products/new", icon: PlusCircle, label: "Add Product" },
   { to: "/enquiries", icon: MessageSquare, label: "Enquiries" },

@@ -86,6 +86,9 @@ export const SUBCATEGORIES: Record<MainCategory, string[]> = {
 
 export interface ProductWithPrice extends Product {
   calculatedPrice: number;
+  pricePerGramUsed: number;
+  metalTypeUsed: "gold" | "silver" | "diamond";
+  /** Legacy alias kept for old UI components. */
   goldPriceUsed: number;
 }
 

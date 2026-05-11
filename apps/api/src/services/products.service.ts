@@ -3,6 +3,16 @@ import { ProductModel } from "../models/Product.model.js";
 import { GoldPriceModel } from "../models/GoldPrice.model.js";
 import type { ProductPromoBadge, ProductWithPrice } from "@jwell/types";
 
+type MetalType = "gold" | "silver" | "diamond";
+
+interface MetalRates {
+  goldPricePerGram: number;
+  silverPricePerGram: number;
+  diamondPricePerGram: number;
+}
+
+type LegacyCategory = "rings" | "necklaces" | "earrings" | "bracelets" | "watches";
+
 export interface GetProductsOptions {
   sort?:
     | "price_desc"
@@ -41,13 +51,44 @@ export function mapOldCategoryToMainCategory(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function toProductWithPrice(p: any, goldRate: number): ProductWithPrice {
+function resolveMetalRate(mainCategory: string | undefined, rates: MetalRates): { metalType: MetalType; pricePerGram: number } {
+  if (mainCategory === "Silver Jewellery") {
+    return { metalType: "silver", pricePerGram: rates.silverPricePerGram };
+  }
+  if (mainCategory === "Diamond Jewellery") {
+    return { metalType: "diamond", pricePerGram: rates.diamondPricePerGram };
+  }
+  return { metalType: "gold", pricePerGram: rates.goldPricePerGram };
+}
+
+function deriveLegacyCategory(mainCategory: string | undefined, subCategory: string | undefined): LegacyCategory {
+  const sub = (subCategory ?? "").toLowerCase();
+
+  if (sub.includes("ring")) return "rings";
+  if (sub.includes("earring")) return "earrings";
+  if (sub.includes("bracelet") || sub.includes("anklet")) return "bracelets";
+  if (sub.includes("necklace") || sub.includes("chain") || sub.includes("pendant")) return "necklaces";
+
+  if (mainCategory === "Unique Categories") return "watches";
+  return "rings";
+}
+
+function toProductWithPrice(p: any, rates: MetalRates): ProductWithPrice {
   const sku = typeof p.sku === "string" && p.sku.trim() ? p.sku.trim() : undefined;
   const promo = p.promoBadge as ProductPromoBadge | null | undefined;
   const order =
     typeof p.homeSpotlightOrder === "number" && Number.isFinite(p.homeSpotlightOrder)
       ? p.homeSpotlightOrder
       : 999;
+  const resolvedMainCategory = p.mainCategory ?? mapOldCategoryToMainCategory(p.category as string);
+  const derivedCategory = deriveLegacyCategory(resolvedMainCategory, p.subCategory as string | undefined);
+  const storedCategory = p.category as LegacyCategory | undefined;
+  const normalizedCategory =
+    !storedCategory ||
+    (storedCategory === "rings" && derivedCategory !== "rings")
+      ? derivedCategory
+      : storedCategory;
+  const { metalType, pricePerGram } = resolveMetalRate(resolvedMainCategory, rates);
 
   return {
     id:              String(p._id),
@@ -55,14 +96,17 @@ function toProductWithPrice(p: any, goldRate: number): ProductWithPrice {
     weight:          p.weight as number,
     makingCharges:   p.makingCharges as number,
     image:           p.image as string,
-    category:        p.category as ProductWithPrice["category"],
+    category:        normalizedCategory,
     description:     p.description as string,
     modelPath:       (p.modelPath as string | null) ?? null,
     createdAt:       p.createdAt instanceof Date ? p.createdAt.toISOString() : String(p.createdAt),
     updatedAt:       p.updatedAt instanceof Date ? p.updatedAt.toISOString() : String(p.updatedAt),
-    calculatedPrice: calculatePrice(goldRate, p.weight as number, p.makingCharges as number),
-    goldPriceUsed:   goldRate,
-    mainCategory:    p.mainCategory ?? mapOldCategoryToMainCategory(p.category as string),
+    calculatedPrice: calculatePrice(pricePerGram, p.weight as number, p.makingCharges as number),
+    pricePerGramUsed: pricePerGram,
+    metalTypeUsed: metalType,
+    // Legacy alias for existing frontend components.
+    goldPriceUsed:   pricePerGram,
+    mainCategory:    resolvedMainCategory,
     subCategory:     p.subCategory ?? undefined,
     occasion:        p.occasion ?? undefined,
     featuredOnHome:  p.featuredOnHome === true,
@@ -126,9 +170,13 @@ export async function getProducts(options?: GetProductsOptions): Promise<Product
     ProductModel.find(query).lean(),
     GoldPriceModel.findOne().lean(),
   ]);
-  const goldRate = goldDoc?.pricePerGram ?? 0;
+  const rates: MetalRates = {
+    goldPricePerGram: goldDoc?.goldPricePerGram ?? goldDoc?.pricePerGram ?? 0,
+    silverPricePerGram: goldDoc?.silverPricePerGram ?? 0,
+    diamondPricePerGram: goldDoc?.diamondPricePerGram ?? 0,
+  };
 
-  let result = products.map((p) => toProductWithPrice(p, goldRate));
+  let result = products.map((p) => toProductWithPrice(p, rates));
 
   if (options?.sort) {
     result = result.sort((a, b) => {
@@ -164,16 +212,24 @@ export async function getProduct(id: string): Promise<ProductWithPrice | null> {
     GoldPriceModel.findOne().lean(),
   ]);
   if (!product) return null;
-  const goldRate = goldDoc?.pricePerGram ?? 0;
-  return toProductWithPrice(product, goldRate);
+  const rates: MetalRates = {
+    goldPricePerGram: goldDoc?.goldPricePerGram ?? goldDoc?.pricePerGram ?? 0,
+    silverPricePerGram: goldDoc?.silverPricePerGram ?? 0,
+    diamondPricePerGram: goldDoc?.diamondPricePerGram ?? 0,
+  };
+  return toProductWithPrice(product, rates);
 }
 
 export async function createProduct(data: Record<string, unknown>): Promise<ProductWithPrice> {
   const image = typeof data["image"] === "string" ? data["image"].trim() : "";
   const product = await ProductModel.create({ ...data, image });
   const goldDoc = await GoldPriceModel.findOne().lean();
-  const goldRate = goldDoc?.pricePerGram ?? 0;
-  return toProductWithPrice(product.toObject(), goldRate);
+  const rates: MetalRates = {
+    goldPricePerGram: goldDoc?.goldPricePerGram ?? goldDoc?.pricePerGram ?? 0,
+    silverPricePerGram: goldDoc?.silverPricePerGram ?? 0,
+    diamondPricePerGram: goldDoc?.diamondPricePerGram ?? 0,
+  };
+  return toProductWithPrice(product.toObject(), rates);
 }
 
 export async function updateProduct(
@@ -183,8 +239,12 @@ export async function updateProduct(
   const product = await ProductModel.findByIdAndUpdate(id, data, { new: true }).lean();
   if (!product) return null;
   const goldDoc = await GoldPriceModel.findOne().lean();
-  const goldRate = goldDoc?.pricePerGram ?? 0;
-  return toProductWithPrice(product, goldRate);
+  const rates: MetalRates = {
+    goldPricePerGram: goldDoc?.goldPricePerGram ?? goldDoc?.pricePerGram ?? 0,
+    silverPricePerGram: goldDoc?.silverPricePerGram ?? 0,
+    diamondPricePerGram: goldDoc?.diamondPricePerGram ?? 0,
+  };
+  return toProductWithPrice(product, rates);
 }
 
 export async function deleteProduct(id: string): Promise<boolean> {

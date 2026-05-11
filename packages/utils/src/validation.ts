@@ -80,18 +80,33 @@ export const UpdateProductSchema = CreateProductSchema.partial().extend({
   promoBadge: z.union([ProductPromoBadgeSchema, z.null()]).optional(),
 });
 
-export const UpdateGoldPriceSchema = z.object({
-  pricePerGram: z.preprocess(
-    (val) => {
-      if (val === null || val === undefined || val === "") return undefined;
-      const n = typeof val === "number" ? val : Number(val);
-      return Number.isFinite(n) ? n : undefined;
-    },
-    z
-      .number({ invalid_type_error: "Gold price must be a valid number" })
-      .refine((n) => n > 0, { message: "Gold price must be greater than 0" })
-  ),
-});
+const PricePerGramSchema = z.preprocess(
+  (val) => {
+    if (val === null || val === undefined || val === "") return undefined;
+    const n = typeof val === "number" ? val : Number(val);
+    return Number.isFinite(n) ? n : undefined;
+  },
+  z
+    .number({ invalid_type_error: "Rate must be a valid number" })
+    .refine((n) => n > 0, { message: "Rate must be greater than 0" })
+);
+
+export const UpdateGoldPriceSchema = z
+  .object({
+    goldPricePerGram: PricePerGramSchema.optional(),
+    silverPricePerGram: PricePerGramSchema.optional(),
+    diamondPricePerGram: PricePerGramSchema.optional(),
+    // Legacy key: treat as gold rate.
+    pricePerGram: PricePerGramSchema.optional(),
+  })
+  .refine(
+    (val) =>
+      val.goldPricePerGram !== undefined ||
+      val.silverPricePerGram !== undefined ||
+      val.diamondPricePerGram !== undefined ||
+      val.pricePerGram !== undefined,
+    { message: "At least one metal rate is required" }
+  );
 
 export const ContactFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),

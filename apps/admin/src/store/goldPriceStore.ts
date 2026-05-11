@@ -1,13 +1,19 @@
 import { create } from "zustand";
 
+interface OptimisticRates {
+  goldPricePerGram: number;
+  silverPricePerGram: number;
+  diamondPricePerGram: number;
+}
+
 interface GoldPriceStore {
-  optimisticPrice: number | null;
-  setOptimisticPrice: (price: number) => void;
-  clearOptimisticPrice: () => void;
+  optimisticRates: OptimisticRates | null;
+  setOptimisticRates: (rates: OptimisticRates) => void;
+  clearOptimisticRates: () => void;
 }
 
 export const useGoldPriceStore = create<GoldPriceStore>((set) => ({
-  optimisticPrice: null,
-  setOptimisticPrice: (price) => set({ optimisticPrice: price }),
-  clearOptimisticPrice: () => set({ optimisticPrice: null }),
+  optimisticRates: null,
+  setOptimisticRates: (rates) => set({ optimisticRates: rates }),
+  clearOptimisticRates: () => set({ optimisticRates: null }),
 }));
