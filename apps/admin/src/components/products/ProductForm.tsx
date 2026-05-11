@@ -103,6 +103,17 @@ const SUBCATEGORIES: Record<string, string[]> = {
 
 const OCCASIONS = ["Everyday", "Festive", "Minimal", "Statement"] as const;
 
+const PURITY_BY_CATEGORY: Record<string, { label: string; value: string }[]> = {
+  "Gold Jewellery": [{ label: "22KT", value: "22KT" }],
+  "Silver Jewellery": [{ label: "925 Sterling", value: "925" }],
+  "Diamond Jewellery": [{ label: "Lab Grown", value: "Lab Grown" }],
+};
+
+function getPurityOptions(mainCategory: string | undefined): { label: string; value: string }[] {
+  if (!mainCategory) return [];
+  return PURITY_BY_CATEGORY[mainCategory] ?? [];
+}
+
 export default function ProductForm({ product }: Props) {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -135,6 +146,7 @@ export default function ProductForm({ product }: Props) {
           mainCategory: product.mainCategory,
           subCategory: product.subCategory,
           occasion: product.occasion,
+          purity: product.purity ?? undefined,
           featuredOnHome: product.featuredOnHome ?? false,
           homeSpotlightOrder: product.homeSpotlightOrder ?? 999,
           promoBadge: product.promoBadge,
@@ -151,6 +163,7 @@ export default function ProductForm({ product }: Props) {
           mainCategory: undefined,
           subCategory: undefined,
           occasion: undefined,
+          purity: undefined,
           featuredOnHome: false,
           homeSpotlightOrder: 999,
           promoBadge: undefined,
@@ -181,7 +194,16 @@ export default function ProductForm({ product }: Props) {
     const mc = v === "__none__" ? undefined : v as FormData["mainCategory"];
     setValue("mainCategory", mc);
     setValue("subCategory", undefined);
-    if (mc) setValue("category", autoCategory(mc));
+    if (mc) {
+      setValue("category", autoCategory(mc));
+      // Auto-set purity based on mainCategory
+      const purityOptions = getPurityOptions(mc);
+      if (purityOptions.length > 0) {
+        setValue("purity", purityOptions[0].value);
+      } else {
+        setValue("purity", undefined);
+      }
+    }
   }
 
   async function handleImageUpload(file: File) {
@@ -350,6 +372,28 @@ export default function ProductForm({ product }: Props) {
                       {availableSubCategories.map((c) => (
                         <SelectItem key={c} value={c}>
                           {c}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+
+              {mainCategoryValue && getPurityOptions(mainCategoryValue).length > 0 && (
+                <div className="flex flex-col gap-1.5">
+                  <Label>Purity / Standard</Label>
+                  <Select
+                    value={watch("purity") ?? "__none__"}
+                    onValueChange={(v) => setValue("purity", v === "__none__" ? undefined : v)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select purity" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="__none__">None</SelectItem>
+                      {getPurityOptions(mainCategoryValue).map((p) => (
+                        <SelectItem key={p.value} value={p.value}>
+                          {p.label}
                         </SelectItem>
                       ))}
                     </SelectContent>

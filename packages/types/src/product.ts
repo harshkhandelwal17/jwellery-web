@@ -26,8 +26,8 @@ export interface Product {
   // New hierarchical category fields
   mainCategory?: MainCategory;
   subCategory?: string;
-  occasion?: Occasion;
-  /** Admin: show in homepage “Featured / Loved This Season” block (ordered by homeSpotlightOrder). */
+  occasion?: Occasion;  /** Purity/standard label (e.g., "22KT", "925", "Lab Grown") */
+  purity?: string;  /** Admin: show in homepage “Featured / Loved This Season” block (ordered by homeSpotlightOrder). */
   featuredOnHome?: boolean;
   /** Lower = earlier in that block (1 first). Default 999 = end of featured group. */
   homeSpotlightOrder?: number;
@@ -106,6 +106,7 @@ export interface CreateProductInput {
   mainCategory?: MainCategory;
   subCategory?: string;
   occasion?: Occasion;
+  purity?: string;
   featuredOnHome?: boolean;
   homeSpotlightOrder?: number;
   promoBadge?: ProductPromoBadge;

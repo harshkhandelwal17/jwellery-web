@@ -16,6 +16,8 @@ interface IProduct {
   mainCategory?: string;
   subCategory?: string;
   occasion?: string;
+  /** Purity/standard label e.g. "22KT", "925", "Lab Grown" */
+  purity?: string;
   featuredOnHome?: boolean;
   homeSpotlightOrder?: number;
   promoBadge?: "bestseller" | "top_rated" | "staff_pick" | "new_arrival";
@@ -47,6 +49,7 @@ const ProductSchema = new Schema<IProduct>(
     mainCategory:  { type: String, enum: MAIN_CATEGORIES, default: null },
     subCategory:   { type: String, default: null },
     occasion:      { type: String, enum: OCCASIONS, default: null },
+    purity:        { type: String, default: "" },
     featuredOnHome:   { type: Boolean, default: false },
     homeSpotlightOrder: { type: Number, default: 999 },
     promoBadge:    { type: String, enum: PROMO_BADGES, default: null },

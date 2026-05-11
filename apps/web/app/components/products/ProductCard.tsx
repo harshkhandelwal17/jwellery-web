@@ -96,7 +96,7 @@ export default function ProductCard({ product }: Props) {
           {product.name}
         </div>
         <div style={{ fontSize: "0.68rem", color: product.mainCategory === "Silver Jewellery" ? "rgba(192,192,220,0.8)" : "var(--color-text-mid)", marginTop: "0.2rem" }}>
-          {product.mainCategory === "Silver Jewellery" ? "Certified 925 Silver" : "22KT"} · {product.weight}g
+          {product.purity || (product.mainCategory === "Silver Jewellery" ? "925" : "22KT")} · {product.weight}g
         </div>
 
         <div

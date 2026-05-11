@@ -302,9 +302,11 @@ export default async function ProductDetailPage({ params }: Props) {
             </h1>
 
             <div className="product-detail-trust" aria-hidden="true">
+              {product.purity && (
+                <span>{product.purity}</span>
+              )}
               {product.mainCategory === "Silver Jewellery" ? (
                 <>
-                  <span>Certified 925 Silver</span>
                   <span>BIS hallmarked</span>
                   <span>Hand-finished</span>
                 </>
@@ -328,9 +330,9 @@ export default async function ProductDetailPage({ params }: Props) {
 
             <div className="product-detail-specs">
               <div>
-                <p className="product-detail-spec-label">Metal</p>
+                <p className="product-detail-spec-label">Metal / Standard</p>
                 <p className="product-detail-spec-value">
-                  {product.mainCategory === "Silver Jewellery" ? "925 Sterling Silver" : "22KT gold"}
+                  {product.purity || (product.mainCategory === "Silver Jewellery" ? "925 Sterling" : "22KT Gold")}
                 </p>
               </div>
               <div>
@@ -344,7 +346,7 @@ export default async function ProductDetailPage({ params }: Props) {
               <div>
                 <p className="product-detail-spec-label">Hallmark</p>
                 <p className="product-detail-spec-value">
-                  {product.mainCategory === "Silver Jewellery" ? "Certified 925" : "BIS 916"}
+                  {product.purity === "925" ? "Certified 925" : product.purity === "Lab Grown" ? "Lab Created" : "BIS 916"}
                 </p>
               </div>
               {product.mainCategory ? (

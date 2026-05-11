@@ -49,6 +49,7 @@ export const CreateProductSchema = z.object({
   mainCategory: MainCategorySchema,
   subCategory: z.string().max(100).optional(),
   occasion: OccasionSchema,
+  purity: z.string().max(50).optional(),
   featuredOnHome: z.boolean().optional().default(false),
   homeSpotlightOrder: z.preprocess(
     (v) => {
