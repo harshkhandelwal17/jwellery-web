@@ -1,4 +1,3 @@
-import { formatCurrency } from "@jwell/utils";
 import type { ProductWithPrice } from "@jwell/types";
 
 interface Props {
@@ -12,7 +11,6 @@ export default function PriceDisplay({ product }: Props) {
       : product.metalTypeUsed === "diamond"
         ? "Diamond"
         : "Gold";
-  const unitRate = product.pricePerGramUsed ?? product.goldPriceUsed;
 
   return (
     <div
@@ -28,49 +26,41 @@ export default function PriceDisplay({ product }: Props) {
         className="text-xs tracking-widest uppercase mb-2 font-medium"
         style={{ color: "var(--color-text-muted)" }}
       >
-        Live Price
+        Pricing
       </p>
 
       <div
         className="font-display leading-none mb-4 tracking-tight"
         style={{
-          fontSize: "clamp(1.85rem, 4.5vw, 2.65rem)",
+          fontSize: "clamp(1.2rem, 2.6vw, 1.6rem)",
           color: "var(--color-gold)",
         }}
       >
-        {formatCurrency(product.calculatedPrice)}
+        Price On Request
       </div>
 
       <div className="space-y-2 text-xs" style={{ color: "var(--color-text-mid)" }}>
         <div className="flex justify-between gap-3">
-          <span className="text-left">
-            {metalLabel} ({product.weight}g × ₹{unitRate.toLocaleString("en-IN")}/g)
-          </span>
-          <span className="shrink-0 tabular-nums">
-            {formatCurrency(unitRate * product.weight)}
-          </span>
+          <span className="text-left">Metal</span>
+          <span className="shrink-0">{metalLabel}</span>
         </div>
         <div className="flex justify-between gap-3">
-          <span>Making charges</span>
-          <span className="shrink-0 tabular-nums">{formatCurrency(product.makingCharges)}</span>
+          <span>Weight</span>
+          <span className="shrink-0">{product.weight}g</span>
         </div>
-        <div
-          className="flex justify-between pt-2.5 border-t font-semibold text-[0.8125rem]"
-          style={{
-            borderColor: "var(--color-border)",
-            color: "var(--color-text)",
-          }}
-        >
-          <span>Total</span>
-          <span className="tabular-nums">{formatCurrency(product.calculatedPrice)}</span>
-        </div>
+        {product.purity ? (
+          <div className="flex justify-between gap-3">
+            <span>Standard</span>
+            <span className="shrink-0">{product.purity}</span>
+          </div>
+        ) : null}
       </div>
 
       <p
         className="mt-3 text-[0.7rem] leading-relaxed"
         style={{ color: "var(--color-text-muted)" }}
       >
-        Price calculated at ₹{unitRate.toLocaleString("en-IN")}/g {metalLabel.toLowerCase()} rate
+        Final quote ke liye enquiry bhejein, team aapko latest rate ke hisaab se confirm karegi.
       </p>
     </div>
   );

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PRODUCT_PROMO_BADGE_LABELS, type ProductWithPrice } from "@jwell/types";
-import { formatCurrency } from "@jwell/utils";
 import { productImageUrl } from "../../lib/cloudinary";
 import SafeImage from "./SafeImage";
 
@@ -112,14 +111,15 @@ export default function ProductCard({ product }: Props) {
           <span
             style={{
               fontFamily: "'Cinzel', serif",
-              fontSize: "0.9rem",
+              fontSize: "0.72rem",
               fontWeight: 600,
               color: "var(--color-gold)",
               lineHeight: 1,
-              letterSpacing: "0.02em",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
             }}
           >
-            {formatCurrency(product.calculatedPrice)}
+            Price On Request
           </span>
           <span
             className="arrow-btn"

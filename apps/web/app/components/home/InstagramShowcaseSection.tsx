@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { ProductWithPrice } from "@jwell/types";
-import { formatCurrency } from "@jwell/utils";
 import { imageSrcNeedsUnoptimized, productImageUrl } from "../../lib/cloudinary";
 
 interface Props {
@@ -239,7 +238,7 @@ export default function InstagramShowcaseSection({ products }: Props) {
                     {product.mainCategory ?? "Jewellery"} · {product.weight}g
                   </span>
                   <span className="ig-card-price">
-                    {product.calculatedPrice > 0 ? formatCurrency(product.calculatedPrice) : "Explore now"}
+                    Enquire for Price
                   </span>
                 </div>
               </Link>

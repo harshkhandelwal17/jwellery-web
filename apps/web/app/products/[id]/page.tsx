@@ -8,7 +8,6 @@ import PriceDisplay from "../../components/products/PriceDisplay";
 import SafeImage from "../../components/products/SafeImage";
 import { fetchProduct, fetchProducts } from "../../lib/api";
 import { PRODUCT_PROMO_BADGE_LABELS } from "@jwell/types";
-import { formatCurrency } from "@jwell/utils";
 import { productImageUrl } from "../../lib/cloudinary";
 import { toAbsoluteUrl } from "../../lib/seo";
 
@@ -446,7 +445,7 @@ export default async function ProductDetailPage({ params }: Props) {
                         className="text-xs md:text-sm font-semibold font-display"
                         style={{ color: "var(--color-gold)" }}
                       >
-                        {formatCurrency(p.calculatedPrice)}
+                        Price On Request
                       </p>
                     </div>
                   </Link>
